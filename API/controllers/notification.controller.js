@@ -1,7 +1,8 @@
-import {default as FSConcert} from "../services/concert.service.js";
+import {default as FSNotification} from "../services/notification.service.js"
+
 
 export const list = (req, res) => {
-    let service = new FSConcert();
+    let service = new FSNotification();
     service.list((error, results) => {
         if (error) {
             res.status(400).send(error);
@@ -11,8 +12,9 @@ export const list = (req, res) => {
 }
 
 export const findID = (req, res) => {
-    let service = new FSConcert();
-    service.getConcertById(req, (error, results) => {
+    const id = req.params.id;
+    let service = new FSNotification();
+    service.getNotifByID(id, (error, results) => {
         if (error) {
             res.status(400).send(error);
         }

@@ -11,6 +11,11 @@ export default class FSScene extends AbstractScene {
         scenes.forEach((scene) => {
             results.push(scene.JSON);
         });
+
+        if(result.length == 0){
+            console.log("Does not exist");
+            return callback([]);
+        }
         return callback(null, results);
     }
 

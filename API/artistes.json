@@ -1,0 +1,47 @@
+[
+    {
+        "id": 1,
+        "nom": "Artiste 1",
+        "photo": "Photo 1",
+        "biographie": "biographie 1",
+        "lien_video": "lien_video 1",
+        "nationalite_id": 1,
+        "genre_id": 1
+    },
+    {
+        "id": 2,
+        "nom": "Artiste 2",
+        "photo": "Photo 2",
+        "biographie": "biographie 2",
+        "lien_video": "lien_video 2",
+        "nationalite_id": 2,
+        "genre_id": 2
+    },
+    {
+        "id": 3,
+        "nom": "Artiste 3",
+        "photo": "Photo 3",
+        "biographie": "biographie 3",
+        "lien_video": "lien_video 3",
+        "nationalite_id": 3,
+        "genre_id": 3
+    },
+    {
+        "id": 4,
+        "nom": "Artiste 4",
+        "photo": "Photo 4",
+        "biographie": "biographie 4",
+        "lien_video": "lien_video 4",
+        "nationalite_id": 4,
+        "genre_id": 4
+    },
+    {
+        "id": 5,
+        "nom": "Artiste 5",
+        "photo": "Photo 5",
+        "biographie": "biographie 5",
+        "lien_video": "lien_video 5",
+        "nationalite_id": 5,
+        "genre_id": 5
+    }
+]

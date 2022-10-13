@@ -85,4 +85,4 @@ export class Scene {
 
 }
 
-export class AbstractScene {}
+export class AbstractScene{}

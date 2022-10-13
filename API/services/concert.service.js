@@ -14,14 +14,17 @@ export default class FSConcert extends AbstractConcert {
         return callback(null, results);
     }
 
-    async getConcertById(id, callback) {
+    async getConcertById(req, callback) {
+        const idArtiste = req.params.idArtiste;
+        const idScene = req.params.idScene;
+        const date = req.params.date;
         const concerts = await this.readAllConcerts();
         if (concerts.length == 0) {
             return callback([]);
         }
         let results = null;
         concerts.forEach((concert) => {
-            if (concert.scene_id == id) {
+            if (concert.scene_id == idScene && concert.artiste_id == idArtiste && concert.date_debut == date) {
                 results = concert.JSON;
             }
         });
