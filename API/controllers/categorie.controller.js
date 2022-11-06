@@ -1,5 +1,5 @@
 import {db} from '../models/index.js';
-const Scene = db.scene;
+const Genre = db.genre;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
@@ -9,22 +9,18 @@ export const create = (req, res) => {
         });
         return;
     }
-    const scene = {
-        libelle: req.body.libelle,
-        jauge: req.body.jauge,
-        latitude: req.body.latitude,
-        longitude: req.body.longitude,
-        id_typescene: req.body.id_typescene
+    const genre = {
+        libelle: req.body.libelle
     };
     
-    Scene.create(scene)
+    Genre.create(genre)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Scene."
+                    err.message || "Some error occurred while creating the Genre."
             });
         });
 }
@@ -33,14 +29,14 @@ export const findAll = (req, res) => {
     const nom = req.query.nom;
     var condition = nom ? { nom: { [Op.like]: `%${nom}%` } } : null;
 
-    Scene.findAll({ where: condition, include: [{model: db.typescene}] })
+    Genre.findAll({ where: condition })
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving scenes."
+                    err.message || "Some error occurred while retrieving genres."
             });
         });
 }
@@ -48,13 +44,13 @@ export const findAll = (req, res) => {
 export const findOne = (req, res) => {
     const id = req.params.id;
 
-    Scene.findByPk(id)
+    Genre.findByPk(id)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error retrieving Scene with id=" + id
+                message: "Error retrieving Genre with id=" + id
             });
         });
 }
@@ -62,23 +58,23 @@ export const findOne = (req, res) => {
 export const update = (req, res) => {
     const id = req.params.id;
 
-    Scene.update(req.body, {
+    Genre.update(req.body, {
         where: { id: id }
     })
         .then(num => {
             if (num == 1) {
                 res.send({
-                    message: "Scene was updated successfully."
+                    message: "Genre was updated successfully."
                 });
             } else {
                 res.send({
-                    message: `Cannot update Scene with id=${id}. Maybe Scene was not found or req.body is empty!`
+                    message: `Cannot update Genre with id=${id}. Maybe Genre was not found or req.body is empty!`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating Scene with id=" + id
+                message: "Error updating Genre with id=" + id
             });
         });
 }
@@ -86,40 +82,39 @@ export const update = (req, res) => {
 export const deleteOne = (req, res) => {
     const id = req.params.id;
 
-    Scene.destroy({
+    Genre.destroy({
         where: { id: id }
     })
         .then(num => {
             if (num == 1) {
                 res.send({
-                    message: "Scene was deleted successfully!"
+                    message: "Genre was deleted successfully!"
                 });
             } else {
                 res.send({
-                    message: `Cannot delete Scene with id=${id}. Maybe Scene was not found!`
+                    message: `Cannot delete Genre with id=${id}. Maybe Genre was not found!`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Could not delete Scene with id=" + id
+                message: "Could not delete Genre with id=" + id
             });
         });
 }
 
 export const deleteAll = (req, res) => {
-    Scene.destroy({
+    Genre.destroy({
         where: {},
         truncate: false
     })
         .then(nums => {
-            res.send({ message: `${nums} Scenes were deleted successfully!` });
+            res.send({ message: `${nums} Genres were deleted successfully!` });
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while removing all scenes."
+                    err.message || "Some error occurred while removing all genres."
             });
         });
 }
-

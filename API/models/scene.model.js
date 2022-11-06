@@ -1,16 +1,16 @@
-const _scene_id = Symbol('id');
+/*const _scene_id = Symbol('id');
 const _scene_nom = Symbol('nom');
 const _scene_jauge = Symbol('jauge');
-const _scene_lattitude = Symbol('lattitude');
+const _scene_latitude = Symbol('latitude');
 const _scene_longitude = Symbol('longitude');
 
 export class Scene {
     //CONSTRUCTEUR
-    constructor(id, nom, jauge, lattitude, longitude) {
+    constructor(id, nom, jauge, latitude, longitude) {
         this[_scene_id] = id;
         this[_scene_nom] = nom;
         this[_scene_jauge] = jauge;
-        this[_scene_lattitude] = lattitude;
+        this[_scene_latitude] = latitude;
         this[_scene_longitude] = longitude;
     }
 
@@ -39,12 +39,12 @@ export class Scene {
         this[_scene_jauge] = value;
     }
 
-    get lattitude() {
-        return this[_scene_lattitude];
+    get latitude() {
+        return this[_scene_latitude];
     }
 
-    set lattitude(value) {
-        this[_scene_lattitude] = value;
+    set latitude(value) {
+        this[_scene_latitude] = value;
     }
 
     get longitude() {
@@ -60,7 +60,7 @@ export class Scene {
             id: this.id,
             nom: this.nom,
             jauge: this.jauge,
-            lattitude: this.lattitude,
+            latitude: this.latitude,
             longitude: this.longitude
         };
     }
@@ -74,15 +74,46 @@ export class Scene {
         || typeof data.nom !== 'string'
         || !data.hasOwnProperty('jauge')
         || typeof data.jauge !== 'number'
-        || !data.hasOwnProperty('lattitude')
-        || typeof data.lattitude !== 'number'
+        || !data.hasOwnProperty('latitude')
+        || typeof data.latitude !== 'number'
         || !data.hasOwnProperty('longitude')
         || typeof data.longitude !== 'number') {
             throw new Error('Invalid JSON');
         }
-        return new Scene(data.id, data.nom, data.jauge, data.lattitude, data.longitude);
+        return new Scene(data.id, data.nom, data.jauge, data.latitude, data.longitude);
     }
 
 }
 
-export class AbstractScene{}
+export class AbstractScene{}*/
+
+export const scene = (sequelize, Sequelize) => {
+    const Scene = sequelize.define('scene', {
+        id: {
+            type: Sequelize.INTEGER,
+            primaryKey: true,
+            autoIncrement: true
+        },
+        libelle: {
+            type: Sequelize.STRING
+        },
+        jauge: {
+            type: Sequelize.INTEGER
+        },
+        latitude: {
+            type: Sequelize.FLOAT
+        },
+        longitude: {
+            type: Sequelize.FLOAT
+        },
+        id_typescene: {
+            type: Sequelize.INTEGER,
+            references: {
+                model: 'typescene',
+                key: 'id'
+            }
+        }
+    });
+
+    return Scene;
+}
