@@ -10,6 +10,7 @@ export const pays = (sequelize, Sequelize) => {
         }
     },
     {
+        schema: 'common',
         timestamps: false,
         freezeTableName: true
     });

@@ -1,5 +1,5 @@
 export const typescene = (sequelize, Sequelize) => {
-    const TypeScene = sequelize.define("typescene", {
+    const TypeScene = sequelize.define("typescenes", {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -10,6 +10,7 @@ export const typescene = (sequelize, Sequelize) => {
         }
     },
     {
+        schema: 'common',
         timestamps: false,
         freezeTableName: true
     });

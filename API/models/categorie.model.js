@@ -1,5 +1,5 @@
 export const categorie = (sequelize, Sequelize) => {
-    const Categorie = sequelize.define("categorie", {
+    const Categorie = sequelize.define("categories", {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -8,8 +8,11 @@ export const categorie = (sequelize, Sequelize) => {
         libelle: {
             type: Sequelize.STRING
         }
-    }, {
-        timestamps: false
+    }, 
+    {
+        schema: 'common',
+        timestamps: false,
+        freezeTableName: true
     });
     return Categorie;
 }

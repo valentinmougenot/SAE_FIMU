@@ -1,5 +1,5 @@
 export const saison = (sequelize, Sequelize) => {
-    const Saison = sequelize.define("saison", {
+    const Saison = sequelize.define("saisons", {
         annee: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -11,6 +11,11 @@ export const saison = (sequelize, Sequelize) => {
         couleur2: {
             type: Sequelize.STRING
         }
+    },
+    {
+        schema: 'common',
+        timestamps: false,
+        freezeTableName: true
     });
     return Saison;
 }

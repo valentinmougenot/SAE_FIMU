@@ -1,5 +1,5 @@
 export const artiste = (sequelize, Sequelize) => {
-    const Artiste = sequelize.define("artiste", {
+    const Artiste = sequelize.define("artistes", {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -17,6 +17,9 @@ export const artiste = (sequelize, Sequelize) => {
         lien_video: {
             type: Sequelize.STRING
         },
+        lien_site: {
+            type: Sequelize.STRING
+        },
         id_categorie: {
             type: Sequelize.INTEGER,
             references: {
@@ -26,7 +29,9 @@ export const artiste = (sequelize, Sequelize) => {
         }
     },
     {
-        timestamps: false
+        schema: 'currentseason',
+        timestamps: false,
+        freezeTableName: true
     });
 
     return Artiste;

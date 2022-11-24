@@ -1,5 +1,5 @@
 export const genre = (sequelize, Sequelize) => {
-    const Genre = sequelize.define("genre", {
+    const Genre = sequelize.define("genres", {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -8,8 +8,11 @@ export const genre = (sequelize, Sequelize) => {
         libelle: {
             type: Sequelize.STRING
         }
-    }, {
-        timestamps: false
+    },
+    {
+        schema: 'common',
+        timestamps: false,
+        freezeTableName: true
     });
 
     return Genre;

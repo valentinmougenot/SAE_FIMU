@@ -32,10 +32,9 @@ export const create = (req, res) => {
 
 export const findAll = (req, res) => {
     const nom = req.query.nom;
-    var condition = nom ? { nom: { [Op.like]: `%${nom}%` } } : null;
 
-    Concert.findAll({ where: condition,
-        include: [{model:db.artiste},
+    Concert.findAll(
+        { include: [{model:db.artiste},
             {model:db.scene},
             {model:db.saison}]})
         .then(data => {

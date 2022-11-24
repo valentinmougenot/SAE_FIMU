@@ -28,9 +28,8 @@ export const create = (req, res) => {
 
 export const findAll = (req, res) => {
     const message = req.query.message;
-    var condition = message ? { message: { [Op.like]: `%${message}%` } } : null;
 
-    Notification.findAll({ where: condition })
+    Notification.findAll()
         .then(data => {
             res.send(data);
         })

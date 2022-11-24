@@ -2,7 +2,6 @@ import {db} from '../models/index.js';
 const Artiste = db.artiste;
 const Op = db.Sequelize.Op;
 
-// add an artiste
 export const create = (req, res) => {
     if (!req.body.nom) {
         res.status(400).send({
@@ -10,12 +9,21 @@ export const create = (req, res) => {
         });
         return;
     }
+    if (req.body.lien_video) {
+        if (req.body.lien_video.includes("https://www.youtube.com/watch?v=")) {
+            req.body.lien_video = req.body.lien_video.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+        }
+        else if (req.bodylien_video.includes("https://youtu.be/")) {
+            req.body.lien_video = req.body.lien_video.replace("https://youtu.be/", "https://www.youtube.com/embed/");
+        }
+    } 
     const artiste = {
         nom: req.body.nom,
         photo: req.body.photo,
         biographie: req.body.biographie,
         lien_video: req.body.lien_video,
-        categorie_id: req.body.categorie_id
+        lien_site: req.body.lien_site,
+        id_categorie: req.body.id_categorie
     };
     
     Artiste.create(artiste)
@@ -32,12 +40,8 @@ export const create = (req, res) => {
 
 
 export const findAll = (req, res) => {
-    const nom = req.query.nom;
-    var condition = nom ? { nom: { [Op.like]: `%${nom}%` } } : null;
-
     Artiste.findAll(
-        { where: condition, 
-            include: [{model:db.nationalite,
+        { include: [{model:db.nationalite,
                 include: [{model:db.pays}]},
                 {model:db.fait,
                     include: [{model:db.genre}]},
@@ -62,8 +66,7 @@ export const findOne = (req, res) => {
         include: [{model:db.pays}]},
         {model:db.fait,
             include: [{model:db.genre}]},
-        {model:db.categorie}]
-    })
+        {model:db.categorie}]})
         .then(data => {
             res.send(data);
         })
@@ -76,6 +79,15 @@ export const findOne = (req, res) => {
 
 export const update = (req, res) => {
     const id = req.params.id;
+    
+    if (req.body.lien_video) {
+        if (req.body.lien_video.includes("https://www.youtube.com/watch?v=")) {
+            req.body.lien_video = req.body.lien_video.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+        }
+        else if (req.body.lien_video.includes("https://youtu.be/")) {
+            req.body.lien_video = req.body.lien_video.replace("https://youtu.be/", "https://www.youtube.com/embed/");
+        }
+    } 
 
     Artiste.update(req.body, {
         where: { id: id }
@@ -137,4 +149,17 @@ export const deleteAll = (req, res) => {
             });
         });
 };
+
+export const findLast = (req, res) => {
+    Artiste.findAll({limit: 1, order: [['id', 'DESC']]})
+        .then(data => {
+            res.send(data[0]);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving artistes."
+            });
+        });
+}
 

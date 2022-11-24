@@ -1,5 +1,5 @@
 import {db} from '../models/index.js';
-const Genre = db.genre;
+const Categorie = db.categorie;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
@@ -9,34 +9,33 @@ export const create = (req, res) => {
         });
         return;
     }
-    const genre = {
+    const categorie = {
         libelle: req.body.libelle
     };
     
-    Genre.create(genre)
+    Categorie.create(categorie)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Genre."
+                    err.message || "Some error occurred while creating the Categorie."
             });
         });
 }
 
 export const findAll = (req, res) => {
     const nom = req.query.nom;
-    var condition = nom ? { nom: { [Op.like]: `%${nom}%` } } : null;
 
-    Genre.findAll({ where: condition })
+    Categorie.findAll()
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving genres."
+                    err.message || "Some error occurred while retrieving categories."
             });
         });
 }
@@ -44,13 +43,13 @@ export const findAll = (req, res) => {
 export const findOne = (req, res) => {
     const id = req.params.id;
 
-    Genre.findByPk(id)
+    Categorie.findByPk(id)
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error retrieving Genre with id=" + id
+                message: "Error retrieving Categorie with id=" + id
             });
         });
 }
@@ -58,23 +57,23 @@ export const findOne = (req, res) => {
 export const update = (req, res) => {
     const id = req.params.id;
 
-    Genre.update(req.body, {
+    Categorie.update(req.body, {
         where: { id: id }
     })
         .then(num => {
             if (num == 1) {
                 res.send({
-                    message: "Genre was updated successfully."
+                    message: "Categorie was updated successfully."
                 });
             } else {
                 res.send({
-                    message: `Cannot update Genre with id=${id}. Maybe Genre was not found or req.body is empty!`
+                    message: `Cannot update Categorie with id=${id}. Maybe Categorie was not found or req.body is empty!`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating Genre with id=" + id
+                message: "Error updating Categorie with id=" + id
             });
         });
 }
@@ -82,39 +81,39 @@ export const update = (req, res) => {
 export const deleteOne = (req, res) => {
     const id = req.params.id;
 
-    Genre.destroy({
+    Categorie.destroy({
         where: { id: id }
     })
         .then(num => {
             if (num == 1) {
                 res.send({
-                    message: "Genre was deleted successfully!"
+                    message: "Categorie was deleted successfully!"
                 });
             } else {
                 res.send({
-                    message: `Cannot delete Genre with id=${id}. Maybe Genre was not found!`
+                    message: `Cannot delete Categorie with id=${id}. Maybe Categorie was not found!`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Could not delete Genre with id=" + id
+                message: "Could not delete Categorie with id=" + id
             });
         });
 }
 
 export const deleteAll = (req, res) => {
-    Genre.destroy({
+    Categorie.destroy({
         where: {},
         truncate: false
     })
         .then(nums => {
-            res.send({ message: `${nums} Genres were deleted successfully!` });
+            res.send({ message: `${nums} Categories were deleted successfully!` });
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while removing all genres."
+                    err.message || "Some error occurred while removing all categories."
             });
         });
 }

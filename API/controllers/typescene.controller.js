@@ -27,9 +27,8 @@ export const create = (req, res) => {
 
 export const findAll = (req, res) => {
     const nom = req.query.nom;
-    var condition = nom ? { nom: { [Op.like]: `%${nom}%` } } : null;
 
-    Typescene.findAll({ where: condition })
+    Typescene.findAll()
         .then(data => {
             res.send(data);
         })

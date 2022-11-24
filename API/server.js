@@ -7,6 +7,10 @@ import {dirname, join} from 'path';
 import { fileURLToPath } from 'url';
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
+import expressSession from 'express-session';
+import cookieParser from 'cookie-parser';
+import connectFlash from 'connect-flash';
+import cors from 'cors';
 
 import {default as routerScene} from './routes/scene.router.js';
 import {default as routerNotification} from './routes/notification.router.js';
@@ -16,9 +20,26 @@ import {default as routerGenre} from './routes/genre.router.js';
 import {default as routerConcert} from './routes/concert.router.js';
 import {default as routerPays} from './routes/pays.router.js';
 import {default as routerTypescene} from './routes/typescene.router.js';
-
+import {default as routerUtilisateur} from './routes/utilisateur.router.js';
+import {default as routerRole} from './routes/role.router.js';
+import {default as routerNationalite} from './routes/nationalite.router.js';
+import {default as routerFait} from './routes/fait.router.js';
+import {default as routerPossede} from './routes/possede.router.js';
+import {default as routerReseauxSociaux} from './routes/reseauxSociaux.router.js';
+import {default as routerArtisteNext} from './routes/artisteNext.router.js';
+import {default as routerConcertNext} from './routes/concertNext.router.js';
+import {default as routerFaitNext} from './routes/faitNext.router.js';
+import {default as routerNationaliteNext} from './routes/nationaliteNext.router.js';
+import {default as routerPossedeNext} from './routes/possedeNext.router.js';
+import {default as routerSceneNext} from './routes/sceneNext.router.js';
+import {default as routerArtistePrevious} from './routes/artistePrevious.router.js';
+import {default as routerJouePrevious} from './routes/jouePrevious.router.js';
+import {default as routerFaitPrevious} from './routes/faitPrevious.router.js';
+import {default as routerNationalitePrevious} from './routes/nationalitePrevious.router.js'
+import {default as routerPossedePrevious} from './routes/possedePrevious.router.js';
 
 const app = express();
+const serverRouter = express.Router();
 
 dotenv.config();
 
@@ -39,6 +60,8 @@ db.sequelize.sync()
 app.use(bodyParser.json());
 app.use(express.static(join(__dirname, 'public')))
 
+app.use(cors());
+
 const swaggerOption = {
     swaggerDefinition: (swaggerJsdoc.Options = {
         info: {
@@ -53,12 +76,24 @@ const swaggerOption = {
     apis: ["server.js", "./routes/*.js"],
 };
 
+serverRouter.use(cookieParser("secret_passcode"));
+const unJour = 1000 * 60 * 60 * 24 // millisecondes
+serverRouter.use(
+    expressSession({
+        secret: "secret_passcode",
+        cookie: { maxAge: unJour },
+        resave: false,
+        saveUninitialized: false
+    })
+);
+serverRouter.use(connectFlash());
+serverRouter.use((req, res, next) => {
+    res.locals.flashMessages = req.flash();
+    next();
+});
+
 const swaggerDocs = swaggerJsdoc(swaggerOption);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
-
-app.get('/', (req, res) => {
-    res.sendFile(join(__dirname + '/view/home.html'))
-})
 
 
 app.use('/artiste', routerArtiste);
@@ -70,6 +105,25 @@ app.use('/genre', routerGenre);
 app.use('/concert', routerConcert);
 app.use('/pays', routerPays);
 app.use('/typescene', routerTypescene);
+app.use('/utilisateur', routerUtilisateur);
+app.use('/role', routerRole);
+app.use('/nationalite', routerNationalite);
+app.use('/fait', routerFait);
+app.use('/possede', routerPossede);
+app.use('/reseauxsociaux', routerReseauxSociaux);
+
+app.use('/next/artiste', routerArtisteNext);
+app.use('/next/concert', routerConcertNext);
+app.use('/next/fait', routerFaitNext);
+app.use('/next/nationalite', routerNationaliteNext);
+app.use('/next/possede', routerPossedeNext);
+app.use('/next/scene', routerSceneNext);
+
+app.use('/previous/artiste', routerArtistePrevious);
+app.use('/previous/joue', routerJouePrevious);
+app.use('/previous/fait', routerFaitPrevious);
+app.use('/previous/nationalite', routerNationalitePrevious);
+app.use('/previous/possede', routerPossedePrevious);
 
 app.listen(port, () => {
     console.log(`Server is running on port ${port}`);

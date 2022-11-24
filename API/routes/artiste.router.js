@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router()
 
-import {create, findAll, findOne, update, deleteOne, deleteAll} from '../controllers/artiste.controller.js'
+import {create, findAll, findOne, update, deleteOne, deleteAll, findLast} from '../controllers/artiste.controller.js'
 
 router.post('/', create);
 /**
@@ -73,6 +73,9 @@ router.get('/', findAll);
  *          '400':
  *              description: Bad request
 */
+
+router.get('/last', findLast);
+
 router.get('/:id', findOne);
 /**
  * @swagger

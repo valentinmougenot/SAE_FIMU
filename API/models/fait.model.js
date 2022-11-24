@@ -5,7 +5,8 @@ export const fait = (sequelize, Sequelize) => {
             primaryKey: true,
             references: {
                 model: 'artiste',
-                key: 'id'
+                key: 'id',
+                schema: 'currentseason'
             }
         },
         id_genre: {
@@ -16,6 +17,11 @@ export const fait = (sequelize, Sequelize) => {
                 key: 'id'
             }
         }
+    },
+    {
+        schema: 'currentseason',
+        timestamps: false,
+        freezeTableName: true
     });
 
     return Fait;

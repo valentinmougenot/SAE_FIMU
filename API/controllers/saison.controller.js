@@ -29,9 +29,8 @@ export const create = (req, res) => {
 
 export const findAll = (req, res) => {
     const nom = req.query.nom;
-    var condition = nom ? { nom: { [Op.like]: `%${nom}%` } } : null;
 
-    Saison.findAll({ where: condition })
+    Saison.findAll()
         .then(data => {
             res.send(data);
         })

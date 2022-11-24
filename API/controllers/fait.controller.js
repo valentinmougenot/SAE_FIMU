@@ -1,0 +1,114 @@
+import {db} from '../models/index.js';
+const Fait = db.fait;
+const Op = db.Sequelize.Op;
+
+export const create = (req, res) => {
+    if (!req.body.id_artiste) {
+        res.status(400).send({
+            message: "Content can not be empty!"
+        });
+        return;
+    }
+    const fait = {
+        id_artiste: req.body.id_artiste,
+        id_genre: req.body.id_genre
+    };
+
+    Fait.create(fait)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while creating the Fait."
+            });
+        });
+}
+
+export const findAll = (req, res) => {
+    Fait.findAll(
+        { include: [{model:db.artiste},
+                    {model:db.genre}]})
+        .then(data => {
+            res.send(data);
+        }
+        )
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving faits."
+            });
+        });
+}
+
+export const findOne = (req, res) => {
+    const id = req.params.id;
+
+    Fait.findByPk(id)
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error retrieving Fait with id=" + id
+            });
+        });
+}
+
+export const update = (req, res) => {
+    const id = req.params.id;
+
+    Fait.update(req.body, {
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                res.send({
+                    message: "Fait was updated successfully."
+                });
+            } else {
+                res.send({
+                    message: `Cannot update Fait with id=${id}. Maybe Fait was not found or req.body is empty!`
+                });
+            }
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error updating Fait with id=" + id
+            });
+        });
+}
+
+export const deleteByIdArtiste = (req, res) => {
+    const id = req.params.id;
+
+    Fait.destroy({
+        where: { id_artiste: id }
+    })
+        .then(nums => {
+            res.send({ message: `${nums} Fait were deleted successfully!` });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send({
+                message: "Could not delete Fait with id=" + id
+            });
+        });
+}
+
+export const deleteAll = (req, res) => {
+    Fait.destroy({
+        where: {},
+        truncate: false
+    })
+        .then(nums => {
+            res.send({ message: `${nums} Fait were deleted successfully!` });
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while removing all faits."
+            });
+        });
+}

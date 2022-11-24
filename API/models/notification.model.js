@@ -1,5 +1,5 @@
 export const notification = (sequelize, Sequelize) => {
-    const Notification = sequelize.define("notification", {
+    const Notification = sequelize.define("notifications", {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -11,8 +11,11 @@ export const notification = (sequelize, Sequelize) => {
         message: {
             type: Sequelize.STRING
         }
-    }, {
-        timestamps: false
+    }, 
+    {
+        schema: 'common',
+        timestamps: false,
+        freezeTableName: true
     });
 
     return Notification;

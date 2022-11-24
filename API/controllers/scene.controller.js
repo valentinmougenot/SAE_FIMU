@@ -31,9 +31,8 @@ export const create = (req, res) => {
 
 export const findAll = (req, res) => {
     const nom = req.query.nom;
-    var condition = nom ? { nom: { [Op.like]: `%${nom}%` } } : null;
 
-    Scene.findAll({ where: condition, include: [{model: db.typescene}] })
+    Scene.findAll({ include: [{model: db.typescene}] })
         .then(data => {
             res.send(data);
         })
@@ -48,7 +47,7 @@ export const findAll = (req, res) => {
 export const findOne = (req, res) => {
     const id = req.params.id;
 
-    Scene.findByPk(id)
+    Scene.findByPk(id, { include: [{model: db.typescene}] })
         .then(data => {
             res.send(data);
         })

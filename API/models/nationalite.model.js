@@ -1,11 +1,12 @@
 export const nationalite = (sequelize, Sequelize) => {
-    const Nationalite = sequelize.define("nationalite", {
+    const Nationalite = sequelize.define("nationalites", {
         id_artiste: {
             type: Sequelize.INTEGER,
             primaryKey: true,
             references: {
                 model: 'artiste',
-                key: 'id'
+                key: 'id',
+                schema: 'currentseason'
             }
         },
         id_pays: {
@@ -16,6 +17,11 @@ export const nationalite = (sequelize, Sequelize) => {
                 key: 'id'
             }
         }
+    },
+    {
+        schema: 'currentseason',
+        timestamps: false,
+        freezeTableName: true
     });
 
     return Nationalite;
