@@ -1,0 +1,101 @@
+<template>
+  <v-container>
+    <v-row>
+      <v-col cols="12" sm="4" md="4">
+        <v-text-field
+            v-model="search"
+            prepend-inner-icon="mdi-magnify"
+            label="Rechercher"
+            outlined
+            hide-details></v-text-field>
+      </v-col>
+    </v-row>
+    <v-row>
+      <v-btn
+          class="ma-6 addDeleteBtn"
+          :height="56"
+          :href="'/genre/add'"
+          color="success">Ajouter genre&emsp;<v-icon>mdi-plus-box-outline</v-icon>
+      </v-btn>
+      <v-btn
+          class="ma-6 addDeleteBtn"
+          :height="56"
+          color="error"
+          @click="deleteAll()">Tout supprimer&emsp;<v-icon>mdi-delete</v-icon>
+      </v-btn>
+    </v-row>
+
+    <v-row class="table-center">
+      <table class="listing">
+        <thead>
+        <tr>
+          <th>Nom genre</th>
+          <th>Actions</th>
+        </tr>
+        </thead>
+        <tbody>
+        <tr v-for="genre in filter" :key="genre.id">
+          <td>{{genre.libelle}}</td>
+          <td>
+            <v-btn class="ma-1" color="primary" :href="'/genre/' + genre.id + '/edit'"><v-icon>mdi-pencil</v-icon></v-btn>
+            <v-btn class="ma-1" color="error" @click="deleteGenre(genre.id)"><v-icon>mdi-delete</v-icon></v-btn>
+          </td>
+        </tr>
+        </tbody>
+      </table>
+    </v-row>
+  </v-container>
+</template>
+
+<script>
+import axios from "axios";
+export default {
+  name: "GenresListView",
+  data: () => ({
+    genres: [],
+    search: "",
+  }),
+  methods: {
+    async getGenres() {
+      return await axios.get("http://localhost:3000/genre")
+          .then(response => {
+            this.genres = response.data
+          })
+          .catch(error => {
+            console.log(error)
+          });
+    },
+    async deleteGenre(id) {
+      return await axios.delete("http://localhost:3000/genre/" + id)
+          .catch(error => {
+            console.log(error)
+          });
+    },
+    async deleteAll() {
+      if (confirm("Voulez-vous vraiment supprimer tous les genres ?")) {
+        return await axios.delete("http://localhost:3000/genre")
+            .catch(error => {
+              console.log(error)
+            });
+      }
+    },
+  },
+  computed: {
+    filter() {
+      return this.genres.filter(genre => {
+        return genre.libelle.toLowerCase().includes(this.search.toLowerCase())
+      })
+    }
+  },
+  updated() {
+    this.getGenres();
+  },
+  created() {
+    this.getGenres()
+  }
+}
+</script>
+
+<style scoped>
+@import '../../public/css/show.css';
+</style>

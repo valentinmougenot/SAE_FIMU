@@ -3,6 +3,13 @@ const Concert = db.concertNext;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer un concert"
+        });
+        return;
+    }
+    
     if (!req.body.annee) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -63,6 +70,13 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier un concert"
+        });
+        return;
+    }
+    
     const id = req.params.id;
 
     Concert.update(req.body, {
@@ -87,6 +101,13 @@ export const update = (req, res) => {
 }
 
 export const deleteOne = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer un concert"
+        });
+        return;
+    }
+    
     const id = req.params.id;
 
     Concert.destroy({
@@ -111,6 +132,13 @@ export const deleteOne = (req, res) => {
 }
 
 export const deleteAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer tous les concerts"
+        });
+        return;
+    }
+    
     Concert.destroy({
         where: {},
         truncate: false

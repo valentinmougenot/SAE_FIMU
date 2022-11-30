@@ -3,6 +3,12 @@ const Possede = db.possedeNext;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer un lien entre un artiste et un réseau social"
+        });
+        return;
+    }
     if (!req.body.lien) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -56,6 +62,12 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier un lien entre un artiste et un réseau social"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Possede.update(req.body, {
@@ -80,6 +92,12 @@ export const update = (req, res) => {
 }
 
  export const deleteByIdArtiste = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer un lien entre un artiste et un réseau social"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Possede.destroy({
@@ -98,6 +116,12 @@ export const update = (req, res) => {
 
 
  export const deleteAll =(req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer tous les liens entre un artiste et un réseau social"
+        });
+        return;
+    }
     Possede.destroy({
         where: {},
         truncate: false

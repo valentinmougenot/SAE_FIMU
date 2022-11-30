@@ -3,6 +3,12 @@ const Scene = db.sceneNext;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer une scene"
+        });
+        return;
+    }
     if (!req.body.libelle) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -30,7 +36,12 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
-    const nom = req.query.nom;
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour voir les scenes"
+        });
+        return;
+    }
 
     Scene.findAll({ include: [{model: db.typescene}] })
         .then(data => {
@@ -45,6 +56,12 @@ export const findAll = (req, res) => {
 }
 
 export const findOne = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour voir une scene"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Scene.findByPk(id, { include: [{model: db.typescene}] })
@@ -59,6 +76,12 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier une scene"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Scene.update(req.body, {
@@ -83,6 +106,12 @@ export const update = (req, res) => {
 }
 
 export const deleteOne = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer une scene"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Scene.destroy({
@@ -107,6 +136,12 @@ export const deleteOne = (req, res) => {
 }
 
 export const deleteAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer toutes les scenes"
+        });
+        return;
+    }
     Scene.destroy({
         where: {},
         truncate: false

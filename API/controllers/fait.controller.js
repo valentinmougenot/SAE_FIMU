@@ -3,6 +3,13 @@ const Fait = db.fait;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer un lien entre genre et artiste"
+        });
+        return;
+    }
     if (!req.body.id_artiste) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -57,6 +64,12 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier un lien entre genre et artiste"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Fait.update(req.body, {
@@ -98,6 +111,12 @@ export const deleteByIdArtiste = (req, res) => {
 }
 
 export const deleteAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer les liens entre genre et artiste"
+        });
+        return;
+    }
     Fait.destroy({
         where: {},
         truncate: false

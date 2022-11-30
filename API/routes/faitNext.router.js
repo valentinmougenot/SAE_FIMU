@@ -6,11 +6,12 @@ import { create, findAll, findOne, update, deleteByIdArtiste, deleteAll } from '
 router.post('/', create);
 /**
  * @swagger
- * /faitNext:
+ * /next/fait:
  *   post:
  *      description: Crée un lien entre genre et artiste
  *      tags:
- *          - faitNext
+ *          - next
+ *          - fait
  *      parameters:
  *          - in: body
  *            name: genre
@@ -37,11 +38,12 @@ router.post('/', create);
 router.get('/', findAll);
 /**
  * @swagger
- * /faitNext:
+ * /next/fait:
  *   get:
  *      description: affichage de toutes les relations genre/artiste
  *      tags:
  *          - fait
+ *          - next
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -53,11 +55,12 @@ router.get('/', findAll);
 router.get('/:id', findOne);
 /**
  * @swagger
- * /faitNext/{id}:
+ * /next/fait/{id}:
  *   get:
  *      description: affichage d'une relation genre/artiste par son id
  *      tags:
- *          - faitNext
+ *          - fait
+ *          - next
  *      parameters:
  *          - in: path
  *            name: id
@@ -75,11 +78,12 @@ router.get('/:id', findOne);
 router.put('/:id', update);
 /**
  * @swagger
- * /faitNext/{id}:
+ * /next/fait/{id}:
  *   put:
  *      description: update d'une relation en fonction de son ID 
  *      tags:
- *          - faitNext
+ *          - next
+ *          - fait
  *      parameters:
  *          - in: path
  *            name: id
@@ -101,7 +105,8 @@ router.delete('/artiste/:id', deleteByIdArtiste);
  *   delete:
  *      description: suppression d'une relation en fonction de l'id de l'artiste
  *      tags:
- *          - faitNext
+ *          - fait
+ *          - next
  *      parameters:
  *          - in: path
  *            name: id
@@ -119,11 +124,12 @@ router.delete('/artiste/:id', deleteByIdArtiste);
 router.delete('/', deleteAll);
 /**
  * @swagger
- * /faitNext:
+ * /next/fait:
  *   delete:
  *      description: supprime toutes les relations
  *      tags:
- *          - faitNext
+ *          - next
+ *          - fait
  *      responses:
  *          '200':
  *              description: Resource updated successfully

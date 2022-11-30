@@ -3,6 +3,12 @@ const Nationalite = db.nationaliteNext;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer une nationalité"
+        });
+        return;
+    }
     if (!req.body.id_artiste) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -57,6 +63,12 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier une nationalité"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Nationalite.update(req.body, {
@@ -81,6 +93,12 @@ export const update = (req, res) => {
 }
 
 export const deleteByIdArtiste = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer une nationalité"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Nationalite.destroy({
@@ -97,6 +115,12 @@ export const deleteByIdArtiste = (req, res) => {
 }
 
 export const deleteAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour suppprimer les nationalités"
+        });
+        return;
+    }
     Nationalite.destroy({
         where: {},
         truncate: false

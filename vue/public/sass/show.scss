@@ -1,0 +1,53 @@
+* {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+  list-style: none;
+}
+
+.listing {
+  font-size: 1.4rem;
+  margin: 0 auto;
+  text-align: center;
+  border-collapse: collapse;
+  thead {
+    background-color: #3c3c3c;
+  }
+  th {
+    border: 2px solid black;
+    color: white;
+    font-size: 1.8rem;
+    padding: 0.3rem 1rem;
+  }
+  td, th {
+    border-left: 2px solid black;
+    border-right: 2px solid black;
+  }
+  td {
+    padding: 0.3rem;
+  }
+  tbody {
+    tr:nth-child(odd) {
+      background-color: #e6e6e8;
+    }
+    tr:last-child {
+      td {
+        border-bottom: 2px solid black;
+      }
+    }
+  }
+}
+
+.addDeleteBtn {
+  text-transform: none;
+  font-size: 1.4rem !important;
+  letter-spacing: normal !important;
+}
+
+a {
+  text-decoration: none;
+}
+
+.form-center {
+  text-align: center;
+}

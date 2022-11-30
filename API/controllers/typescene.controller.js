@@ -3,6 +3,13 @@ const Typescene = db.typescene;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour chercher un type de scène"
+        });
+        return;
+    }
+    
     if (!req.body.libelle) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -26,8 +33,6 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
-    const nom = req.query.nom;
-
     Typescene.findAll()
         .then(data => {
             res.send(data);
@@ -55,6 +60,13 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier un type de scène"
+        });
+        return;
+    }
+    
     const id = req.params.id;
 
     Typescene.update(req.body, {
@@ -79,6 +91,13 @@ export const update = (req, res) => {
 }
 
 export const deleteOne = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer un type de scène"
+        });
+        return;
+    }
+    
     const id = req.params.id;
 
     Typescene.destroy({
@@ -103,6 +122,13 @@ export const deleteOne = (req, res) => {
 }
 
 export const deleteAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer tous les types de scène"
+        });
+        return;
+    }
+    
     Typescene.destroy({
         where: {},
         truncate: false

@@ -3,6 +3,13 @@ const Role = db.role;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer un rôle"
+        });
+        return;
+    }
+    
     if (!req.body.libelle) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -26,8 +33,6 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
-    const nom = req.query.nom;
-
     Role.findAll()
         .then(data => {
             res.send(data);
@@ -55,6 +60,13 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier un rôle"
+        });
+        return;
+    }
+    
     const id = req.params.id;
 
     Role.update(req.body, {
@@ -79,6 +91,13 @@ export const update = (req, res) => {
 }
 
 export const deleteOne = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer un rôle"
+        });
+        return;
+    }
+    
     const id = req.params.id;
 
     Role.destroy({
@@ -103,6 +122,13 @@ export const deleteOne = (req, res) => {
 }
 
 export const deleteAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour suppprimer tous les rôles"
+        });
+        return;
+    }
+    
     Role.destroy({
         where: {},
         truncate: false

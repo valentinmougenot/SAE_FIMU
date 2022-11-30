@@ -1,0 +1,30 @@
+.sidebar {
+  background-color: #fafafa;
+}
+.sidebar .nav-items {
+  background-color: #fafafa;
+}
+.sidebar .item {
+  background-color: #f0f0f0;
+  margin-bottom: 0.3rem;
+}
+.sidebar .item:hover {
+  transition: 0.3s;
+  background-color: #f9f2f2;
+  border-right: 0.3rem solid #f5a9ae;
+}
+.sidebar .item:hover .item-text {
+  transition: 0.3s;
+  color: #f5a9ae;
+  margin-left: 0.5rem;
+}
+.sidebar .selected {
+  background-color: #f9f2f2;
+  border-right: 0.3rem solid #f5a9ae;
+}
+.sidebar .selected .item-text {
+  color: #f5a9ae;
+  margin-left: 0.5rem;
+}
+
+/*# sourceMappingURL=navbar.css.map */

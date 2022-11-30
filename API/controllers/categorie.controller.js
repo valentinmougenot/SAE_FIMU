@@ -3,6 +3,14 @@ const Categorie = db.categorie;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer une catégorie"
+        });
+        return;
+    }
+    
+    
     if (!req.body.libelle) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -55,6 +63,13 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier une catégorie"
+        });
+        return;
+    }
+    
     const id = req.params.id;
 
     Categorie.update(req.body, {
@@ -79,6 +94,13 @@ export const update = (req, res) => {
 }
 
 export const deleteOne = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer une catégorie"
+        });
+        return;
+    }
+    
     const id = req.params.id;
 
     Categorie.destroy({
@@ -103,6 +125,13 @@ export const deleteOne = (req, res) => {
 }
 
 export const deleteAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer toutes les catégorie"
+        });
+        return;
+    }
+    
     Categorie.destroy({
         where: {},
         truncate: false

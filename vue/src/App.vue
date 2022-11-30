@@ -1,7 +1,7 @@
 <template>
   <v-app>
     <v-row>
-      <v-col cols="12" sm="2" md="2">
+      <v-col cols="12" sm="2" md="2" v-if="showSidebar">
         <div class="sidebar">
           <v-list>
             <v-list-item>
@@ -36,11 +36,21 @@
                   <v-list-item-title class="title"><span class="item-text">Gestion des utilisateurs</span></v-list-item-title>
                 </v-list-item-content>
               </v-list-item>
+              <v-list-item>
+                <v-btn
+                color="primary"
+                @click="logout()">Logout</v-btn>
+              </v-list-item>
             </div>
           </v-list>
         </div>
       </v-col>
-      <v-col cols="12" sm="10" md="10">
+      <v-col cols="12" sm="10" md="10" v-if="showSidebar">
+        <v-main>
+          <router-view/>
+        </v-main>
+      </v-col>
+      <v-col cols="12" sm="12" md="12" v-else>
         <v-main>
           <router-view/>
         </v-main>
@@ -50,6 +60,7 @@
 </template>
 
 <script>
+import axios from 'axios';
 
 export default {
   name: 'App',
@@ -60,10 +71,12 @@ export default {
     categorieActive: false,
     genreActive: false,
     utilisateurActive: false,
+    showSidebar: true,
   }),
  methods: {
     setActive() {
       const path = window.location.pathname;
+      this.showSidebar = path !== '/login';
       if (path.includes('artiste')) {
         this.artisteActive = true;
       } else if (path.includes('scene')) {
@@ -76,8 +89,17 @@ export default {
         this.utilisateurActive = true;
       }
     },
+    logout() {
+      axios.post('http://localhost:3000/utilisateur/logout')
+          .then(() => {
+            this.$router.push('/login');
+          })
+          .catch(error => {
+            console.log(error)
+          });
+    },
  },
-  mounted() {
+  updated() {
     this.setActive();
   },
 };

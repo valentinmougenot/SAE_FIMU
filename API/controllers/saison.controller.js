@@ -3,6 +3,12 @@ const Saison = db.saison;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer une saison"
+        });
+        return;
+    }
     if (!req.body.annee) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -28,8 +34,6 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
-    const nom = req.query.nom;
-
     Saison.findAll()
         .then(data => {
             res.send(data);
@@ -56,6 +60,12 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier une saison"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Saison.update(req.body, {
@@ -80,6 +90,12 @@ export const update = (req, res) => {
 }
 
 export const deleteOne = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer une saison"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Saison.destroy({
@@ -104,6 +120,12 @@ export const deleteOne = (req, res) => {
 }
 
 export const deleteAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer toutes les saisons"
+        });
+        return;
+    }
     Saison.destroy({
         where: {},
         truncate: false

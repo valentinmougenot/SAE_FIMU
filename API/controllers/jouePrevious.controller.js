@@ -3,6 +3,12 @@ const previousJoue = db.jouePrevious;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer un lien entre un ancien artiste et une saison"
+        });
+        return;
+    }
     if (!req.body.id_artiste) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -55,6 +61,12 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier un lien entre un ancien artiste et une saison"
+        });
+        return;
+    }
     const id = req.params.id;
 
     previousJoue.update(req.body, {
@@ -79,6 +91,12 @@ export const update = (req, res) => {
 }
 
 export const deleteByIdArtiste = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer un lien entre un ancien artiste et une saison"
+        });
+        return;
+    }
     const id = req.params.id;
 
     previousJoue.destroy({
@@ -103,6 +121,12 @@ export const deleteByIdArtiste = (req, res) => {
 }
 
 export const deleteAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer les liens entre un ancien artiste et une saison"
+        });
+        return;
+    }
     previousJoue.destroy({
         where: {},
         truncate: false

@@ -3,6 +3,12 @@ const Artiste = db.artiste;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer un artiste"
+        });
+        return;
+    }
     if (!req.body.nom) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -41,10 +47,8 @@ export const create = (req, res) => {
 
 export const findAll = (req, res) => {
     Artiste.findAll(
-        { include: [{model:db.nationalite,
-                include: [{model:db.pays}]},
-                {model:db.fait,
-                    include: [{model:db.genre}]},
+        { include: [{model:db.pays},
+                {model:db.genre},
                 {model:db.categorie}]
             })
         .then(data => {
@@ -62,10 +66,8 @@ export const findAll = (req, res) => {
 export const findOne = (req, res) => {
     const id = req.params.id;
 
-    Artiste.findByPk(id, {include: [{model:db.nationalite,
-        include: [{model:db.pays}]},
-        {model:db.fait,
-            include: [{model:db.genre}]},
+    Artiste.findByPk(id, {include:  [{model:db.pays},
+        {model:db.genre},
         {model:db.categorie}]})
         .then(data => {
             res.send(data);
@@ -78,6 +80,12 @@ export const findOne = (req, res) => {
 };
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier un artiste"
+        });
+        return;
+    }
     const id = req.params.id;
     
     if (req.body.lien_video) {
@@ -111,6 +119,12 @@ export const update = (req, res) => {
 };
 
 export const deleteOne = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer un artiste"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Artiste.destroy({
@@ -135,6 +149,12 @@ export const deleteOne = (req, res) => {
 };
 
 export const deleteAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer les artiste"
+        });
+        return;
+    }
     Artiste.destroy({
         where: {},
         truncate: false

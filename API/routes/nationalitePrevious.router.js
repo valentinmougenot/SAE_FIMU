@@ -6,11 +6,11 @@ import { create, findAll, findOne, update, deleteByIdArtiste, deleteAll } from '
 router.post('/', create);
 /**
  * @swagger
- * /nationaliteNext:
+ * /previous/nationalite:
  *   post:
  *      description: Crée un lien entre un artiste et une nationalité
  *      tags:
- *          - nationaliteNext
+ *          - nationalitePrevious
  *      parameters:
  *          - in: body
  *            name: id_pays

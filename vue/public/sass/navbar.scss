@@ -1,0 +1,28 @@
+.sidebar {
+  background-color: #fafafa;
+  .nav-items {
+    background-color: #fafafa;
+  }
+  .item {
+    background-color: #f0f0f0;
+    margin-bottom: 0.3rem;
+    &:hover {
+      transition: 0.3s;
+      background-color: #f9f2f2;
+      border-right: 0.3rem solid #f5a9ae;
+      .item-text {
+        transition: 0.3s;
+        color: #f5a9ae;
+        margin-left: 0.5rem;
+      }
+    }
+  }
+  .selected {
+    background-color: #f9f2f2;
+    border-right: 0.3rem solid #f5a9ae;
+    .item-text {
+      color: #f5a9ae;
+      margin-left: 0.5rem;
+    }
+  }
+}

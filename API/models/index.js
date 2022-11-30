@@ -31,6 +31,7 @@ const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
     dialect: dbConfig.dialect,
     operatorsAliases: false,
+    logging: false,
     pool: {
         max: dbConfig.pool.max,
         min: dbConfig.pool.min,
@@ -75,23 +76,17 @@ db.possedePrevious = possedePrevious(sequelize, Sequelize);
 db.jouePrevious = jouePrevious(sequelize, Sequelize);
 
 
-db.nationalite.belongsTo(db.artiste, {foreignKey: 'id_artiste'});
-db.nationalite.belongsTo(db.pays, {foreignKey: 'id_pays'});
-db.artiste.hasMany(db.nationalite, {foreignKey: 'id_artiste'});
-db.pays.hasMany(db.nationalite, {foreignKey: 'id_pays'});
+db.artiste.belongsToMany(db.pays, { through: db.nationalite, foreignKey: 'id_artiste'});
+db.pays.belongsToMany(db.artiste, { through: db.nationalite, foreignKey: 'id_pays'});
 
-db.possede.belongsTo(db.artiste, {foreignKey: 'id_artiste'});
-db.possede.belongsTo(db.reseauxSociaux, {foreignKey: 'id_reseaux_sociaux'});
-db.artiste.hasMany(db.possede, {foreignKey: 'id_artiste'});
-db.reseauxSociaux.hasMany(db.possede, {foreignKey: 'id_reseaux_sociaux'});
+db.artiste.belongsToMany(db.reseauxSociaux, { through: db.possede, foreignKey: 'id_artiste'});
+db.reseauxSociaux.belongsToMany(db.artiste, { through: db.possede, foreignKey: 'id_reseauxSociaux'});
 
 db.artiste.belongsTo(db.categorie, {foreignKey: 'id_categorie'});
 db.categorie.hasMany(db.artiste, {foreignKey: 'id_categorie'});
 
-db.fait.belongsTo(db.artiste, {foreignKey: 'id_artiste'});
-db.fait.belongsTo(db.genre, {foreignKey: 'id_genre'});
-db.artiste.hasMany(db.fait, {foreignKey: 'id_artiste'});
-db.genre.hasMany(db.fait, {foreignKey: 'id_genre'});
+db.artiste.belongsToMany(db.genre, { through: db.fait, foreignKey: 'id_artiste'});
+db.genre.belongsToMany(db.artiste, { through: db.fait, foreignKey: 'id_genre'});
 
 db.concert.belongsTo(db.artiste, {foreignKey: 'id_artiste'});
 db.artiste.hasMany(db.concert, {foreignKey: 'id_artiste'});
@@ -110,23 +105,17 @@ db.role.hasMany(db.utilisateur, {foreignKey: 'id_role'});
 
 // -----------------------------------------------------------------------------
 
-db.nationaliteNext.belongsTo(db.artisteNext, {foreignKey: 'id_artiste'});
-db.nationaliteNext.belongsTo(db.pays, {foreignKey: 'id_pays'});
-db.artisteNext.hasMany(db.nationaliteNext, {foreignKey: 'id_artiste'});
-db.pays.hasMany(db.nationaliteNext, {foreignKey: 'id_pays'});
+db.artisteNext.belongsToMany(db.pays, { through: db.nationaliteNext, foreignKey: 'id_artiste'});
+db.pays.belongsToMany(db.artisteNext, { through: db.nationaliteNext, foreignKey: 'id_pays'});
 
-db.possedeNext.belongsTo(db.artisteNext, {foreignKey: 'id_artiste'});
-db.possedeNext.belongsTo(db.reseauxSociaux, {foreignKey: 'id_reseaux_sociaux'});
-db.artisteNext.hasMany(db.possedeNext, {foreignKey: 'id_artiste'});
-db.reseauxSociaux.hasMany(db.possedeNext, {foreignKey: 'id_reseaux_sociaux'});
+db.artisteNext.belongsToMany(db.reseauxSociaux, { through: db.possedeNext, foreignKey: 'id_artiste'});
+db.reseauxSociaux.belongsToMany(db.artisteNext, { through: db.possedeNext, foreignKey: 'id_reseauxSociaux'});
 
 db.artisteNext.belongsTo(db.categorie, {foreignKey: 'id_categorie'});
 db.categorie.hasMany(db.artisteNext, {foreignKey: 'id_categorie'});
 
-db.faitNext.belongsTo(db.artisteNext, {foreignKey: 'id_artiste'});
-db.faitNext.belongsTo(db.genre, {foreignKey: 'id_genre'});
-db.artisteNext.hasMany(db.faitNext, {foreignKey: 'id_artiste'});
-db.genre.hasMany(db.faitNext, {foreignKey: 'id_genre'});
+db.artisteNext.belongsToMany(db.genre, { through: db.faitNext, foreignKey: 'id_artiste'});
+db.genre.belongsToMany(db.artisteNext, { through: db.faitNext, foreignKey: 'id_genre'});
 
 db.concertNext.belongsTo(db.artisteNext, {foreignKey: 'id_artiste'});
 db.artisteNext.hasMany(db.concertNext, {foreignKey: 'id_artiste'});
@@ -142,25 +131,17 @@ db.typescene.hasMany(db.sceneNext, {foreignKey: 'id_typescene'});
 
 // -----------------------------------------------------------------------------------
 
-db.nationalitePrevious.belongsTo(db.artistePrevious, {foreignKey: 'id_artiste'});
-db.nationalitePrevious.belongsTo(db.pays, {foreignKey: 'id_pays'});
-db.artistePrevious.hasMany(db.nationalitePrevious, {foreignKey: 'id_artiste'});
-db.pays.hasMany(db.nationalitePrevious, {foreignKey: 'id_pays'});
-
-db.possedePrevious.belongsTo(db.artistePrevious, {foreignKey: 'id_artiste'});
-db.possedePrevious.belongsTo(db.reseauxSociaux, {foreignKey: 'id_reseaux_sociaux'});
-db.artistePrevious.hasMany(db.possedePrevious, {foreignKey: 'id_artiste'});
-db.reseauxSociaux.hasMany(db.possedePrevious, {foreignKey: 'id_reseaux_sociaux'});
+db.artistePrevious.belongsToMany(db.reseauxSociaux, {through: db.possedePrevious, foreignKey: 'id_artiste'});
+db.reseauxSociaux.belongsToMany(db.artistePrevious, {through: db.possedePrevious, foreignKey: 'id_reseaux_sociaux'});
 
 db.artistePrevious.belongsTo(db.categorie, {foreignKey: 'id_categorie'});
 db.categorie.hasMany(db.artistePrevious, {foreignKey: 'id_categorie'});
 
-db.faitPrevious.belongsTo(db.artistePrevious, {foreignKey: 'id_artiste'});
-db.faitPrevious.belongsTo(db.genre, {foreignKey: 'id_genre'});
-db.artistePrevious.hasMany(db.faitPrevious, {foreignKey: 'id_artiste'});
-db.genre.hasMany(db.faitPrevious, {foreignKey: 'id_genre'});
+db.artistePrevious.belongsToMany(db.genre, {through: db.faitPrevious, foreignKey: 'id_artiste'});
+db.genre.belongsToMany(db.artistePrevious, {through: db.faitPrevious, foreignKey: 'id_genre'})
 
-db.jouePrevious.belongsTo(db.artistePrevious, {foreignKey: 'id_artiste'});
-db.jouePrevious.belongsTo(db.saison, {foreignKey: 'annee'});
-db.artistePrevious.hasMany(db.jouePrevious, {foreignKey: 'id_artiste'});
-db.saison.hasMany(db.jouePrevious, {foreignKey: 'annee'});
+db.artistePrevious.belongsToMany(db.saison, {through: db.jouePrevious, foreignKey: 'id_artiste'});
+db.saison.belongsToMany(db.artistePrevious, {through: db.jouePrevious, foreignKey: 'annee'});
+
+db.artistePrevious.belongsToMany(db.pays, {through: db.nationalitePrevious, foreignKey: 'id_artiste'});
+db.pays.belongsToMany(db.artistePrevious, {through: db.nationalitePrevious, foreignKey: 'id_pays'});

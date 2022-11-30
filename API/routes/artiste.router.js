@@ -8,7 +8,7 @@ router.post('/', create);
  * @swagger
  * /artiste:
  *   post:
- *      description: création d'un artiste
+ *      description: Création d'un artiste
  *      tags:
  *          - artiste
  *      parameters:

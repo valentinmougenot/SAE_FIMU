@@ -26,7 +26,6 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
-    const nom = req.query.nom;
 
     Genre.findAll()
         .then(data => {
@@ -55,6 +54,7 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
+
     const id = req.params.id;
 
     Genre.update(req.body, {
@@ -79,6 +79,7 @@ export const update = (req, res) => {
 }
 
 export const deleteOne = (req, res) => {
+
     const id = req.params.id;
 
     Genre.destroy({

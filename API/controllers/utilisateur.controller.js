@@ -3,6 +3,12 @@ const Utilisateur = db.utilisateur;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer un utilisateur"
+        });
+        return;
+    }
     if (!req.body.identifiant) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -28,7 +34,12 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
-    const identifiant = req.query.identifiant;
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour voir les utilisateurs"
+        });
+        return;
+    }
 
     Utilisateur.findAll({
         include: [
@@ -47,6 +58,13 @@ export const findAll = (req, res) => {
 }
 
 export const findOne = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour voir un utilisateur"
+        });
+        return;
+    }
+
     const id = req.params.id;
 
     Utilisateur.findByPk(id)
@@ -61,6 +79,12 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier un utilisateur"
+        });
+        return;
+    }
     const id = req.params.id;
     console.log(req.body);
 
@@ -86,6 +110,12 @@ export const update = (req, res) => {
 }
 
 export const deleteOne = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer un utilisateur"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Utilisateur.destroy({
@@ -110,6 +140,12 @@ export const deleteOne = (req, res) => {
 }
 
 export const deleteAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer tous les utilisateurs"
+        });
+        return;
+    }
     Utilisateur.destroy({
         where: {},
         truncate: false
@@ -125,40 +161,7 @@ export const deleteAll = (req, res) => {
         });
 }
 
-export const home = (req, res) => {
-    let session = req.session;
-    if (session.identifiant) {
-        res.flash('success', `Welcome back ${session.identifiant}!`);
-        res.redirect('/');
-    } 
-    else {
-        res.render('home', {title: 'Home'});
-    }
-}
-
 export const login = (req, res) => {
-    let session = req.session;
-    if (session.identifiant) {
-        res.flash('success', `Welcome back ${session.identifiant}!`);
-        res.redirect('/');
-    } 
-    else {
-        res.render('login', {title: 'Login'});
-    }
-}
-
-export const logout = (req, res) => {
-    req.session.destroy(err => {
-        if(err) {
-            return res.redirect('/');
-        }
-        res.clearCookie(SESS_NAME);
-        res.redirect('/');
-    });
-}
-
-export const authenticate = (req, res) => {
-    let session = req.session;
     const identifiant = req.body.identifiant;
     const mot_de_passe = req.body.mot_de_passe;
     Utilisateur.findOne({
@@ -172,16 +175,17 @@ export const authenticate = (req, res) => {
     })
         .then(data => {
             if (data) {
-                session.identifiant = data.identifiant;
-                session.mot_de_passe = data.mot_de_passe;
-                session.id_role = data.id_role;
-                session.role = data.role.libelle;
-                res.flash('success', `Welcome ${session.identifiant}!`);
-                res.redirect('/');
+                req.session.identifiant = data.identifiant;
+                req.session.mot_de_passe = data.mot_de_passe;
+                req.session.id_role = data.id_role;
+                req.session.role = data.role.libelle;
+                data.dataValues.token = req.sessionID;
+                res.send(data);
             } 
             else {
-                res.flash('error', 'Invalid credentials!');
-                res.redirect('/login');
+                res.status(500).send({
+                    message: "Error retrieving Utilisateur with id=" + id
+                });
             }
         })
         .catch(err => {
@@ -189,4 +193,9 @@ export const authenticate = (req, res) => {
                 message: "Error retrieving Utilisateur with id=" + id
             });
         });
+}
+
+export const logout = (req, res) => {
+    req.session.destroy();
+    res.send({ message: "Vous êtes déconnecté" });
 }

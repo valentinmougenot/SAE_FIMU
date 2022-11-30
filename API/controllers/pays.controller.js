@@ -3,6 +3,12 @@ const Pays = db.pays;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer un pays"
+        });
+        return;
+    }
     if (!req.body.libelle) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -26,8 +32,6 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
-    const nom = req.query.nom;
-
     Pays.findAll()
         .then(data => {
             res.send(data);
@@ -55,6 +59,12 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier un pays"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Pays.update(req.body, {
@@ -79,6 +89,12 @@ export const update = (req, res) => {
 }
 
 export const deleteOne = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer un pays"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Pays.destroy({
@@ -103,6 +119,12 @@ export const deleteOne = (req, res) => {
 }
 
 export const deleteAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer tous les pays"
+        });
+        return;
+    }
     Pays.destroy({
         where: {},
         truncate: false

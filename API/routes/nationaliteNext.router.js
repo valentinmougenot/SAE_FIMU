@@ -6,11 +6,12 @@ import { create, findAll, findOne, update, deleteByIdArtiste, deleteAll } from '
 router.post('/', create);
 /**
  * @swagger
- * /nationaliteNext:
+ * /next/nationalite:
  *   post:
  *      description: Crée un lien entre un artiste et une nationalité
  *      tags:
- *          - nationaliteNext
+ *          - nationalite
+ *          - next
  *      parameters:
  *          - in: body
  *            name: id_pays
@@ -41,11 +42,12 @@ router.post('/', create);
 router.get('/', findAll);
 /**
  * @swagger
- * /nationaliteNext:
+ * /next/nationalite:
  *   get:
  *      description: Récupère tous les liens entre artistes et nationalités
  *      tags:
- *          - nationaliteNext
+ *          - nationalite
+ *          - next
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -57,11 +59,12 @@ router.get('/', findAll);
 router.get('/:id', findOne);
 /**
  * @swagger
- * /nationaliteNext/{id}:
+ * /next/nationalite/{id}:
  *   get:
  *      description: affichage d'une relation entre un artiste et une nationalité
  *      tags:
- *          - nationaliteNext
+ *          - nationalite
+ *          - next
  *      parameters:
  *          - in: path
  *            name: id
@@ -79,11 +82,12 @@ router.get('/:id', findOne);
 router.put('/:id', update);
 /**
  * @swagger
- * /nationaliteNext/{id}:
+ * /next/nationalite/{id}:
  *   put:
  *      description: update d'une relation entre un artiste et une nationalité
  *      tags:
- *          - nationaliteNext
+ *          - nationalite
+ *          - next
  *      parameters:
  *          - in: path
  *            name: id
@@ -101,11 +105,12 @@ router.put('/:id', update);
 router.delete('/artiste/:id', deleteByIdArtiste);
 /**
  * @swagger
- * /nationaliteNext/artiste/{id}:
+ * /next/nationalite/artiste/{id}:
  *   delete:
  *      description: suppression d'une relation en fonction de l'id de l'artiste
  *      tags:
- *          - nationaliteNext
+ *          - nationalite
+ *          - next
  *      parameters:
  *          - in: path
  *            name: id
@@ -123,11 +128,12 @@ router.delete('/artiste/:id', deleteByIdArtiste);
 router.delete('/', deleteAll);
 /**
  * @swagger
- * /nationaliteNext:
+ * /next/nationalite:
  *   delete:
  *      description: supprime toutes les relations entre artistes et nationalités
  *      tags:
- *          - nationaliteNext
+ *          - nationalite
+ *          - next
  *      responses:
  *          '200':
  *              description: Resource updated successfully

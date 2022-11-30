@@ -3,6 +3,13 @@ const Notification = db.notification;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer une notification"
+        });
+        return;
+    }
+    
     if (!req.body.message) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -27,8 +34,6 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
-    const message = req.query.message;
-
     Notification.findAll()
         .then(data => {
             res.send(data);
@@ -56,6 +61,13 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier une notification"
+        });
+        return;
+    }
+    
     const id = req.params.id;
 
     Notification.update(req.body, {
@@ -80,6 +92,13 @@ export const update = (req, res) => {
 }
 
 export const deleteOne = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer une notification"
+        });
+        return;
+    }
+    
     const id = req.params.id;
 
     Notification.destroy({
@@ -104,6 +123,13 @@ export const deleteOne = (req, res) => {
 }
 
 export const deleteAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer toutes les notifications"
+        });
+        return;
+    }
+    
     Notification.destroy({
         where: {},
         truncate: false

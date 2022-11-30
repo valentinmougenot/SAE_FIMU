@@ -20,7 +20,6 @@
     "express-session": "^1.17.3",
     "pg": "^8.8.0",
     "pg-hstore": "^2.3.4",
-    "sass": "^1.55.0",
     "sequelize": "^6.25.1",
     "swagger-jsdoc": "^6.2.5",
     "swagger-ui-express": "^4.5.0",

@@ -3,6 +3,14 @@ const Artiste = db.artisteNext;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer un prochain artiste"
+        });
+        return;
+    }
+    
     if (!req.body.nom) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -40,12 +48,9 @@ export const create = (req, res) => {
 
 
 export const findAll = (req, res) => {
-    console.log("findAll");
     Artiste.findAll(
-        { include: [{model:db.nationaliteNext,
-                include: [{model:db.pays}]},
-                {model:db.faitNext,
-                    include: [{model:db.genre}]},
+        { include: [{model:db.pays},
+                {model:db.genre},
                 {model:db.categorie}]
             })
         .then(data => {
@@ -79,6 +84,13 @@ export const findOne = (req, res) => {
 };
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier un prochain artiste"
+        });
+        return;
+    }
+    
     const id = req.params.id;
     
     if (req.body.lien_video) {
@@ -112,6 +124,13 @@ export const update = (req, res) => {
 };
 
 export const deleteOne = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer un prochain artiste"
+        });
+        return;
+    }
+    
     const id = req.params.id;
 
     Artiste.destroy({
@@ -136,6 +155,13 @@ export const deleteOne = (req, res) => {
 };
 
 export const deleteAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer un prochain artiste"
+        });
+        return;
+    }
+    
     Artiste.destroy({
         where: {},
         truncate: false

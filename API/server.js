@@ -7,9 +7,8 @@ import {dirname, join} from 'path';
 import { fileURLToPath } from 'url';
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
-import expressSession from 'express-session';
 import cookieParser from 'cookie-parser';
-import connectFlash from 'connect-flash';
+import session from 'express-session';
 import cors from 'cors';
 
 import {default as routerScene} from './routes/scene.router.js';
@@ -60,7 +59,27 @@ db.sequelize.sync()
 app.use(bodyParser.json());
 app.use(express.static(join(__dirname, 'public')))
 
-app.use(cors());
+app.use(cookieParser());
+
+app.use(session({
+  secret: 'wow very secret',
+  cookie: {
+    maxAge: 600000,
+    secure: true
+  },
+  saveUninitialized: false,
+  resave: false,
+  unset: 'destroy'
+}));
+
+app.use(cors({
+    origin: [
+      'http://localhost:8080',
+      'https://localhost:8080'
+    ],
+    credentials: true,
+    exposedHeaders: ['set-cookie']
+}));
 
 const swaggerOption = {
     swaggerDefinition: (swaggerJsdoc.Options = {
@@ -75,22 +94,6 @@ const swaggerOption = {
     }),
     apis: ["server.js", "./routes/*.js"],
 };
-
-serverRouter.use(cookieParser("secret_passcode"));
-const unJour = 1000 * 60 * 60 * 24 // millisecondes
-serverRouter.use(
-    expressSession({
-        secret: "secret_passcode",
-        cookie: { maxAge: unJour },
-        resave: false,
-        saveUninitialized: false
-    })
-);
-serverRouter.use(connectFlash());
-serverRouter.use((req, res, next) => {
-    res.locals.flashMessages = req.flash();
-    next();
-});
 
 const swaggerDocs = swaggerJsdoc(swaggerOption);
 app.use("/api-docs", swaggerUi.serve, swaggerUi.setup(swaggerDocs));
