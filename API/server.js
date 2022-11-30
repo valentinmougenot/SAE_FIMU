@@ -38,15 +38,11 @@ import {default as routerNationalitePrevious} from './routes/nationalitePrevious
 import {default as routerPossedePrevious} from './routes/possedePrevious.router.js';
 
 const app = express();
-const serverRouter = express.Router();
 
 dotenv.config();
 
 const port = process.env.PORT;
 
-const __dirname = dirname(fileURLToPath(import.meta.url));
-
-console.log(__dirname)
 
 db.sequelize.sync()
     .then(() => {
@@ -57,16 +53,12 @@ db.sequelize.sync()
     });
 
 app.use(bodyParser.json());
-app.use(express.static(join(__dirname, 'public')))
 
 app.use(cookieParser());
 
 app.use(session({
   secret: 'wow very secret',
-  cookie: {
-    maxAge: 600000,
-    secure: true
-  },
+  cookie: {maxAge: 15 * 60 * 1000},
   saveUninitialized: false,
   resave: false,
   unset: 'destroy'

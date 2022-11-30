@@ -19,14 +19,13 @@
           multiple
           outlined>
           <template v-slot:selection="{ item, index }">
-            <v-chip v-if="index <= 1">
+            <v-chip v-if="index <= 0">
               <span>{{ item }}</span>
             </v-chip>
             <span
-                v-if="index === 2"
-                class="grey--text text-caption"
-            >
-                (+{{ categorie.length - 2 }} autre<span v-if="categorie.length - 2 > 1">s</span>)
+                v-if="index === 1"
+                class="grey--text text-caption">
+                (+{{ categorie.length - 1 }} autre<span v-if="categorie.length - 2 > 1">s</span>)
               </span>
           </template>
         </v-select>
@@ -46,8 +45,7 @@
             </v-chip>
             <span
                 v-if="index === 2"
-                class="grey--text text-caption"
-            >
+                class="grey--text text-caption">
                   (+{{ genre.length - 2 }} autre<span v-if="genre.length - 2 > 1">s</span>)
                 </span>
           </template>
@@ -68,8 +66,7 @@
             </v-chip>
             <span
                 v-if="index === 2"
-                class="grey--text text-caption"
-            >
+                class="grey--text text-caption">
                   (+{{ origine.length - 2 }} autre<span v-if="origine.length - 2 > 1">s</span>)
                 </span>
           </template>
@@ -107,14 +104,10 @@
             <td>{{artiste.nom}}</td>
             <td>{{artiste.category.libelle}}</td>
             <td>
-              <span v-for="(genre, index) of artiste.faits" :key="genre.id_genre">
-                {{genre.genre.libelle}}<span v-if="index !== Object.keys(artiste.faits).length - 1" >, </span>
-              </span>
+              {{artiste.genres.map(genre => genre.libelle).join(', ')}}
             </td>
             <td>
-              <span v-for="(origine, index) of artiste.nationalites" :key="origine.id_pays">
-                {{origine.pay.libelle}}<span v-if="index !== Object.keys(artiste.nationalites).length - 1" >, </span>
-              </span>
+              {{artiste.pays.map(pays => pays.libelle).join(', ')}}
             </td>
             <td>
               <v-btn class="ma-1" color="success" :href="'/artiste/' + artiste.id"><v-icon>mdi-magnify</v-icon></v-btn>
@@ -129,7 +122,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "ArtisteView",
   data: () => ({
@@ -144,7 +137,7 @@ export default {
   }),
   methods: {
     async getArtistes() {
-      return await axios.get("http://localhost:3000/artiste")
+      await Vue.axios.get("http://localhost:3000/artiste")
           .then(response => {
             this.artistes = response.data
           })
@@ -153,7 +146,7 @@ export default {
           });
     },
     async getCategories() {
-      return await axios.get("http://localhost:3000/categorie")
+      return await Vue.axios.get("http://localhost:3000/categorie")
           .then(response => {
             response.data.forEach(categorie => {
               this.categories.push(categorie.libelle)
@@ -164,7 +157,7 @@ export default {
           });
     },
     async getGenres() {
-      return await axios.get("http://localhost:3000/genre")
+      return await Vue.axios.get("http://localhost:3000/genre")
           .then(response => {
             response.data.forEach(genre => {
               this.genres.push(genre.libelle)
@@ -175,7 +168,7 @@ export default {
           });
     },
     async getOrigines() {
-      return await axios.get("http://localhost:3000/pays")
+      return await Vue.axios.get("http://localhost:3000/pays")
           .then(response => {
             response.data.forEach(origine => {
               this.origines.push(origine.libelle)
@@ -206,8 +199,8 @@ export default {
       let result = []
       this.artistes.forEach(artiste => {
         add = false;
-        artiste.faits.forEach(fait => {
-          if (!add && this.genre.includes(fait.genre.libelle)) {
+        artiste.genres.forEach(genre => {
+          if (!add && this.genre.includes(genre.libelle)) {
             add = true;
             result.push(artiste)
           }
@@ -223,8 +216,8 @@ export default {
       let result = []
       this.artistes.forEach(artiste => {
         add = false;
-        artiste.nationalites.forEach(nationalite => {
-          if (!add && this.origine.includes(nationalite.pay.libelle)) {
+        artiste.pays.forEach(pays => {
+          if (!add && this.origine.includes(pays.libelle)) {
             add = true;
             result.push(artiste)
           }
@@ -234,21 +227,18 @@ export default {
     },
 
     deleteArtiste(id) {
-      axios.delete("http://localhost:3000/artiste/" + id)
+      Vue.axios.delete("http://localhost:3000/artiste/" + id)
           .catch(error => {
             console.log(error)
           });
     },
     deleteAll() {
       if (confirm("Voulez-vous vraiment supprimer tous les artistes ?")) {
-        axios.delete("http://localhost:3000/artiste")
+        Vue.axios.delete("http://localhost:3000/artiste")
             .catch(error => {
               console.log(error)
             });
       }
-    },
-    detail(id) {
-      this.$router.push('/artiste/' + id)
     }
   },
   computed: {
@@ -261,9 +251,6 @@ export default {
         return this.origineFiltres().includes(artiste)
       })
     }
-  },
-  updated() {
-    this.getArtistes();
   },
   created() {
     this.getArtistes();

@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "CategoriesListView",
   data: () => ({
@@ -57,7 +57,7 @@ export default {
   }),
   methods: {
     async getCategories() {
-      return await axios.get("http://localhost:3000/categorie")
+      return await Vue.axios.get("http://localhost:3000/categorie")
           .then(response => {
             this.categories = response.data
           })
@@ -66,14 +66,14 @@ export default {
           });
     },
     async deleteCategorie(id) {
-      return await axios.delete("http://localhost:3000/categorie/" + id)
+      return await Vue.axios.delete("http://localhost:3000/categorie/" + id)
           .catch(error => {
             console.log(error)
           });
     },
     async deleteAll() {
       if (confirm("Voulez-vous vraiment supprimer toutes les catégories ?")) {
-        return await axios.delete("http://localhost:3000/categorie")
+        return await Vue.axios.delete("http://localhost:3000/categorie")
             .catch(error => {
               console.log(error)
             });

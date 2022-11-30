@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "CategorieAddView",
   data: () => ({
@@ -33,7 +33,7 @@ export default {
   }),
   methods: {
     async addCategorie() {
-      return await axios.post("http://localhost:3000/categorie", this.categorie)
+      return await Vue.axios.post("http://localhost:3000/categorie", this.categorie)
           .then(() => {
             this.$router.push("/categorie");
           })

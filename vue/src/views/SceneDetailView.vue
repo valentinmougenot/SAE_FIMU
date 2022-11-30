@@ -19,7 +19,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "SceneDetailView",
   data: () => ({
@@ -27,7 +27,7 @@ export default {
   }),
   methods: {
     async getScene() {
-      return await axios.get("http://localhost:3000/scene/" + this.$route.params.id)
+      return await Vue.axios.get("http://localhost:3000/scene/" + this.$route.params.id)
           .then(response => {
             this.scene = response.data
           })

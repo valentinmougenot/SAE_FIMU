@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Vue from 'vue';
 export default {
   name: "UtilisateursListView",
   data: () => ({
@@ -67,7 +67,7 @@ export default {
   }),
   methods: {
     async getUtilisateurs() {
-      return await axios.get("http://localhost:3000/utilisateur")
+      return await Vue.axios.get("http://localhost:3000/utilisateur")
           .then(response => {
             this.utilisateurs = response.data
           })
@@ -76,7 +76,7 @@ export default {
           });
     },
     async getRoles() {
-      return await axios.get("http://localhost:3000/role")
+      return await Vue.axios.get("http://localhost:3000/role")
           .then(response => {
             response.data.forEach(role => {
               this.roles.push(role.libelle)
@@ -100,7 +100,7 @@ export default {
       })
     },
     deleteUtilisateur(id) {
-      return axios.delete("http://localhost:3000/utilisateur/" + id)
+      return Vue.axios.delete("http://localhost:3000/utilisateur/" + id)
           .then(() => {
             this.getUtilisateurs();
           })

@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "SceneAddView",
   data: () => ({
@@ -71,7 +71,7 @@ export default {
   }),
   methods: {
    async getTypescenes() {
-      return await axios.get("http://localhost:3000/typescene")
+      return await Vue.axios.get("http://localhost:3000/typescene")
           .then(response => {
             response.data.forEach(typescene => {
               this.typescenes.push({
@@ -91,7 +91,7 @@ export default {
       this.scene.jauge = parseInt(this.scene.jauge);
       this.scene.latitude = parseFloat(this.scene.latitude);
       this.scene.longitude = parseFloat(this.scene.longitude);
-      return await axios.post("http://localhost:3000/scene", this.scene)
+      return await Vue.axios.post("http://localhost:3000/scene", this.scene)
           .then(() => {
             this.$router.push("/scene")
           })

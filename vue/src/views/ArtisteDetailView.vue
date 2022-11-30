@@ -13,11 +13,12 @@
             <h1>{{artiste.nom}}</h1>
           </v-card-title>
           <v-card-text>
+            <h2 class="ma-2">{{artiste.pays.length > 1 ? 'Origines' : 'Origine'}} :
+            {{artiste.pays.map(pays => pays.libelle).join(', ')}}</h2>
             <h2 class="ma-2">Catégorie : {{artiste.category.libelle}}</h2>
-            <h2 class="ma-2">Genres :
-              <span v-for="(genre, index) of artiste.faits" :key="genre.id_genre">
-                {{genre.genre.libelle}}<span v-if="index !== Object.keys(artiste.faits).length - 1" >, </span>
-              </span></h2>
+            <h2 class="ma-2">{{artiste.genres.length > 1 ? 'Genres' : 'Genre'}} :
+              {{artiste.genres.map(genre => genre.libelle).join(', ')}}
+              </h2>
             <a class="ma-2" v-if="artiste.lien_site" :href="artiste.lien_site"><v-icon>mdi-web</v-icon>&emsp;{{artiste.lien_site}}</a>
           </v-card-text>
         </v-card>
@@ -40,7 +41,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "ArtisteShow",
   data: () => ({
@@ -48,7 +49,7 @@ export default {
   }),
   methods: {
     async getArtiste() {
-      return await axios.get("http://localhost:3000/artiste/" + this.$route.params.id)
+      return await Vue.axios.get("http://localhost:3000/artiste/" + this.$route.params.id)
           .then(response => {
             this.artiste = response.data
           })

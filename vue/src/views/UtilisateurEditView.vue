@@ -30,7 +30,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "UtilisateurEditView",
   data: () => ({
@@ -39,7 +39,7 @@ export default {
   }),
   methods: {
     getRoles() {
-      return axios.get("http://localhost:3000/role")
+      return Vue.axios.get("http://localhost:3000/role")
         .then(response => {
           this.roles = response.data.map(role => {
             return {
@@ -53,7 +53,7 @@ export default {
         });
     },
     getUtilisateur() {
-      return axios.get("http://localhost:3000/utilisateur/" + this.$route.params.id)
+      return Vue.axios.get("http://localhost:3000/utilisateur/" + this.$route.params.id)
         .then(response => {
           this.id_role = response.data.id_role;
         })
@@ -62,7 +62,7 @@ export default {
         });
     },
     editUtilisateur() {
-      return axios
+      return Vue.axios
         .put("http://localhost:3000/utilisateur/" + this.$route.params.id, {
           id_role: this.id_role
         })

@@ -48,7 +48,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "GenresListView",
   data: () => ({
@@ -57,7 +57,7 @@ export default {
   }),
   methods: {
     async getGenres() {
-      return await axios.get("http://localhost:3000/genre")
+      return await Vue.axios.get("http://localhost:3000/genre")
           .then(response => {
             this.genres = response.data
           })
@@ -66,14 +66,14 @@ export default {
           });
     },
     async deleteGenre(id) {
-      return await axios.delete("http://localhost:3000/genre/" + id)
+      return await Vue.axios.delete("http://localhost:3000/genre/" + id)
           .catch(error => {
             console.log(error)
           });
     },
     async deleteAll() {
       if (confirm("Voulez-vous vraiment supprimer tous les genres ?")) {
-        return await axios.delete("http://localhost:3000/genre")
+        return await Vue.axios.delete("http://localhost:3000/genre")
             .catch(error => {
               console.log(error)
             });

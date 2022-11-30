@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "GenreAddView",
   data: () => ({
@@ -33,7 +33,7 @@ export default {
   }),
   methods: {
     async addGenre() {
-      return await axios.post("http://localhost:3000/genre", this.genre)
+      return await Vue.axios.post("http://localhost:3000/genre", this.genre)
           .then(() => {
             this.$router.push("/genre");
           })

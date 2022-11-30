@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "CategorieEditView",
   data: () => ({
@@ -33,7 +33,7 @@ export default {
   }),
   methods: {
     async getCategorie() {
-      return await axios.get("http://localhost:3000/categorie/" + this.$route.params.id)
+      return await Vue.axios.get("http://localhost:3000/categorie/" + this.$route.params.id)
           .then(response => {
             this.categorie = response.data;
           })
@@ -42,7 +42,7 @@ export default {
           });
     },
     async editCategorie() {
-      return await axios.put("http://localhost:3000/categorie/" + this.$route.params.id, this.categorie)
+      return await Vue.axios.put("http://localhost:3000/categorie/" + this.$route.params.id, this.categorie)
           .then(() => {
             this.$router.push("/categorie");
           })

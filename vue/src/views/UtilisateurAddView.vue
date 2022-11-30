@@ -47,7 +47,7 @@
 
 <script>
 import bcrypt from "bcryptjs";
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "UtilisateurAddView",
   data: () => ({
@@ -65,7 +65,7 @@ export default {
   }),
   methods: {
     getRoles() {
-      axios.get("http://localhost:3000/role").then(response => {
+      Vue.axios.get("http://localhost:3000/role").then(response => {
         response.data.forEach(role => {
           this.roles.push({
             text: role.libelle,
@@ -77,7 +77,7 @@ export default {
     addUtilisateur() {
       if (this.utilisateur.mot_de_passe === this.confirm_password) {
         this.utilisateur.mot_de_passe = bcrypt.hashSync(this.utilisateur.mot_de_passe, 10);
-        axios.post("http://localhost:3000/utilisateur", this.utilisateur).then(() => {
+        Vue.axios.post("http://localhost:3000/utilisateur", this.utilisateur).then(() => {
           this.$router.push("/utilisateur");
         });
       } else {

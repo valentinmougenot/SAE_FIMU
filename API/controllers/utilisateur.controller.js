@@ -34,6 +34,7 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
+
     if (!req.session.identifiant) {
         res.status(401).send({
             message: "Vous devez être connecté pour voir les utilisateurs"
@@ -86,7 +87,6 @@ export const update = (req, res) => {
         return;
     }
     const id = req.params.id;
-    console.log(req.body);
 
     Utilisateur.update(req.body, {
         where: { identifiant: id }
@@ -179,7 +179,7 @@ export const login = (req, res) => {
                 req.session.mot_de_passe = data.mot_de_passe;
                 req.session.id_role = data.id_role;
                 req.session.role = data.role.libelle;
-                data.dataValues.token = req.sessionID;
+
                 res.send(data);
             } 
             else {

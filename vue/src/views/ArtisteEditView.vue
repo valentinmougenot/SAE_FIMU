@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "ArtisteEditView",
   data: () => ({
@@ -135,9 +135,8 @@ export default {
   }),
   methods: {
     async getArtiste() {
-      return await axios.get("http://localhost:3000/artiste/" + this.$route.params.id)
+      return await Vue.axios.get("http://localhost:3000/artiste/" + this.$route.params.id)
           .then(response => {
-            console.log(response.data);
             this.artiste = {
               nom: response.data.nom,
               photo: response.data.photo,
@@ -146,11 +145,11 @@ export default {
               lien_site: response.data.lien_site,
               id_categorie: response.data.id_categorie,
             };
-            response.data.faits.forEach(fait => {
-              this.id_genres.push(fait.id_genre);
+            response.data.genres.forEach(genre => {
+              this.id_genres.push(genre.id);
             })
-            response.data.nationalites.forEach(origine => {
-              this.id_pays.push(origine.id_pays);
+            response.data.pays.forEach(pays => {
+              this.id_pays.push(pays.id);
             })
           })
           .catch(error => {
@@ -158,7 +157,7 @@ export default {
           });
     },
     async getCategories() {
-      return await axios.get("http://localhost:3000/categorie")
+      return await Vue.axios.get("http://localhost:3000/categorie")
           .then(response => {
             this.categories = response.data.map(categorie => {
               return {
@@ -172,7 +171,7 @@ export default {
           });
     },
     async getGenres() {
-      return await axios.get("http://localhost:3000/genre")
+      return await Vue.axios.get("http://localhost:3000/genre")
           .then(response => {
             this.genres = response.data.map(genre => {
               return {
@@ -186,7 +185,7 @@ export default {
           });
     },
     async getPays() {
-      return await axios.get("http://localhost:3000/pays")
+      return await Vue.axios.get("http://localhost:3000/pays")
           .then(response => {
             this.pays = response.data.map(pays => {
               return {
@@ -206,16 +205,16 @@ export default {
       if (this.artiste.lien_site && this.artiste.lien_site.length === 0) {
         this.artiste.lien_site = null;
       }
-      return await axios.put("http://localhost:3000/artiste/" + this.$route.params.id, this.artiste)
+      return await Vue.axios.put("http://localhost:3000/artiste/" + this.$route.params.id, this.artiste)
           .then(async () => {
-            await axios.delete("http://localhost:3000/fait/artiste/" + this.$route.params.id);
+            await Vue.axios.delete("http://localhost:3000/fait/artiste/" + this.$route.params.id);
           })
           .then(async () => {
-            await axios.delete("http://localhost:3000/nationalite/artiste/" + this.$route.params.id);
+            await Vue.axios.delete("http://localhost:3000/nationalite/artiste/" + this.$route.params.id);
           })
           .then(async () => {
             for(const id_genre of this.id_genres) {
-              await axios.post("http://localhost:3000/fait", {
+              await Vue.axios.post("http://localhost:3000/fait", {
                 id_artiste: this.$route.params.id,
                 id_genre: id_genre,
               })
@@ -223,7 +222,7 @@ export default {
           })
           .then(async () => {
             for(const id_pays of this.id_pays) {
-              await axios.post("http://localhost:3000/nationalite", {
+              await Vue.axios.post("http://localhost:3000/nationalite", {
                 id_artiste: this.$route.params.id,
                 id_pays: id_pays,
               })

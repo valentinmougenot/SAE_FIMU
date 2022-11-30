@@ -115,7 +115,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "ArtisteAddView",
   data: () => ({
@@ -135,7 +135,7 @@ export default {
   }),
   methods: {
     async getCategories() {
-      return await axios.get("http://localhost:3000/categorie")
+      return await Vue.axios.get("http://localhost:3000/categorie")
           .then(response => {
             this.categories = response.data.map(categorie => {
               return {
@@ -149,7 +149,7 @@ export default {
           });
     },
     async getGenres() {
-      return await axios.get("http://localhost:3000/genre")
+      return await Vue.axios.get("http://localhost:3000/genre")
           .then(response => {
             this.genres = response.data.map(genre => {
               return {
@@ -163,7 +163,7 @@ export default {
           });
     },
     async getPays() {
-      return axios.get("http://localhost:3000/pays")
+      return Vue.axios.get("http://localhost:3000/pays")
           .then(response => {
             this.pays = response.data.map(pays => {
               return {
@@ -183,9 +183,9 @@ export default {
       if (this.artiste.lien_site && this.artiste.lien_site.length === 0) {
         this.artiste.lien_site = null;
       }
-      await axios.post("http://localhost:3000/artiste", this.artiste)
+      await Vue.axios.post("http://localhost:3000/artiste", this.artiste)
           .then(async () => {
-            await axios.get("http://localhost:3000/artiste/last")
+            await Vue.axios.get("http://localhost:3000/artiste/last")
                 .then(response => {
                   this.id = response.data.id
                 })
@@ -195,7 +195,7 @@ export default {
           })
           .then(async () => {
             for (const id_pays of this.id_pays) {
-              await axios.post("http://localhost:3000/nationalite", {
+              await Vue.axios.post("http://localhost:3000/nationalite", {
                 id_artiste: this.id,
                 id_pays: id_pays
               })
@@ -209,7 +209,7 @@ export default {
           })
           .then(async () => {
             for (const id_genre of this.id_genres) {
-              await axios.post("http://localhost:3000/fait", {
+              await Vue.axios.post("http://localhost:3000/fait", {
                 id_artiste: this.id,
                 id_genre: id_genre
               })

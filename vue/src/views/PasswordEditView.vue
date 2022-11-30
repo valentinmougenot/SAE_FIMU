@@ -39,7 +39,7 @@
 
 <script>
 import bcrypt from "bcryptjs";
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "PasswordEditView",
   data: () => ({
@@ -58,7 +58,7 @@ export default {
         const p = {
           mot_de_passe: bcrypt.hashSync(this.password, 10)
         }
-        return axios.put("http://localhost:3000/utilisateur/" + this.$route.params.id, p)
+        return Vue.axios.put("http://localhost:3000/utilisateur/" + this.$route.params.id, p)
           .then(() => {
             this.$router.push("/utilisateur");
           })

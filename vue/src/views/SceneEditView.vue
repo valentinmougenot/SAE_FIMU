@@ -56,7 +56,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "SceneEditView",
   data() {
@@ -74,14 +74,14 @@ export default {
   },
   methods: {
     getScene() {
-      return axios
+      return Vue.axios
         .get("http://localhost:3000/scene/" + this.$route.params.id)
         .then((response) => {
           this.scene = response.data;
         });
     },
     async getTypescene() {
-      return axios.get("http://localhost:3000/typescene").then((response) => {
+      return Vue.axios.get("http://localhost:3000/typescene").then((response) => {
         this.typescenes = response.data.map((typescene) => {
           return {
             text: typescene.libelle,
@@ -94,7 +94,7 @@ export default {
       if (this.scene.id_typescene === 1) {
         this.scene.jauge = null;
       }
-      return await axios.put("http://localhost:3000/scene/" + this.$route.params.id, this.scene)
+      return await Vue.axios.put("http://localhost:3000/scene/" + this.$route.params.id, this.scene)
         .then(() => {
           this.$router.push("/scene");
         });

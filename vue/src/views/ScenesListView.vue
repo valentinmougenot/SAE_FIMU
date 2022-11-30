@@ -69,7 +69,7 @@
 
 
 <script>
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "ScenesListView",
   data: () => ({
@@ -81,7 +81,7 @@ export default {
   }),
   methods: {
     async getScenes() {
-      return await axios.get("http://localhost:3000/scene")
+      return await Vue.axios.get("http://localhost:3000/scene")
           .then(response => {
             this.scenes = response.data
           })
@@ -90,7 +90,7 @@ export default {
           });
     },
     async getTypescenes() {
-      return await axios.get("http://localhost:3000/typescene")
+      return await Vue.axios.get("http://localhost:3000/typescene")
           .then(response => {
             response.data.forEach(typescene => {
               this.typescenes.push(typescene.libelle)
@@ -114,7 +114,7 @@ export default {
       })
     },
     deleteScene(id) {
-      axios.delete("http://localhost:3000/scene/" + id)
+      Vue.axios.delete("http://localhost:3000/scene/" + id)
           .then(response => {
             this.getScenes()
             return response.data
@@ -125,7 +125,7 @@ export default {
     },
     deleteAll() {
       if (confirm("Voulez-vous vraiment supprimer toutes les scènes ?")) {
-        axios.delete("http://localhost:3000/scene")
+        Vue.axios.delete("http://localhost:3000/scene")
             .then(response => {
               this.getScenes()
               return response.data

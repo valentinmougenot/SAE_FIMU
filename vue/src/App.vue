@@ -60,7 +60,7 @@
 </template>
 
 <script>
-import axios from 'axios';
+import Vue from 'vue';
 
 export default {
   name: 'App',
@@ -90,7 +90,7 @@ export default {
       }
     },
     logout() {
-      axios.post('http://localhost:3000/utilisateur/logout')
+      Vue.axios.post('http://localhost:3000/utilisateur/logout')
           .then(() => {
             this.$router.push('/login');
           })

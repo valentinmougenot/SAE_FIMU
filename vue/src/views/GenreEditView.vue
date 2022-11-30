@@ -23,7 +23,7 @@
 </template>
 
 <script>
-import axios from "axios";
+import Vue from "vue";
 export default {
   name: "GenreEditView",
   data: () => ({
@@ -34,7 +34,7 @@ export default {
   }),
   methods: {
     async getGenre() {
-      return await axios.get("http://localhost:3000/genre/" + this.$route.params.id)
+      return await Vue.axios.get("http://localhost:3000/genre/" + this.$route.params.id)
           .then(response => {
             console.log(response.data);
             this.genre = {
@@ -47,7 +47,7 @@ export default {
           });
     },
     async editGenre() {
-      return await axios.put("http://localhost:3000/genre/" + this.$route.params.id, this.genre)
+      return await Vue.axios.put("http://localhost:3000/genre/" + this.$route.params.id, this.genre)
           .then(() => {
             this.$router.push('/genre');
           })
