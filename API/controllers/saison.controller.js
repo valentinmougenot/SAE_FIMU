@@ -1,4 +1,5 @@
 import {db} from '../models/index.js';
+import {pool} from '../db.config.js';
 const Saison = db.saison;
 const Op = db.Sequelize.Op;
 

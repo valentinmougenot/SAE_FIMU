@@ -1,4 +1,5 @@
 import {db} from '../models/index.js';
+import {pool} from "../db.config.js";
 const Artiste = db.artiste;
 const Op = db.Sequelize.Op;
 
@@ -183,3 +184,45 @@ export const findLast = (req, res) => {
         });
 }
 
+export const switchPreviousArtistes = (req, res) => {
+    pool.query('BEGIN TRANSACTION INSERT INTO ' +
+        'previousseasons.artistes(id,nom,photo,biograpghie,lien_video,lien_site,id_categorie) ' +
+        'SELECT id,nom,photo,biograpghie,lien_video ' +
+        'FROM currentseason.artistes;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).json(results.rows)
+    }
+}
+
+
+export const switchNextArtistes = (req, res) => {
+    pool.query('BEGIN TRANSACTION INSERT INTO ' +
+        'nextseason.artistes(id,nom,photo,biograpghie,lien_video,lien_site,id_categorie) ' +
+        'SELECT id,nom,photo,biograpghie,lien_video ' +
+        'FROM currentseason.artistes;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).json(results.rows)
+    }
+}
+
+const deleteCurrentAfterSwitch = (req, res) => {
+    pool.query('DELETE FROM currentseason.artistes;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).json(results.rows)
+    }
+}
+
+const deleteNextAfterSwitch = (req, res) => {
+    pool.query('DELETE FROM nextseason.artistes;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).json(results.rows)
+    }
+}
