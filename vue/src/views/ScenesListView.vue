@@ -39,30 +39,27 @@
       </v-btn>
     </v-row>
     <v-row class="table-center">
-      <table class="listing">
-        <thead>
-        <tr>
-          <th>Nom scène</th>
-          <th>Latitude</th>
-          <th>Longitude</th>
-          <th>Type de scène</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-          <tr v-for="scene in filtres" :key="scene.id">
-            <td>{{scene.libelle}}</td>
-            <td>{{scene.latitude}}</td>
-            <td>{{scene.longitude}}</td>
-            <td>{{scene.typescene.libelle}}</td>
-            <td>
-              <v-btn class="ma-1" color="success" :href="'/scene/' + scene.id"><v-icon>mdi-magnify</v-icon></v-btn>
-              <v-btn class="ma-1" color="primary" :href="'/scene/' + scene.id + '/edit'"><v-icon>mdi-pencil</v-icon></v-btn>
-              <v-btn class="ma-1" color="error" @click="deleteScene(scene.id)"><v-icon>mdi-delete</v-icon></v-btn>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <TableList
+        :data="filtres"
+        :fields="['libelle', 'latitude', 'longitude', 'tsl']"
+        :titles="['Nom scène', 'Latitude', 'Longitude', 'Type de scène', 'Actions']"
+        :buttons="[
+          {
+            icon: 'mdi-magnify',
+            color: 'success'
+          },
+          {
+            icon: 'mdi-pencil',
+            color: 'primary'
+          },
+          {
+            icon: 'mdi-delete',
+            color: 'error'
+          },
+        ]"
+        :pk="'id'"
+        @button-click="buttonClick"
+        ></TableList>
     </v-row>
   </v-container>
 </template>
@@ -72,6 +69,9 @@
 import Vue from "vue";
 export default {
   name: "ScenesListView",
+  components: {
+    TableList: () => import("@/components/TableList.vue"),
+  },
   data: () => ({
     scenes: [],
     typescenes: [],
@@ -84,6 +84,9 @@ export default {
       return await Vue.axios.get("http://localhost:3000/scene")
           .then(response => {
             this.scenes = response.data
+            this.scenes.forEach(scene => {
+              scene.tsl = scene.typescene.libelle
+            })
           })
           .catch(error => {
             console.log(error)
@@ -134,6 +137,17 @@ export default {
               console.log(error)
             });
       }
+    },
+    buttonClick(id, buttonIndex) {
+      if (buttonIndex === 0) {
+        this.$router.push('/scene/' + id);
+      }
+      else if (buttonIndex === 1) {
+        this.$route.push('/scene/' + id + '/edit');
+      }
+      else if (buttonIndex === 2) {
+        this.deleteScene(id)
+      }
     }
   },
   mounted() {
@@ -145,6 +159,11 @@ export default {
       return this.scenesFiltres().filter(scene => {
         return this.typescenesFiltres().includes(scene)
       })
+    }
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
     }
   }
 }

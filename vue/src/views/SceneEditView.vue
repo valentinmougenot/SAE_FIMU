@@ -104,6 +104,11 @@ export default {
     this.getScene();
     this.getTypescene();
   },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 

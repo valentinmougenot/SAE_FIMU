@@ -77,6 +77,11 @@ export default {
   created() {
     this.getRoles();
     this.getUtilisateur()
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

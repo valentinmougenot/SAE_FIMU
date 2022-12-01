@@ -53,6 +53,11 @@ export default {
   },
   created() {
     this.getCategorie();
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

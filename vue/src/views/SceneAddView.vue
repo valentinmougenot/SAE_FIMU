@@ -103,6 +103,11 @@ export default {
   created() {
     this.getTypescenes()
     console.log(this.typescenes)
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

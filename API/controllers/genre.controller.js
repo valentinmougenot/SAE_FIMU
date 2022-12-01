@@ -3,6 +3,12 @@ const Genre = db.genre;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer un genre"
+        });
+        return;
+    }
     if (!req.body.libelle) {
         res.status(400).send({
             message: "Content can not be empty!"
@@ -54,6 +60,12 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier un genre"
+        });
+        return;
+    }
 
     const id = req.params.id;
 
@@ -79,6 +91,12 @@ export const update = (req, res) => {
 }
 
 export const deleteOne = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer un genre"
+        });
+        return;
+    }
 
     const id = req.params.id;
 
@@ -104,6 +122,12 @@ export const deleteOne = (req, res) => {
 }
 
 export const deleteAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour supprimer un genre"
+        });
+        return;
+    }
     Genre.destroy({
         where: {},
         truncate: false

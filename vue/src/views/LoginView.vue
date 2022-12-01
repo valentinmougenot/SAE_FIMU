@@ -67,13 +67,21 @@ export default {
         mot_de_passe: this.password,
       }).then((response) => {
         if (response.data.identifiant) {
-          this.$router.push("/artiste");
+          this.$session.start();
+          this.$session.set("identifiant", response.data.identifiant);
+          this.$session.set("role", response.data.role.libelle);
+          window.location.href = "/artiste";
         } else {
           alert("Identifiant ou mot de passe incorrect");
         }
       });
       }
     },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 

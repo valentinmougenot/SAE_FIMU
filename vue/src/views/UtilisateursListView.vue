@@ -23,7 +23,6 @@
     </v-row>
     <v-row>
       <v-btn
-          v-model="ajouter"
           class="ma-6 addDeleteBtn"
           :height="56"
           :href="'/utilisateur/add'"
@@ -31,26 +30,18 @@
       </v-btn>
     </v-row>
     <v-row>
-      <table class="listing">
-        <thead>
-        <tr>
-          <th>Identifiant</th>
-          <th>Role</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-          <tr v-for="user in filtres" :key="user.id">
-            <td>{{user.identifiant}}</td>
-            <td>{{user.role.libelle}}</td>
-            <td>
-              <v-btn class="ma-1" color="warning" :href="'/password/' + user.identifiant + '/edit'"><v-icon>mdi-key-variant</v-icon></v-btn>
-              <v-btn class="ma-1" color="primary" :href="'/utilisateur/' + user.identifiant + '/edit'"><v-icon>mdi-pencil</v-icon></v-btn>
-              <v-btn class="ma-1" color="error" @click="deleteUtilisateur(user.identifiant)"><v-icon>mdi-delete</v-icon></v-btn>
-            </td>
-          </tr>
-        </tbody>
-      </table>
+      <TableList
+        :data="filtres"
+        :fields="['identifiant', 'rl']"
+        :titles="['Identifiant', 'Role', 'Actions']"
+        :buttons="[
+          {icon: 'mdi-key-variant', color: 'warning'},
+          {icon: 'mdi-pencil', color: 'primary'},
+          {icon: 'mdi-delete', color: 'error'}
+        ]"
+        :pk="'identifiant'"
+        @button-click="buttonClick"
+        ></TableList>
     </v-row>
   </v-container>
 </template>
@@ -59,6 +50,9 @@
 import Vue from 'vue';
 export default {
   name: "UtilisateursListView",
+  components: {
+    TableList: () => import("@/components/TableList.vue"),
+  },
   data: () => ({
     utilisateurs: [],
     roles: [],
@@ -70,6 +64,9 @@ export default {
       return await Vue.axios.get("http://localhost:3000/utilisateur")
           .then(response => {
             this.utilisateurs = response.data
+            this.utilisateurs.forEach(user => {
+              user.rl = user.role.libelle
+            })
           })
           .catch(error => {
             console.log(error)
@@ -108,6 +105,19 @@ export default {
             console.log(error)
           });
     },
+    buttonClick(identifiant, buttonIndex) {
+      switch (buttonIndex) {
+        case 0:
+          this.$router.push('/password/' + identifiant + '/edit');
+          break;
+        case 1:
+          this.$router.push('/utilisateur/' + identifiant + '/edit');
+          break;
+        case 2:
+          this.deleteUtilisateur(identifiant);
+          break;
+      }
+    }
   },
   created() {
     this.getUtilisateurs();
@@ -118,6 +128,11 @@ export default {
       return this.utilisateursFiltres().filter(utilisateur => {
         return this.rolesFiltres().includes(utilisateur)
       })
+    }
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
     }
   }
 }

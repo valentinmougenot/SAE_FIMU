@@ -3,8 +3,6 @@ import bodyParser from 'body-parser';
 import dotenv from 'dotenv';
 import {default as routerArtiste} from './routes/artiste.router.js';
 import {db} from './models/index.js';
-import {dirname, join} from 'path';
-import { fileURLToPath } from 'url';
 import swaggerJsdoc from "swagger-jsdoc";
 import swaggerUi from "swagger-ui-express";
 import cookieParser from 'cookie-parser';

@@ -69,6 +69,11 @@ export default {
         alert("Les mots de passe ne correspondent pas");
       }
     }
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

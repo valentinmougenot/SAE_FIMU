@@ -38,6 +38,11 @@ export default {
   },
   created() {
     this.getScene()
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

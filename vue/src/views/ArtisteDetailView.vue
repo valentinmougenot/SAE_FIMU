@@ -61,6 +61,11 @@ export default {
   mounted() {
     this.getArtiste();
   },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 

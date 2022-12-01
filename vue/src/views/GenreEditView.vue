@@ -59,6 +59,11 @@ export default {
   created() {
     this.getGenre();
   },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 

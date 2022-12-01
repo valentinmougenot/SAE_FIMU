@@ -89,7 +89,7 @@
     </v-row>
 
     <v-row class="table-center">
-      <table class="listing">
+<!--      <table class="listing">
         <thead>
           <tr>
             <th>Nom groupe</th>
@@ -116,7 +116,28 @@
             </td>
           </tr>
         </tbody>
-      </table>
+      </table>-->
+      <TableList
+        :data="filtres"
+        :fields="['nom', 'cl', 'gl', 'pl']"
+        :titles="['Nom groupe', 'Catégorie', 'Genres', 'Origines', 'Actions']"
+        :buttons="[
+          {
+            icon: 'mdi-magnify',
+            color: 'success'
+          },
+          {
+            icon: 'mdi-pencil',
+            color: 'primary'
+          },
+          {
+            icon: 'mdi-delete',
+            color: 'error'
+          },
+        ]"
+        :pk="'id'"
+        @button-click="buttonClick"
+      ></TableList>
     </v-row>
   </v-container>
 </template>
@@ -125,6 +146,9 @@
 import Vue from "vue";
 export default {
   name: "ArtisteView",
+  components: {
+    TableList: () => import("@/components/TableList.vue"),
+  },
   data: () => ({
     artistes: [],
     categories: [],
@@ -140,6 +164,11 @@ export default {
       await Vue.axios.get("http://localhost:3000/artiste")
           .then(response => {
             this.artistes = response.data
+            this.artistes.forEach(artiste => {
+              artiste.cl = artiste.category.libelle
+              artiste.gl = artiste.genres.map(genre => genre.libelle).join(', ')
+              artiste.pl = artiste.pays.map(pays => pays.libelle).join(', ')
+            })
           })
           .catch(error => {
             console.log(error)
@@ -239,6 +268,19 @@ export default {
               console.log(error)
             });
       }
+    },
+    buttonClick(id, index) {
+      switch (index) {
+        case 0:
+          this.$router.push('/artiste/' + id)
+          break;
+        case 1:
+          this.$router.push('/artiste/' + id + '/edit')
+          break;
+        case 2:
+          this.deleteArtiste(id)
+          break;
+      }
     }
   },
   computed: {
@@ -257,6 +299,11 @@ export default {
     this.getCategories();
     this.getGenres();
     this.getOrigines();
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

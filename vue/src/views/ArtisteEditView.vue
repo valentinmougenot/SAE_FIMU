@@ -242,6 +242,11 @@ export default {
     this.getGenres();
     this.getPays();
   },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 

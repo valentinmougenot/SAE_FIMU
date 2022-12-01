@@ -50,13 +50,6 @@ export const findAll = (req, res) => {
 }
 
 export const findOne = (req, res) => {
-    
-    if (!req.session.identifiant) {
-        res.status(401).send({
-            message: "Vous devez être connecté pour chercher une scène"
-        });
-        return;
-    }
 
     const id = req.params.id;
 

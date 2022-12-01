@@ -26,23 +26,23 @@
     </v-row>
 
     <v-row class="table-center">
-      <table class="listing">
-        <thead>
-        <tr>
-          <th>Nom genre</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="genre in filter" :key="genre.id">
-          <td>{{genre.libelle}}</td>
-          <td>
-            <v-btn class="ma-1" color="primary" :href="'/genre/' + genre.id + '/edit'"><v-icon>mdi-pencil</v-icon></v-btn>
-            <v-btn class="ma-1" color="error" @click="deleteGenre(genre.id)"><v-icon>mdi-delete</v-icon></v-btn>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+      <TableList
+        :data="filter"
+        :fields="['libelle']"
+        :titles="['Nom genre', 'Actions']"
+        :buttons="[
+          {
+            icon: 'mdi-pencil',
+            color: 'primary'
+          },
+          {
+            icon: 'mdi-delete',
+            color: 'error'
+          },
+        ]"
+        :pk="'id'"
+        @button-click="buttonClick"
+        ></TableList>
     </v-row>
   </v-container>
 </template>
@@ -51,6 +51,9 @@
 import Vue from "vue";
 export default {
   name: "GenresListView",
+  components: {
+    TableList: () => import("@/components/TableList.vue"),
+  },
   data: () => ({
     genres: [],
     search: "",
@@ -79,6 +82,14 @@ export default {
             });
       }
     },
+    buttonClick(id, buttonIndex) {
+      if (buttonIndex === 0) {
+        this.$router.push("/genre/" + id + "/edit");
+      }
+      else if (buttonIndex === 1) {
+        this.deleteGenre(id);
+      }
+    }
   },
   computed: {
     filter() {
@@ -92,6 +103,11 @@ export default {
   },
   created() {
     this.getGenres()
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

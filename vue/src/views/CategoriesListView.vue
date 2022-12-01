@@ -26,23 +26,20 @@
     </v-row>
 
     <v-row class="table-center">
-      <table class="listing">
-        <thead>
-        <tr>
-          <th>Nom catégorie</th>
-          <th>Actions</th>
-        </tr>
-        </thead>
-        <tbody>
-        <tr v-for="categorie in filter" :key="categorie.id">
-          <td>{{categorie.libelle}}</td>
-          <td>
-            <v-btn class="ma-1" color="primary" :href="'/categorie/' + categorie.id + '/edit'"><v-icon>mdi-pencil</v-icon></v-btn>
-            <v-btn class="ma-1" color="error" @click="deleteCategorie(categorie.id)"><v-icon>mdi-delete</v-icon></v-btn>
-          </td>
-        </tr>
-        </tbody>
-      </table>
+      <TableList
+        :data="filter"
+        :fields="['libelle']"
+        :titles="['Nom catégorie', 'Actions']"
+        :buttons="[{
+          icon: 'mdi-pencil',
+          color: 'primary'
+        }, {
+          icon: 'mdi-delete',
+          color: 'error'
+        }]"
+        :pk="'id'"
+        @button-click="buttonClick"
+        ></TableList>
     </v-row>
   </v-container>
 </template>
@@ -51,6 +48,9 @@
 import Vue from "vue";
 export default {
   name: "CategoriesListView",
+  components: {
+    TableList: () => import("@/components/TableList.vue"),
+  },
   data: () => ({
     categories: [],
     search: "",
@@ -79,6 +79,13 @@ export default {
             });
       }
     },
+    buttonClick(id, buttonIndex) {
+      if (buttonIndex === 0) {
+        this.$router.push("/categorie/" + id + "/edit");
+      } else if (buttonIndex === 1) {
+        this.deleteCategorie(id);
+      }
+    }
   },
   computed: {
     filter() {
@@ -92,6 +99,11 @@ export default {
   },
   created() {
     this.getCategories()
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>
