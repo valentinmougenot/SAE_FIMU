@@ -2,53 +2,45 @@
   <v-container class="form-center">
     <v-form>
       <v-row>
-        <v-col cols="2" sm="2" md="3">
-          <v-text-field
-              v-model="scene.libelle"
-              label="Nom de la scène"
-              outlined
-          ></v-text-field>
-        </v-col>
-        <v-col cols="2" sm="2" md="3">
-          <v-select
-              v-model="scene.id_typescene"
-              :items="typescenes"
-              label="Type de scène"
-              outlined
-          ></v-select>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="2" sm="2" md="3">
-          <v-text-field
-              v-model="scene.latitude"
-              label="Latitude"
-              outlined
-          ></v-text-field>
-        </v-col>
-        <v-col cols="2" sm="2" md="3">
-          <v-text-field
-              v-model="scene.longitude"
-              label="Longitude"
-              outlined
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="2" sm="2" md="3" v-if="scene.id_typescene == 2">
-          <v-text-field
-              v-model="scene.jauge"
-              label="Jauge maximum"
-              outlined
-          ></v-text-field>
-        </v-col>
-        <v-col cols="2" sm="2" md="3">
-          <v-btn
-              color="success"
-              :height="56"
-              class="addDeleteBtn"
-              @click="addScene()">Ajouter
-          </v-btn>
+        <v-col cols="12">
+          <v-card-title>
+            <h1 class="display-1">Ajouter une scène</h1>
+          </v-card-title>
+          <v-card-text>
+            <v-text-field
+                v-model="scene.libelle"
+                label="Nom de la scène"
+                required
+            ></v-text-field>
+            <v-select
+                v-model="scene.id_typescene"
+                :items="typescenes"
+                label="Type de scène"
+                required
+            ></v-select>
+            <v-text-field
+                v-model="scene.latitude"
+                label="Latitude"
+                required
+            ></v-text-field>
+            <v-text-field
+                v-model="scene.longitude"
+                label="Longitude"
+                required
+            ></v-text-field>
+            <v-text-field
+                v-if="scene.id_typescene===2"
+                  v-model="scene.jauge"
+                  label="Jauge maximum"
+                  required
+            ></v-text-field>
+            <v-btn
+                color="success"
+                :height="56"
+                class="addDeleteBtn"
+                @click="addScene()">Ajouter
+            </v-btn>
+          </v-card-text>
         </v-col>
       </v-row>
     </v-form>

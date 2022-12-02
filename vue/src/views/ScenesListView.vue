@@ -143,7 +143,7 @@ export default {
         this.$router.push('/scene/' + id);
       }
       else if (buttonIndex === 1) {
-        this.$route.push('/scene/' + id + '/edit');
+        this.$router.push('/scene/' + id + '/edit');
       }
       else if (buttonIndex === 2) {
         this.deleteScene(id)

@@ -1,24 +1,29 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12" sm="4" md="4">
-        <v-text-field
-            v-model="genre.libelle"
-            label="Nom du genre"
-            outlined
-        ></v-text-field>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" sm="4" md="4">
-        <v-btn
-            color="primary"
-            :height="56"
-            class="addDeleteBtn"
-            @click="editGenre()">Modifier
-        </v-btn>
-      </v-col>
-    </v-row>
+    <v-form>
+      <v-row>
+        <v-col cols="12">
+          <v-card>
+            <v-card-title>
+              <h1 class="display-1">Modifier un genre</h1>
+            </v-card-title>
+            <v-card-text>
+              <v-text-field
+                  v-model="genre.libelle"
+                  label="Nom du genre"
+                  required
+              ></v-text-field>
+              <v-btn
+                  color="primary"
+                  :height="56"
+                  class="addDeleteBtn"
+                  @click="editGenre()">Modifier
+              </v-btn>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-form>
   </v-container>
 </template>
 

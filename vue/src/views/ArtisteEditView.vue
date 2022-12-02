@@ -2,112 +2,93 @@
   <v-container>
     <v-form>
       <v-row>
-        <v-col cols="12" sm="6" md="4">
-          <v-text-field
-              v-model="artiste.nom"
-              label="Nom de l'artiste"
-              outlined
-          ></v-text-field>
-        </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-text-field
-              v-model="artiste.photo"
-              label="Photo de l'artiste"
-              outlined
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" sm="6" md="4">
-          <v-select
-              v-model="id_pays"
-              :items="pays"
-              label="Origine de l'artiste"
-              :height="56"
-              multiple
-              chips
-              outlined
-          >
-            <template v-slot:selection="{ item, index }">
-              <v-chip v-if="index <= 1">
-                <span>{{ item.text }}</span>
-              </v-chip>
-              <span
-                  v-if="index === 2"
-                  class="grey--text text-caption"
+        <v-col cols="12">
+          <v-card>
+            <v-card-title>
+              <h1 class="display-1">Modifier un artiste</h1>
+            </v-card-title>
+            <v-card-text>
+              <v-text-field
+                  v-model="artiste.nom"
+                  label="Nom de l'artiste"
+                  required
+              ></v-text-field>
+              <v-text-field
+                  v-model="artiste.photo"
+                  label="Photo de l'artiste"
+                  required
+              ></v-text-field>
+              <v-select
+                  v-model="id_pays"
+                  :items="pays"
+                  label="Origine de l'artiste"
+                  multiple
+                  chips
+                  required
               >
+                <template v-slot:selection="{ item, index }">
+                  <v-chip v-if="index <= 1">
+                    <span>{{ item.text }}</span>
+                  </v-chip>
+                  <span
+                      v-if="index === 2"
+                      class="grey--text text-caption"
+                  >
                 (+{{ id_pays.length - 2 }} autre<span v-if="id_pays.length - 2 > 1">s</span>)
               </span>
-            </template>
-          </v-select>
-        </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-select
-              v-model="artiste.id_categorie"
-              :items="categories"
-              label="Catégorie de l'artiste"
-              outlined
-          ></v-select>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" sm="6" md="4">
-          <v-select
-              v-model="id_genres"
-              :items="genres"
-              label="Genres de l'artiste"
-              :height="56"
-              multiple
-              chips
-              outlined
-          >
-            <template v-slot:selection="{ item, index }">
-              <v-chip v-if="index <= 1">
-                <span>{{ item.text }}</span>
-              </v-chip>
-              <span
-                  v-if="index === 2"
-                  class="grey--text text-caption"
+                </template>
+              </v-select>
+              <v-select
+                  v-model="artiste.id_categorie"
+                  :items="categories"
+                  label="Catégorie de l'artiste"
+                  required
+              ></v-select>
+              <v-select
+                  v-model="id_genres"
+                  :items="genres"
+                  label="Genres de l'artiste"
+                  multiple
+                  chips
+                  required
               >
+                <template v-slot:selection="{ item, index }">
+                  <v-chip v-if="index <= 1">
+                    <span>{{ item.text }}</span>
+                  </v-chip>
+                  <span
+                      v-if="index === 2"
+                      class="grey--text text-caption"
+                  >
                 (+{{ id_genres.length - 2 }} autre<span v-if="id_genres.length - 2 > 1">s</span>)
               </span>
-            </template>
-          </v-select>
-        </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-text-field
-              v-model="artiste.lien_video"
-              label="Lien vidéo Youtube de l'artiste"
-              outlined
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" sm="6" md="4">
-          <v-text-field
-              v-model="artiste.lien_site"
-              label="Lien site Web de l'artiste"
-              outlined
-          ></v-text-field>
-        </v-col>
-        <v-col cols="12" sm="6" md="4">
-          <v-text-field
-              v-model="artiste.biographie"
-              label="Description de l'artiste"
-              outlined
-          ></v-text-field>
-        </v-col>
-      </v-row>
-      <v-row>
-        <v-col cols="12" sm="6" md="4">
-          <v-btn
-              color="primary"
-              class="addDeleteBtn"
-              :height="56"
-              @click="editArtiste()"
-          >
-            Modifier
-          </v-btn>
+                </template>
+              </v-select>
+              <v-text-field
+                  v-model="artiste.lien_video"
+                  label="Lien vidéo Youtube de l'artiste"
+                  required
+              ></v-text-field>
+              <v-text-field
+                  v-model="artiste.lien_site"
+                  label="Lien site Web de l'artiste"
+                  required
+              ></v-text-field>
+              <v-text-field
+                  v-model="artiste.biographie"
+                  label="Description de l'artiste"
+                  required
+              ></v-text-field>
+              <v-btn
+                  color="primary"
+                  class="addDeleteBtn"
+                  :height="56"
+                  @click="editArtiste()"
+              >
+                Modifier
+              </v-btn>
+            </v-card-text>
+          </v-card>
         </v-col>
       </v-row>
     </v-form>

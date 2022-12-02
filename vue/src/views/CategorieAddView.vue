@@ -1,24 +1,29 @@
 <template>
   <v-container>
-    <v-row>
-      <v-col cols="12" sm="4" md="4">
-        <v-text-field
-            v-model="categorie.libelle"
-            label="Nom de la categorie"
-            outlined
-        ></v-text-field>
-      </v-col>
-    </v-row>
-    <v-row>
-      <v-col cols="12" sm="4" md="4">
-        <v-btn
-            color="success"
-            :height="56"
-            class="addDeleteBtn"
-            @click="addCategorie()">Ajouter
-        </v-btn>
-      </v-col>
-    </v-row>
+    <v-form>
+      <v-row>
+        <v-col cols = "12">
+          <v-card>
+            <v-card-title>
+              <h1 class="display-1">Ajouter une catégorie</h1>
+            </v-card-title>
+            <v-card-text>
+              <v-text-field
+                  v-model="categorie.libelle"
+                  label="Nom de la categorie"
+                  required
+              ></v-text-field>
+              <v-btn
+                  color="success"
+                  :height="56"
+                  class="addDeleteBtn"
+                  @click="addCategorie()">Ajouter
+              </v-btn>
+            </v-card-text>
+          </v-card>
+        </v-col>
+      </v-row>
+    </v-form>
   </v-container>
 </template>
 
