@@ -1,4 +1,5 @@
 import {db} from "../models/index.js";
+import bcrypt from "bcryptjs";
 const Utilisateur = db.utilisateur;
 const Op = db.Sequelize.Op;
 
@@ -35,12 +36,12 @@ export const create = (req, res) => {
 
 export const findAll = (req, res) => {
 
-    if (!req.session.identifiant) {
-        res.status(401).send({
-            message: "Vous devez être connecté pour voir les utilisateurs"
-        });
-        return;
-    }
+    // if (!req.session.identifiant) {
+    //     res.status(401).send({
+    //         message: "Vous devez être connecté pour voir les utilisateurs"
+    //     });
+    //     return;
+    // }
 
     Utilisateur.findAll({
         include: [
@@ -59,12 +60,12 @@ export const findAll = (req, res) => {
 }
 
 export const findOne = (req, res) => {
-    if (!req.session.identifiant) {
-        res.status(401).send({
-            message: "Vous devez être connecté pour voir un utilisateur"
-        });
-        return;
-    }
+    // if (!req.session.identifiant) {
+    //     res.status(401).send({
+    //         message: "Vous devez être connecté pour voir un utilisateur"
+    //     });
+    //     return;
+    // }
 
     const id = req.params.id;
 
@@ -80,12 +81,12 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
-    if (!req.session.identifiant) {
-        res.status(401).send({
-            message: "Vous devez être connecté pour modifier un utilisateur"
-        });
-        return;
-    }
+    // if (!req.session.identifiant) {
+    //     res.status(401).send({
+    //         message: "Vous devez être connecté pour modifier un utilisateur"
+    //     });
+    //     return;
+    // }
     const id = req.params.id;
 
     Utilisateur.update(req.body, {
@@ -167,14 +168,13 @@ export const login = (req, res) => {
     Utilisateur.findOne({
         where: {
             identifiant: identifiant,
-            mot_de_passe: mot_de_passe
         },
         include: [
             {model: db.role}
         ]
     })
         .then(data => {
-            if (data) {
+            if (data && bcrypt.compareSync(mot_de_passe, data.mot_de_passe)) {
                 req.session.identifiant = data.identifiant;
                 req.session.mot_de_passe = data.mot_de_passe;
                 req.session.id_role = data.id_role;
@@ -190,7 +190,7 @@ export const login = (req, res) => {
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error retrieving Utilisateur with id=" + id
+                message: "Error retrieving Utilisateur with id=" + identifiant
             });
         });
 }
