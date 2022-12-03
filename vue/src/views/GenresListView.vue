@@ -70,6 +70,9 @@ export default {
     },
     async deleteGenre(id) {
       return await Vue.axios.delete("http://localhost:3000/genre/" + id)
+          .then(() => {
+            this.getGenres();
+          })
           .catch(error => {
             console.log(error)
           });
@@ -77,6 +80,9 @@ export default {
     async deleteAll() {
       if (confirm("Voulez-vous vraiment supprimer tous les genres ?")) {
         return await Vue.axios.delete("http://localhost:3000/genre")
+            .then(() => {
+              this.getGenres();
+            })
             .catch(error => {
               console.log(error)
             });
@@ -97,9 +103,6 @@ export default {
         return genre.libelle.toLowerCase().includes(this.search.toLowerCase())
       })
     }
-  },
-  updated() {
-    this.getGenres();
   },
   created() {
     this.getGenres()

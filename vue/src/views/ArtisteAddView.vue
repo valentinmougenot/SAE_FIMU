@@ -80,6 +80,31 @@
                     label="Description de l'artiste"
                     required
                 ></v-text-field>
+                <v-select
+                    v-model="id_reseauxsociaux"
+                    :items="reseauxsociaux"
+                    label="Réseaux sociaux de l'artiste"
+                    multiple
+                    chips
+                    required
+                >
+                  <template v-slot:selection="{ item, index }">
+                    <v-chip v-if="index <= 1">
+                      <span>{{ item.text }}</span>
+                    </v-chip>
+                    <span
+                        v-if="index === 2"
+                        class="grey--text text-caption"
+                    >
+                (+{{ id_reseauxsociaux.length - 2 }} autre<span v-if="id_reseauxsociaux .length - 2 > 1">s</span>)
+                </span>
+                  </template>
+                </v-select>
+                <v-text-field
+                  v-for="(id, i) in id_reseauxsociaux" :key="i"
+                  v-model="possede.find(p => p.id_reseaux_sociaux === id).lien"
+                  :label="reseauxsociaux.find(x => x.value === id).text"
+                  ></v-text-field>
                 <v-btn
                     color="success"
                     class="addDeleteBtn"
@@ -113,8 +138,11 @@ export default {
     categories: [],
     genres: [],
     pays: [],
+    reseauxsociaux: [],
     id_genres: [],
     id_pays: [],
+    id_reseauxsociaux: [],
+    possede: []
   }),
   methods: {
     async getCategories() {
@@ -152,6 +180,26 @@ export default {
               return {
                 value: pays.id,
                 text: pays.libelle,
+              }
+            })
+          })
+          .catch(error => {
+            console.log(error)
+          });
+    },
+    async getReseauxSociaux() {
+      return Vue.axios.get("http://localhost:3000/reseauxsociaux")
+          .then(response => {
+            this.reseauxsociaux = response.data.map(reseau => {
+              return {
+                value: reseau.id,
+                text: reseau.libelle,
+              }
+            })
+            this.possede = response.data.map(reseau => {
+              return {
+                id_reseaux_sociaux: reseau.id,
+                lien: null
               }
             })
           })
@@ -204,6 +252,23 @@ export default {
                   });
             }
           })
+          .then(async () => {
+            for (const possede of this.possede) {
+              if (this.id_reseauxsociaux.includes(possede.id_reseaux_sociaux)) {
+                await Vue.axios.post("http://localhost:3000/possede", {
+                  idArtiste: this.id,
+                  idReseauxSociaux: possede.id_reseaux_sociaux,
+                  lien: possede.lien
+                })
+                    .then(response => {
+                      console.log(response)
+                    })
+                    .catch(error => {
+                      console.log(error)
+                    });
+              }
+            }
+          })
           .then(() => {
             this.$router.push('/artiste')
           })
@@ -216,6 +281,7 @@ export default {
     this.getCategories()
     this.getGenres()
     this.getPays()
+    this.getReseauxSociaux()
   },
   beforeCreate() {
     if (!this.$session.exists()) {

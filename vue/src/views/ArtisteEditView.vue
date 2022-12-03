@@ -79,6 +79,31 @@
                   label="Description de l'artiste"
                   required
               ></v-text-field>
+              <v-select
+                  v-model="id_reseauxsociaux"
+                  :items="reseauxsociaux"
+                  label="Réseaux sociaux de l'artiste"
+                  multiple
+                  chips
+                  required
+              >
+                <template v-slot:selection="{ item, index }">
+                  <v-chip v-if="index <= 1">
+                    <span>{{ item.text }}</span>
+                  </v-chip>
+                  <span
+                      v-if="index === 2"
+                      class="grey--text text-caption"
+                  >
+                (+{{ id_reseauxsociaux.length - 2 }} autre<span v-if="id_reseauxsociaux .length - 2 > 1">s</span>)
+                </span>
+                </template>
+              </v-select>
+              <v-text-field
+                  v-for="(id, i) in id_reseauxsociaux" :key="i"
+                  v-model="possede.find(p => p.id_reseaux_sociaux === id).lien"
+                  :label="reseauxsociaux.find(x => x.value === id).text"
+              ></v-text-field>
               <v-btn
                   color="primary"
                   class="addDeleteBtn"
@@ -111,8 +136,11 @@ export default {
     categories: [],
     genres: [],
     pays: [],
+    reseauxsociaux: [],
     id_genres: [],
     id_pays: [],
+    id_reseauxsociaux: [],
+    possede: [],
   }),
   methods: {
     async getArtiste() {
@@ -131,6 +159,13 @@ export default {
             })
             response.data.pays.forEach(pays => {
               this.id_pays.push(pays.id);
+            })
+            response.data.reseauxsociauxes.forEach(reseau => {
+              this.id_reseauxsociaux.push(reseau.id);
+              this.possede.push({
+                id_reseaux_sociaux: reseau.id,
+                lien: reseau.possede.lien,
+              })
             })
           })
           .catch(error => {
@@ -179,6 +214,28 @@ export default {
             console.log(error)
           });
     },
+    async getReseauxSociaux() {
+      return await Vue.axios.get("http://localhost:3000/reseauxsociaux")
+          .then(response => {
+            this.reseauxsociaux = response.data.map(reseauxsociaux => {
+              return {
+                value: reseauxsociaux.id,
+                text: reseauxsociaux.libelle,
+              }
+            })
+            response.data.forEach(reseau => {
+              if (!this.possede.find(p => p.id_reseaux_sociaux === reseau.id)) {
+                this.possede.push({
+                  id_reseaux_sociaux: reseau.id,
+                  lien: null,
+                })
+              }
+            })
+          })
+          .catch(error => {
+            console.log(error)
+          });
+    },
     async editArtiste() {
       if (this.artiste.lien_video && this.artiste.lien_video.length === 0) {
         this.artiste.lien_video = null;
@@ -192,6 +249,9 @@ export default {
           })
           .then(async () => {
             await Vue.axios.delete("http://localhost:3000/nationalite/artiste/" + this.$route.params.id);
+          })
+          .then(async () => {
+            await Vue.axios.delete("http://localhost:3000/possede/artiste/" + this.$route.params.id);
           })
           .then(async () => {
             for(const id_genre of this.id_genres) {
@@ -209,6 +269,17 @@ export default {
               })
             }
           })
+          .then(async () => {
+            for(const possede of this.possede) {
+              if (this.id_reseauxsociaux.includes(possede.id_reseaux_sociaux)) {
+                await Vue.axios.post("http://localhost:3000/possede", {
+                  idArtiste: this.$route.params.id,
+                  idReseauxSociaux: possede.id_reseaux_sociaux,
+                  lien: possede.lien,
+                })
+              }
+            }
+          })
           .then(() => {
             this.$router.push('/artiste');
           })
@@ -217,11 +288,14 @@ export default {
           });
     }
   },
-  created() {
-    this.getArtiste();
+  mounted() {
     this.getCategories();
     this.getGenres();
     this.getPays();
+    this.getArtiste()
+        .then(() => {
+          this.getReseauxSociaux();
+        })
   },
   beforeCreate() {
     if (!this.$session.exists()) {

@@ -35,9 +35,7 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
-    Possede.findAll(
-        { include: [{model:db.artiste},
-                    {model:db.reseauxSociaux}]})
+    Possede.findAll()
         .then(data => {
             res.send(data);
         })

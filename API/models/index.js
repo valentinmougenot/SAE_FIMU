@@ -80,7 +80,7 @@ db.artiste.belongsToMany(db.pays, { through: db.nationalite, foreignKey: 'id_art
 db.pays.belongsToMany(db.artiste, { through: db.nationalite, foreignKey: 'id_pays'});
 
 db.artiste.belongsToMany(db.reseauxSociaux, { through: db.possede, foreignKey: 'id_artiste'});
-db.reseauxSociaux.belongsToMany(db.artiste, { through: db.possede, foreignKey: 'id_reseauxSociaux'});
+db.reseauxSociaux.belongsToMany(db.artiste, { through: db.possede, foreignKey: 'id_reseaux_sociaux'});
 
 db.artiste.belongsTo(db.categorie, {foreignKey: 'id_categorie'});
 db.categorie.hasMany(db.artiste, {foreignKey: 'id_categorie'});

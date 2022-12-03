@@ -89,34 +89,6 @@
     </v-row>
 
     <v-row class="table-center">
-<!--      <table class="listing">
-        <thead>
-          <tr>
-            <th>Nom groupe</th>
-            <th>Catégorie</th>
-            <th>Genres</th>
-            <th>Origines</th>
-            <th>Actions</th>
-          </tr>
-        </thead>
-        <tbody>
-          <tr v-for="artiste in filtres" :key="artiste.id">
-            <td>{{artiste.nom}}</td>
-            <td>{{artiste.category.libelle}}</td>
-            <td>
-              {{artiste.genres.map(genre => genre.libelle).join(', ')}}
-            </td>
-            <td>
-              {{artiste.pays.map(pays => pays.libelle).join(', ')}}
-            </td>
-            <td>
-              <v-btn class="ma-1" color="success" :href="'/artiste/' + artiste.id"><v-icon>mdi-magnify</v-icon></v-btn>
-              <v-btn class="ma-1" color="primary" :href="'/artiste/' + artiste.id + '/edit'"><v-icon>mdi-pencil</v-icon></v-btn>
-              <v-btn class="ma-1" color="error" @click="deleteArtiste(artiste.id)"><v-icon>mdi-delete</v-icon></v-btn>
-            </td>
-          </tr>
-        </tbody>
-      </table>-->
       <TableList
         :data="filtres"
         :fields="['nom', 'cl', 'gl', 'pl']"
@@ -257,6 +229,9 @@ export default {
 
     deleteArtiste(id) {
       Vue.axios.delete("http://localhost:3000/artiste/" + id)
+          .then(() => {
+            this.getArtistes()
+          })
           .catch(error => {
             console.log(error)
           });
@@ -264,12 +239,16 @@ export default {
     deleteAll() {
       if (confirm("Voulez-vous vraiment supprimer tous les artistes ?")) {
         Vue.axios.delete("http://localhost:3000/artiste")
+            .then(() => {
+              this.getArtistes()
+            })
             .catch(error => {
               console.log(error)
             });
       }
     },
     buttonClick(id, index) {
+      console.log(id, index)
       switch (index) {
         case 0:
           this.$router.push('/artiste/' + id)
@@ -278,7 +257,7 @@ export default {
           this.$router.push('/artiste/' + id + '/edit')
           break;
         case 2:
-          this.deleteArtiste(id)
+          this.deleteArtiste(id);
           break;
       }
     }

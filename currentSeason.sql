@@ -129,3 +129,8 @@ INSERT INTO fait (id_artiste, id_genre) VALUES
 
 INSERT INTO concerts (id_scene, id_artiste, date_debut, duree, nb_personnes, annee) VALUES
 (1, 1, NOW(), 55, 958, 2022);
+
+INSERT INTO possede VALUES
+(1, 1, 'lien-1'),
+(1, 2, 'lien-2'),
+(2, 2, 'lien-3');

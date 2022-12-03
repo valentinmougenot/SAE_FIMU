@@ -19,7 +19,7 @@ export const create = (req, res) => {
         if (req.body.lien_video.includes("https://www.youtube.com/watch?v=")) {
             req.body.lien_video = req.body.lien_video.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
         }
-        else if (req.bodylien_video.includes("https://youtu.be/")) {
+        else if (req.body.lien_video.includes("https://youtu.be/")) {
             req.body.lien_video = req.body.lien_video.replace("https://youtu.be/", "https://www.youtube.com/embed/");
         }
     } 
@@ -49,7 +49,8 @@ export const findAll = (req, res) => {
     Artiste.findAll(
         { include: [{model:db.pays},
                 {model:db.genre},
-                {model:db.categorie}]
+                {model:db.categorie},
+                {model:db.reseauxSociaux}]
             })
         .then(data => {
             res.send(data);
@@ -68,7 +69,8 @@ export const findOne = (req, res) => {
 
     Artiste.findByPk(id, {include:  [{model:db.pays},
         {model:db.genre},
-        {model:db.categorie}]})
+        {model:db.categorie},
+        {model:db.reseauxSociaux}]})
         .then(data => {
             res.send(data);
         })

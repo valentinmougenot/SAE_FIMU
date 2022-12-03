@@ -114,15 +114,15 @@ INSERT INTO roles (libelle) VALUES
 ('Editeur');
 
 INSERT INTO utilisateurs VALUES
-('jdoe', 'mdp1', 1),
-('srogole', 'mdp2', 2),
-('pskuzov', 'mdp3', 2);
+('admin', '$2a$10$guQcEKLVrLObnENrzX3vAOMiep1nMk8ppJ0l5zhpAU0FEPLVstuV2', 1),
+('jdoe', '$2a$10$KbHcs9ZBKD4ss0QWxdrsPOgP3aAXXBfdM9dazEajmg/HoehDy9Adi', 1),
+('srogole', '$2a$10$2EV2FN3VvpOD0PaB0Q4nFuAoQ/x8s72OVeYYL7N/W0FXjdz8XpDpO', 2),
+('pskuzov', '$2a$10$akwNm3zgNs5Xsysi4PwrlOVzUuIPLoogOR6uF6BQ3jyg1Xxk386tG', 2);
 
 INSERT INTO notifications(date_envoi, message) VALUES
 (NOW(), 'notification message 1');
 
 INSERT INTO reseauxsociaux(libelle, logo) VALUES
-('Instagram', 'logo_insta'),
-('Snapchat', 'logo_snap'),
-('Facebook', 'logo_face');
-
+('Instagram', 'mdi-instagram'),
+('Snapchat', 'mdi-snapchat'),
+('Facebook', 'mdi-facebook');

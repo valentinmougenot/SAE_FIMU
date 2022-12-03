@@ -67,6 +67,9 @@ export default {
     },
     async deleteCategorie(id) {
       return await Vue.axios.delete("http://localhost:3000/categorie/" + id)
+          .then(() => {
+            this.getCategories();
+          })
           .catch(error => {
             console.log(error)
           });
@@ -74,6 +77,9 @@ export default {
     async deleteAll() {
       if (confirm("Voulez-vous vraiment supprimer toutes les catégories ?")) {
         return await Vue.axios.delete("http://localhost:3000/categorie")
+            .then(() => {
+              this.getCategories();
+            })
             .catch(error => {
               console.log(error)
             });
@@ -93,9 +99,6 @@ export default {
         return categorie.libelle.toLowerCase().includes(this.search.toLowerCase())
       })
     }
-  },
-  updated() {
-    this.getCategories();
   },
   created() {
     this.getCategories()

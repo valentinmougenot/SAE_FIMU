@@ -19,7 +19,8 @@
             <h2 class="ma-2">{{artiste.genres.length > 1 ? 'Genres' : 'Genre'}} :
               {{artiste.genres.map(genre => genre.libelle).join(', ')}}
               </h2>
-            <a class="ma-2" v-if="artiste.lien_site" :href="artiste.lien_site"><v-icon>mdi-web</v-icon>&emsp;{{artiste.lien_site}}</a>
+            <a class="ma-2" v-if="artiste.lien_site" :href="artiste.lien_site"><v-icon>mdi-web</v-icon>&emsp;{{artiste.lien_site}}<br></a>
+            <a class="ma-2" v-for="(rs, i) in artiste.reseauxsociauxes" :key="i"><v-icon>{{rs.logo}}</v-icon>&emsp;{{rs.possede.lien}}<br></a>
           </v-card-text>
         </v-card>
       </v-col>
