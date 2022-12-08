@@ -1,4 +1,5 @@
 import {db} from '../models/index.js';
+import {pool} from "../db.config.js";
 const previousJoue = db.jouePrevious;
 const Op = db.Sequelize.Op;
 
@@ -141,3 +142,4 @@ export const deleteAll = (req, res) => {
             });
         });
 }
+

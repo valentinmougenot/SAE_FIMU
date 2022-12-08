@@ -1,4 +1,5 @@
 import {db} from '../models/index.js';
+import {pool} from "../db.config.js";
 const Nationalite = db.nationalite;
 const Op = db.Sequelize.Op;
 
@@ -139,3 +140,23 @@ export const deleteAll = (req, res) => {
             });
         });
 }
+
+const deleteCurrentAfterSwitch = (req, res) => {
+    pool.query('DELETE FROM currentseason.nationalites;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).json(results.rows)
+    }
+}
+
+const deleteNextAfterSwitch = (req, res) => {
+    pool.query('DELETE FROM nextseason.nationalites;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).json(results.rows)
+    }
+}
+
+

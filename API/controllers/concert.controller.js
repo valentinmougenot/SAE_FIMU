@@ -1,4 +1,5 @@
 import {db} from "../models/index.js";
+import {pool} from "../db.config.js";
 const Concert = db.concert;
 const Op = db.Sequelize.Op;
 
@@ -147,3 +148,17 @@ export const deleteAll = (req, res) => {
             });
         });
 }
+
+
+
+const deleteCurrentAfterSwitch = (req, res) => {
+    pool.query('DELETE FROM nextseason.concerts;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).json(results.rows)
+    }
+}
+
+
+

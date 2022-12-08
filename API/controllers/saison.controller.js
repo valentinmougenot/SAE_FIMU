@@ -142,3 +142,192 @@ export const deleteAll = (req, res) => {
         });
 }
 
+export const switchNextToCurrentScene= (req, res) => {
+    pool.query('BEGIN TRANSACTION INSERT INTO ' +
+        'currentseason.scenes(libelle,jauge,latitude,longitude,id_typescene) ' +
+        'SELECT libelle,jauge,latitude,longitude,id_typescene' +
+        'FROM nextseason.scenes;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).json(results.rows)
+    }
+}
+
+export const deleteCurrentBeforeSwitchScene= (req, res) => {
+    pool.query('DELETE FROM nextseason.scenes;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).json(results.rows)
+    }
+}
+
+export const switchPreviousArtistes = (req, res) => {
+    pool.query('BEGIN TRANSACTION INSERT INTO ' +
+        'previousseasons.artistes(nom,photo,biograpghie,lien_video,lien_site,id_categorie) ' +
+        'SELECT nom,photo,biograpghie,lien_video,lien_site,id_categorie ' +
+        'FROM currentseason.artistes;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).json(results.rows)
+    }
+}
+
+
+export const switchNextArtistes = (req, res) => {
+    pool.query('BEGIN TRANSACTION INSERT INTO ' +
+        'currentseason.artistes(id,nom,photo,biograpghie,lien_video,lien_site,id_categorie) ' +
+        'SELECT id,nom,photo,biograpghie,lien_video,lite_site,id_categorie ' +
+        'FROM nextseason.artistes;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).json(results.rows)
+    }
+}
+
+export const switchCurrentConcert= (req, res) => {
+    pool.query('BEGIN TRANSACTION INSERT INTO ' +
+        'currentseason.cocnert(id_scene,id_artiste,date_debut,duree,nb_personne,annee) ' +
+        'SELECT id_scene,id_artiste,date_debut,duree,nb_personne,annee' +
+        'FROM nextseason.artistes;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).json(results.rows)
+    }
+}
+
+export const switchPreviousPossede = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier un lien entre un réseau social et un artiste"
+        });
+        return;
+    }
+    pool.query('BEGIN TRANSACTION INSERT INTO ' +
+        'currentseason.scenes(id,libelle,jauge,latitude,longitude,id_typescene) ' +
+        'SELECT id,libelle,jauge,latitude,longitude,id_typescene' +
+        'FROM nextseason.scenes;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        res.status(200).json(results.rows)
+    }
+
+}
+
+export const switchCurrentToPreviousSeason = async (req, res) => {
+    let n;
+    let resultats;
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier un lien entre un réseau social et un artiste"
+        });
+        return;
+    }
+    await pool.query('SELECT COUNT (*) FROM currentseason.artistes;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        n = JSON.stringify(results.rows);
+    }
+
+    await pool.query('SELECT * FROM currentseason.artistes;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        resultats = results;
+    }
+    n = JSON.stringify(resultats.length);
+
+    let annee;
+    await pool.query('SELECT annee FROM currentseason.concert LIMIT 1;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+        annee = JSON.stringify(results[0].annee);
+    }
+    console.log(4)
+    for (let i = 0; i < n; i++) {
+        let id;
+        console.log(5)
+        await pool.query('INSERT INTO previousseasons.artistes(nom,photo,biograpghie,lien_video,lien_site,id_categorie) ' +
+            'VALUES ($1,$2,$3,$4,$5,$6)', [resultats[i].nom, resultats[i].photo, resultats[i].biographie, resultats[i].lien_video, resultats[i].lien_site, resultats[i].id_categorie], (error, results) => {
+            if (error) {
+                throw error
+            }
+        })
+        console.log(6)
+        await pool.query('SELECT MAX(id) FROM previousseasons.artistes;') , (error, results) => {
+            if (error) {
+                throw error
+            }
+            id = JSON.stringify(results);
+        }
+        let possede = [];
+        console.log(7)
+        await pool.query('SELECT * FROM currentseason.possede WHERE id_artiste = $1', [resultats[i].id], (error, results) => {
+            if (error) {
+                throw error
+            }
+            possede = JSON.stringify(results);
+        })
+        console.log(8)
+        for (let j = 0; j < possede.length; j++) {
+            console.log(12)
+            await pool.query('INSERT INTO previousseasons.possede(id_artiste,id_reseaux_sociaux,lien) ' +
+                'VALUES ($1,$2,$3)', [id, possede[j].id_reseaux_sociaux, possede[j].lien], (error, results) => {
+                if (error) {
+                    throw error
+                }
+            })
+        }
+        console.log(9)
+        await pool.query('INSERT INTO previousseasons.joue(id_artiste,annee) ' +
+            'VALUES ($1,$2)', [id, annee], (error, results) => {
+            if (error) {
+                throw error
+            }
+        })
+        let fait;
+        console.log(10)
+        await pool.query('SELECT * FROM currentseason.fait WHERE id_artiste = $1', [resultats[i].id], (error, results) => {
+            if (error) {
+                throw error
+            }
+            fait = JSON.stringify(results);
+        })
+        console.log(11)
+        for (let j = 0; j < fait.length; j++) {
+            console.log(13)
+            await pool.query('INSERT INTO previousseasons.fait(id_artiste,id_genre) ' +
+                'VALUES ($1,$2)', [id, fait[j].id_genre], (error, results) => {
+                if (error) {
+                    throw error
+                }
+            })
+        }
+
+    }
+    console.log(14)
+    await pool.query('DELETE FROM currentseason.artistes;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+    }
+    console.log(15)
+    await pool.query('DELETE FROM currentseason.concerts;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+    }
+    console.log(16)
+    await pool.query('DELETE FROM currentseason.scenes;') , (error, results) => {
+        if (error) {
+            throw error
+        }
+    }
+}

@@ -1,4 +1,5 @@
 import {db} from "../models/index.js";
+import {pool} from "../db.config.js";
 const Possede = db.possede;
 const Op = db.Sequelize.Op;
 

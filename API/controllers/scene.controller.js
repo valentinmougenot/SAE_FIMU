@@ -1,4 +1,5 @@
 import {db} from '../models/index.js';
+import {pool} from "../db.config.js";
 const Scene = db.scene;
 const Op = db.Sequelize.Op;
 
@@ -148,4 +149,9 @@ export const deleteAll = (req, res) => {
             });
         });
 }
+
+
+
+
+
 
