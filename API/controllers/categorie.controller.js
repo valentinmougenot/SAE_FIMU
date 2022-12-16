@@ -102,6 +102,7 @@ export const deleteOne = (req, res) => {
     }
     
     const id = req.params.id;
+    console.log(id);
 
     Categorie.destroy({
         where: { id: id }
@@ -118,6 +119,7 @@ export const deleteOne = (req, res) => {
             }
         })
         .catch(err => {
+            console.log(err);
             res.status(500).send({
                 message: "Could not delete Categorie with id=" + id
             });

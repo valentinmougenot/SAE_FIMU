@@ -46,29 +46,20 @@
 
 <script>
 import Vue from "vue";
+import {mapState} from "vuex";
 export default {
   name: "CategoriesListView",
   components: {
     TableList: () => import("@/components/TableList.vue"),
   },
   data: () => ({
-    categories: [],
     search: "",
   }),
   methods: {
-    async getCategories() {
-      return await Vue.axios.get("http://localhost:3000/categorie")
-          .then(response => {
-            this.categories = response.data
-          })
-          .catch(error => {
-            console.log(error)
-          });
-    },
     async deleteCategorie(id) {
       return await Vue.axios.delete("http://localhost:3000/categorie/" + id)
           .then(() => {
-            this.getCategories();
+            this.$store.dispatch("getCategories");
           })
           .catch(error => {
             console.log(error)
@@ -78,7 +69,7 @@ export default {
       if (confirm("Voulez-vous vraiment supprimer toutes les catégories ?")) {
         return await Vue.axios.delete("http://localhost:3000/categorie")
             .then(() => {
-              this.getCategories();
+              this.$store.dispatch("getCategories");
             })
             .catch(error => {
               console.log(error)
@@ -94,14 +85,17 @@ export default {
     }
   },
   computed: {
+    ...mapState(["categories"]),
     filter() {
       return this.categories.filter(categorie => {
         return categorie.libelle.toLowerCase().includes(this.search.toLowerCase())
       })
     }
   },
-  created() {
-    this.getCategories()
+  mounted() {
+    if (this.categories.length === 0) {
+      this.$store.dispatch("getCategories");
+    }
   },
   beforeCreate() {
     if (!this.$session.exists()) {

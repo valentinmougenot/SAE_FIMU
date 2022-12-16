@@ -7,6 +7,9 @@ export const categorie = (sequelize, Sequelize) => {
         },
         libelle: {
             type: Sequelize.STRING
+        },
+        couleur: {
+            type: Sequelize.STRING
         }
     }, 
     {

@@ -50,6 +50,8 @@ export default {
     async editCategorie() {
       return await Vue.axios.put("http://localhost:3000/categorie/" + this.$route.params.id, this.categorie)
           .then(() => {
+            this.$store.dispatch('getCategories');
+            this.$store.dispatch('getArtistes');
             this.$router.push("/categorie");
           })
           .catch(error => {

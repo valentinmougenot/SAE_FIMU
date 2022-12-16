@@ -1,5 +1,8 @@
 export const concert = (sequelize, Sequelize) => {
     const Concert = sequelize.define("concerts", {
+        id: {
+            type: Sequelize.INTEGER,
+        },
         id_scene: {
             type: Sequelize.INTEGER,
             primaryKey: true,
@@ -17,6 +20,10 @@ export const concert = (sequelize, Sequelize) => {
                 key: 'id',
                 schema: 'currentseason'
             }
+        },
+        heure_debut: {
+            type: Sequelize.STRING,
+            primaryKey: true
         },
         date_debut: {
             type: Sequelize.STRING,

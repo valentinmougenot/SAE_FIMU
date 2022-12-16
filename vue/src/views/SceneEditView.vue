@@ -90,6 +90,8 @@ export default {
       }
       return await Vue.axios.put("http://localhost:3000/scene/" + this.$route.params.id, this.scene)
         .then(() => {
+          this.$store.dispatch("getScenes");
+          this.$store.dispatch("getConcerts");
           this.$router.push("/scene");
         });
     },

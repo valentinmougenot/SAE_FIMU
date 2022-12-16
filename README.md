@@ -54,11 +54,7 @@ CREATE SCHEMA previousseasons;
 4. Fill the database with the data
 
 ```bash
-cd ..
-psql -U login -d fimu -f common.sql
-psql -U login -d fimu -f currentSeason.sql
-psql -U login -d fimu -f nextSeason.sql
-psql -U login -d fimu -f previousSeasons.sql
+./init_db.sh <login> <server>
 ```
 
 5. Edit the configuration file

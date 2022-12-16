@@ -94,10 +94,10 @@ INSERT INTO pays (libelle) VALUES
 ('Espagne');
 
 INSERT INTO categories (libelle, couleur) VALUES
-('Musique du monde', '#ffffff'),
-('Musique actuelle', '#ffffff'),
-('Musique classique', '#ffffff'),
-('Musique improvisée', '#ffffff');
+('Musique du monde', '#dc331e'),
+('Musique actuelle', '#39b7ab'),
+('Musique classique', '#f5a8ae'),
+('Musique improvisée', '#f6d914');
 
 INSERT INTO genres (libelle) VALUES
 ('Pop'),

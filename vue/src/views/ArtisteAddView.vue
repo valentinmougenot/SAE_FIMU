@@ -270,6 +270,7 @@ export default {
             }
           })
           .then(() => {
+            this.$store.dispatch('getArtistes');
             this.$router.push('/artiste')
           })
           .catch(error => {

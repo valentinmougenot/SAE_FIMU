@@ -40,6 +40,8 @@ export default {
     async addCategorie() {
       return await Vue.axios.post("http://localhost:3000/categorie", this.categorie)
           .then(() => {
+            this.$store.dispatch('getCategories');
+            this.$store.dispatch('getArtistes');
             this.$router.push("/categorie");
           })
           .catch(error => {

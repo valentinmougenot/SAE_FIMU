@@ -49,29 +49,20 @@
 
 <script>
 import Vue from "vue";
+import {mapState} from "vuex";
 export default {
   name: "GenresListView",
   components: {
     TableList: () => import("@/components/TableList.vue"),
   },
   data: () => ({
-    genres: [],
     search: "",
   }),
   methods: {
-    async getGenres() {
-      return await Vue.axios.get("http://localhost:3000/genre")
-          .then(response => {
-            this.genres = response.data
-          })
-          .catch(error => {
-            console.log(error)
-          });
-    },
     async deleteGenre(id) {
       return await Vue.axios.delete("http://localhost:3000/genre/" + id)
           .then(() => {
-            this.getGenres();
+            this.$store.dispatch("getGenres");
           })
           .catch(error => {
             console.log(error)
@@ -81,7 +72,7 @@ export default {
       if (confirm("Voulez-vous vraiment supprimer tous les genres ?")) {
         return await Vue.axios.delete("http://localhost:3000/genre")
             .then(() => {
-              this.getGenres();
+              this.$store.dispatch("getGenres");
             })
             .catch(error => {
               console.log(error)
@@ -98,14 +89,17 @@ export default {
     }
   },
   computed: {
+    ...mapState(["genres"]),
     filter() {
       return this.genres.filter(genre => {
         return genre.libelle.toLowerCase().includes(this.search.toLowerCase())
       })
     }
   },
-  created() {
-    this.getGenres()
+  mounted() {
+    if (this.genres.length === 0) {
+      this.$store.dispatch("getGenres");
+    }
   },
   beforeCreate() {
     if (!this.$session.exists()) {

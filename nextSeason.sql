@@ -50,13 +50,15 @@ CREATE TABLE IF NOT EXISTS prestataires(
 );
 
 CREATE TABLE IF NOT EXISTS concerts(
+   id SERIAL,
    id_scene INTEGER,
    id_artiste INTEGER,
-   date_debut TIMESTAMP,
+   heure_debut TIME,
+   date_debut DATE,
    duree INTEGER,
    nb_personnes INTEGER,
    annee INT NOT NULL,
-   PRIMARY KEY(id_scene, id_artiste, date_debut),
+   PRIMARY KEY(id_scene, id_artiste, heure_debut, date_debut),
    FOREIGN KEY(id_scene) REFERENCES scenes(id) ON DELETE CASCADE,
    FOREIGN KEY(id_artiste) REFERENCES artistes(id) ON DELETE CASCADE,
    FOREIGN KEY(annee) REFERENCES common.saisons(annee) ON DELETE CASCADE

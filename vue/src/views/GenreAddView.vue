@@ -40,6 +40,8 @@ export default {
     async addGenre() {
       return await Vue.axios.post("http://localhost:3000/genre", this.genre)
           .then(() => {
+            this.$store.dispatch('getGenres');
+            this.$store.dispatch('getArtistes');
             this.$router.push("/genre");
           })
           .catch(error => {

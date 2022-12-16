@@ -50,13 +50,15 @@ CREATE TABLE IF NOT EXISTS prestataires(
 );
 
 CREATE TABLE IF NOT EXISTS concerts(
+   id SERIAL,
    id_scene INTEGER,
    id_artiste INTEGER,
-   date_debut TIMESTAMP,
+   heure_debut TIME,
+   date_debut DATE,
    duree INTEGER,
    nb_personnes INTEGER,
    annee INT NOT NULL,
-   PRIMARY KEY(id_scene, id_artiste, date_debut),
+   PRIMARY KEY(id_scene, id_artiste, heure_debut, date_debut),
    FOREIGN KEY(id_scene) REFERENCES scenes(id) ON DELETE CASCADE,
    FOREIGN KEY(id_artiste) REFERENCES artistes(id) ON DELETE CASCADE,
    FOREIGN KEY(annee) REFERENCES common.saisons(annee) ON DELETE CASCADE
@@ -105,12 +107,16 @@ CREATE TABLE IF NOT EXISTS nationalites(
 
 INSERT INTO artistes (nom, photo, biographie, lien_video, lien_site, id_categorie) VALUES
 ('#TRAD', 'https://www.fimu.com/fileadmin/_processed_/a/d/csm_MM__TRAD__ff2b63e800.jpg', 'Ayant baignés dès leur plus jeune âge dans la musique traditionnelle du Centre-France, les deux jeunes frères du groupe #TRAD'' ont l’objectif de faire découvrir cette culture musicale hors du commun tout en apportant une touche de modernité à ', 'https://www.youtube.com/embed/eX65HDpKykA', NULL, 1),
-('2PanHeads', 'https://www.fimu.com/fileadmin/_processed_/5/7/csm_MM_2PanHeads_1400_cad6a9572a.jpg', '2PanHeads c’est le petit frère de Paranoid London ! Amoureux du live, le groupe propose un univers disco rock teinté d’influences acid house et post punk. Le rock et la rave party se mélangent et nous donnent envie de faire la fête. Adeptes inconditionnels de la scène, on a déjà pu les voir dans bon nombre de salles et de festivals du Grand Est et de Franche Comté. Un concert qui promet une énergie transcendante. A ne pas manquer !', 'https://www.youtube.com/embed/0_gMla8hycU', 'https://2panheads.bandcamp.com/', 2);
+('2PanHeads', 'https://www.fimu.com/fileadmin/_processed_/5/7/csm_MM_2PanHeads_1400_cad6a9572a.jpg', '2PanHeads c’est le petit frère de Paranoid London ! Amoureux du live, le groupe propose un univers disco rock teinté d’influences acid house et post punk. Le rock et la rave party se mélangent et nous donnent envie de faire la fête. Adeptes inconditionnels de la scène, on a déjà pu les voir dans bon nombre de salles et de festivals du Grand Est et de Franche Comté. Un concert qui promet une énergie transcendante. A ne pas manquer !', 'https://www.youtube.com/embed/0_gMla8hycU', 'https://2panheads.bandcamp.com/', 2),
+('Aleph Quintet', 'https://www.fimu.com/fileadmin/_processed_/f/5/csm_J_Aleph_Quintet_ad33dc29d4.jpg', 'Tout droit venus de Bruxelles, ces cinq musiciens proposent un voyage dépaysant grâce à leur musique d’improvisation Jazz, teintée de rythmes Gnawa et de culture Soufi. Un mélange hétéroclite de nationalités et de parcours. Leur objectif ? Transmettre leur énergie et leur passion au travers de leur musique. Leurs compositions se caractérisent par la rencontre du jazz moderne (piano, basse, batterie) et l''alliance des sonorités du oud et du violon, proche des musiques traditionnelles du Maghreb et du Moyen-Orient.', 'https://www.youtube.com/embed/g_BzTSdJLqM', NULL, 3),
+('AMA', 'https://www.fimu.com/fileadmin/_processed_/8/7/csm_MM_Ama_033bdbc747.jpg', 'Ce groupe burkinabé rassemble trois jeunes talents qui unissent leurs univers musicaux sur scène. Un savant mélange inspiré du terroir et de la tradition musicale burkinabé. Au son de la kora et du balafon laissez-vous emporter en Afrique de l''Ouest grâce à la voix unique de leur chanteuse, Awa Guindo. ', NULL, NULL, 4);
 
 INSERT INTO nationalites (id_artiste, id_pays) VALUES
 (1, 1),
 (1, 2),
-(2, 3);
+(2, 3),
+(3, 1),
+(4, 3);
 
 INSERT INTO scenes (libelle, jauge, latitude, longitude, id_typescene) VALUES
 ('L''arsenal', NULL, 2.3948449, 3.141592653, 1),
@@ -125,10 +131,15 @@ INSERT INTO scenes (libelle, jauge, latitude, longitude, id_typescene) VALUES
 INSERT INTO fait (id_artiste, id_genre) VALUES
 (1, 1),
 (1, 2),
-(2, 2);
+(2, 2),
+(3, 3),
+(4, 4);
 
-INSERT INTO concerts (id_scene, id_artiste, date_debut, duree, nb_personnes, annee) VALUES
-(1, 1, NOW(), 55, 958, 2022);
+INSERT INTO concerts (id_scene, id_artiste, heure_debut, date_debut, duree, nb_personnes, annee) VALUES
+(1, 1, '12:45', '2022-12-10', 75, 958, 2022),
+(4, 2, '15:30', '2022-12-10', 120, 0, 2022),
+(3, 3, '17:00', '2022-12-11', 90, 0, 2022),
+(4, 4, '20:00', '2022-12-12', 45, 0, 2022);
 
 INSERT INTO possede VALUES
 (1, 1, 'lien-1'),

@@ -22,6 +22,7 @@ export const artiste = (sequelize, Sequelize) => {
         },
         id_categorie: {
             type: Sequelize.INTEGER,
+            allowNull: true,
             references: {
                 model: 'categorie',
                 key: 'id'

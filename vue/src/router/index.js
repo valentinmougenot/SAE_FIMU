@@ -112,6 +112,26 @@ const routes = [
     path: '/password/:id/edit',
     name: 'password-edit',
     component: () => import('../views/PasswordEditView.vue')
+  },
+  {
+    path: '/concert',
+    name: 'concert',
+    component: () => import('../views/ConcertsView.vue')
+  },
+  {
+    path: '/concert/add',
+    name: 'concert-add',
+    component: () => import('../views/ConcertAddView.vue')
+  },
+  {
+  path: '/concert/:id',
+  name: 'concert-detail',
+  component: () => import('../views/ConcertDetailView.vue')
+  },
+  {
+    path: '/concert/:id/edit',
+    name: 'concert-edit',
+    component: () => import('../views/ConcertEditView.vue')
   }
 ]
 

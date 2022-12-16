@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router()
 
-import {create, findAll, findOne, update, deleteOne, deleteAll} from '../controllers/concert.controller.js'
+import {create, findAll, findOne, findByDate, update, deleteOne, deleteAll, getDates} from '../controllers/concert.controller.js'
 
 router.post('/', create)
 /**
@@ -73,6 +73,9 @@ router.get('/', findAll)
  *          '400':
  *              description: Bad request
 */
+
+router.get('/date', getDates);
+
 router.get('/:id', findOne)
 /**
  * @swagger
@@ -84,8 +87,31 @@ router.get('/:id', findOne)
  *      parameters:
  *          - in: path
  *            name: id
- *            description: ID du concert
- *            required: false
+ *            description: id du concert
+ *            required: true
+ *            type: string
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+*/
+
+router.get('/date/:date', findByDate)
+/**
+ * @swagger
+ * /concert/date/{date}:
+ *   get:
+ *      description: Trouver le concert pour la date donnée
+ *      tags:
+ *          - Concerts
+ *      parameters:
+ *          - in: path
+ *            name: date
+ *            description: date du concert
+ *            required: true
  *            type: string
  *      responses:
  *          '200':

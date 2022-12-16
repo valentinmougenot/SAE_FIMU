@@ -12,7 +12,7 @@
       <v-col cols="12" sm="6" md="3">
         <v-select
           v-model="categorie"
-          :items="categories"
+          :items="categoriesSelect"
           :height="56"
           chips
           label="Categories"
@@ -33,7 +33,7 @@
       <v-col cols="12" sm="6" md="3">
         <v-select
             v-model="genre"
-            :items="genres"
+            :items="genresSelect"
             :height="56"
             chips
             label="Genres"
@@ -54,7 +54,7 @@
       <v-col cols="12" sm="6" md="3">
         <v-select
             v-model="origine"
-            :items="origines"
+            :items="originesSelect"
             :height="56"
             chips
             label="Origines"
@@ -116,69 +116,19 @@
 
 <script>
 import Vue from "vue";
+import {mapState} from "vuex";
 export default {
   name: "ArtisteView",
   components: {
     TableList: () => import("@/components/TableList.vue"),
   },
   data: () => ({
-    artistes: [],
-    categories: [],
-    genres: [],
-    origines: [],
     search: "",
     categorie: [],
     genre: [],
     origine: [],
   }),
   methods: {
-    async getArtistes() {
-      await Vue.axios.get("http://localhost:3000/artiste")
-          .then(response => {
-            this.artistes = response.data
-            this.artistes.forEach(artiste => {
-              artiste.cl = artiste.category.libelle
-              artiste.gl = artiste.genres.map(genre => genre.libelle).join(', ')
-              artiste.pl = artiste.pays.map(pays => pays.libelle).join(', ')
-            })
-          })
-          .catch(error => {
-            console.log(error)
-          });
-    },
-    async getCategories() {
-      return await Vue.axios.get("http://localhost:3000/categorie")
-          .then(response => {
-            response.data.forEach(categorie => {
-              this.categories.push(categorie.libelle)
-            })
-          })
-          .catch(error => {
-            console.log(error)
-          });
-    },
-    async getGenres() {
-      return await Vue.axios.get("http://localhost:3000/genre")
-          .then(response => {
-            response.data.forEach(genre => {
-              this.genres.push(genre.libelle)
-            })
-          })
-          .catch(error => {
-            console.log(error)
-          });
-    },
-    async getOrigines() {
-      return await Vue.axios.get("http://localhost:3000/pays")
-          .then(response => {
-            response.data.forEach(origine => {
-              this.origines.push(origine.libelle)
-            })
-          })
-          .catch(error => {
-            console.log(error)
-          });
-    },
     artistesFiltres() {
       return this.artistes.filter(artiste => {
         return artiste.nom.toLowerCase().includes(this.search.toLowerCase())
@@ -189,7 +139,7 @@ export default {
         return this.artistes;
       }
       return this.artistes.filter(artiste => {
-        return this.categorie.includes(artiste.category.libelle)
+        return this.categorie.includes(artiste.category.id);
       })
     },
     genresFiltres() {
@@ -201,7 +151,7 @@ export default {
       this.artistes.forEach(artiste => {
         add = false;
         artiste.genres.forEach(genre => {
-          if (!add && this.genre.includes(genre.libelle)) {
+          if (!add && this.genre.includes(genre.id)) {
             add = true;
             result.push(artiste)
           }
@@ -218,7 +168,7 @@ export default {
       this.artistes.forEach(artiste => {
         add = false;
         artiste.pays.forEach(pays => {
-          if (!add && this.origine.includes(pays.libelle)) {
+          if (!add && this.origine.includes(pays.id)) {
             add = true;
             result.push(artiste)
           }
@@ -230,7 +180,7 @@ export default {
     deleteArtiste(id) {
       Vue.axios.delete("http://localhost:3000/artiste/" + id)
           .then(() => {
-            this.getArtistes()
+            this.$store.dispatch("getArtistes");
           })
           .catch(error => {
             console.log(error)
@@ -240,7 +190,7 @@ export default {
       if (confirm("Voulez-vous vraiment supprimer tous les artistes ?")) {
         Vue.axios.delete("http://localhost:3000/artiste")
             .then(() => {
-              this.getArtistes()
+              this.$store.dispatch("getArtistes");
             })
             .catch(error => {
               console.log(error)
@@ -263,6 +213,7 @@ export default {
     }
   },
   computed: {
+    ...mapState(['artistes', 'categories', 'genres', 'pays']),
     filtres() {
       return this.artistesFiltres().filter(artiste => {
         return this.categoriesFiltres().includes(artiste)
@@ -271,13 +222,45 @@ export default {
       }).filter(artiste => {
         return this.origineFiltres().includes(artiste)
       })
-    }
+    },
+    categoriesSelect() {
+      return this.categories.map(categorie => {
+        return {
+          value: categorie.id,
+          text: categorie.libelle
+        }
+      })
+    },
+    genresSelect() {
+      return this.genres.map(genre => {
+        return {
+          value: genre.id,
+          text: genre.libelle
+        }
+      })
+    },
+    originesSelect() {
+      return this.pays.map(pays => {
+        return {
+          value: pays.id,
+          text: pays.libelle
+        }
+      })
+    },
   },
-  created() {
-    this.getArtistes();
-    this.getCategories();
-    this.getGenres();
-    this.getOrigines();
+  mounted() {
+    if (this.artistes.length === 0) {
+      this.$store.dispatch("getArtistes");
+    }
+    if (this.categories.length === 0) {
+      this.$store.dispatch("getCategories");
+    }
+    if (this.genres.length === 0) {
+      this.$store.dispatch("getGenres");
+    }
+    if (this.pays.length === 0) {
+      this.$store.dispatch("getPays");
+    }
   },
   beforeCreate() {
     if (!this.$session.exists()) {

@@ -14,7 +14,7 @@
         <v-select
             v-model="typescene"
             class="ma-4"
-            :items="typescenes"
+            :items="typescenesSelect"
             :height="56"
             chips
             label="Type de scène"
@@ -25,7 +25,6 @@
     </v-row>
     <v-row>
       <v-btn
-          v-model="ajouter"
           class="addDeleteBtn ma-6"
           color="success addArtiste"
           :height="56"
@@ -67,42 +66,17 @@
 
 <script>
 import Vue from "vue";
+import {mapState} from "vuex";
 export default {
   name: "ScenesListView",
   components: {
     TableList: () => import("@/components/TableList.vue"),
   },
   data: () => ({
-    scenes: [],
-    typescenes: [],
     search: "",
     typescene: [],
-    ajouter: false,
   }),
   methods: {
-    async getScenes() {
-      return await Vue.axios.get("http://localhost:3000/scene")
-          .then(response => {
-            this.scenes = response.data
-            this.scenes.forEach(scene => {
-              scene.tsl = scene.typescene.libelle
-            })
-          })
-          .catch(error => {
-            console.log(error)
-          });
-    },
-    async getTypescenes() {
-      return await Vue.axios.get("http://localhost:3000/typescene")
-          .then(response => {
-            response.data.forEach(typescene => {
-              this.typescenes.push(typescene.libelle)
-            })
-          })
-          .catch(error => {
-            console.log(error)
-          });
-    },
     scenesFiltres() {
       return this.scenes.filter(scene => {
         return scene.libelle.toLowerCase().includes(this.search.toLowerCase())
@@ -113,7 +87,7 @@ export default {
         return this.scenes;
       }
       return this.scenes.filter(scene => {
-        return this.typescene.includes(scene.typescene.libelle)
+        return this.typescene.includes(scene.typescene.id)
       })
     },
     deleteScene(id) {
@@ -150,15 +124,28 @@ export default {
       }
     }
   },
-  mounted() {
-    this.getScenes();
-    this.getTypescenes();
-  },
   computed: {
+    ...mapState(['scenes', 'typescenes']),
     filtres() {
       return this.scenesFiltres().filter(scene => {
         return this.typescenesFiltres().includes(scene)
       })
+    },
+    typescenesSelect() {
+      return this.typescenes.map(typescene => {
+        return {
+          value: typescene.id,
+          text: typescene.libelle
+        }
+      })
+    }
+  },
+  mounted() {
+    if (this.scenes.length === 0) {
+      this.$store.dispatch('getScenes')
+    }
+    if (this.typescenes.length === 0) {
+      this.$store.dispatch('getTypescenes')
     }
   },
   beforeCreate() {

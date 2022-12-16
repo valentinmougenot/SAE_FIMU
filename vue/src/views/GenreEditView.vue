@@ -54,6 +54,8 @@ export default {
     async editGenre() {
       return await Vue.axios.put("http://localhost:3000/genre/" + this.$route.params.id, this.genre)
           .then(() => {
+            this.$store.dispatch('getGenres');
+            this.$store.dispatch('getArtistes');
             this.$router.push('/genre');
           })
           .catch(error => {

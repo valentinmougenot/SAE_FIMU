@@ -85,6 +85,8 @@ export default {
       this.scene.longitude = parseFloat(this.scene.longitude);
       return await Vue.axios.post("http://localhost:3000/scene", this.scene)
           .then(() => {
+            this.$store.dispatch("getScenes");
+            this.$store.dispatch("getConcerts");
             this.$router.push("/scene")
           })
           .catch(error => {

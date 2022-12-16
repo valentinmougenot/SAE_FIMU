@@ -31,6 +31,7 @@
 
 <script>
 import Vue from 'vue';
+import {mapActions} from "vuex";
 export default {
   name: 'App',
   components: {
@@ -41,6 +42,7 @@ export default {
     menuData: []
   }),
   methods: {
+    ...mapActions(['getArtistes', 'getScenes', "getTypescenes", "getCategories", "getGenres", "getPays", "getConcerts"]),
     logout() {
       Vue.axios.post('http://localhost:3000/utilisateur/logout')
           .then(() => {
@@ -55,11 +57,13 @@ export default {
         this.$router.push('/artiste');
       } else if (index === 1 && this.$route.path !== '/scene') {
         this.$router.push('/scene');
-      } else if (index === 2 && this.$route.path !== '/categorie') {
+      } else if (index === 2 && this.$route.path !== '/concert') {
+        this.$router.push('/concert');
+      } else if (index === 3 && this.$route.path !== '/categorie') {
         this.$router.push('/categorie');
-      } else if (index === 3 && this.$route.path !== '/genre') {
+      } else if (index === 4 && this.$route.path !== '/genre') {
         this.$router.push('/genre');
-      } else if (index === 4 && this.$route.path !== '/utilisateur') {
+      } else if (index === 5 && this.$route.path !== '/utilisateur') {
         this.$router.push('/utilisateur');
       }
     },
@@ -68,6 +72,7 @@ export default {
         this.menuData = [
           {text: 'Artistes', selected : false},
           {text: 'Scènes', selected: false},
+          {text: 'Concerts', selected: false},
           {text: 'Catégories', selected: false},
           {text: 'Genres', selected: false},
           {text: 'Gestion des utilisateurs', selected: false},
@@ -77,6 +82,7 @@ export default {
         this.menuData = [
           {text: 'Artistes', selected : false},
           {text: 'Scènes', selected: false},
+          {text: 'Concerts', selected: false},
           {text: 'Catégories', selected: false},
           {text: 'Genres', selected: false},
         ];
@@ -103,12 +109,14 @@ export default {
         this.menuData[0].selected = true;
       } else if (this.$route.path.includes('/scene')) {
         this.menuData[1].selected = true;
-      } else if (this.$route.path.includes('/categorie')) {
+      } else if (this.$route.path.includes('/concert')) {
         this.menuData[2].selected = true;
-      } else if (this.$route.path.includes('/genre')) {
+      } else if (this.$route.path.includes('/categorie')) {
         this.menuData[3].selected = true;
-      } else if (this.$route.path.includes('/utilisateur')) {
+      } else if (this.$route.path.includes('/genre')) {
         this.menuData[4].selected = true;
+      } else if (this.$route.path.includes('/utilisateur')) {
+        this.menuData[5].selected = true;
       }
     },
 

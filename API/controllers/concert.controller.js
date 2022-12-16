@@ -15,10 +15,19 @@ export const create = (req, res) => {
         });
         return;
     }
+
+    const date = new Date(Date.parse(req.body.date_debut));
+    const year = date.getFullYear();
+    const month = date.getMonth() + 1;
+    const day = date.getDate();
+
+    const isoDate = `${year}-${month.toString().padStart(2, '0')}-${day.toString().padStart(2, '0')}`;
+
     const concert = {
         id_scene: req.body.id_scene,
         id_artiste: req.body.id_artiste,
-        date_debut: req.body.date_debut,
+        heure_debut: req.body.heure_debut,
+        date_debut: isoDate,
         duree: req.body.duree,
         nb_personnes: req.body.nb_personnes,
         annee: req.body.annee
@@ -38,7 +47,7 @@ export const create = (req, res) => {
 
 export const findAll = (req, res) => {
     Concert.findAll(
-        { include: [{model:db.artiste},
+        { include: [{model:db.artiste, include: [{model: db.categorie}, {model: db.genre}]},
             {model:db.scene},
             {model:db.saison}]})
         .then(data => {
@@ -55,9 +64,11 @@ export const findAll = (req, res) => {
 export const findOne = (req, res) => {
     const id = req.params.id;
 
-    Concert.findByPk(id)
+    Concert.findAll({where: {id: id}, include: [{model:db.artiste, include: [{model: db.categorie}, {model: db.genre}]},
+        {model:db.scene},
+        {model:db.saison}]})
         .then(data => {
-            res.send(data);
+            res.send(data[0]);
         })
         .catch(err => {
             res.status(500).send({
@@ -65,6 +76,23 @@ export const findOne = (req, res) => {
             });
         });
 }
+
+export const findByDate = (req, res) => {
+    const date = req.params.date;
+
+    Concert.findAll({where: {date_debut: date}, include: [{model:db.artiste, include: [{model: db.categorie}, {model: db.genre}]},
+        {model:db.scene},
+        {model:db.saison}]})
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message: "Error retrieving Concert with date=" + date
+            });
+        });
+}
+
 
 export const update = (req, res) => {
     if (!req.session.identifiant) {
@@ -144,6 +172,19 @@ export const deleteAll = (req, res) => {
             res.status(500).send({
                 message:
                     err.message || "Some error occurred while removing all Concerts."
+            });
+        });
+}
+
+export const getDates = (req, res) => {
+    Concert.findAll({attributes: ['date_debut'], group: ['date_debut'], order: [['date_debut', 'ASC']]})
+        .then(data => {
+            res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Concert."
             });
         });
 }
