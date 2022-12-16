@@ -42,7 +42,10 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="editConcert">Modifier</v-btn>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="blue darken-1" text @click="editConcert">Modifier</v-btn>
+            </v-card-actions>
           </v-card-actions>
         </v-card>
       </v-col>

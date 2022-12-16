@@ -37,7 +37,10 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="primary" @click="addUtilisateur">Ajouter</v-btn>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" text @click="addUtilisateur">Ajouter</v-btn>
+            </v-card-actions>
           </v-card-actions>
         </v-card>
       </v-col>

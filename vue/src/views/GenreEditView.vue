@@ -13,12 +13,10 @@
                   label="Nom du genre"
                   required
               ></v-text-field>
-              <v-btn
-                  color="primary"
-                  :height="56"
-                  class="addDeleteBtn"
-                  @click="editGenre()">Modifier
-              </v-btn>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="editGenre">Modifier</v-btn>
+              </v-card-actions>
             </v-card-text>
           </v-card>
         </v-col>

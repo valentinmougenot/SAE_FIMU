@@ -42,7 +42,7 @@
           </v-card-text>
           <v-card-actions>
             <v-spacer></v-spacer>
-            <v-btn color="blue darken-1" text @click="addConcert">Ajouter</v-btn>
+            <v-btn color="green darken-1" text @click="addConcert">Ajouter</v-btn>
           </v-card-actions>
         </v-card>
       </v-col>

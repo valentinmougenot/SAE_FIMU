@@ -71,9 +71,10 @@ export default {
           this.$session.set("identifiant", response.data.identifiant);
           this.$session.set("role", response.data.role.libelle);
           window.location.href = "/artiste";
-        } else {
-          alert("Identifiant ou mot de passe incorrect");
         }
+      }).catch((error) => {
+        console.log(error);
+        alert("Identifiant ou mot de passe incorrect");
       });
       }
     }

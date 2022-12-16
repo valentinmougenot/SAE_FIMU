@@ -13,12 +13,10 @@
                   label="Nom du genre"
                   required
               ></v-text-field>
-              <v-btn
-                  color="success"
-                  :height="56"
-                  class="addDeleteBtn"
-                  @click="addGenre()">Ajouter
-              </v-btn>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="green darken-1" text @click="addGenre">Ajouter</v-btn>
+              </v-card-actions>
             </v-card-text>
           </v-card>
         </v-col>

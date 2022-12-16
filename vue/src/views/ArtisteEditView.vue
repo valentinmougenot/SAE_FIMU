@@ -104,14 +104,10 @@
                   v-model="possede.find(p => p.id_reseaux_sociaux === id).lien"
                   :label="reseauxsociaux.find(x => x.value === id).text"
               ></v-text-field>
-              <v-btn
-                  color="primary"
-                  class="addDeleteBtn"
-                  :height="56"
-                  @click="editArtiste()"
-              >
-                Modifier
-              </v-btn>
+              <v-card-actions>
+                <v-spacer></v-spacer>
+                <v-btn color="blue darken-1" text @click="editArtiste">Modifier</v-btn>
+              </v-card-actions>
             </v-card-text>
           </v-card>
         </v-col>

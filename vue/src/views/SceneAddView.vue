@@ -34,12 +34,10 @@
                   label="Jauge maximum"
                   required
             ></v-text-field>
-            <v-btn
-                color="success"
-                :height="56"
-                class="addDeleteBtn"
-                @click="addScene()">Ajouter
-            </v-btn>
+            <v-card-actions>
+              <v-spacer></v-spacer>
+              <v-btn color="green darken-1" text @click="addScene">Ajouter</v-btn>
+            </v-card-actions>
           </v-card-text>
         </v-col>
       </v-row>
