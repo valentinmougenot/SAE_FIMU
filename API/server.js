@@ -34,6 +34,8 @@ import {default as routerJouePrevious} from './routes/jouePrevious.router.js';
 import {default as routerFaitPrevious} from './routes/faitPrevious.router.js';
 import {default as routerNationalitePrevious} from './routes/nationalitePrevious.router.js'
 import {default as routerPossedePrevious} from './routes/possedePrevious.router.js';
+import {default as routerActualite} from './routes/actualite.router.js';
+import {default as routerTypeactu} from './routes/typeactu.router.js';
 
 const app = express();
 
@@ -104,6 +106,8 @@ app.use('/nationalite', routerNationalite);
 app.use('/fait', routerFait);
 app.use('/possede', routerPossede);
 app.use('/reseauxsociaux', routerReseauxSociaux);
+app.use('/actualite', routerActualite);
+app.use('/typeactu', routerTypeactu);
 
 app.use('/next/artiste', routerArtisteNext);
 app.use('/next/concert', routerConcertNext);

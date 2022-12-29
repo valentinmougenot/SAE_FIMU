@@ -8,6 +8,9 @@ export const notification = (sequelize, Sequelize) => {
         date_envoi: {
             type: Sequelize.STRING
         },
+        heure_envoi: {
+            type: Sequelize.STRING
+        },
         message: {
             type: Sequelize.STRING
         }

@@ -36,6 +36,8 @@ DROP TABLE IF EXISTS artistes;
 
 SET SEARCH_PATH = common;
 
+DROP TABLE IF EXISTS actualites;
+DROP TABLE IF EXISTS typeactu;
 DROP TABLE IF EXISTS notifications;
 DROP TABLE IF EXISTS utilisateurs;
 DROP TABLE IF EXISTS roles;

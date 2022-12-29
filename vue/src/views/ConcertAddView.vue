@@ -29,7 +29,7 @@
               <v-text-field
                   v-model="concert.date_debut"
                   type="date"
-                  label="Heure"
+                  label="Date"
                   required
               ></v-text-field>
               <v-text-field

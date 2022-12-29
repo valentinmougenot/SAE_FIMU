@@ -14,7 +14,7 @@
             ></v-text-field>
             <v-select
                 v-model="scene.id_typescene"
-                :items="typescenes"
+                :items="typescenesSelect"
                 label="Type de scène"
                 required
             ></v-select>
@@ -29,7 +29,7 @@
                 required
             ></v-text-field>
             <v-text-field
-                v-if="scene.id_typescene===2"
+                v-if="scene.id_typescene === 2"
                   v-model="scene.jauge"
                   label="Jauge maximum"
                   required
@@ -47,6 +47,7 @@
 
 <script>
 import Vue from "vue";
+import {mapState} from "vuex";
 export default {
   name: "SceneAddView",
   data: () => ({
@@ -56,24 +57,9 @@ export default {
       longitude: null,
       id_typescene: null,
       jauge: null
-    },
-    typescenes: []
+    }
   }),
   methods: {
-   async getTypescenes() {
-      return await Vue.axios.get("http://localhost:3000/typescene")
-          .then(response => {
-            response.data.forEach(typescene => {
-              this.typescenes.push({
-                text: typescene.libelle,
-                value: typescene.id
-              })
-            })
-          })
-          .catch(error => {
-            console.log(error)
-          });
-    },
     async addScene() {
       if (this.scene.id_typescene === 1) {
         this.scene.jauge = null;
@@ -92,9 +78,21 @@ export default {
           });
     },
   },
-  created() {
-    this.getTypescenes()
-    console.log(this.typescenes)
+  computed: {
+    ...mapState(["typescenes"]),
+    typescenesSelect() {
+      return this.typescenes.map(typescene => {
+        return {
+          text: typescene.libelle,
+          value: typescene.id
+        }
+      })
+    }
+  },
+  mounted() {
+    if (this.$store.state.typescenes.length === 0) {
+      this.$store.dispatch("getTypescenes");
+    }
   },
   beforeCreate() {
     if (!this.$session.exists()) {

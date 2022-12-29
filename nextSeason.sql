@@ -129,5 +129,5 @@ INSERT INTO fait (id_artiste, id_genre) VALUES
 (1, 2),
 (2, 2);
 
-INSERT INTO concerts (id_scene, id_artiste, date_debut, duree, nb_personnes, annee) VALUES
-(1, 1, NOW(), 55, 958, 2022);
+INSERT INTO concerts (id_scene, id_artiste, heure_debut, date_debut, duree, nb_personnes, annee) VALUES
+(1, 1, '12:45', '2022-12-10', 75, 958, 2022);

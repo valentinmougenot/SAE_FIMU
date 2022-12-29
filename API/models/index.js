@@ -26,6 +26,8 @@ import { concertNext } from './concertNext.model.js';
 import { possedeNext } from './possedeNext.model.js';
 import { possedePrevious } from './possedePrevious.model.js';
 import { jouePrevious } from './jouePrevious.model.js';
+import { typeactu } from './typeactu.model.js';
+import { actualite } from './actualite.model.js';
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
@@ -74,6 +76,8 @@ db.concertNext = concertNext(sequelize, Sequelize);
 db.possedeNext = possedeNext(sequelize, Sequelize);
 db.possedePrevious = possedePrevious(sequelize, Sequelize);
 db.jouePrevious = jouePrevious(sequelize, Sequelize);
+db.typeactu = typeactu(sequelize, Sequelize);
+db.actualite = actualite(sequelize, Sequelize);
 
 
 db.artiste.belongsToMany(db.pays, { through: db.nationalite, foreignKey: 'id_artiste'});
@@ -102,6 +106,9 @@ db.typescene.hasMany(db.scene, {foreignKey: 'id_typescene'});
 
 db.utilisateur.belongsTo(db.role, {foreignKey: 'id_role'});
 db.role.hasMany(db.utilisateur, {foreignKey: 'id_role'});
+
+db.actualite.belongsTo(db.typeactu, {foreignKey: 'id_typeactu'});
+db.typeactu.hasMany(db.actualite, {foreignKey: 'id_typeactu'});
 
 // -----------------------------------------------------------------------------
 

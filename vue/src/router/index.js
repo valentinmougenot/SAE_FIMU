@@ -132,6 +132,36 @@ const routes = [
     path: '/concert/:id/edit',
     name: 'concert-edit',
     component: () => import('../views/ConcertEditView.vue')
+  },
+  {
+    path: '/actualite',
+    name: 'actualite',
+    component: () => import('../views/ActualiteView.vue')
+  },
+  {
+    path: '/actualite/add',
+    name: 'actualite-add',
+    component: () => import('../views/ActualiteAddView.vue')
+  },
+  {
+    path: '/actualite/:id/edit',
+    name: 'actualite-edit',
+    component: () => import('../views/ActualiteEditView.vue')
+  },
+  {
+    path: '/notification',
+    name: 'notification',
+    component: () => import('../views/NotificationView.vue')
+  },
+  {
+    path: '/notification/add',
+    name: 'notification-add',
+    component: () => import('../views/NotificationAddView.vue')
+  },
+  {
+    path: '/notification/:id/edit',
+    name: 'notification-edit',
+    component: () => import('../views/NotificationEditView.vue')
   }
 ]
 

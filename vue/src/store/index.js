@@ -12,6 +12,9 @@ export default new Vuex.Store({
     genres: [],
     pays: [],
     concerts: [],
+    actualites: [],
+    typeactu: [],
+    notifications: [],
   },
   getters: {
   },
@@ -36,6 +39,15 @@ export default new Vuex.Store({
     },
     updateConcerts(state, concerts) {
         state.concerts = concerts
+    },
+    updateActualites(state, actualites) {
+        state.actualites = actualites
+    },
+    updateTypeactu(state, typeactu) {
+        state.typeactu = typeactu
+    },
+    updateNotifications(state, notifications) {
+        state.notifications = notifications
     }
   },
   actions: {
@@ -117,6 +129,33 @@ export default new Vuex.Store({
                     }
                 })
                 commit('updateConcerts', response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    },
+    async getActualites({ commit }) {
+        await Vue.axios.get("http://localhost:3000/actualite")
+            .then(response => {
+                commit('updateActualites', response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    },
+    async getTypeactu({ commit }) {
+        await Vue.axios.get("http://localhost:3000/typeactu")
+            .then(response => {
+                commit('updateTypeactu', response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    },
+    async getNotifications({ commit }) {
+        await Vue.axios.get("http://localhost:3000/notification")
+            .then(response => {
+                commit('updateNotifications', response.data)
             })
             .catch(error => {
                 console.log(error)

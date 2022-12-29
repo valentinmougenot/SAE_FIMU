@@ -21,7 +21,8 @@ export const faitPrevious = (sequelize, Sequelize) => {
     {
         schema: 'previousseasons',
         timestamps: false,
-        freezeTableName: true
+        freezeTableName: true,
+        tableName: 'fait'
     });
 
     return FaitPrevious;

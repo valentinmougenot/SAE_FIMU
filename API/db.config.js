@@ -1,7 +1,7 @@
 export const dbConfig = {
     HOST: "localhost",
-    USER: "simon",
-    PASSWORD: "simon",
+    USER: "valentinmougenot",
+    PASSWORD: "",
     DB: "fimu",
     dialect: "postgres",
     pool: {

@@ -20,7 +20,8 @@ export const jouePrevious = (sequelize, Sequelize) => {
     {
         schema: 'previousseasons',
         timestamps: false,
-        freezeTableName: true
+        freezeTableName: true,
+        tableName: 'joue'
     });
 
     return JouePrevious;

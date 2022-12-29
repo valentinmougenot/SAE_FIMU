@@ -26,9 +26,9 @@
     <v-row>
       <v-btn
           class="addDeleteBtn ma-6"
-          color="success addArtiste"
+          color="success"
           :height="56"
-          :href="'/scene/add'">Ajouter scène&emsp;<v-icon>mdi-plus-box-outline</v-icon>
+          @click="$router.push('/scene/add')">Ajouter scène&emsp;<v-icon>mdi-plus-box-outline</v-icon>
       </v-btn>
       <v-btn
           class="addDeleteBtn ma-6"
@@ -93,7 +93,6 @@ export default {
     deleteScene(id) {
       Vue.axios.delete("http://localhost:3000/scene/" + id)
           .then(response => {
-            this.getScenes()
             return response.data
           })
           .catch(error => {

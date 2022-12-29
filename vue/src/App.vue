@@ -63,7 +63,11 @@ export default {
         this.$router.push('/categorie');
       } else if (index === 4 && this.$route.path !== '/genre') {
         this.$router.push('/genre');
-      } else if (index === 5 && this.$route.path !== '/utilisateur') {
+      } else if (index === 5 && this.$route.path !== '/actualite') {
+        this.$router.push('/actualite');
+      } else if (index === 6 && this.$route.path !== '/notification') {
+        this.$router.push('/notification');
+      } else if (index === 7 && this.$route.path !== '/utilisateur') {
         this.$router.push('/utilisateur');
       }
     },
@@ -75,6 +79,8 @@ export default {
           {text: 'Concerts', selected: false},
           {text: 'Catégories', selected: false},
           {text: 'Genres', selected: false},
+          {text: 'Actualités', selected: false},
+          {text: 'Notifications', selected: false},
           {text: 'Gestion des utilisateurs', selected: false},
         ];
       }
@@ -85,6 +91,8 @@ export default {
           {text: 'Concerts', selected: false},
           {text: 'Catégories', selected: false},
           {text: 'Genres', selected: false},
+          {text: 'Actualités', selected: false},
+          {text: 'Notifications', selected: false},
         ];
       }
     },
@@ -115,8 +123,12 @@ export default {
         this.menuData[3].selected = true;
       } else if (this.$route.path.includes('/genre')) {
         this.menuData[4].selected = true;
-      } else if (this.$route.path.includes('/utilisateur')) {
+      } else if (this.$route.path.includes('/actualite')) {
         this.menuData[5].selected = true;
+      } else if (this.$route.path.includes('/notification')) {
+        this.menuData[6].selected = true;
+      } else if (this.$route.path.includes('/utilisateur')) {
+        this.menuData[7].selected = true;
       }
     },
 

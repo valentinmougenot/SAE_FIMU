@@ -1,6 +1,7 @@
 import {db} from '../models/index.js';
 const Notification = db.notification;
 const Op = db.Sequelize.Op;
+const Sequelize = db.Sequelize;
 
 export const create = (req, res) => {
     if (!req.session.identifiant) {
@@ -18,8 +19,16 @@ export const create = (req, res) => {
     }
     const notification = {
         message: req.body.message,
+        heure_envoi: req.body.heure_envoi,
         date_envoi: req.body.date_envoi
     };
+
+    if (notification.date_envoi == null) {
+        notification.date_envoi = Sequelize.fn('NOW');
+    }
+    if (notification.heure_envoi == null) {
+        notification.heure_envoi = Sequelize.fn('NOW');
+    }
     
     Notification.create(notification)
         .then(data => {
@@ -34,7 +43,9 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
-    Notification.findAll()
+    Notification.findAll({
+        order: [['date_envoi', 'DESC'], ['heure_envoi', 'DESC']]
+    })
         .then(data => {
             res.send(data);
         })
@@ -70,7 +81,20 @@ export const update = (req, res) => {
     
     const id = req.params.id;
 
-    Notification.update(req.body, {
+    const notification = {
+        message: req.body.message,
+        heure_envoi: req.body.heure_envoi,
+        date_envoi: req.body.date_envoi
+    };
+
+    if (notification.date_envoi == null) {
+        notification.date_envoi = Sequelize.fn('NOW');
+    }
+    if (notification.heure_envoi == null) {
+        notification.heure_envoi = Sequelize.fn('NOW');
+    }
+
+    Notification.update(notification, {
         where: { id: id }
     })
         .then(num => {
@@ -85,6 +109,7 @@ export const update = (req, res) => {
             }
         })
         .catch(err => {
+            console.log(err);
             res.status(500).send({
                 message: "Error updating Notification with id=" + id
             });

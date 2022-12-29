@@ -48,4 +48,16 @@ a {
   text-align: center;
 }
 
+.bginfo {
+  background-color: rgba(71, 167, 255, 0.5) !important;
+}
+
+.bgwarn {
+  background-color: rgba(255, 206, 117, 0.5) !important;
+}
+
+.bgdanger {
+  background-color: rgba(255, 0, 0, 0.5) !important;
+}
+
 /*# sourceMappingURL=show.css.map */
