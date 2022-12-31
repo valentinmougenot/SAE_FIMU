@@ -6,7 +6,7 @@ DROP TABLE IF EXISTS associe;
 DROP TABLE IF EXISTS fait;
 DROP TABLE IF EXISTS possede;
 DROP TABLE IF EXISTS concerts;
-DROP TABLE IF EXISTS prestataires;
+DROP TABLE IF EXISTS stands;
 DROP TABLE IF EXISTS scenes;
 DROP TABLE IF EXISTS artistes;
 DROP TABLE IF EXISTS partenaires;
@@ -41,12 +41,14 @@ CREATE TABLE IF NOT EXISTS scenes(
    FOREIGN KEY(id_typescene) REFERENCES common.typescenes(id) ON DELETE SET NULL
 );
 
-CREATE TABLE IF NOT EXISTS prestataires(
+CREATE TABLE IF NOT EXISTS stands(
    id SERIAL,
    libelle VARCHAR(255),
-   id_type_prestataire INT NOT NULL,
+   latitude VARCHAR(50),
+   longitude VARCHAR(50),
+   id_typestand INT NOT NULL,
    PRIMARY KEY(id),
-   FOREIGN KEY(id_type_prestataire) REFERENCES common.typeprestataire(id) ON DELETE SET NULL
+   FOREIGN KEY(id_typestand) REFERENCES common.typestand(id) ON DELETE SET NULL
 );
 
 CREATE TABLE IF NOT EXISTS concerts(
@@ -91,10 +93,10 @@ CREATE TABLE IF NOT EXISTS associe(
 
 CREATE TABLE IF NOT EXISTS propose(
    id_service INTEGER,
-   id_prestataire INTEGER,
-   PRIMARY KEY(id_service, id_prestataire),
+   id_stand INTEGER,
+   PRIMARY KEY(id_service, id_stand),
    FOREIGN KEY(id_service) REFERENCES common.services(id) ON DELETE CASCADE,
-   FOREIGN KEY(id_prestataire) REFERENCES prestataires(id) ON DELETE CASCADE
+   FOREIGN KEY(id_stand) REFERENCES stands(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS nationalites(
@@ -145,3 +147,34 @@ INSERT INTO possede VALUES
 (1, 1, 'lien-1'),
 (1, 2, 'lien-2'),
 (2, 2, 'lien-3');
+
+INSERT INTO stands (libelle, latitude, longitude, id_typestand) VALUES
+('Stand 1', 1.3948449, 2.141592653, 1),
+('Stand 2', 2.3948449, 3.141592653, 1),
+('Stand 3', 3.3948449, 4.141592653, 1),
+('Stand 4', 4.3948449, 5.141592653, 1),
+('Stand 5', 5.3948449, 6.141592653, 1),
+('Stand 6', 6.3948449, 7.141592653, 1),
+('Stand 7', 7.3948449, 8.141592653, 1),
+('Stand 8', 8.3948449, 9.141592653, 1),
+('Stand 9', 9.3948449, 10.141592653, 1),
+('Stand 10', 10.3948449, 11.141592653, 2),
+('Stand 11', 11.3948449, 12.141592653, 2),
+('Stand 12', 12.3948449, 13.141592653, 2),
+('Stand 13', 13.3948449, 14.141592653, 2),
+('Stand 14', 14.3948449, 15.141592653, 3),
+('Stand 15', 15.3948449, 16.141592653, 3),
+('Stand 16', 16.3948449, 17.141592653, 3),
+('Stand 17', 17.3948449, 18.141592653, 3),
+('Stand 18', 18.3948449, 19.141592653, 4),
+('Stand 19', 19.3948449, 20.141592653, 4),
+('Stand 20', 20.3948449, 21.141592653, 4),
+('Stand 21', 21.3948449, 22.141592653, 4),
+('Stand 22', 22.3948449, 23.141592653, 5),
+('Stand 23', 23.3948449, 24.141592653, 5);
+
+INSERT INTO propose(id_stand, id_service) VALUES
+(1, 1),
+(1, 3),
+(2, 3),
+(5, 2);

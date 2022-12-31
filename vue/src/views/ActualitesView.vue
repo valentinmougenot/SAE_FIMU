@@ -60,7 +60,7 @@ import Vue from 'vue';
 import {mapState} from "vuex";
 
 export default {
-  name: "ActualiteView",
+  name: "ActualitesView",
   data: () => ({
     search: "",
     typeactualites: [],

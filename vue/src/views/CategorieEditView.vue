@@ -13,6 +13,11 @@
                   label="Nom de la categorie"
                   required
               ></v-text-field>
+              <v-color-picker
+                  v-model="categorie.couleur"
+                  label="Couleur de la catégorie"
+                  required
+              ></v-color-picker>
               <v-card-actions>
                 <v-spacer></v-spacer>
                 <v-btn color="blue darken-1" text @click="editCategorie">Modifier</v-btn>
@@ -31,7 +36,8 @@ export default {
   name: "CategorieEditView",
   data: () => ({
     categorie: {
-      libelle: null
+      libelle: null,
+      couleur: "#000000"
     }
   }),
   methods: {

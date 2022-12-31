@@ -28,8 +28,8 @@
     <v-row class="table-center">
       <TableList
         :data="filter"
-        :fields="['libelle']"
-        :titles="['Nom catégorie', 'Actions']"
+        :fields="['libelle', 'couleur']"
+        :titles="['Nom catégorie', 'Couleur', 'Actions']"
         :buttons="[{
           icon: 'mdi-pencil',
           color: 'primary'

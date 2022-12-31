@@ -7,7 +7,7 @@ DROP TABLE IF EXISTS utilisateurs;
 DROP TABLE IF EXISTS roles;
 DROP TABLE IF EXISTS reseauxsociaux;
 DROP TABLE IF EXISTS services;
-DROP TABLE IF EXISTS typeprestataire;
+DROP TABLE IF EXISTS typestand;
 DROP TABLE IF EXISTS typescenes;
 DROP TABLE IF EXISTS genres;
 DROP TABLE IF EXISTS categories;
@@ -46,7 +46,7 @@ CREATE TABLE IF NOT EXISTS typescenes(
    PRIMARY KEY(id)
 );
 
-CREATE TABLE IF NOT EXISTS typeprestataire(
+CREATE TABLE IF NOT EXISTS typestand(
    id SERIAL,
    libelle VARCHAR(255),
    PRIMARY KEY(id)
@@ -157,3 +157,17 @@ INSERT INTO actualites(date_envoi, titre, contenu, id_typeactu) VALUES
 (NOW(), 'titre1', 'contenu cool1', 2),
 (NOW(), 'titre2', 'contenu cool2', 3),
 (NOW(), 'titre3', 'contenu cool3', 1);
+
+INSERT INTO typestand (libelle) VALUES
+('Restauration'),
+('Buvette'),
+('Boutique'),
+('WC'),
+('Divers');
+
+INSERT INTO services (libelle) VALUES
+('Frites'),
+('Coca'),
+('Bière'),
+('Chips'),
+('Saucisse');

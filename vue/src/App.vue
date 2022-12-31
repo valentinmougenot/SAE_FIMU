@@ -67,7 +67,11 @@ export default {
         this.$router.push('/actualite');
       } else if (index === 6 && this.$route.path !== '/notification') {
         this.$router.push('/notification');
-      } else if (index === 7 && this.$route.path !== '/utilisateur') {
+      } else if (index === 7 && this.$route.path !== '/stand') {
+        this.$router.push('/stand');
+      } else if (index === 8 && this.$route.path !== '/service') {
+        this.$router.push('/service');
+      } else if (index === 9 && this.$route.path !== '/utilisateur') {
         this.$router.push('/utilisateur');
       }
     },
@@ -81,6 +85,8 @@ export default {
           {text: 'Genres', selected: false},
           {text: 'Actualités', selected: false},
           {text: 'Notifications', selected: false},
+          {text: 'Stands', selected: false},
+          {text: 'Services', selected: false},
           {text: 'Gestion des utilisateurs', selected: false},
         ];
       }
@@ -93,6 +99,8 @@ export default {
           {text: 'Genres', selected: false},
           {text: 'Actualités', selected: false},
           {text: 'Notifications', selected: false},
+          {text: 'Stands', selected: false},
+          {text: 'Services', selected: false},
         ];
       }
     },
@@ -127,8 +135,12 @@ export default {
         this.menuData[5].selected = true;
       } else if (this.$route.path.includes('/notification')) {
         this.menuData[6].selected = true;
-      } else if (this.$route.path.includes('/utilisateur')) {
+      } else if (this.$route.path.includes('/stand')) {
         this.menuData[7].selected = true;
+      } else if (this.$route.path.includes('/service')) {
+        this.menuData[8].selected = true;
+      } else if (this.$route.path.includes('/utilisateur')) {
+        this.menuData[9].selected = true;
       }
     },
 

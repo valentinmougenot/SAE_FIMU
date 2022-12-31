@@ -136,7 +136,7 @@ const routes = [
   {
     path: '/actualite',
     name: 'actualite',
-    component: () => import('../views/ActualiteView.vue')
+    component: () => import('../views/./ActualitesView')
   },
   {
     path: '/actualite/add',
@@ -151,7 +151,7 @@ const routes = [
   {
     path: '/notification',
     name: 'notification',
-    component: () => import('../views/NotificationView.vue')
+    component: () => import('../views/./NotificationsView')
   },
   {
     path: '/notification/add',
@@ -162,6 +162,36 @@ const routes = [
     path: '/notification/:id/edit',
     name: 'notification-edit',
     component: () => import('../views/NotificationEditView.vue')
+  },
+  {
+    path: '/stand',
+    name: 'stand',
+    component: () => import('../views/./StandsListView')
+  },
+  {
+    path: '/stand/add',
+    name: 'stand-add',
+    component: () => import('../views/StandAddView.vue')
+  },
+  {
+    path: '/stand/:id/edit',
+    name: 'stand-edit',
+    component: () => import('../views/StandEditView.vue')
+  },
+  {
+    path: '/service',
+    name: 'service',
+    component: () => import('../views/./ServicesListView')
+  },
+  {
+    path: '/service/add',
+    name: 'service-add',
+    component: () => import('../views/ServiceAddView.vue')
+  },
+  {
+    path: '/service/:id/edit',
+    name: 'service-edit',
+    component: () => import('../views/ServiceEditView.vue')
   }
 ]
 

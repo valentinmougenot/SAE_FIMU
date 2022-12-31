@@ -36,6 +36,12 @@ import {default as routerNationalitePrevious} from './routes/nationalitePrevious
 import {default as routerPossedePrevious} from './routes/possedePrevious.router.js';
 import {default as routerActualite} from './routes/actualite.router.js';
 import {default as routerTypeactu} from './routes/typeactu.router.js';
+import {default as routerStand} from './routes/stand.router.js';
+import {default as routerTypestand} from './routes/typestand.router.js';
+import {default as routerStandNext} from './routes/standNext.router.js';
+import {default as routerService} from './routes/service.router.js';
+import {default as routerPropose} from './routes/propose.router.js';
+import {default as routerProposeNext} from './routes/proposeNext.router.js';
 
 const app = express();
 
@@ -108,6 +114,10 @@ app.use('/possede', routerPossede);
 app.use('/reseauxsociaux', routerReseauxSociaux);
 app.use('/actualite', routerActualite);
 app.use('/typeactu', routerTypeactu);
+app.use('/stand', routerStand);
+app.use('/typestand', routerTypestand);
+app.use('/service', routerService);
+app.use('/propose', routerPropose);
 
 app.use('/next/artiste', routerArtisteNext);
 app.use('/next/concert', routerConcertNext);
@@ -115,6 +125,8 @@ app.use('/next/fait', routerFaitNext);
 app.use('/next/nationalite', routerNationaliteNext);
 app.use('/next/possede', routerPossedeNext);
 app.use('/next/scene', routerSceneNext);
+app.use('/next/stand', routerStandNext);
+app.use('/next/propose', routerProposeNext);
 
 app.use('/previous/artiste', routerArtistePrevious);
 app.use('/previous/joue', routerJouePrevious);

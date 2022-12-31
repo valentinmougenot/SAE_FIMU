@@ -1,6 +1,6 @@
-export const sceneNext = (sequelize, Sequelize) => {
-    const SceneNext = sequelize.define('scenes', {
-        id: {
+export const stand = (sequelize, Sequelize) => {
+    const Stand = sequelize.define("stands", {
+        id : {
             type: Sequelize.INTEGER,
             primaryKey: true,
             autoIncrement: true
@@ -8,29 +8,25 @@ export const sceneNext = (sequelize, Sequelize) => {
         libelle: {
             type: Sequelize.STRING
         },
-        jauge: {
-            type: Sequelize.INTEGER
-        },
         latitude: {
             type: Sequelize.FLOAT
         },
         longitude: {
             type: Sequelize.FLOAT
         },
-        id_typescene: {
+        id_typestand: {
             type: Sequelize.INTEGER,
             references: {
-                schema: 'common',
-                model: 'typescene',
-                key: 'id',
+                model: 'typestand',
+                key: 'id'
             }
         }
     },
     {
-        schema: 'nextseason',
+        schema: 'currentseason',
         timestamps: false,
         freezeTableName: true
     });
 
-    return SceneNext;
+    return Stand;
 }

@@ -28,6 +28,12 @@ import { possedePrevious } from './possedePrevious.model.js';
 import { jouePrevious } from './jouePrevious.model.js';
 import { typeactu } from './typeactu.model.js';
 import { actualite } from './actualite.model.js';
+import { typestand } from './typestand.model.js';
+import { stand } from './stand.model.js';
+import { standNext } from './standNext.model.js';
+import { service } from './service.model.js';
+import { propose } from './propose.model.js';
+import { proposeNext } from './proposeNext.model.js';
 
 const sequelize = new Sequelize(dbConfig.DB, dbConfig.USER, dbConfig.PASSWORD, {
     host: dbConfig.HOST,
@@ -78,6 +84,12 @@ db.possedePrevious = possedePrevious(sequelize, Sequelize);
 db.jouePrevious = jouePrevious(sequelize, Sequelize);
 db.typeactu = typeactu(sequelize, Sequelize);
 db.actualite = actualite(sequelize, Sequelize);
+db.typestand = typestand(sequelize, Sequelize);
+db.stand = stand(sequelize, Sequelize);
+db.standNext = standNext(sequelize, Sequelize);
+db.service = service(sequelize, Sequelize);
+db.propose = propose(sequelize, Sequelize);
+db.proposeNext = proposeNext(sequelize, Sequelize);
 
 
 db.artiste.belongsToMany(db.pays, { through: db.nationalite, foreignKey: 'id_artiste'});
@@ -110,6 +122,12 @@ db.role.hasMany(db.utilisateur, {foreignKey: 'id_role'});
 db.actualite.belongsTo(db.typeactu, {foreignKey: 'id_typeactu'});
 db.typeactu.hasMany(db.actualite, {foreignKey: 'id_typeactu'});
 
+db.stand.belongsTo(db.typestand, {foreignKey: 'id_typestand'});
+db.typestand.hasMany(db.stand, {foreignKey: 'id_typestand'});
+
+db.stand.belongsToMany(db.service, { through: db.propose, foreignKey: 'id_stand'});
+db.service.belongsToMany(db.stand, { through: db.propose, foreignKey: 'id_service'});
+
 // -----------------------------------------------------------------------------
 
 db.artisteNext.belongsToMany(db.pays, { through: db.nationaliteNext, foreignKey: 'id_artiste'});
@@ -135,6 +153,12 @@ db.saison.hasMany(db.concertNext, {foreignKey: 'annee'});
 
 db.sceneNext.belongsTo(db.typescene, {foreignKey: 'id_typescene'});
 db.typescene.hasMany(db.sceneNext, {foreignKey: 'id_typescene'});
+
+db.standNext.belongsTo(db.typestand, {foreignKey: 'id_typestand'});
+db.typestand.hasMany(db.standNext, {foreignKey: 'id_typestand'});
+
+db.standNext.belongsToMany(db.service, { through: db.proposeNext, foreignKey: 'id_stand'});
+db.service.belongsToMany(db.standNext, { through: db.proposeNext, foreignKey: 'id_service'});
 
 // -----------------------------------------------------------------------------------
 

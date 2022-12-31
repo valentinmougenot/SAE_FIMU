@@ -1,50 +1,53 @@
 import {db} from '../models/index.js';
-const Categorie = db.categorie;
+const Stand = db.stand;
 const Op = db.Sequelize.Op;
 
 export const create = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
-            message: "Vous devez être connecté pour créer une catégorie"
+            message: "Vous devez être connecté pour créer un artiste"
         });
         return;
     }
-    
-    
     if (!req.body.libelle) {
         res.status(400).send({
             message: "Content can not be empty!"
         });
         return;
     }
-    const categorie = {
+
+    const stand = {
         libelle: req.body.libelle,
-        couleur: req.body.couleur
+        latitude: req.body.latitude,
+        longitude: req.body.longitude,
+        id_typestand: req.body.id_typestand
     };
-    
-    Categorie.create(categorie)
+
+    Stand.create(stand)
         .then(data => {
             res.send(data);
-        })
+        }
+        )
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while creating the Categorie."
+                    err.message || "Some error occurred while creating the Stand."
             });
-        });
-}
+        }
+        );
+};
 
 export const findAll = (req, res) => {
-    const nom = req.query.nom;
-
-    Categorie.findAll()
+    Stand.findAll(
+        { include: [{model:db.typestand}, {model: db.service}]})
         .then(data => {
             res.send(data);
-        })
+        }
+        )
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while retrieving categories."
+                    err.message || "Some error occurred while retrieving stands."
             });
         });
 }
@@ -52,13 +55,13 @@ export const findAll = (req, res) => {
 export const findOne = (req, res) => {
     const id = req.params.id;
 
-    Categorie.findByPk(id)
+    Stand.findByPk(id, { include: [{model:db.typestand}, {model: db.service}]})
         .then(data => {
             res.send(data);
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error retrieving Categorie with id=" + id
+                message: "Error retrieving Stand with id=" + id
             });
         });
 }
@@ -66,30 +69,29 @@ export const findOne = (req, res) => {
 export const update = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
-            message: "Vous devez être connecté pour modifier une catégorie"
+            message: "Vous devez être connecté pour modifier un stand"
         });
         return;
     }
-    
     const id = req.params.id;
 
-    Categorie.update(req.body, {
+    Stand.update(req.body, {
         where: { id: id }
     })
         .then(num => {
             if (num == 1) {
                 res.send({
-                    message: "Categorie was updated successfully."
+                    message: "Stand was updated successfully."
                 });
             } else {
                 res.send({
-                    message: `Cannot update Categorie with id=${id}. Maybe Categorie was not found or req.body is empty!`
+                    message: `Cannot update Stand with id=${id}. Maybe Stand was not found or req.body is empty!`
                 });
             }
         })
         .catch(err => {
             res.status(500).send({
-                message: "Error updating Categorie with id=" + id
+                message: "Error updating Stand with id=" + id
             });
         });
 }
@@ -97,32 +99,29 @@ export const update = (req, res) => {
 export const deleteOne = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
-            message: "Vous devez être connecté pour supprimer une catégorie"
+            message: "Vous devez être connecté pour supprimer un stand"
         });
         return;
     }
-    
     const id = req.params.id;
-    console.log(id);
 
-    Categorie.destroy({
+    Stand.destroy({
         where: { id: id }
     })
         .then(num => {
             if (num == 1) {
                 res.send({
-                    message: "Categorie was deleted successfully!"
+                    message: "Stand was deleted successfully!"
                 });
             } else {
                 res.send({
-                    message: `Cannot delete Categorie with id=${id}. Maybe Categorie was not found!`
+                    message: `Cannot delete Stand with id=${id}. Maybe Stand was not found!`
                 });
             }
         })
         .catch(err => {
-            console.log(err);
             res.status(500).send({
-                message: "Could not delete Categorie with id=" + id
+                message: "Could not delete Stand with id=" + id
             });
         });
 }
@@ -130,22 +129,21 @@ export const deleteOne = (req, res) => {
 export const deleteAll = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
-            message: "Vous devez être connecté pour supprimer toutes les catégorie"
+            message: "Vous devez être connecté pour supprimer un stand"
         });
         return;
     }
-    
-    Categorie.destroy({
+    Stand.destroy({
         where: {},
         truncate: false
     })
         .then(nums => {
-            res.send({ message: `${nums} Categories were deleted successfully!` });
+            res.send({ message: `${nums} stands were deleted successfully!` });
         })
         .catch(err => {
             res.status(500).send({
                 message:
-                    err.message || "Some error occurred while removing all categories."
+                    err.message || "Some error occurred while removing all stands."
             });
         });
 }

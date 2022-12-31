@@ -13,9 +13,14 @@
                   label="Nom de la categorie"
                   required
               ></v-text-field>
+              <v-color-picker
+                  v-model="categorie.couleur"
+                  label="Couleur de la catégorie"
+                  required
+              ></v-color-picker>
               <v-card-actions>
                 <v-spacer></v-spacer>
-                <v-btn color="green darken-1" text @click="addArtiste">Ajouter</v-btn>
+                <v-btn color="green darken-1" text @click="addCategorie">Ajouter</v-btn>
               </v-card-actions>
             </v-card-text>
           </v-card>
@@ -31,7 +36,8 @@ export default {
   name: "CategorieAddView",
   data: () => ({
     categorie: {
-      libelle: null
+      libelle: null,
+      couleur: "#000000"
     }
   }),
   methods: {

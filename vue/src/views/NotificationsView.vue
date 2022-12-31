@@ -55,7 +55,7 @@
 import Vue from "vue";
 import { mapState } from "vuex";
 export default {
-  name: "NotificationView",
+  name: "NotificationsView",
   data: () => ({
     search: "",
   }),

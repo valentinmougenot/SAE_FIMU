@@ -15,6 +15,9 @@ export default new Vuex.Store({
     actualites: [],
     typeactu: [],
     notifications: [],
+    stands: [],
+    typestands: [],
+    services: [],
   },
   getters: {
   },
@@ -48,6 +51,15 @@ export default new Vuex.Store({
     },
     updateNotifications(state, notifications) {
         state.notifications = notifications
+    },
+    updateStands(state, stands) {
+        state.stands = stands
+    },
+    updateTypestands(state, typestands) {
+        state.typestands = typestands
+    },
+    updateServices(state, services) {
+        state.services = services
     }
   },
   actions: {
@@ -156,6 +168,38 @@ export default new Vuex.Store({
         await Vue.axios.get("http://localhost:3000/notification")
             .then(response => {
                 commit('updateNotifications', response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    },
+    async getStands({ commit }) {
+        await Vue.axios.get("http://localhost:3000/stand")
+            .then(response => {
+                response.data.forEach(stand => {
+                    stand.tsl = stand.typestand.libelle
+                    stand.tsr = stand.services.map(service => service.libelle).join(', ')
+                });
+                commit('updateStands', response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    },
+    async getTypestands({ commit }) {
+        await Vue.axios.get("http://localhost:3000/typestand")
+            .then(response => {
+                commit('updateTypestands', response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            }
+        );
+    },
+    async getServices({ commit }) {
+        await Vue.axios.get("http://localhost:3000/service")
+            .then(response => {
+                commit('updateServices', response.data)
             })
             .catch(error => {
                 console.log(error)
