@@ -134,7 +134,7 @@ db.artisteNext.belongsToMany(db.pays, { through: db.nationaliteNext, foreignKey:
 db.pays.belongsToMany(db.artisteNext, { through: db.nationaliteNext, foreignKey: 'id_pays'});
 
 db.artisteNext.belongsToMany(db.reseauxSociaux, { through: db.possedeNext, foreignKey: 'id_artiste'});
-db.reseauxSociaux.belongsToMany(db.artisteNext, { through: db.possedeNext, foreignKey: 'id_reseauxSociaux'});
+db.reseauxSociaux.belongsToMany(db.artisteNext, { through: db.possedeNext, foreignKey: 'id_reseaux_sociaux'});
 
 db.artisteNext.belongsTo(db.categorie, {foreignKey: 'id_categorie'});
 db.categorie.hasMany(db.artisteNext, {foreignKey: 'id_categorie'});

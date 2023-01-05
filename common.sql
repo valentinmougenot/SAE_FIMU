@@ -104,8 +104,10 @@ CREATE TABLE IF NOT EXISTS actualites(
 );
 
 INSERT INTO saisons (annee, couleur1, couleur2) VALUES
+(2023, '#34ABE8', '#185BEF'),
 (2022, '#34ABE8', '#185BEF'),
-(2021, '#111111', '#222222');
+(2021, '#111111', '#222222'),
+(2020, '#111111', '#222222');
 
 INSERT INTO pays (libelle) VALUES
 ('France'),

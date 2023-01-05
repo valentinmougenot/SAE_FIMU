@@ -19,6 +19,7 @@ export const create = (req, res) => {
     const concert = {
         id_scene: req.body.id_scene,
         id_artiste: req.body.id_artiste,
+        heure_debut: req.body.heure_debut,
         date_debut: req.body.date_debut,
         duree: req.body.duree,
         nb_personnes: req.body.nb_personnes,

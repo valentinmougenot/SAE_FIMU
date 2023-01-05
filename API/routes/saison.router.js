@@ -1,7 +1,7 @@
 import express from 'express'
 const router = express.Router()
 
-import {create, findAll, findOne, update, deleteOne, deleteAll} from '../controllers/saison.controller.js'
+import {create, findAll, findOne, update, deleteOne, deleteAll, migrateDataToPreviousSeasons, migrateDataToCurrentSeason} from '../controllers/saison.controller.js'
 
 router.post('/', create)
 /**
@@ -143,5 +143,9 @@ router.delete('/', deleteAll)
  *          '400':
  *              description: Bad request
 */
+
+router.post('/migrate-data-previous', migrateDataToPreviousSeasons);
+
+router.post('/migrate-data-current', migrateDataToCurrentSeason);
 
 export default router

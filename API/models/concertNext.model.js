@@ -18,6 +18,10 @@ export const concertNext = (sequelize, Sequelize) => {
                 schema: 'nextseason'
             }
         },
+        heure_debut: {
+            type: Sequelize.STRING,
+            primaryKey: true
+        },
         date_debut: {
             type: Sequelize.STRING,
             primaryKey: true

@@ -68,7 +68,7 @@ INSERT INTO fait (id_artiste, id_genre) VALUES
 (2, 2);
 
 INSERT INTO joue VALUES
-(1, 2022),
-(2, 2022),
-(3, 2021),
-(4, 2021);
+(1, 2021),
+(2, 2021),
+(3, 2020),
+(4, 2020);

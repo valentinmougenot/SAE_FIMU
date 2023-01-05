@@ -23,7 +23,7 @@ export const standNext = (sequelize, Sequelize) => {
         }
     },
     {
-        schema: 'currentseason',
+        schema: 'nextseason',
         timestamps: false,
         freezeTableName: true
     });
