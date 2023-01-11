@@ -8,7 +8,7 @@
               <h1 class="display-1">Ajouter un artiste</h1>
             </v-card-title>
             <v-card-text>
-              <v-form ref="form" v-model="valid" lazy-validation>
+              <v-form ref="form" lazy-validation>
                 <v-text-field
                     v-model="artiste.nom"
                     label="Nom de l'artiste"
@@ -20,8 +20,8 @@
                     required
                 ></v-text-field>
                 <v-select
-                    v-model="id_pays"
-                    :items="pays"
+                    v-model="artiste.nationalite"
+                    :items="paysSelect"
                     label="Origine de l'artiste"
                     multiple
                     chips
@@ -35,19 +35,19 @@
                         v-if="index === 2"
                         class="grey--text text-caption"
                     >
-                (+{{ id_pays.length - 2 }} autre<span v-if="id_pays.length - 2 > 1">s</span>)
+                (+{{ artiste.nationalite.length - 2 }} autre<span v-if="artiste.nationalite.length - 2 > 1">s</span>)
                     </span>
                   </template>
                 </v-select>
                 <v-select
                     v-model="artiste.id_categorie"
-                    :items="categories"
+                    :items="categoriesSelect"
                     label="Catégorie de l'artiste"
                     required
                 ></v-select>
                 <v-select
-                    v-model="id_genres"
-                    :items="genres"
+                    v-model="artiste.fait"
+                    :items="genresSelect"
                     label="Genres de l'artiste"
                     multiple
                     chips
@@ -61,7 +61,7 @@
                         v-if="index === 2"
                         class="grey--text text-caption"
                     >
-                (+{{ id_genres.length - 2 }} autre<span v-if="id_genres.length - 2 > 1">s</span>)
+                (+{{ artiste.fait.length - 2 }} autre<span v-if="artiste.fait.length - 2 > 1">s</span>)
               </span>
                   </template>
                 </v-select>
@@ -82,7 +82,7 @@
                 ></v-text-field>
                 <v-select
                     v-model="id_reseauxsociaux"
-                    :items="reseauxsociaux"
+                    :items="reseauxsociauxSelect"
                     label="Réseaux sociaux de l'artiste"
                     multiple
                     chips
@@ -102,8 +102,8 @@
                 </v-select>
                 <v-text-field
                   v-for="(id, i) in id_reseauxsociaux" :key="i"
-                  v-model="possede.find(p => p.id_reseaux_sociaux === id).lien"
-                  :label="reseauxsociaux.find(x => x.value === id).text"
+                  v-model="artiste.possede.find(p => p.id_reseaux_sociaux === id).lien"
+                  :label="reseauxsociaux.find(r => r.id === id).libelle"
                   ></v-text-field>
                 <v-card-actions>
                   <v-spacer></v-spacer>
@@ -120,6 +120,7 @@
 
 <script>
 import Vue from "vue";
+import {mapState} from "vuex";
 export default {
   name: "ArtisteAddView",
   data: () => ({
@@ -130,155 +131,83 @@ export default {
       lien_video: null,
       lien_site: null,
       id_categorie: null,
+      fait: [],
+      nationalite: [],
+      possede: []
     },
-    categories: [],
-    genres: [],
-    pays: [],
-    reseauxsociaux: [],
-    id_genres: [],
-    id_pays: [],
     id_reseauxsociaux: [],
-    possede: []
   }),
   methods: {
-    async getCategories() {
-      return await Vue.axios.get("http://localhost:3000/categorie")
-          .then(response => {
-            this.categories = response.data.map(categorie => {
-              return {
-                value: categorie.id,
-                text: categorie.libelle,
-              }
-            })
-          })
-          .catch(error => {
-            console.log(error)
-          });
-    },
-    async getGenres() {
-      return await Vue.axios.get("http://localhost:3000/genre")
-          .then(response => {
-            this.genres = response.data.map(genre => {
-              return {
-                value: genre.id,
-                text: genre.libelle,
-              }
-            })
-          })
-          .catch(error => {
-            console.log(error)
-          });
-    },
-    async getPays() {
-      return Vue.axios.get("http://localhost:3000/pays")
-          .then(response => {
-            this.pays = response.data.map(pays => {
-              return {
-                value: pays.id,
-                text: pays.libelle,
-              }
-            })
-          })
-          .catch(error => {
-            console.log(error)
-          });
-    },
-    async getReseauxSociaux() {
-      return Vue.axios.get("http://localhost:3000/reseauxsociaux")
-          .then(response => {
-            this.reseauxsociaux = response.data.map(reseau => {
-              return {
-                value: reseau.id,
-                text: reseau.libelle,
-              }
-            })
-            this.possede = response.data.map(reseau => {
-              return {
-                id_reseaux_sociaux: reseau.id,
-                lien: null
-              }
-            })
-          })
-          .catch(error => {
-            console.log(error)
-          });
-    },
     async addArtiste() {
-      if (this.artiste.lien_video && this.artiste.lien_video.length === 0) {
-        this.artiste.lien_video = null;
+      for (let i = this.artiste.possede.length - 1; i >= 0; i--) {
+        if (!this.id_reseauxsociaux.includes(this.artiste.possede[i].id_reseaux_sociaux)) {
+          this.artiste.possede.splice(i, 1);
+        }
       }
-      if (this.artiste.lien_site && this.artiste.lien_site.length === 0) {
-        this.artiste.lien_site = null;
-      }
-      await Vue.axios.post("http://localhost:3000/artiste", this.artiste)
-          .then(async () => {
-            await Vue.axios.get("http://localhost:3000/artiste/last")
-                .then(response => {
-                  this.id = response.data.id
-                })
-                .catch(error => {
-                  console.log(error)
-                });
-          })
-          .then(async () => {
-            for (const id_pays of this.id_pays) {
-              await Vue.axios.post("http://localhost:3000/nationalite", {
-                id_artiste: this.id,
-                id_pays: id_pays
-              })
-                  .then(response => {
-                    console.log(response)
-                  })
-                  .catch(error => {
-                    console.log(error)
-                  });
-            }
-          })
-          .then(async () => {
-            for (const id_genre of this.id_genres) {
-              await Vue.axios.post("http://localhost:3000/fait", {
-                id_artiste: this.id,
-                id_genre: id_genre
-              })
-                  .then(response => {
-                    console.log(response)
-                  })
-                  .catch(error => {
-                    console.log(error)
-                  });
-            }
-          })
-          .then(async () => {
-            for (const possede of this.possede) {
-              if (this.id_reseauxsociaux.includes(possede.id_reseaux_sociaux)) {
-                await Vue.axios.post("http://localhost:3000/possede", {
-                  idArtiste: this.id,
-                  idReseauxSociaux: possede.id_reseaux_sociaux,
-                  lien: possede.lien
-                })
-                    .then(response => {
-                      console.log(response)
-                    })
-                    .catch(error => {
-                      console.log(error)
-                    });
-              }
-            }
-          })
+      await Vue.axios.post("http://localhost:3000/artiste/all", this.artiste)
           .then(() => {
             this.$store.dispatch('getArtistes');
             this.$router.push('/artiste')
           })
           .catch(error => {
-            console.log(error)
+            alert(error.response.data.message);
           });
     },
   },
-  created() {
-    this.getCategories()
-    this.getGenres()
-    this.getPays()
-    this.getReseauxSociaux()
+  computed: {
+    ...mapState(['categories', 'genres', 'pays', 'reseauxsociaux']),
+    categoriesSelect() {
+      return this.categories.map(categorie => {
+        return {
+          text: categorie.libelle,
+          value: categorie.id
+        }
+      })
+    },
+    genresSelect() {
+      return this.genres.map(genre => {
+        return {
+          text: genre.libelle,
+          value: genre.id
+        }
+      })
+    },
+    paysSelect() {
+      return this.pays.map(pays => {
+        return {
+          text: pays.libelle,
+          value: pays.id
+        }
+      })
+    },
+    reseauxsociauxSelect() {
+      return this.reseauxsociaux.map(rs => {
+        return {
+          text: rs.libelle,
+          value: rs.id
+        }
+      })
+    }
+  },
+  async created() {
+    if (this.categories.length === 0) {
+      await this.$store.dispatch('getCategories');
+    }
+    if (this.genres.length === 0) {
+      await this.$store.dispatch('getGenres');
+    }
+    if (this.pays.length === 0) {
+      await this.$store.dispatch('getPays');
+    }
+    if (this.reseauxsociaux.length === 0) {
+      await this.$store.dispatch('getReseauxsociaux');
+    }
+    this.artiste.possede = this.reseauxsociaux.map(rs => {
+      return {
+        id_reseaux_sociaux: rs.id,
+        lien: null
+      }
+    })
   },
   beforeCreate() {
     if (!this.$session.exists()) {

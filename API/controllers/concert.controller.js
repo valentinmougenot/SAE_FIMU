@@ -9,12 +9,6 @@ export const create = (req, res) => {
         });
         return;
     }
-    if (!req.body.annee) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
 
     const date = new Date(Date.parse(req.body.date_debut));
     const year = date.getFullYear();
@@ -131,6 +125,13 @@ export const deleteOne = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer un concert"
+        });
+        return;
+    }
+
     const id = req.params.id;
 
     Concert.destroy({
@@ -161,6 +162,13 @@ export const deleteAll = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer les concerts"
+        });
+        return;
+    }
+
     Concert.destroy({
         where: {},
         truncate: false

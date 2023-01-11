@@ -96,7 +96,7 @@ export default {
             return response.data
           })
           .catch(error => {
-            console.log(error)
+            alert(error.response.data.message);
           });
     },
     deleteAll() {
@@ -107,7 +107,7 @@ export default {
               return response.data
             })
             .catch(error => {
-              console.log(error)
+              alert(error.response.data.message);
             });
       }
     },

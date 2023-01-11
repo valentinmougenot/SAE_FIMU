@@ -3,15 +3,17 @@ export const faitPrevious = (sequelize, Sequelize) => {
         id_artiste: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            allowNull: false,
             references: {
                 model: 'artiste',
                 key: 'id',
-                schema: 'previousseasons'
+                schema: 'currentseason'
             }
         },
         id_genre: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            allowNull: false,
             references: {
                 model: 'genre',
                 key: 'id'

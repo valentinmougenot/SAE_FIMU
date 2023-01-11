@@ -3,6 +3,7 @@ export const fait = (sequelize, Sequelize) => {
         id_artiste: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            allowNull: false,
             references: {
                 model: 'artiste',
                 key: 'id',
@@ -12,6 +13,7 @@ export const fait = (sequelize, Sequelize) => {
         id_genre: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            allowNull: false,
             references: {
                 model: 'genre',
                 key: 'id'

@@ -3,6 +3,7 @@ export const nationalitePrevious = (sequelize, Sequelize) => {
         id_artiste: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            allowNull: false,
             references: {
                 model: 'artiste',
                 key: 'id',
@@ -12,6 +13,7 @@ export const nationalitePrevious = (sequelize, Sequelize) => {
         id_pays: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            allowNull: false,
             references: {
                 model: 'pays',
                 key: 'id'

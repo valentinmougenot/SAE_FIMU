@@ -71,8 +71,8 @@ export default {
           .then(() => {
             this.$store.dispatch("getServices");
           })
-          .catch((error) => {
-            console.log(error);
+          .catch(error => {
+            alert(error.response.data.message);
           });
     },
     deleteAll() {
@@ -81,8 +81,8 @@ export default {
             .then(() => {
               this.$store.dispatch("getServices");
             })
-            .catch((error) => {
-              console.log(error);
+            .catch(error => {
+              alert(error.response.data.message);
             });
       }
     },
@@ -98,6 +98,11 @@ export default {
   mounted() {
     if (this.services.length === 0) {
       this.$store.dispatch("getServices");
+    }
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
     }
   }
 }

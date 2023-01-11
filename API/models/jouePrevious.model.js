@@ -3,6 +3,7 @@ export const jouePrevious = (sequelize, Sequelize) => {
         id_artiste: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            allowNull: false,
             references: {
                 model: 'artiste',
                 key: 'id'
@@ -11,6 +12,7 @@ export const jouePrevious = (sequelize, Sequelize) => {
         annee: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            allowNull: false,
             references: {
                 model: 'annee',
                 key: 'id'

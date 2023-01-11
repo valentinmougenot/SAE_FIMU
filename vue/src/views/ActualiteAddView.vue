@@ -55,6 +55,9 @@ export default {
           this.$store.dispatch('getActualites');
           this.$router.push('/actualite');
         })
+          .catch(error => {
+            alert(error.response.data.message);
+          });
     }
   },
   computed: {
@@ -73,6 +76,11 @@ export default {
       this.$store.dispatch("getTypeactu");
     }
   },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 

@@ -3,22 +3,28 @@ export const possedeNext = (sequelize, Sequelize) => {
         id_artiste: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            allowNull: false,
             references: {
                 model: 'artiste',
                 key: 'id',
-                schema: 'nextseason'
+                schema: 'currentseason'
             }
         },
         id_reseaux_sociaux: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            allowNull: false,
             references: {
                 model: 'reseauxSociaux',
                 key: 'id'
             }
         },
         lien: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                isUrl: true
+            }
         }
     },
     {

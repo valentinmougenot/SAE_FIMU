@@ -1,39 +1,64 @@
 export const concertNext = (sequelize, Sequelize) => {
     const ConcertNext = sequelize.define("concerts", {
+        id: {
+            type: Sequelize.INTEGER,
+            allowNull: false
+        },
         id_scene: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            allowNull: false,
             references: {
-                model: 'sceneNext',
+                model: 'scene',
                 key: 'id',
-                schema: 'nextseason'
+                schema: 'currentseason'
             }
         },
         id_artiste: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            allowNull: false,
             references: {
                 model: 'artiste',
                 key: 'id',
-                schema: 'nextseason'
+                schema: 'currentseason'
             }
         },
         heure_debut: {
             type: Sequelize.STRING,
-            primaryKey: true
+            primaryKey: true,
+            allowNull: false,
+            validate: {
+                isTime: true
+            }
         },
         date_debut: {
             type: Sequelize.STRING,
-            primaryKey: true
+            primaryKey: true,
+            allowNull: false,
+            validate: {
+                isDate: true
+            }
         },
         duree: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            allowNull: false,
+            validate: {
+                quartHeure: function (value) {
+                    if (value % 15 !== 0) {
+                        throw new Error('Invalid duration');
+                    }
+                }
+            }
         },
         nb_personnes: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            allowNull: true
         },
         annee: {
             type: Sequelize.INTEGER,
+            primaryKey: true,
+            allowNull: false,
             references: {
                 model: 'annee',
                 key: 'annee'

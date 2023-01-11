@@ -49,7 +49,7 @@ export default {
             this.$router.push("/categorie");
           })
           .catch(error => {
-            console.log(error);
+            alert(error.response.data.message);
           });
     }
   },

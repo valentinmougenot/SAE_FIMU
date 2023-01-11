@@ -10,12 +10,6 @@ export const create = (req, res) => {
         return;
     }
     
-    if (!req.body.libelle) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
     const scene = {
         libelle: req.body.libelle,
         jauge: req.body.jauge,
@@ -95,6 +89,12 @@ export const deleteOne = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer une scène"
+        });
+        return;
+    }
     
     const id = req.params.id;
 
@@ -123,6 +123,12 @@ export const deleteAll = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
             message: "Vous devez être connecté pour supprimer toutes les scènes"
+        });
+        return;
+    }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer toutes les scènes"
         });
         return;
     }

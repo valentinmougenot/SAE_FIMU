@@ -9,12 +9,6 @@ export const create = (req, res) => {
         });
         return;
     }
-    if (!req.body.lien) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
 
     const possede = {
         id_artiste: req.body.idArtiste,
@@ -96,6 +90,13 @@ export const update = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer un lien entre un artiste et un réseau social"
+        });
+        return;
+    }
+
     const id = req.params.id;
 
     Possede.destroy({
@@ -120,6 +121,13 @@ export const update = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer tous les liens entre un artiste et un réseau social"
+        });
+        return;
+    }
+    
     Possede.destroy({
         where: {},
         truncate: false

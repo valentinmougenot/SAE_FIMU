@@ -162,6 +162,11 @@ export default {
         this.affectConcerts();
       });
     }
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

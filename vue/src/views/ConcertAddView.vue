@@ -75,9 +75,9 @@ export default {
           this.$store.dispatch("getConcerts");
           this.$router.push("/concert");
         })
-        .catch(error => {
-          console.log(error);
-        });
+          .catch(error => {
+            alert(error.response.data.message);
+          });
     }
   },
   computed: {
@@ -104,6 +104,11 @@ export default {
     }
     if (this.$store.state.artistes.length === 0) {
       this.$store.dispatch("getArtistes");
+    }
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
     }
   }
 }

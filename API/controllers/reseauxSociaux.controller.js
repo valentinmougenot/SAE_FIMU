@@ -10,21 +10,11 @@ export const create = (req, res) => {
         return;
     }
     
-    // Validate request
-    if (!req.body.libelle) {
-        res.status(400).send({
-        message: "Content can not be empty!"
-        });
-        return;
-    }
-    
-    // Create a ReseauxSociaux
     const reseauxSociaux = {
         libelle: req.body.libelle,
         logo: req.body.logo,
     };
     
-    // Save ReseauxSociaux in the database
     ReseauxSociaux.create(reseauxSociaux)
         .then(data => {
         res.send(data);
@@ -102,6 +92,12 @@ export const deleteOne = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer un réseau social"
+        });
+        return;
+    }
     
     const id = req.params.id;
     
@@ -130,6 +126,12 @@ export const deleteAll = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
             message: "Vous devez être connecté pour supprimer tous les réseaux sociaux"
+        });
+        return;
+    }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer tous les réseaux sociaux"
         });
         return;
     }

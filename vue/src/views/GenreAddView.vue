@@ -43,7 +43,7 @@ export default {
             this.$router.push("/genre");
           })
           .catch(error => {
-            console.log(error);
+            alert(error.response.data.message);
           });
     }
   },

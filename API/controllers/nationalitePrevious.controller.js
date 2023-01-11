@@ -9,12 +9,7 @@ export const create = (req, res) => {
         });
         return;
     }
-    if (!req.body.id_artiste) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
+
     const nationalite = {
         id_artiste: req.body.id_artiste,
         id_pays: req.body.id_pays
@@ -99,6 +94,12 @@ export const deleteByIdArtiste = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer une nationalité"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Nationalite.destroy({
@@ -121,6 +122,13 @@ export const deleteAll = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer toutes les nationalités"
+        });
+        return;
+    }
+    
     Nationalite.destroy({
         where: {},
         truncate: false

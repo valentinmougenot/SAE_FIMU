@@ -11,12 +11,6 @@ export const create = (req, res) => {
         return;
     }
     
-    if (!req.body.message) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
     const notification = {
         message: req.body.message,
         heure_envoi: req.body.heure_envoi,
@@ -123,6 +117,12 @@ export const deleteOne = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer une notification"
+        });
+        return;
+    }
     
     const id = req.params.id;
 
@@ -151,6 +151,12 @@ export const deleteAll = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
             message: "Vous devez être connecté pour supprimer toutes les notifications"
+        });
+        return;
+    }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer toutes les notifications"
         });
         return;
     }

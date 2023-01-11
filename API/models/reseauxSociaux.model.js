@@ -6,12 +6,20 @@ export const reseauxSociaux = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         libelle: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                len: [1, 255]
+            }
         },
         logo: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                isUrl: true,
+                len: [1, 255]
+            }
         },
-
     },
     {
         schema: 'common',

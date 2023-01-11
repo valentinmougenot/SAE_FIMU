@@ -101,21 +101,21 @@ export default {
                   id_stand: this.$route.params.id,
                   id_service: id_service,
                 })
-                .catch((error) => {
-                  console.log(error);
-                });
+                    .catch(error => {
+                      alert(error.response.data.message);
+                    });
             })})
               .then(() => {
                 this.$store.dispatch("getStands");
                 this.$router.push("/stand");
               })
-            .catch((error) => {
-              console.log(error);
-            });
+              .catch(error => {
+                alert(error.response.data.message);
+              });
         })
-        .catch((error) => {
-          console.log(error);
-        });
+          .catch(error => {
+            alert(error.response.data.message);
+          });
     }
   },
   computed: {
@@ -145,6 +145,11 @@ export default {
       this.$store.dispatch('getServices');
     }
     this.getStand();
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

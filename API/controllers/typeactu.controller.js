@@ -9,12 +9,7 @@ export const create = (req, res) => {
         });
         return;
     }
-    if (!req.body.libelle) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
+
     const typeactu = {
         libelle: req.body.libelle
     };
@@ -95,6 +90,12 @@ export const deleteOne = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer un type d'actualité"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Typeactu.destroy({
@@ -122,6 +123,12 @@ export const deleteAll = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
             message: "Vous devez être connecté pour supprimer un type d'actualité"
+        });
+        return;
+    }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer un type d'actualité"
         });
         return;
     }

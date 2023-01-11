@@ -74,7 +74,7 @@ export default {
             this.$router.push("/scene")
           })
           .catch(error => {
-            console.log(error)
+            alert(error.response.data.message);
           });
     },
   },

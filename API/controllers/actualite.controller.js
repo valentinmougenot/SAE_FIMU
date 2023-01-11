@@ -10,12 +10,6 @@ export const create = (req, res) => {
         });
         return;
     }
-    if (!req.body.titre) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
     const actualite = {
         titre: req.body.titre,
         contenu: req.body.contenu,
@@ -109,6 +103,13 @@ export const deleteOne = (req, res) => {
         });
         return;
     }
+    if (req.session.role != "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer une actualité"
+        });
+        return;
+    }
+
     const id = req.params.id;
 
     Actualite.destroy({
@@ -139,6 +140,13 @@ export const deleteAll = (req, res) => {
         });
         return;
     }
+    if (req.session.role != "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer les actualités"
+        });
+        return;
+    }
+
     Actualite.destroy({
         where: {},
         truncate: false

@@ -15,7 +15,7 @@
       </v-card>
     </v-row>
     <v-row>
-      <v-btn class="ma-1" @click="updateConcert" color="primary"><v-icon>mdi-pencil</v-icon></v-btn>
+      <v-btn class="ma-1" @click="editConcert" color="primary"><v-icon>mdi-pencil</v-icon></v-btn>
       <v-btn class="ma-1" @click="deleteConcert" color="error"><v-icon>mdi-delete</v-icon></v-btn>
     </v-row>
   </v-container>
@@ -47,10 +47,10 @@ export default {
             this.$router.push("/concert");
           })
           .catch(error => {
-            console.log(error);
+            alert(error.response.data.message);
           });
     },
-    updateConcert() {
+    editConcert() {
       this.$router.push("/concert/" + this.$route.params.id + "/edit");
     }
   },
@@ -58,6 +58,11 @@ export default {
     this.getConcert().then(() => {
       console.log(this.concert)
     })
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

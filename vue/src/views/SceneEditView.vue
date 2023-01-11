@@ -15,7 +15,7 @@
               ></v-text-field>
               <v-select
                   v-model="scene.id_typescene"
-                  :items="typescenes"
+                  :items="typescenesSelect"
                   label="Type de scène"
                   required
               ></v-select>
@@ -49,6 +49,7 @@
 
 <script>
 import Vue from "vue";
+import {mapState} from "vuex";
 export default {
   name: "SceneEditView",
   data() {
@@ -61,7 +62,6 @@ export default {
         longitude: null,
         jauge: null
       },
-      typescenes: [],
     };
   },
   methods: {
@@ -72,16 +72,6 @@ export default {
           this.scene = response.data;
         });
     },
-    async getTypescene() {
-      return Vue.axios.get("http://localhost:3000/typescene").then((response) => {
-        this.typescenes = response.data.map((typescene) => {
-          return {
-            text: typescene.libelle,
-            value: typescene.id,
-          };
-        });
-      });
-    },
     async editScene() {
       if (this.scene.id_typescene === 1) {
         this.scene.jauge = null;
@@ -91,12 +81,28 @@ export default {
           this.$store.dispatch("getScenes");
           this.$store.dispatch("getConcerts");
           this.$router.push("/scene");
-        });
+        })
+          .catch(error => {
+            alert(error.response.data.message);
+          });
+    },
+  },
+  computed: {
+    ...mapState(["typescenes"]),
+    typescenesSelect() {
+      return this.typescenes.map((typescene) => {
+        return {
+          text: typescene.libelle,
+          value: typescene.id,
+        };
+      });
     },
   },
   created() {
     this.getScene();
-    this.getTypescene();
+    if (this.typescenes.length === 0) {
+      this.$store.dispatch("getTypescenes");
+    }
   },
   beforeCreate() {
     if (!this.$session.exists()) {

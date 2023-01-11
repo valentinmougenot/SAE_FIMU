@@ -10,12 +10,6 @@ export const create = (req, res) => {
         return;
     }
     
-    if (!req.body.id_artiste) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
     const fait = {
         id_artiste: req.body.id_artiste,
         id_genre: req.body.id_genre
@@ -101,6 +95,12 @@ export const deleteByIdArtiste = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer un ancien lien entre le prochain artiste et un genre"
+        });
+        return;
+    }
     
     const id = req.params.id;
 
@@ -122,6 +122,12 @@ export const deleteAll = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
             message: "Vous devez être connecté pour supprimmer tous les anciens liens entre le prochain artiste et un genre"
+        });
+        return;
+    }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimmer tous les anciens liens entre le prochain artiste et un genre"
         });
         return;
     }

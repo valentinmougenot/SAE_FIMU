@@ -3,6 +3,7 @@ export const proposeNext = (sequelize, Sequelize) => {
         id_stand: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            allowNull: false,
             references: {
                 model: 'stands',
                 key: 'id'
@@ -11,6 +12,7 @@ export const proposeNext = (sequelize, Sequelize) => {
         id_service: {
             type: Sequelize.INTEGER,
             primaryKey: true,
+            allowNull: false,
             references: {
                 model: 'services',
                 key: 'id'

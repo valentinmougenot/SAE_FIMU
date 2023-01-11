@@ -84,6 +84,9 @@ export default {
         .then(() => {
           this.$store.dispatch("getActualites");
         })
+        .catch(error => {
+          alert(error.response.data.message);
+        });
     },
     deleteAll() {
       if (confirm("Voulez-vous vraiment supprimer toutes les actualités ?")) {
@@ -91,6 +94,9 @@ export default {
             .then(() => {
               this.$store.dispatch("getActualites");
             })
+            .catch(error => {
+              alert(error.response.data.message);
+            });
       }
     }
   },
@@ -118,6 +124,11 @@ export default {
       this.$store.dispatch("getActualites");
     }
   },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
+  }
 }
 </script>
 

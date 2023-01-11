@@ -9,18 +9,13 @@ export const create = (req, res) => {
         });
         return;
     }
-    if (!req.body.nom) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
+
     if (req.body.lien_video) {
-        if (req.body.lien_video.includes("https://www.youtube.com/watch?v=")) {
-            req.body.lien_video = req.body.lien_video.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+        if (req.body.lien_video.includes("youtube.com/watch?v=")) {
+            req.body.lien_video = req.body.lien_video.replace("youtube.com/watch?v=", "youtube.com/embed/");
         }
-        else if (req.body.lien_video.includes("https://youtu.be/")) {
-            req.body.lien_video = req.body.lien_video.replace("https://youtu.be/", "https://www.youtube.com/embed/");
+        else if (req.body.lien_video.includes("youtu.be/")) {
+            req.body.lien_video = req.body.lien_video.replace("youtu.be/", "youtube.com/embed/");
         }
     } 
     const artiste = {
@@ -91,11 +86,11 @@ export const update = (req, res) => {
     const id = req.params.id;
     
     if (req.body.lien_video) {
-        if (req.body.lien_video.includes("https://www.youtube.com/watch?v=")) {
-            req.body.lien_video = req.body.lien_video.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+        if (req.body.lien_video.includes("www.youtube.com/watch?v=")) {
+            req.body.lien_video = req.body.lien_video.replace("www.youtube.com/watch?v=", "www.youtube.com/embed/");
         }
-        else if (req.body.lien_video.includes("https://youtu.be/")) {
-            req.body.lien_video = req.body.lien_video.replace("https://youtu.be/", "https://www.youtube.com/embed/");
+        else if (req.body.lien_video.includes("youtu.be/")) {
+            req.body.lien_video = req.body.lien_video.replace("youtu.be/", "www.youtube.com/embed/");
         }
     } 
 
@@ -127,6 +122,13 @@ export const deleteOne = (req, res) => {
         });
         return;
     }
+    if (req.session.role != 'Administateur') {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer un artiste"
+        });
+        return;
+    }
+
     const id = req.params.id;
 
     Artiste.destroy({
@@ -153,10 +155,17 @@ export const deleteOne = (req, res) => {
 export const deleteAll = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
-            message: "Vous devez être connecté pour supprimer les artiste"
+            message: "Vous devez être connecté pour supprimer les artistes"
         });
         return;
     }
+    if (req.session.role != 'Administateur') {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer les artistes"
+        });
+        return;
+    }
+
     Artiste.destroy({
         where: {},
         truncate: false
@@ -185,3 +194,75 @@ export const findLast = (req, res) => {
         });
 }
 
+export const createAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer un artiste"
+        });
+        return;
+    }
+
+    if (req.body.lien_site && req.body.lien_site.length === 0) {
+        req.body.lien_site = null;
+    }
+    if (req.body.lien_video && req.body.lien_video.length === 0) {
+        req.body.lien_video = null;
+    }
+
+    if (req.body.lien_video) {
+        if (req.body.lien_video.includes("youtube.com/watch?v=")) {
+            req.body.lien_video = req.body.lien_video.replace("youtube.com/watch?v=", "youtube.com/embed/");
+        }
+        else if (req.body.lien_video.includes("youtu.be/")) {
+            req.body.lien_video = req.body.lien_video.replace("youtu.be/", "youtube.com/embed/");
+        }
+    } 
+    const artiste = {
+        nom: req.body.nom,
+        photo: req.body.photo,
+        biographie: req.body.biographie,
+        lien_video: req.body.lien_video,
+        lien_site: req.body.lien_site,
+        id_categorie: req.body.id_categorie
+    };
+
+    let artisteId;
+    Artiste.create(artiste)
+        .then(data => {
+            artisteId = data.id;
+        })
+        .then(() => {
+            for (const id_genre of req.body.fait) {
+                db.fait.create({
+                    id_artiste: artisteId,
+                    id_genre: id_genre
+                })
+            }
+
+            for (const id_pays of req.body.nationalite) {
+                db.nationalite.create({
+                    id_artiste: artisteId,
+                    id_pays: id_pays
+                })
+            }
+
+            for (const possede of req.body.possede) {
+                console.log(possede.id_reseaux_sociaux);
+                db.possede.create({
+                    id_artiste: artisteId,
+                    id_reseaux_sociaux: possede.id_reseaux_sociaux,
+                    lien: possede.lien
+                })
+            }
+        })
+        .then(() => {
+            res.send({ message: "Artiste was created successfully." });
+        })
+        .catch(err => {
+            console.log(err);
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while creating the Artiste."
+            });
+        });
+}

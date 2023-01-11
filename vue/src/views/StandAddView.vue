@@ -96,7 +96,7 @@ export default {
             this.$router.push('/stand');
           })
           .catch(error => {
-            console.log(error);
+            alert(error.response.data.message);
           });
     }
   },
@@ -125,6 +125,11 @@ export default {
     }
     if (this.services.length === 0) {
       this.$store.dispatch('getServices');
+    }
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
     }
   }
 }

@@ -10,12 +10,7 @@ export const create = (req, res) => {
         });
         return;
     }
-    if (!req.body.annee) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
+
     const saison = {
         annee: req.body.annee,
         couleur1: req.body.couleur1,
@@ -97,6 +92,12 @@ export const deleteOne = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer une saison"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Saison.destroy({
@@ -127,6 +128,13 @@ export const deleteAll = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer toutes les saisons"
+        });
+        return;
+    }
+
     Saison.destroy({
         where: {},
         truncate: false
@@ -146,6 +154,12 @@ export const migrateDataToPreviousSeasons = async (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
             message: "Vous devez être connecté pour migrer les données vers la saison précédente"
+        });
+        return;
+    }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour migrer les données vers la saison précédente"
         });
         return;
     }
@@ -226,7 +240,13 @@ export const migrateDataToPreviousSeasons = async (req, res) => {
 export const migrateDataToCurrentSeason = async (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
-            message: "Vous devez être connecté pour migrer les données vers la saison précédente"
+            message: "Vous devez être connecté pour migrer les données vers la saison courrante"
+        });
+        return;
+    }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour migrer les données vers la saison courrante"
         });
         return;
     }
@@ -289,7 +309,7 @@ export const migrateDataToCurrentSeason = async (req, res) => {
         await db.artisteNext.destroy({ where: {} });
 
         const curAnnee = await db.saison.max('annee');
-        await db.saison.create({ annee: curAnnee + 1 });
+        await db.saison.create({ annee: curAnnee + 1, couleur1: "#000000", couleur2: "#000000" });
 
         res.send({ message: "Migration des données vers la saison courante effectuée avec succès" });
     }

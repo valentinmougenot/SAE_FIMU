@@ -6,16 +6,29 @@ export const standNext = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         libelle: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                len: [1, 255]
+            }
         },
         latitude: {
-            type: Sequelize.FLOAT
+            type: Sequelize.FLOAT,
+            allowNull: false,
+            validate: {
+                isNumeric: true
+            }
         },
         longitude: {
-            type: Sequelize.FLOAT
+            type: Sequelize.FLOAT,
+            allowNull: false,
+            validate: {
+                isNumeric: true
+            }
         },
         id_typestand: {
             type: Sequelize.INTEGER,
+            allowNull: false,
             references: {
                 model: 'typestand',
                 key: 'id'

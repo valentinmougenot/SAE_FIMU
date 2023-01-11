@@ -11,20 +11,14 @@ export const create = (req, res) => {
         return;
     }
     
-    if (!req.body.nom) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
     if (req.body.lien_video) {
-        if (req.body.lien_video.includes("https://www.youtube.com/watch?v=")) {
-            req.body.lien_video = req.body.lien_video.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+        if (req.body.lien_video.includes("youtube.com/watch?v=")) {
+            req.body.lien_video = req.body.lien_video.replace("youtube.com/watch?v=", "youtube.com/embed/");
         }
-        else if (req.bodylien_video.includes("https://youtu.be/")) {
-            req.body.lien_video = req.body.lien_video.replace("https://youtu.be/", "https://www.youtube.com/embed/");
+        else if (req.body.lien_video.includes("youtu.be/")) {
+            req.body.lien_video = req.body.lien_video.replace("youtu.be/", "youtube.com/embed/");
         }
-    } 
+    }  
     const artiste = {
         nom: req.body.nom,
         photo: req.body.photo,
@@ -94,11 +88,11 @@ export const update = (req, res) => {
     const id = req.params.id;
     
     if (req.body.lien_video) {
-        if (req.body.lien_video.includes("https://www.youtube.com/watch?v=")) {
-            req.body.lien_video = req.body.lien_video.replace("https://www.youtube.com/watch?v=", "https://www.youtube.com/embed/");
+        if (req.body.lien_video.includes("www.youtube.com/watch?v=")) {
+            req.body.lien_video = req.body.lien_video.replace("www.youtube.com/watch?v=", "www.youtube.com/embed/");
         }
-        else if (req.body.lien_video.includes("https://youtu.be/")) {
-            req.body.lien_video = req.body.lien_video.replace("https://youtu.be/", "https://www.youtube.com/embed/");
+        else if (req.body.lien_video.includes("youtu.be/")) {
+            req.body.lien_video = req.body.lien_video.replace("youtu.be/", "www.youtube.com/embed/");
         }
     } 
 
@@ -130,6 +124,12 @@ export const deleteOne = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer un prochain artiste"
+        });
+        return;
+    }
     
     const id = req.params.id;
 
@@ -158,6 +158,12 @@ export const deleteAll = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
             message: "Vous devez être connecté pour supprimer un prochain artiste"
+        });
+        return;
+    }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer un prochain artiste"
         });
         return;
     }

@@ -183,7 +183,7 @@ export default {
             this.$store.dispatch("getArtistes");
           })
           .catch(error => {
-            console.log(error)
+            alert(error.response.data.message);
           });
     },
     deleteAll() {
@@ -193,12 +193,11 @@ export default {
               this.$store.dispatch("getArtistes");
             })
             .catch(error => {
-              console.log(error)
+              alert(error.response.data.message);
             });
       }
     },
     buttonClick(id, index) {
-      console.log(id, index)
       switch (index) {
         case 0:
           this.$router.push('/artiste/' + id)

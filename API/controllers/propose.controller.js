@@ -9,12 +9,6 @@ export const create = (req, res) => {
         });
         return;
     }
-    if (!req.body.id_stand) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
 
     const propose = {
         id_stand: req.body.id_stand,
@@ -100,6 +94,13 @@ export const deleteOne = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer une proposition"
+        });
+        return;
+    }
+
     const id = req.params.id;
 
     Propose.destroy({
@@ -130,6 +131,13 @@ export const deleteAll = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer une proposition"
+        });
+        return;
+    }
+    
     Propose.destroy({
         where: {},
         truncate: false

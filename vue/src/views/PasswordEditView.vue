@@ -65,9 +65,9 @@ export default {
           .then(() => {
             this.$router.push("/utilisateur");
           })
-          .catch(error => {
-            console.log(error);
-          });
+            .catch(error => {
+              alert(error.response.data.message);
+            });
       } else {
         alert("Les mots de passe ne correspondent pas");
       }

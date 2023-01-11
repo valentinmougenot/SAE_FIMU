@@ -6,23 +6,39 @@ export const sceneNext = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         libelle: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                len: [1, 255]
+            }
         },
         jauge: {
-            type: Sequelize.INTEGER
+            type: Sequelize.INTEGER,
+            allowNull: true,
+            validate: {
+                isInt: true
+            }
         },
         latitude: {
-            type: Sequelize.FLOAT
+            type: Sequelize.FLOAT,
+            allowNull: false,
+            validate: {
+                isNumeric: true
+            }
         },
         longitude: {
-            type: Sequelize.FLOAT
+            type: Sequelize.FLOAT,
+            allowNull: false,
+            validate: {
+                isNumeric: true
+            }
         },
         id_typescene: {
             type: Sequelize.INTEGER,
+            allowNull: false,
             references: {
-                schema: 'common',
                 model: 'typescene',
-                key: 'id',
+                key: 'id'
             }
         }
     },

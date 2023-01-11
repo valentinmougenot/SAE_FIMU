@@ -9,12 +9,7 @@ export const create = (req, res) => {
         });
         return;
     }
-    if (!req.body.id_artiste) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
+
     const joue = {
         id_artiste: req.body.id_artiste,
         id_instrument: req.body.id_instrument
@@ -97,6 +92,12 @@ export const deleteByIdArtiste = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer un lien entre un ancien artiste et une saison"
+        });
+        return;
+    }
     const id = req.params.id;
 
     previousJoue.destroy({
@@ -124,6 +125,12 @@ export const deleteAll = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
             message: "Vous devez être connecté pour supprimer les liens entre un ancien artiste et une saison"
+        });
+        return;
+    }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer les liens entre un ancien artiste et une saison"
         });
         return;
     }

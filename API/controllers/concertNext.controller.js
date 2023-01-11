@@ -10,12 +10,6 @@ export const create = (req, res) => {
         return;
     }
     
-    if (!req.body.annee) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
     const concert = {
         id_scene: req.body.id_scene,
         id_artiste: req.body.id_artiste,
@@ -108,6 +102,12 @@ export const deleteOne = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer un concert"
+        });
+        return;
+    }
     
     const id = req.params.id;
 
@@ -136,6 +136,12 @@ export const deleteAll = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
             message: "Vous devez être connecté pour supprimer tous les concerts"
+        });
+        return;
+    }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer tous les concerts"
         });
         return;
     }

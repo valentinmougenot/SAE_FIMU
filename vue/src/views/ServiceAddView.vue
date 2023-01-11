@@ -44,9 +44,14 @@ export default {
           this.$store.dispatch('getStands');
           this.$router.push('/service');
         })
-        .catch((error) => {
-          console.log(error);
-        });
+          .catch(error => {
+            alert(error.response.data.message);
+          });
+    }
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
     }
   }
 }

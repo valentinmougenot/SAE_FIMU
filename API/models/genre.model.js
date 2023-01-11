@@ -3,10 +3,15 @@ export const genre = (sequelize, Sequelize) => {
         id: {
             type: Sequelize.INTEGER,
             primaryKey: true,
-            autoIncrement: true
+            autoIncrement: true,
+            allowNull: false
         },
         libelle: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                len: [1, 255]
+            }
         }
     },
     {

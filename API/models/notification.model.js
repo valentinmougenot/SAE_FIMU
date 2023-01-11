@@ -6,13 +6,25 @@ export const notification = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         date_envoi: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                isDate: true
+            }
         },
         heure_envoi: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                isTime: true
+            }
         },
         message: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                len: [1, 255]
+            }
         }
     }, 
     {

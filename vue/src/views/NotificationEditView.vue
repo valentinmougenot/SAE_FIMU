@@ -77,13 +77,18 @@ export default {
           this.$store.dispatch("getNotifications");
           this.$router.push("/notification");
         })
-        .catch((error) => {
-          console.log(error);
-        });
+          .catch(error => {
+            alert(error.response.data.message);
+          });
     },
   },
   mounted() {
     this.getNotification();
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
+    }
   }
 }
 </script>

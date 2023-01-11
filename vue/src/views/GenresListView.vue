@@ -65,7 +65,7 @@ export default {
             this.$store.dispatch("getGenres");
           })
           .catch(error => {
-            console.log(error)
+            alert(error.response.data.message);
           });
     },
     async deleteAll() {
@@ -75,7 +75,7 @@ export default {
               this.$store.dispatch("getGenres");
             })
             .catch(error => {
-              console.log(error)
+              alert(error.response.data.message);
             });
       }
     },

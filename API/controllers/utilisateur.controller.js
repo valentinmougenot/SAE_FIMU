@@ -10,12 +10,13 @@ export const create = (req, res) => {
         });
         return;
     }
-    if (!req.body.identifiant) {
-        res.status(400).send({
-            message: "Content can not be empty!"
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour créer un utilisateur"
         });
         return;
     }
+
     const utilisateur = {
         identifiant: req.body.identifiant,
         mot_de_passe: req.body.mot_de_passe,
@@ -36,12 +37,18 @@ export const create = (req, res) => {
 
 export const findAll = (req, res) => {
 
-    // if (!req.session.identifiant) {
-    //     res.status(401).send({
-    //         message: "Vous devez être connecté pour voir les utilisateurs"
-    //     });
-    //     return;
-    // }
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour voir les utilisateurs"
+        });
+        return;
+    }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour voir les utilisateurs"
+        });
+        return;
+    }
 
     Utilisateur.findAll({
         include: [
@@ -60,12 +67,18 @@ export const findAll = (req, res) => {
 }
 
 export const findOne = (req, res) => {
-    // if (!req.session.identifiant) {
-    //     res.status(401).send({
-    //         message: "Vous devez être connecté pour voir un utilisateur"
-    //     });
-    //     return;
-    // }
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour voir un utilisateur"
+        });
+        return;
+    }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour voir un utilisateur"
+        });
+        return;
+    }
 
     const id = req.params.id;
 
@@ -81,12 +94,18 @@ export const findOne = (req, res) => {
 }
 
 export const update = (req, res) => {
-    // if (!req.session.identifiant) {
-    //     res.status(401).send({
-    //         message: "Vous devez être connecté pour modifier un utilisateur"
-    //     });
-    //     return;
-    // }
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour modifier un utilisateur"
+        });
+        return;
+    }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour modifier un utilisateur"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Utilisateur.update(req.body, {
@@ -117,6 +136,12 @@ export const deleteOne = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer un utilisateur"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Utilisateur.destroy({
@@ -144,6 +169,12 @@ export const deleteAll = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
             message: "Vous devez être connecté pour supprimer tous les utilisateurs"
+        });
+        return;
+    }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer tous les utilisateurs"
         });
         return;
     }

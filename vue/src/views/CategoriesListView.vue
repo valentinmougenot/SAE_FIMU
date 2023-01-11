@@ -62,7 +62,7 @@ export default {
             this.$store.dispatch("getCategories");
           })
           .catch(error => {
-            console.log(error)
+            alert(error.response.data.message);
           });
     },
     async deleteAll() {
@@ -72,7 +72,7 @@ export default {
               this.$store.dispatch("getCategories");
             })
             .catch(error => {
-              console.log(error)
+              alert(error.response.data.message);
             });
       }
     },

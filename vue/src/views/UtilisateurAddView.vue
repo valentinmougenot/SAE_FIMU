@@ -80,9 +80,13 @@ export default {
     addUtilisateur() {
       if (this.utilisateur.mot_de_passe === this.confirm_password) {
         this.utilisateur.mot_de_passe = bcrypt.hashSync(this.utilisateur.mot_de_passe, 10);
-        Vue.axios.post("http://localhost:3000/utilisateur", this.utilisateur).then(() => {
-          this.$router.push("/utilisateur");
-        });
+        Vue.axios.post("http://localhost:3000/utilisateur", this.utilisateur)
+            .then(() => {
+              this.$router.push("/utilisateur");
+            })
+            .catch(error => {
+              alert(error.response.data.message);
+            });
       } else {
         alert("Les mots de passe ne correspondent pas");
       }

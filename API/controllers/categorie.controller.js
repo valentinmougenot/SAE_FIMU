@@ -10,13 +10,7 @@ export const create = (req, res) => {
         return;
     }
     
-    
-    if (!req.body.libelle) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
+
     const categorie = {
         libelle: req.body.libelle,
         couleur: req.body.couleur
@@ -101,9 +95,14 @@ export const deleteOne = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer une catégorie"
+        });
+        return;
+    }
     
     const id = req.params.id;
-    console.log(id);
 
     Categorie.destroy({
         where: { id: id }
@@ -131,6 +130,12 @@ export const deleteAll = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({
             message: "Vous devez être connecté pour supprimer toutes les catégorie"
+        });
+        return;
+    }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer toutes les catégorie"
         });
         return;
     }

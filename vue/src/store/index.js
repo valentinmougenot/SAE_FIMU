@@ -18,6 +18,7 @@ export default new Vuex.Store({
     stands: [],
     typestands: [],
     services: [],
+    reseauxsociaux: []
   },
   getters: {
   },
@@ -60,6 +61,9 @@ export default new Vuex.Store({
     },
     updateServices(state, services) {
         state.services = services
+    },
+    updateReseauxsociaux(state, reseauxsociaux) {
+        state.reseauxsociaux = reseauxsociaux
     }
   },
   actions: {
@@ -200,6 +204,15 @@ export default new Vuex.Store({
         await Vue.axios.get("http://localhost:3000/service")
             .then(response => {
                 commit('updateServices', response.data)
+            })
+            .catch(error => {
+                console.log(error)
+            });
+    },
+    async getReseauxsociaux({ commit }) {
+        await Vue.axios.get("http://localhost:3000/reseauxsociaux")
+            .then(response => {
+                commit('updateReseauxsociaux', response.data)
             })
             .catch(error => {
                 console.log(error)

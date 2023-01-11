@@ -6,10 +6,20 @@ export const saison = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         couleur1: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                len: [7, 7],
+                isHexColor: true
+            }
         },
         couleur2: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                len: [7, 7],
+                isHexColor: true
+            }
         }
     },
     {

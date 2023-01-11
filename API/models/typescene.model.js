@@ -6,7 +6,11 @@ export const typescene = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         libelle: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                len: [1, 255]
+            }
         }
     },
     {

@@ -9,12 +9,7 @@ export const create = (req, res) => {
         });
         return;
     }
-    if (!req.body.libelle) {
-        res.status(400).send({
-            message: "Content can not be empty!"
-        });
-        return;
-    }
+
     const pays = {
         libelle: req.body.libelle
     };
@@ -95,6 +90,12 @@ export const deleteOne = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer un pays"
+        });
+        return;
+    }
     const id = req.params.id;
 
     Pays.destroy({
@@ -125,6 +126,13 @@ export const deleteAll = (req, res) => {
         });
         return;
     }
+    if (req.session.role !== "Administrateur") {
+        res.status(401).send({
+            message: "Vous devez être administrateur pour supprimer tous les pays"
+        });
+        return;
+    }
+    
     Pays.destroy({
         where: {},
         truncate: false

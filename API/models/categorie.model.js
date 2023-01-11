@@ -6,10 +6,19 @@ export const categorie = (sequelize, Sequelize) => {
             autoIncrement: true
         },
         libelle: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                len: [1, 255]
+            }
         },
         couleur: {
-            type: Sequelize.STRING
+            type: Sequelize.STRING,
+            allowNull: false,
+            validate: {
+                len: [7, 7],
+                isHexColor: true
+            }
         }
     }, 
     {

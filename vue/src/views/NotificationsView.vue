@@ -64,6 +64,9 @@ export default {
       Vue.axios.delete("http://localhost:3000/notification/" + id)
           .then(() => {
             this.$store.dispatch("getNotifications");
+          })
+          .catch(error => {
+            alert(error.response.data.message);
           });
     },
     deleteAll() {
@@ -72,6 +75,9 @@ export default {
             .then(() => {
               this.$store.dispatch("getNotifications");
             })
+            .catch(error => {
+              alert(error.response.data.message);
+            });
       }
     }
   },
@@ -86,6 +92,11 @@ export default {
   mounted() {
     if (this.$store.state.notifications.length === 0) {
       this.$store.dispatch("getNotifications");
+    }
+  },
+  beforeCreate() {
+    if (!this.$session.exists()) {
+      this.$router.push('/login')
     }
   }
 }
