@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { create, findAll, findOne, update, deleteByIdArtiste, deleteAll } from '../controllers/nationaliteNext.controller.js';
+import { create, findAll, deleteByIdArtiste, deleteAll } from '../controllers/nationaliteNext.controller.js';
 
 router.post('/', create);
 /**
@@ -10,8 +10,7 @@ router.post('/', create);
  *   post:
  *      description: Crée un lien entre un artiste et une nationalité
  *      tags:
- *          - nationalite
- *          - next
+ *          - nationaliteNext
  *      parameters:
  *          - in: body
  *            name: id_pays
@@ -46,8 +45,7 @@ router.get('/', findAll);
  *   get:
  *      description: Récupère tous les liens entre artistes et nationalités
  *      tags:
- *          - nationalite
- *          - next
+ *          - nationaliteNext
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -64,8 +62,7 @@ router.delete('/artiste/:id', deleteByIdArtiste);
  *   delete:
  *      description: suppression d'une relation en fonction de l'id de l'artiste
  *      tags:
- *          - nationalite
- *          - next
+ *          - nationaliteNext
  *      parameters:
  *          - in: path
  *            name: id
@@ -87,8 +84,7 @@ router.delete('/', deleteAll);
  *   delete:
  *      description: supprime toutes les relations entre artistes et nationalités
  *      tags:
- *          - nationalite
- *          - next
+ *          - nationaliteNext
  *      responses:
  *          '200':
  *              description: Resource updated successfully

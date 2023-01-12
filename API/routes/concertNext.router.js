@@ -58,7 +58,7 @@ router.get('/', findAll);
  *   get:
  *      description: Trouver les prochains concerts pour le nom donné
  *      tags:
- *          - concertsNext
+ *          - concertNext
  *      parameters:
  *          - in: query
  *            name: nom
@@ -102,7 +102,7 @@ router.put('/:id', update);
  *   put:
  *      description: Updater le prochain concert pour l'id donné
  *      tags:
- *          - concertsNext
+ *          - concertNext
  *      parameters:
  *          - in: path
  *            name: id
@@ -124,7 +124,7 @@ router.delete('/:id', deleteOne);
  *   delete:
  *      description: Supprimer le prochain concert pour l'id donné
  *      tags:
- *          - Concerts
+ *          - concertNext
  *      parameters:
  *          - in: path
  *            name: id
@@ -146,7 +146,7 @@ router.delete('/', deleteAll);
  *   delete:
  *      description: Supprimer tous les prochains concerts
  *      tags:
- *          - Concerts
+ *          - concertNext
  *      responses:
  *          '200':
  *              description: Resource updated successfully

@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { create, findAll, findOne, update, deleteByIdArtiste, deleteAll } from '../controllers/jouePrevious.controller.js';
+import { create, findAll, deleteByIdArtiste, deleteAll } from '../controllers/jouePrevious.controller.js';
 
 router.post('/', create);
 /**

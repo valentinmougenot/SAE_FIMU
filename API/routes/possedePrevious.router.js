@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { create, findAll, findOne, update, deleteByIdArtiste, deleteAll } from '../controllers/possedeNext.controller.js';
+import { create, findAll, deleteByIdArtiste, deleteAll } from '../controllers/possedePrevious.controller.js';
 
 router.post('/', create);
 /**
@@ -34,21 +34,14 @@ router.post('/', create);
  *          '400':
  *              description: Bad request
 */
-
-router.put('/:id', update);
+router.get('/', findAll);
 /**
  * @swagger
- * /previous/possede/{id}:
- *   put:
- *      description: update d'une relation en fonction de son ID 
+ * /previous/possede:
+ *   get:
+ *      description: affichage de toutes les relations artiste - réseau social
  *      tags:
  *          - possedePrevious
- *      parameters:
- *          - in: path
- *            name: id
- *            description: id de la relation artiste - réseau social
- *            required: true
- *            type: integer
  *      responses:
  *          '200':
  *              description: Resource updated successfully

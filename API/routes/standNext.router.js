@@ -10,7 +10,7 @@ router.post('/', create);
  *   post:
  *      description: Ajout d'un stand
  *      tags:
- *          - stand
+ *          - standNext
  *      parameters:
  *          - in: body
  *            name: stand
@@ -52,7 +52,7 @@ router.get('/', findAll);
  *   get:
  *      description: afficher tous les stands 
  *      tags:
- *          - stand
+ *          - standNext
  *      parameters:
  *          - in: query
  *            name: libelle
@@ -74,7 +74,7 @@ router.get('/:id', findOne);
  *   get:
  *      description: afficher un stand en fonction de l'id
  *      tags:
- *          - stand
+ *          - standNext
  *      parameters:
  *          - in: path
  *            name: id
@@ -96,7 +96,7 @@ router.put('/:id', update);
  *   put:
  *      description: modifier un stand
  *      tags:
- *          - stand
+ *          - standNext
  *      parameters:
  *          - in: path
  *            name: id
@@ -118,7 +118,7 @@ router.delete('/:id', deleteOne);
  *   delete:
  *      description: supprimer un stand
  *      tags:
- *          - stand
+ *          - standNext
  *      parameters:
  *          - in: path
  *            name: id
@@ -140,7 +140,7 @@ router.delete('/', deleteAll);
  *   delete:
  *      description: supprimer tous les stands
  *      tags:
- *          - stand        
+ *          - standNext
  *      responses:
  *          '200':
  *              description: Resource updated successfully

@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { create, findAll, findOne, update, deleteByIdArtiste, deleteAll } from '../controllers/faitNext.controller.js';
+import { create, findAll, deleteByIdArtiste, deleteAll } from '../controllers/faitNext.controller.js';
 
 router.post('/', create);
 /**
@@ -10,8 +10,7 @@ router.post('/', create);
  *   post:
  *      description: Crée un lien entre genre et artiste
  *      tags:
- *          - next
- *          - fait
+ *          - faitNext
  *      parameters:
  *          - in: body
  *            name: genre
@@ -42,8 +41,7 @@ router.get('/', findAll);
  *   get:
  *      description: affichage de toutes les relations genre/artiste
  *      tags:
- *          - fait
- *          - next
+ *          - faitNext
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -56,12 +54,11 @@ router.get('/', findAll);
 router.delete('/artiste/:id', deleteByIdArtiste);
 /**
  * @swagger
- * /faitNext/artiste/{id}:
+ * /next/fait/artiste/{id}:
  *   delete:
  *      description: suppression d'une relation en fonction de l'id de l'artiste
  *      tags:
- *          - fait
- *          - next
+ *          - faitNext
  *      parameters:
  *          - in: path
  *            name: id
@@ -83,8 +80,7 @@ router.delete('/', deleteAll);
  *   delete:
  *      description: supprime toutes les relations
  *      tags:
- *          - next
- *          - fait
+ *          - faitNext
  *      responses:
  *          '200':
  *              description: Resource updated successfully

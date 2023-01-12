@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { create, findAll, findOne, update, deleteByIdArtiste, deleteAll } from '../controllers/possedeNext.controller.js';
+import { create, findAll, deleteByIdArtiste, deleteAll } from '../controllers/possedeNext.controller.js';
 
 router.post('/', create);
 /**
@@ -10,8 +10,7 @@ router.post('/', create);
  *   post:
  *      description: Crée un lien entre artiste et un réseau social 
  *      tags:
- *          - next
- *          - possede
+ *          - possedeNext
  *      parameters:
  *          - in: body
  *            name: reseau_social
@@ -42,8 +41,7 @@ router.get('/', findAll);
  *   get:
  *      description: affichage de toutes les relations artiste - réseau social
  *      tags:
- *          - possede
- *          - next
+ *          - possedeNext
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -60,8 +58,7 @@ router.delete('/artiste/:id', deleteByIdArtiste);
  *   delete:
  *      description: suppression d'une relation en fonction de l'id de l'artiste
  *      tags:
- *          - possede
- *          - next
+ *          - possedeNext
  *      parameters:
  *          - in: path
  *            name: id
@@ -83,8 +80,7 @@ router.delete('/', deleteAll);
  *   delete:
  *      description: supprime toutes les relations
  *      tags:
- *          - possede
- *          - next
+ *          - possedeNext
  *      responses:
  *          '200':
  *              description: Resource updated successfully

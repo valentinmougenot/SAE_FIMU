@@ -1,4 +1,3 @@
-import { concert } from '../models/concert.model.js';
 import {db} from '../models/index.js';
 const Saison = db.saison;
 const Op = db.Sequelize.Op;

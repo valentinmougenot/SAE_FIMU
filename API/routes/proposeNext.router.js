@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { create, findAll, findOne, update, deleteOne, deleteAll, deleteByIdStand } from '../controllers/proposeNext.controller.js';
+import { create, findAll, deleteAll, deleteByIdStand } from '../controllers/proposeNext.controller.js';
 
 router.post('/', create);
 /**
@@ -10,7 +10,7 @@ router.post('/', create);
  *   post:
  *      description: Crée un lien entre un stand et un service 
  *      tags:
- *          - propose
+ *          - proposeNext
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -27,7 +27,7 @@ router.get('/', findAll);
  *   get:
  *      description: Affichage de toutes les relations stand - service
  *      tags:
- *          - propose
+ *          - proposeNext
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -44,7 +44,7 @@ router.delete('/', deleteAll);
  *   delete:
  *      description: supprime toutes les relations
  *      tags:
- *          - propose
+ *          - proposeNext
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -61,7 +61,7 @@ router.delete('/bystand/:id_stand', deleteByIdStand);
  *   delete:
  *      description: suppression d'une relation en fonction de l'id du stand
  *      tags:
- *          - propose
+ *          - proposeNext
  *      parameters:
  *          - in: path
  *            name: id

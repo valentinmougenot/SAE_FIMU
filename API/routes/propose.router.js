@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router();
 
-import { create, findAll, findOne, update, deleteOne, deleteAll, deleteByIdStand } from '../controllers/propose.controller.js';
+import { create, findAll, deleteAll, deleteByIdStand } from '../controllers/propose.controller.js';
 
 router.post('/', create);
 /**
