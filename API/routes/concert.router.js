@@ -75,6 +75,21 @@ router.get('/', findAll)
 */
 
 router.get('/date', getDates);
+/**
+ * @swagger
+ * /concert/date:
+ *   get:
+ *      description: Trouver toutes les dates des concerts
+ *      tags:
+ *          - Concerts
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+*/
 
 router.get('/:id', findOne)
 /**

@@ -43,50 +43,6 @@ export const findAll = (req, res) => {
         });
 }
 
-export const findOne = (req, res) => {
-    const id = req.params.id;
-
-    Nationalite.findByPk(id)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Nationalite with id=" + id
-            });
-        });
-}
-
-export const update = (req, res) => {
-    if (!req.session.identifiant) {
-        res.status(401).send({
-            message: "Vous devez être connecté pour modifier une nationalité"
-        });
-        return;
-    }
-    const id = req.params.id;
-
-    Nationalite.update(req.body, {
-        where: { id: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Nationalite was updated successfully."
-                });
-            } else {
-                res.send({
-                    message: `Cannot update Nationalite with id=${id}. Maybe Nationalite was not found or req.body is empty!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error updating Nationalite with id=" + id
-            });
-        });
-}
-
 export const deleteByIdArtiste = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({

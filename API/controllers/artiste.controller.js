@@ -181,19 +181,6 @@ export const deleteAll = (req, res) => {
         });
 };
 
-export const findLast = (req, res) => {
-    Artiste.findAll({limit: 1, order: [['id', 'DESC']]})
-        .then(data => {
-            res.send(data[0]);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message:
-                    err.message || "Some error occurred while retrieving artistes."
-            });
-        });
-}
-
 export const createAll = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({

@@ -6,25 +6,25 @@ import {create, findAll, findOne, update, deleteOne, deleteAll} from '../control
 router.post('/', create);
 /**
  * @swagger
- * /roles:
+ * /role:
  *   post:
  *      description: Crée un rôle
  *      tags:
  *          - roles
  *      parameters:
  *          - in: body
- *            name: reseau_social
- *            description: Le lien du réseau social à lier à l'artiste (JOBST)
+ *            name: role
+ *            description: Le rôle à créer
  *            schema:
  *              type: object
  *              required:
- *                - reseau_social
+ *                - libelle
  *              properties:
- *                genre:
+ *                libelle:
  *                  type: string
  *                  minLength: 1
  *                  maxLength: 5000
- *                  example: https://www.facebook.com/JobstOfficial
+ *                  example: "Administrateur"
  * 
  *      responses:
  *          '200':
@@ -34,11 +34,102 @@ router.post('/', create);
  *          '400':
  *              description: Bad request
 */
-
 router.get('/', findAll);
+/**
+ * @swagger
+ * /role:
+ *   get:
+ *      description: Trouve tous les rôles
+ *      tags:
+ *          - roles
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+*/
 router.get('/:id', findOne);
+/**
+ * @swagger
+ * /role/{id}:
+ *   get:
+ *      description: Récupère le role d'id donné
+ *      tags:
+ *          - roles
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            description: id du rôle
+ *            required: true
+ *            type: integer
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+*/
 router.put('/:id', update);
+/**
+ * @swagger
+ * /role/{id}:
+ *   put:
+ *      description: Update le role d'id donné
+ *      tags:
+ *          - roles
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            description: id du rôle
+ *            required: true
+ *            type: integer
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+*/
 router.delete('/:id', deleteOne);
+/**
+ * @swagger
+ * /role/{id}:
+ *   put:
+ *      description: Supprime le role d'id donné
+ *      tags:
+ *          - roles
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            description: id du rôle
+ *            required: true
+ *            type: integer
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+*/
 router.delete('/', deleteAll);
-
+/**
+ * @swagger
+ * /role:
+ *   delete:
+ *      description: Supprime tous les rôles
+ *      tags:
+ *          - roles
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+*/
 export default router;

@@ -4,17 +4,77 @@ const router = express.Router();
 import { create, findAll, findOne, update, deleteOne, deleteAll, deleteByIdStand } from '../controllers/proposeNext.controller.js';
 
 router.post('/', create);
+/**
+ * @swagger
+ * /next/propose:
+ *   post:
+ *      description: Crée un lien entre un stand et un service 
+ *      tags:
+ *          - propose
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+*/
 
 router.get('/', findAll);
-
-router.get('/:id', findOne);
-
-router.put('/:id', update);
-
-router.delete('/:id', deleteOne);
+/**
+ * @swagger
+ * /next/propose:
+ *   get:
+ *      description: Affichage de toutes les relations stand - service
+ *      tags:
+ *          - propose
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+*/
 
 router.delete('/', deleteAll);
+/**
+ * @swagger
+ * /next/propose:
+ *   delete:
+ *      description: supprime toutes les relations
+ *      tags:
+ *          - propose
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+*/
 
 router.delete('/bystand/:id_stand', deleteByIdStand);
+/**
+ * @swagger
+ * /next/propose/stand/{id}:
+ *   delete:
+ *      description: suppression d'une relation en fonction de l'id du stand
+ *      tags:
+ *          - propose
+ *      parameters:
+ *          - in: path
+ *            name: id
+ *            description: id du stand dont on veut supprimer les relations
+ *            required: true
+ *            type: integer
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+*/
 
 export default router;

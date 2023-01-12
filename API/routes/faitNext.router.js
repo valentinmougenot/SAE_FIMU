@@ -52,52 +52,7 @@ router.get('/', findAll);
  *          '400':
  *              description: Bad request
 */
-router.get('/:id', findOne);
-/**
- * @swagger
- * /next/fait/{id}:
- *   get:
- *      description: affichage d'une relation genre/artiste par son id
- *      tags:
- *          - fait
- *          - next
- *      parameters:
- *          - in: path
- *            name: id
- *            description: id de la relation genre/artiste
- *            required: false
- *            type: integer
- *      responses:
- *          '200':
- *              description: Resource updated successfully
- *          '500':
- *              description: Internal server error
- *          '400':
- *              description: Bad request
-*/
-router.put('/:id', update);
-/**
- * @swagger
- * /next/fait/{id}:
- *   put:
- *      description: update d'une relation en fonction de son ID 
- *      tags:
- *          - next
- *          - fait
- *      parameters:
- *          - in: path
- *            name: id
- *            description: id de la relation genre/artiste
- *            required: true
- *            type: integer
- *      responses:
- *          '200':
- *              description: Resource updated successfully
- *          '500':
- *              description: Internal server error
- *          '400':
- *              description: Bad request
-*/
+
 router.delete('/artiste/:id', deleteByIdArtiste);
 /**
  * @swagger

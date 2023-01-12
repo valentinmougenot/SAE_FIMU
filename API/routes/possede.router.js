@@ -50,50 +50,7 @@ router.get('/', findAll);
  *          '400':
  *              description: Bad request
 */
-router.get('/:id', findOne);
-/**
- * @swagger
- * /possede/{id}:
- *   get:
- *      description: affichage d'une relation artiste - réseau social par son id
- *      tags:
- *          - possede
- *      parameters:
- *          - in: path
- *            name: id
- *            description: id de la relation artiste - réseau social
- *            required: false
- *            type: integer
- *      responses:
- *          '200':
- *              description: Resource updated successfully
- *          '500':
- *              description: Internal server error
- *          '400':
- *              description: Bad request
-*/
-router.put('/:id', update);
-/**
- * @swagger
- * /possede/{id}:
- *   put:
- *      description: update d'une relation en fonction de son ID 
- *      tags:
- *          - possede
- *      parameters:
- *          - in: path
- *            name: id
- *            description: id de la relation artiste - réseau social
- *            required: true
- *            type: integer
- *      responses:
- *          '200':
- *              description: Resource updated successfully
- *          '500':
- *              description: Internal server error
- *          '400':
- *              description: Bad request
-*/
+
 router.delete('/artiste/:id', deleteByIdArtiste);
 /**
  * @swagger

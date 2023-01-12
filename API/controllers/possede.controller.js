@@ -39,51 +39,6 @@ export const findAll = (req, res) => {
         })
 }
 
-export const findOne = (req, res) => {
-    const id = req.params.id;
-
-    Possede.findByPk(id)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Possede with id=" + id
-            });
-        })
-}
-
-export const update = (req, res) => {
-    if (!req.session.identifiant) {
-        res.status(401).send({
-            message: "Vous devez être connecté pour modifier un lien entre un réseau social et un artiste"
-        });
-        return;
-    }
-    
-    const id = req.params.id;
-
-    Possede.update(req.body, {
-        where: { id: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Possede was updated successfully."
-                });
-            } else {
-                res.send({
-                    message: `Cannot update Possede with id=${id}. Maybe Possede was not found or req.body is empty!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error updating Possede with id=" + id
-            });
-        })
-}
-
  export const deleteByIdArtiste = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({

@@ -145,7 +145,37 @@ router.delete('/', deleteAll)
 */
 
 router.post('/migrate-data-previous', migrateDataToPreviousSeasons);
+/**
+ * @swagger
+ * /saison/migrate-data-previous:
+ *   post:
+ *      description: migration des données de la saison courante vers les saisons précédentes
+ *      tags:
+ *          - saison
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+*/
 
 router.post('/migrate-data-current', migrateDataToCurrentSeason);
+/**
+ * @swagger
+ * /saison/migrate-data-current:
+ *   post:
+ *      description: migration des données de la saison prochaine vers la saison courante
+ *      tags:
+ *          - saison
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+*/
 
 export default router

@@ -34,44 +34,7 @@ router.post('/', create);
  *          '400':
  *              description: Bad request
 */
-router.get('/', findAll);
-/**
- * @swagger
- * /previous/possede:
- *   get:
- *      description: affichage de toutes les relations artiste - réseau social
- *      tags:
- *          - possedePrevious
- *      responses:
- *          '200':
- *              description: Resource updated successfully
- *          '500':
- *              description: Internal server error
- *          '400':
- *              description: Bad request
-*/
-router.get('/:id', findOne);
-/**
- * @swagger
- * /previous/possede/{id}:
- *   get:
- *      description: affichage d'une relation artiste - réseau social par son id
- *      tags:
- *          - possedePrevious
- *      parameters:
- *          - in: path
- *            name: id
- *            description: id de la relation artiste - réseau social
- *            required: false
- *            type: integer
- *      responses:
- *          '200':
- *              description: Resource updated successfully
- *          '500':
- *              description: Internal server error
- *          '400':
- *              description: Bad request
-*/
+
 router.put('/:id', update);
 /**
  * @swagger

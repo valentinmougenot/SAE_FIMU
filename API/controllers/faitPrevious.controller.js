@@ -43,51 +43,6 @@ export const findAll = (req, res) => {
         });
 }
 
-export const findOne = (req, res) => {
-    const id = req.params.id;
-
-    previousFait.findByPk(id)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving previous fait with id=" + id
-            });
-        });
-}
-
-export const update = (req, res) => {
-    if (!req.session.identifiant) {
-        res.status(401).send({
-            message: "Vous devez être connecté pour modifier un ancien lien entre le prochain artiste et un genre"
-        });
-        return;
-    }
-    
-    const id = req.params.id;
-
-    previousFait.update(req.body, {
-        where: { id: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "previous fait was updated successfully."
-                });
-            } else {
-                res.send({
-                    message: `Cannot update previous Fait with id=${id}. Maybe previous fait was not found or req.body is empty!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error updating previous fait with id=" + id
-            });
-        });
-}
-
 export const deleteByIdArtiste = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({

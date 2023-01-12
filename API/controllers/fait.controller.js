@@ -43,50 +43,6 @@ export const findAll = (req, res) => {
         });
 }
 
-export const findOne = (req, res) => {
-    const id = req.params.id;
-
-    Fait.findByPk(id)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Fait with id=" + id
-            });
-        });
-}
-
-export const update = (req, res) => {
-    if (!req.session.identifiant) {
-        res.status(401).send({
-            message: "Vous devez être connecté pour modifier un lien entre genre et artiste"
-        });
-        return;
-    }
-    const id = req.params.id;
-
-    Fait.update(req.body, {
-        where: { id: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Fait was updated successfully."
-                });
-            } else {
-                res.send({
-                    message: `Cannot update Fait with id=${id}. Maybe Fait was not found or req.body is empty!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error updating Fait with id=" + id
-            });
-        });
-}
-
 export const deleteByIdArtiste = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({

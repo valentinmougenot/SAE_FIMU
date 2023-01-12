@@ -43,50 +43,6 @@ export const findAll = (req, res) => {
         });
 }
 
-export const findOne = (req, res) => {
-    const id = req.params.id;
-
-    Propose.findByPk(id)
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Propose with id=" + id
-            });
-        });
-}
-
-export const update = (req, res) => {
-    if (!req.session.identifiant) {
-        res.status(401).send({
-            message: "Vous devez être connecté pour modifier une proposition"
-        });
-        return;
-    }
-    const id = req.params.id;
-
-    Propose.update(req.body, {
-        where: { id: id }
-    })
-        .then(num => {
-            if (num == 1) {
-                res.send({
-                    message: "Propose was updated successfully."
-                });
-            } else {
-                res.send({
-                    message: `Cannot update Propose with id=${id}. Maybe Propose was not found or req.body is empty!`
-                });
-            }
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error updating Propose with id=" + id
-            });
-        });
-}
-
 export const deleteOne = (req, res) => {
     if (!req.session.identifiant) {
         res.status(401).send({

@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router()
 
-import { create, findAll, findOne, update, deleteByIdArtiste, deleteAll } from '../controllers/fait.controller.js'
+import { create, findAll, findOne, deleteByIdArtiste, deleteAll } from '../controllers/fait.controller.js'
 
 router.post('/', create);
 /**
@@ -50,50 +50,7 @@ router.get('/', findAll);
  *          '400':
  *              description: Bad request
 */
-router.get('/:id', findOne);
-/**
- * @swagger
- * /fait/{id}:
- *   get:
- *      description: affichage d'une relation genre/artiste par son id
- *      tags:
- *          - fait
- *      parameters:
- *          - in: path
- *            name: id
- *            description: id de la relation genre/artiste
- *            required: false
- *            type: integer
- *      responses:
- *          '200':
- *              description: Resource updated successfully
- *          '500':
- *              description: Internal server error
- *          '400':
- *              description: Bad request
-*/
-router.put('/:id', update);
-/**
- * @swagger
- * /fait/{id}:
- *   put:
- *      description: update d'une relation en fonction de son ID 
- *      tags:
- *          - fait
- *      parameters:
- *          - in: path
- *            name: id
- *            description: id de la relation genre/artiste
- *            required: true
- *            type: integer
- *      responses:
- *          '200':
- *              description: Resource updated successfully
- *          '500':
- *              description: Internal server error
- *          '400':
- *              description: Bad request
-*/
+
 router.delete('/artiste/:id', deleteByIdArtiste);
 /**
  * @swagger

@@ -56,52 +56,7 @@ router.get('/', findAll);
  *          '400':
  *              description: Bad request
 */
-router.get('/:id', findOne);
-/**
- * @swagger
- * /next/nationalite/{id}:
- *   get:
- *      description: affichage d'une relation entre un artiste et une nationalité
- *      tags:
- *          - nationalite
- *          - next
- *      parameters:
- *          - in: path
- *            name: id
- *            description: id de la relation nationalité/artiste
- *            required: false
- *            type: integer
- *      responses:
- *          '200':
- *              description: Resource updated successfully
- *          '500':
- *              description: Internal server error
- *          '400':
- *              description: Bad request
-*/
-router.put('/:id', update);
-/**
- * @swagger
- * /next/nationalite/{id}:
- *   put:
- *      description: update d'une relation entre un artiste et une nationalité
- *      tags:
- *          - nationalite
- *          - next
- *      parameters:
- *          - in: path
- *            name: id
- *            description: id de la relation genre/artiste
- *            required: true
- *            type: integer
- *      responses:
- *          '200':
- *              description: Resource updated successfully
- *          '500':
- *              description: Internal server error
- *          '400':
- *              description: Bad request
-*/
+
 router.delete('/artiste/:id', deleteByIdArtiste);
 /**
  * @swagger
