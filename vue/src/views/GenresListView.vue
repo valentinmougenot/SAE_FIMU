@@ -14,7 +14,7 @@
       <v-btn
           class="ma-6 addDeleteBtn"
           :height="56"
-          :href="'/genre/add'"
+          :to="'/genre/add'"
           color="success">Ajouter genre&emsp;<v-icon>mdi-plus-box-outline</v-icon>
       </v-btn>
       <v-btn

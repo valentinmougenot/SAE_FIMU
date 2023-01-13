@@ -86,6 +86,19 @@ router.put('/:id', update);
  *            description: id du rôle
  *            required: true
  *            type: integer
+ *          - in: body
+ *            name: role
+ *            description: Le rôle à modifier
+ *            schema:
+ *              type: object
+ *              required:
+ *                - libelle
+ *              properties:
+ *                libelle:
+ *                  type: string
+ *                  minLength: 1
+ *                  maxLength: 5000
+ *                  example: "Administrateur"
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -98,7 +111,7 @@ router.delete('/:id', deleteOne);
 /**
  * @swagger
  * /role/{id}:
- *   put:
+ *   delete:
  *      description: Supprime le role d'id donné
  *      tags:
  *          - roles

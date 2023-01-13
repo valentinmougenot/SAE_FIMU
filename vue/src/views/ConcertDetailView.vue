@@ -30,7 +30,7 @@ export default {
   }),
   methods: {
     async getConcert() {
-      return await Vue.axios.get("http://localhost:3000/concert/" + this.$route.params.id)
+      return await Vue.axios.get(`http://localhost:3000${this.$store.state.sselected}/concert/` + this.$route.params.id)
           .then(response => {
             this.concert = response.data
             console.log(this.concert)
@@ -41,7 +41,7 @@ export default {
     },
     deleteConcert() {
       Vue.axios
-          .delete("http://localhost:3000/concert/" + this.$route.params.id)
+          .delete(`http://localhost:3000${this.$store.state.sselected}/concert/` + this.$route.params.id)
           .then(() => {
             this.$store.dispatch("getConcerts");
             this.$router.push("/concert");

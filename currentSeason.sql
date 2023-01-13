@@ -2,21 +2,12 @@ SET SEARCH_PATH = currentseason;
 
 DROP TABLE IF EXISTS nationalites;
 DROP TABLE IF EXISTS propose;
-DROP TABLE IF EXISTS associe;
 DROP TABLE IF EXISTS fait;
 DROP TABLE IF EXISTS possede;
 DROP TABLE IF EXISTS concerts;
 DROP TABLE IF EXISTS stands;
 DROP TABLE IF EXISTS scenes;
 DROP TABLE IF EXISTS artistes;
-DROP TABLE IF EXISTS partenaires;
-
-CREATE TABLE IF NOT EXISTS partenaires(
-   id SERIAL,
-   nom VARCHAR(255),
-   logo VARCHAR(255),
-   PRIMARY KEY(id)
-);
 
 CREATE TABLE IF NOT EXISTS artistes(
    id SERIAL,
@@ -83,13 +74,6 @@ CREATE TABLE IF NOT EXISTS fait(
    FOREIGN KEY(id_genre) REFERENCES common.genres(id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS associe(
-   annee INTEGER,
-   id_partenaire INTEGER,
-   PRIMARY KEY(annee, id_partenaire),
-   FOREIGN KEY(annee) REFERENCES common.saisons(annee) ON DELETE CASCADE,
-   FOREIGN KEY(id_partenaire) REFERENCES partenaires(id) ON DELETE CASCADE
-);
 
 CREATE TABLE IF NOT EXISTS propose(
    id_service INTEGER,
@@ -144,9 +128,9 @@ INSERT INTO concerts (id_scene, id_artiste, heure_debut, date_debut, duree, nb_p
 (4, 4, '20:00', '2022-12-12', 45, 0, 2022);
 
 INSERT INTO possede VALUES
-(1, 1, 'lien-1'),
-(1, 2, 'lien-2'),
-(2, 2, 'lien-3');
+(1, 1, 'lien-1.com'),
+(1, 2, 'lien-2.com'),
+(2, 2, 'lien-3.com');
 
 INSERT INTO stands (libelle, latitude, longitude, id_typestand) VALUES
 ('Stand 1', 1.3948449, 2.141592653, 1),

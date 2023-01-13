@@ -31,12 +31,6 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
-    if (!req.session.identifiant) {
-        res.status(401).send({
-            message: "Vous devez être connecté pour voir les scenes"
-        });
-        return;
-    }
 
     Scene.findAll({ include: [{model: db.typescene}] })
         .then(data => {
@@ -51,12 +45,6 @@ export const findAll = (req, res) => {
 }
 
 export const findOne = (req, res) => {
-    if (!req.session.identifiant) {
-        res.status(401).send({
-            message: "Vous devez être connecté pour voir une scene"
-        });
-        return;
-    }
     const id = req.params.id;
 
     Scene.findByPk(id, { include: [{model: db.typescene}] })

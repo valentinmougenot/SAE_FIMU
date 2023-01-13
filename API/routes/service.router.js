@@ -40,13 +40,7 @@ router.get('/', findAll);
  *   get:
  *      description: afficher tous les services 
  *      tags:
- *          - service
- *      parameters:
- *          - in: query
- *            name: libelle
- *            description: libelle d'un service pour filtrer
- *            required: false
- *            type: string         
+ *          - service    
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -90,7 +84,20 @@ router.put('/:id', update);
  *            name: id
  *            description: id du service à modifier
  *            required: true
- *            type: integer         
+ *            type: integer   
+ *          - in: body
+ *            name: service
+ *            description: Le service à modifier
+ *            schema:
+ *                type: object
+ *                required:
+ *                  - libelle
+ *                properties:
+ *                  libelle:
+ *                     type: string
+ *                     minLength: 1
+ *                     maxLength: 255
+ *                     example: "Arsenal"      
  *      responses:
  *          '200':
  *              description: Resource updated successfully

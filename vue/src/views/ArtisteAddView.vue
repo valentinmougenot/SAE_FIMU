@@ -144,7 +144,7 @@ export default {
           this.artiste.possede.splice(i, 1);
         }
       }
-      await Vue.axios.post("http://localhost:3000/artiste/all", this.artiste)
+      await Vue.axios.post(`http://localhost:3000${this.$store.state.sselected}/artiste/all`, this.artiste)
           .then(() => {
             this.$store.dispatch('getArtistes');
             this.$router.push('/artiste')

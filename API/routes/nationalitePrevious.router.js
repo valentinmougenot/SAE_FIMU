@@ -8,16 +8,13 @@ router.post('/', create);
  * @swagger
  * /previous/nationalite:
  *   post:
- *      description: Crée un lien entre un artiste et une nationalité
+ *      description: Crée un lien entre un artiste et un pays
  *      tags:
  *          - nationalitePrevious
  *      parameters:
  *          - in: body
- *            name: id_pays
- *            description: L'id du pays
- *          - in: body
- *            name: id_artiste
- *            description: L'id de l'artiste
+ *            name: nationalite
+ *            description: Lien entre un artiste et un pays
  *            schema:
  *              type: object
  *              required:

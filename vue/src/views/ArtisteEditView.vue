@@ -164,49 +164,12 @@ export default {
           });
     },
     async editArtiste() {
-      if (this.artiste.lien_video && this.artiste.lien_video.length === 0) {
-        this.artiste.lien_video = null;
+      for (let i = this.artiste.possede.length - 1; i >= 0; i--) {
+        if (!this.id_reseauxsociaux.includes(this.artiste.possede[i].id_reseaux_sociaux)) {
+          this.artiste.possede.splice(i, 1);
+        }
       }
-      if (this.artiste.lien_site && this.artiste.lien_site.length === 0) {
-        this.artiste.lien_site = null;
-      }
-      return await Vue.axios.put("http://localhost:3000/artiste/" + this.$route.params.id, this.artiste)
-          .then(async () => {
-            await Vue.axios.delete("http://localhost:3000/fait/artiste/" + this.$route.params.id);
-          })
-          .then(async () => {
-            await Vue.axios.delete("http://localhost:3000/nationalite/artiste/" + this.$route.params.id);
-          })
-          .then(async () => {
-            await Vue.axios.delete("http://localhost:3000/possede/artiste/" + this.$route.params.id);
-          })
-          .then(async () => {
-            for(const id_genre of this.artiste.fait) {
-              await Vue.axios.post("http://localhost:3000/fait", {
-                id_artiste: this.$route.params.id,
-                id_genre: id_genre,
-              })
-            }
-          })
-          .then(async () => {
-            for(const id_pays of this.artiste.nationalite) {
-              await Vue.axios.post("http://localhost:3000/nationalite", {
-                id_artiste: this.$route.params.id,
-                id_pays: id_pays,
-              })
-            }
-          })
-          .then(async () => {
-            for(const possede of this.artiste.possede) {
-              if (this.id_reseauxsociaux.includes(possede.id_reseaux_sociaux)) {
-                await Vue.axios.post("http://localhost:3000/possede", {
-                  idArtiste: this.$route.params.id,
-                  idReseauxSociaux: possede.id_reseaux_sociaux,
-                  lien: possede.lien,
-                })
-              }
-            }
-          })
+      return await Vue.axios.put("http://localhost:3000/artiste/all/" + this.$route.params.id, this.artiste)
           .then(() => {
             this.$store.dispatch('getArtistes');
             this.$router.push('/artiste');

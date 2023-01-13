@@ -28,10 +28,8 @@ export const artistePrevious = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             validate: {
                 len: [1, 255],
+                isURL: true,
                 correctUrl: function (value) {
-                    if (!validator.isURL(value)) {
-                        throw new Error('Invalid URL');
-                    }
                     if (!value.includes('youtube.com/embed/')) {
                         throw new Error('Invalid youtube URL');
                     }

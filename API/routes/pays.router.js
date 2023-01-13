@@ -41,12 +41,6 @@ router.get('/', findAll)
  *      description: Trouver les pays pour le nom donné
  *      tags:
  *          - Pays
- *      parameters:
- *          - in: query
- *            name: nom
- *            description: Nom du sous-genre
- *            required: false
- *            type: string
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -91,6 +85,19 @@ router.put('/:id', update)
  *            description: ID du pays
  *            required: false
  *            type: string
+ *          - in: body
+ *            name: pays
+ *            description: Le pays à modifier
+ *            schema:
+ *              type: object
+ *              required:
+ *                - libelle 
+ *              properties:
+ *                libelle:
+ *                  type: string
+ *                  minLength: 1
+ *                  maxLength: 255
+ *                  example: France
  *      responses:
  *          '200':
  *              description: Resource updated successfully

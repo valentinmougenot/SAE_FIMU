@@ -67,7 +67,7 @@ export default {
   methods: {
     getScene() {
       return Vue.axios
-        .get("http://localhost:3000/scene/" + this.$route.params.id)
+        .get(`http://localhost:3000${this.$store.state.sselected}/scene/` + this.$route.params.id)
         .then((response) => {
           this.scene = response.data;
         });

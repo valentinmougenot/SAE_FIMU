@@ -41,12 +41,6 @@ router.get('/', findAll)
  *      description: afficher tous les types de stands 
  *      tags:
  *          - Type Stand
- *      parameters:
- *          - in: query
- *            name: nom
- *            description: nom d'un stand pour filtrer
- *            required: false
- *            type: string         
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -91,6 +85,19 @@ router.put('/:id', update)
  *            description: ID du type de stand
  *            required: true
  *            type: string
+ *          - in: body
+ *            name: typestand
+ *            description: Le type de stand à modifier
+ *            schema:
+ *              type: object
+ *              required:
+ *                - libelle
+ *              properties:
+ *                libelle:
+ *                  type: string
+ *                  minLength: 1
+ *                  maxLength: 255
+ *                  example: Intérieur
  *      responses:
  *          '200':
  *              description: Resource updated successfully

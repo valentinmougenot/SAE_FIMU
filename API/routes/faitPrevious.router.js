@@ -6,11 +6,11 @@ import { create, findAll, deleteByIdArtiste, deleteAll } from '../controllers/fa
 router.post('/', create);
 /**
  * @swagger
- * /fait:
+ * /previous/fait:
  *   post:
  *      description: Crée un lien entre genre et ancien artiste
  *      tags:
- *          - fait
+ *          - faitPrevious
  *      parameters:
  *          - in: body
  *            name: genre
@@ -37,11 +37,11 @@ router.post('/', create);
 router.get('/', findAll);
 /**
  * @swagger
- * /fait:
+ * /previous/fait:
  *   get:
  *      description: affichage de toutes les relations genre/ancien artiste
  *      tags:
- *          - fait
+ *          - faitPrevious
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -54,11 +54,11 @@ router.get('/', findAll);
 router.delete('/artiste/:id', deleteByIdArtiste);
 /**
  * @swagger
- * /fait/artiste/{id}:
+ * /previous/fait/artiste/{id}:
  *   delete:
  *      description: suppression d'une ancienne relation en fonction de l'id de l'artiste
  *      tags:
- *          - fait
+ *          - faitPrevious
  *      parameters:
  *          - in: path
  *            name: id
@@ -76,11 +76,11 @@ router.delete('/artiste/:id', deleteByIdArtiste);
 router.delete('/', deleteAll);
 /**
  * @swagger
- * /fait:
+ * /previous/fait:
  *   delete:
  *      description: supprime toutes ancienne les relations
  *      tags:
- *          - fait
+ *          - faitPrevious
  *      responses:
  *          '200':
  *              description: Resource updated successfully

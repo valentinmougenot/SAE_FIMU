@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router()
 
-import {create, findAll, findOne, update, deleteOne, deleteAll} from '../controllers/concertNext.controller.js'
+import {create, findAll, findOne, findByDate, update, deleteOne, deleteAll, getDates} from '../controllers/concertNext.controller.js'
 
 router.post('/', create);
 /**
@@ -20,6 +20,7 @@ router.post('/', create);
  *              required:
  *                - id_scene
  *                - id_artiste
+ *                - heure_debut
  *                - date_debut
  *                - duree
  *                - nb_personnes
@@ -31,9 +32,12 @@ router.post('/', create);
  *                id_artiste:
  *                  type: integer
  *                  example: 1
+ *                heure_debut:
+ *                  type: string
+ *                  example: "20:00"
  *                date_debut:
  *                  type: string
- *                  example: "2021-06-01 20:00:00"
+ *                  example: "2021-06-01"
  *                duree:
  *                  type: integer
  *                  example: 120
@@ -73,6 +77,22 @@ router.get('/', findAll);
  *          '400':
  *              description: Bad request
 */
+router.get('/date', getDates);
+/**
+ * @swagger
+ * /next/concert/date:
+ *   get:
+ *      description: Trouver toutes les dates des concerts
+ *      tags:
+ *          - concertNext
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+*/
 router.get('/:id', findOne);
 /**
  * @swagger
@@ -95,12 +115,34 @@ router.get('/:id', findOne);
  *          '400':
  *              description: Bad request
 */
-router.put('/:id', update);
+router.get('/date/:date', findByDate)
+/**
+ * @swagger
+ * /next/concert/date/{date}:
+ *   get:
+ *      description: Trouver le concert pour la date donnée
+ *      tags:
+ *          - concertNext
+ *      parameters:
+ *          - in: path
+ *            name: date
+ *            description: date du concert
+ *            required: true
+ *            type: string
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+*/
+router.put('/:id', update)
 /**
  * @swagger
  * /next/concert/{id}:
  *   put:
- *      description: Updater le prochain concert pour l'id donné
+ *      description: Updater le concert pour l'id donné
  *      tags:
  *          - concertNext
  *      parameters:
@@ -109,6 +151,41 @@ router.put('/:id', update);
  *            description: ID du concert
  *            required: false
  *            type: string
+ *          - in: body
+ *            name: concert
+ *            description: Le concert à modifier
+ *            schema:
+ *              type: object
+ *              required:
+ *                - id_scene
+ *                - id_artiste
+ *                - heure_debut
+ *                - date_debut
+ *                - duree
+ *                - nb_personnes
+ *                - annee
+ *              properties:
+ *                id_scene:
+ *                  type: integer
+ *                  example: 1
+ *                id_artiste:
+ *                  type: integer
+ *                  example: 1
+ *                heure_debut:
+ *                  type: string
+ *                  example: "20:00"
+ *                date_debut:
+ *                  type: string
+ *                  example: "2021-06-01"
+ *                duree:
+ *                  type: integer
+ *                  example: 120
+ *                nb_personnes:
+ *                  type: integer
+ *                  example: 100
+ *                annee:
+ *                  type: integer
+ *                  example: 2022
  *      responses:
  *          '200':
  *              description: Resource updated successfully

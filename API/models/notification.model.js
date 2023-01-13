@@ -15,9 +15,6 @@ export const notification = (sequelize, Sequelize) => {
         heure_envoi: {
             type: Sequelize.STRING,
             allowNull: false,
-            validate: {
-                isTime: true
-            }
         },
         message: {
             type: Sequelize.STRING,

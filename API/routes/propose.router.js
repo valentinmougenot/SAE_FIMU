@@ -54,7 +54,7 @@ router.delete('/', deleteAll);
  *              description: Bad request
 */
 
-router.delete('/bystand/:id_stand', deleteByIdStand);
+router.delete('/stand/:id', deleteByIdStand);
 /**
  * @swagger
  * /propose/stand/{id}:

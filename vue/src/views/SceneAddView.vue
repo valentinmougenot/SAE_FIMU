@@ -67,7 +67,7 @@ export default {
       this.scene.jauge = parseInt(this.scene.jauge);
       this.scene.latitude = parseFloat(this.scene.latitude);
       this.scene.longitude = parseFloat(this.scene.longitude);
-      return await Vue.axios.post("http://localhost:3000/scene", this.scene)
+      return await Vue.axios.post(`http://localhost:3000${this.$store.state.sselected}/scene`, this.scene)
           .then(() => {
             this.$store.dispatch("getScenes");
             this.$store.dispatch("getConcerts");

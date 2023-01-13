@@ -29,7 +29,9 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
-    Saison.findAll()
+    Saison.findAll(
+        {order: [['annee', 'DESC']]}
+    )
         .then(data => {
             res.send(data);
         })

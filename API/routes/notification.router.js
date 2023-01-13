@@ -44,13 +44,7 @@ router.get('/', findAll);
  *   get:
  *      description: afficher toutes les notifications
  *      tags:
- *          - notification
- *      parameters:
- *          - in: query
- *            name: message
- *            description: message pour filtrer
- *            required: false
- *            type: string         
+ *          - notification       
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -95,6 +89,23 @@ router.put('/:id', update);
  *            description: ID de la notification
  *            required: true
  *            type: string
+ *          - in: body
+ *            name: notification
+ *            description: La notification à modifier
+ *            schema:
+ *              type: object
+ *              required:
+ *                - date_envoi
+ *                - message
+ *              properties:
+ *                date_envoi:
+ *                  type: string
+ *                  example: "2021-06-01 20:00:00"
+ *                message:
+ *                  type: string
+ *                  minLength: 1
+ *                  maxLength: 255
+ *                  example: "Concert annulé"
  *      responses:
  *          '200':
  *              description: Resource updated successfully

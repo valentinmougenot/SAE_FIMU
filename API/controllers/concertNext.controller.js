@@ -34,7 +34,7 @@ export const create = (req, res) => {
 
 export const findAll = (req, res) => {
     Concert.findAll(
-        { include: [{model:db.artisteNext},
+        {include: [{model:db.artisteNext, include: [{model: db.categorie}, {model: db.genre}]},
             {model:db.sceneNext},
             {model:db.saison}]})
         .then(data => {
@@ -51,7 +51,7 @@ export const findAll = (req, res) => {
 export const findOne = (req, res) => {
     const id = req.params.id;
 
-    Concert.findAll({where: {id: id}, include: [{model:db.artiste, include: [{model: db.categorie}, {model: db.genre}]},
+    Concert.findAll({where: {id: id}, include: [{model:db.artisteNext, include: [{model: db.categorie}, {model: db.genre}]},
         {model:db.scene},
         {model:db.saison}]})
         .then(data => {
@@ -67,8 +67,8 @@ export const findOne = (req, res) => {
 export const findByDate = (req, res) => {
     const date = req.params.date;
 
-    Concert.findAll({where: {date_debut: date}, include: [{model:db.artiste, include: [{model: db.categorie}, {model: db.genre}]},
-        {model:db.scene},
+    Concert.findAll({where: {date_debut: date}, include: [{model:db.artisteNext, include: [{model: db.categorie}, {model: db.genre}]},
+        {model:db.sceneNext},
         {model:db.saison}]})
         .then(data => {
             res.send(data);
@@ -79,7 +79,6 @@ export const findByDate = (req, res) => {
             });
         });
 }
-
 
 export const update = (req, res) => {
     if (!req.session.identifiant) {

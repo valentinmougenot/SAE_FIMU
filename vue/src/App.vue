@@ -4,7 +4,11 @@
         v-if="showNavbars"
         :user="{identifiant: $session.get('identifiant'), role: $session.get('role')}"
         :items="['Déconnexion']"
+        btnChange="Changer de saison"
+        :saisonSelect="tab"
         @user-btn-click="userBtnClick"
+        @switch-saison="switchSaison"
+        @change-saison="changeSaison"
         ></TopMenuBar>
     <v-row>
       <v-col cols="12" sm="2" md="2" v-if="showNavbars">
@@ -12,7 +16,7 @@
             :data="menuData"
             title="Navigation"
             @select-item="selectItem"
-            @logout="logout"
+            @change-saison="changeSaison"
           ></SideMenuBar>
       </v-col>
       <v-col cols="12" sm="10" md="10" v-if="showNavbars">
@@ -22,7 +26,7 @@
       </v-col>
       <v-col cols="12" sm="12" md="12" v-else>
         <v-main>
-          <router-view/>
+          <router-view ref="myComponent"/>
         </v-main>
       </v-col>
     </v-row>
@@ -31,7 +35,7 @@
 
 <script>
 import Vue from 'vue';
-import {mapActions} from "vuex";
+import {mapActions, mapState} from "vuex";
 export default {
   name: 'App',
   components: {
@@ -39,7 +43,8 @@ export default {
     TopMenuBar: () => import('@/components/TopMenuBar.vue'),
   },
   data: () => ({
-    menuData: []
+    menuData: [],
+    tab: [],
   }),
   methods: {
     ...mapActions(['getArtistes', 'getScenes', "getTypescenes", "getCategories", "getGenres", "getPays", "getConcerts"]),
@@ -104,14 +109,72 @@ export default {
         ];
       }
     },
+    initTab() {
+      this.tab.push({
+        text: "Saison " + this.saison[1].annee.toString() + " (actuelle)",
+        value: 0
+      })
+      this.tab.push({
+        text: "Saison " + this.saison[0].annee + " (suivante)",
+        value: 1
+      })
+      for(let i = 2; i < this.saison.length; i++) {
+        this.tab.push({
+          text: "Saison " + this.saison[i].annee,
+          value: i
+        })
+      }
+    },
     userBtnClick(index) {
       if (index === 0) {
         this.logout();
         this.$session.destroy();
       }
     },
+    switchSaison() {
+      if (confirm("Voulez-vous vraiment changer de saison ?")) {
+        Vue.axios.post('http://localhost:3000/saison/migrate-data-previous')
+            .then(() => {
+              Vue.axios.post('http://localhost:3000/saison/migrate-data-current')
+                  .then(() => {
+                    window.location.reload();
+                  })
+                  .catch(error => {
+                    alert(error.response.data.message);
+                  });
+            })
+            .catch(error => {
+              alert(error.response.data.message);
+            });
+      }
+    },
+    async changeSaison(id) {
+      let data = {};
+      if (id === 0) {
+        data.saison = '';
+        data.year = '';
+        data.sselected = '';
+      }
+      else if (id === 1) {
+        data.saison = '/next';
+        data.year = '';
+        data.sselected = '/next';
+      }
+      else {
+        data.saison = '/previous';
+        data.year = '/year/' + this.saison[id].annee.toString();
+        data.sselected = '';
+      }
+      await this.$store.dispatch('selectSaison', data);
+      await this.$store.dispatch('getArtistes');
+      await this.$store.commit('updateScenes', []);
+      await this.$store.commit('updateStands', []);
+      await this.$store.commit('updateConcerts', []);
+      this.$router.push('/artiste', {force: true});
+    }
    },
   computed: {
+    ...mapState(['saison']),
     showNavbars() {
       return !this.$route.path.includes('/login');
     },
@@ -145,9 +208,14 @@ export default {
     },
 
   },
-  mounted() {
+  async created() {
+    if (this.saison.length === 0) {
+      await this.$store.dispatch('getSaison');
+    }
     this.initMenuData();
-  }
+    this.initTab();
+
+  },
 };
 </script>
 <style scoped>

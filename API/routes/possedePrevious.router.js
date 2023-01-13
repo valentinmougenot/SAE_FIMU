@@ -53,7 +53,7 @@ router.get('/', findAll);
 router.delete('/artiste/:id', deleteByIdArtiste);
 /**
  * @swagger
- * /previous/possede/{id}:
+ * /previous/possede/artiste/{id}:
  *   delete:
  *      description: suppression d'une relation en fonction de l'id de l'artiste
  *      tags:

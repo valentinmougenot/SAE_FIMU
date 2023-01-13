@@ -20,6 +20,7 @@ router.post('/', create)
  *              required:
  *                - id_scene
  *                - id_artiste
+ *                - heure_debut
  *                - date_debut
  *                - duree
  *                - nb_personnes
@@ -31,9 +32,12 @@ router.post('/', create)
  *                id_artiste:
  *                  type: integer
  *                  example: 1
+ *                heure_debut:
+ *                  type: string
+ *                  example: "20:00"
  *                date_debut:
  *                  type: string
- *                  example: "2021-06-01 20:00:00"
+ *                  example: "2021-06-01"
  *                duree:
  *                  type: integer
  *                  example: 120
@@ -59,12 +63,6 @@ router.get('/', findAll)
  *      description: Trouver les concerts pour le nom donné
  *      tags:
  *          - Concerts
- *      parameters:
- *          - in: query
- *            name: nom
- *            description: Nom du concert
- *            required: false
- *            type: string
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -150,6 +148,41 @@ router.put('/:id', update)
  *            description: ID du concert
  *            required: false
  *            type: string
+ *          - in: body
+ *            name: concert
+ *            description: Le concert à modifier
+ *            schema:
+ *              type: object
+ *              required:
+ *                - id_scene
+ *                - id_artiste
+ *                - heure_debut
+ *                - date_debut
+ *                - duree
+ *                - nb_personnes
+ *                - annee
+ *              properties:
+ *                id_scene:
+ *                  type: integer
+ *                  example: 1
+ *                id_artiste:
+ *                  type: integer
+ *                  example: 1
+ *                heure_debut:
+ *                  type: string
+ *                  example: "20:00"
+ *                date_debut:
+ *                  type: string
+ *                  example: "2021-06-01"
+ *                duree:
+ *                  type: integer
+ *                  example: 120
+ *                nb_personnes:
+ *                  type: integer
+ *                  example: 100
+ *                annee:
+ *                  type: integer
+ *                  example: 2022
  *      responses:
  *          '200':
  *              description: Resource updated successfully

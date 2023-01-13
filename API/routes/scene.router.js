@@ -56,13 +56,7 @@ router.get('/', findAll);
  *   get:
  *      description: afficher toutes les scènes 
  *      tags:
- *          - scene
- *      parameters:
- *          - in: query
- *            name: libelle
- *            description: libelle d'une scène pour filtrer
- *            required: false
- *            type: string         
+ *          - scene      
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -106,7 +100,36 @@ router.put('/:id', update);
  *            name: id
  *            description: id de la scène à modifier
  *            required: true
- *            type: integer         
+ *            type: integer    
+ *          - in: body
+ *            name: scene
+ *            description: La scène à modifier
+ *            schema:
+ *                type: object
+ *                required:
+ *                  - libelle
+ *                  - jauge
+ *                  - latitude
+ *                  - longitude
+ *                  - id_typescene
+ *                properties:
+ *                  libelle:
+ *                     type: string
+ *                     minLength: 1
+ *                     maxLength: 255
+ *                     example: "Arsenal"
+ *                  jauge:
+ *                     type: integer
+ *                     example: 1500
+ *                  latitude:
+ *                     type: float
+ *                     example: 48.856614
+ *                  longitude:
+ *                     type: float
+ *                     example: 2.3522219
+ *                  id_typescene:
+ *                     type: integer
+ *                     example: 1     
  *      responses:
  *          '200':
  *              description: Resource updated successfully

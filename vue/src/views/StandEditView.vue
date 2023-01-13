@@ -92,7 +92,7 @@ export default {
         });
     },
     editStand() {
-      Vue.axios.delete("http://localhost:3000/propose/bystand/" + this.$route.params.id)
+      Vue.axios.delete("http://localhost:3000/propose/stand/" + this.$route.params.id)
         .then(() => {
           Vue.axios.put("http://localhost:3000/stand/" + this.$route.params.id, this.stand)
             .then(() => {

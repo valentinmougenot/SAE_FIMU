@@ -32,7 +32,8 @@ router.post('/', create);
  *                  minLength: 1
  *                  example: "L'équipe du FIMU vous propose encore une fois cette année un festival qui se tiendra en fin juin, soyez présents !"
  *                id_typeactu:
- *                  type: integer 
+ *                  type: integer
+ *                  example: 1
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -50,12 +51,6 @@ router.get('/', findAll);
  *      description: affichage de tous les actualités + filtre avec nom
  *      tags:
  *          - actualite
- *      parameters:
- *          - in: query
- *            name: nom
- *            description: nom de l'actualité
- *            required: false
- *            type: string
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -102,6 +97,28 @@ router.put('/:id', update);
  *            description: id de l'actualité
  *            required: true
  *            type: integer
+ *          - in: body
+ *            name: actualite
+ *            description: L'actualité à modifier
+ *            schema:
+ *              type: object
+ *              required:
+ *                - titre
+ *                - contenu
+ *                - id_typeactu
+ *              properties:
+ *                nom:
+ *                  type: string
+ *                  minLength: 1
+ *                  maxLength: 255
+ *                  example: "La saison 2023 est là !"
+ *                contenu:
+ *                  type: string
+ *                  minLength: 1
+ *                  example: "L'équipe du FIMU vous propose encore une fois cette année un festival qui se tiendra en fin juin, soyez présents !"
+ *                id_typeactu:
+ *                  type: integer
+ *                  example: 1
  *      responses:
  *          '200':
  *              description: Resource updated successfully

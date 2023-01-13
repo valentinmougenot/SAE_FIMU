@@ -253,3 +253,101 @@ export const createAll = (req, res) => {
             });
         });
 }
+
+export const updateAll = (req, res) => {
+    if (!req.session.identifiant) {
+        res.status(401).send({
+            message: "Vous devez être connecté pour créer un artiste"
+        });
+        return;
+    }
+
+    if (req.body.lien_site && req.body.lien_site.length === 0) {
+        req.body.lien_site = null;
+    }
+    if (req.body.lien_video && req.body.lien_video.length === 0) {
+        req.body.lien_video = null;
+    }
+
+    if (req.body.lien_video) {
+        if (req.body.lien_video.includes("youtube.com/watch?v=")) {
+            req.body.lien_video = req.body.lien_video.replace("youtube.com/watch?v=", "youtube.com/embed/");
+        }
+        else if (req.body.lien_video.includes("youtu.be/")) {
+            req.body.lien_video = req.body.lien_video.replace("youtu.be/", "youtube.com/embed/");
+        }
+    }
+    const artiste = {
+        nom: req.body.nom,
+        photo: req.body.photo,
+        biographie: req.body.biographie,
+        lien_video: req.body.lien_video,
+        lien_site: req.body.lien_site,
+        id_categorie: req.body.id_categorie
+    }
+
+    const id = req.params.id;
+
+    Artiste.update(artiste, {
+        where: { id: id }
+    })
+        .then(num => {
+            if (num == 1) {
+                db.fait.destroy({
+                    where: { id_artiste: id }
+                })
+                    .then(() => {
+                        for (const id_genre of req.body.fait) {
+                            db.fait.create({
+                                id_artiste: id,
+                                id_genre: id_genre
+                            })
+                        }
+                    })
+                    .then(() => {
+                        db.nationalite.destroy({
+                            where: { id_artiste: id }
+                        })
+                            .then(() => {
+                                for (const id_pays of req.body.nationalite) {
+                                    db.nationalite.create({
+                                        id_artiste: id,
+                                        id_pays: id_pays
+                                    })
+                                }
+                            })
+                            .then(() => {
+                                db.possede.destroy({
+                                    where: { id_artiste: id }
+                                })
+                                    .then(() => {
+                                        for (const possede of req.body.possede) {
+                                            db.possede.create({
+                                                id_artiste: id,
+                                                id_reseaux_sociaux: possede.id_reseaux_sociaux,
+                                                lien: possede.lien
+                                            })
+                                        }
+                                    })
+                                    .then(() => {
+                                        res.send({
+                                            message: "Artiste was updated successfully."
+                                        });
+                                    })
+                            })
+                    })
+            } else {
+                res.send({
+                    message: `Cannot update Artiste with id=${id}. Maybe Artiste was not found or req.body is empty!`
+                });
+            }
+        }
+        )
+        .catch(err => {
+            console.log(err);
+            res.status(500).send({
+                message: "Error updating Artiste with id=" + id
+            });
+        }
+        );
+}

@@ -47,12 +47,6 @@ router.get('/', findAll)
  *      description: affichage de tous les saison + filtre avec nom
  *      tags:
  *          - saison
- *      parameters:
- *          - in: query
- *            name: nom
- *            description: nom de la saison
- *            required: false
- *            type: string
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -97,6 +91,25 @@ router.put('/:id', update)
  *            description: id de la saison
  *            required: true
  *            type: integer
+ *          - in: body
+ *            name: saison
+ *            description: La saison à modifier
+ *            schema:
+ *              type: object
+ *              required:
+ *                - annee
+ *                - couleur1
+ *                - couleur2
+ *              properties:
+ *                annee:
+ *                  type: integer
+ *                  example: 2022
+ *                couleur1:
+ *                  type: string
+ *                  example: "#38C6AB"
+ *                couleur2:
+ *                  type: string
+ *                  example: "#F5A8AE"
  *      responses:
  *          '200':
  *              description: Resource updated successfully

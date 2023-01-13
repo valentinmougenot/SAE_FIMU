@@ -116,7 +116,7 @@ export const deleteByIdStand = (req, res) => {
         });
         return;
     }
-    const id_stand = req.params.id_stand;
+    const id_stand = req.params.id;
 
     Propose.destroy({
         where: { id_stand: id_stand }

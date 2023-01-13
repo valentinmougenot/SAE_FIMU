@@ -40,13 +40,7 @@ router.get('/', findAll)
  *   get:
  *      description: afficher tous les types de scènes 
  *      tags:
- *          - Type Scene
- *      parameters:
- *          - in: query
- *            name: nom
- *            description: nom d'une scène pour filtrer
- *            required: false
- *            type: string         
+ *          - Type Scene      
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -91,6 +85,19 @@ router.put('/:id', update)
  *            description: ID du type de scène
  *            required: true
  *            type: string
+ *          - in: body
+ *            name: typescene
+ *            description: Le type de scène à modifier
+ *            schema:
+ *              type: object
+ *              required:
+ *                - libelle
+ *              properties:
+ *                libelle:
+ *                  type: string
+ *                  minLength: 1
+ *                  maxLength: 255
+ *                  example: Intérieur
  *      responses:
  *          '200':
  *              description: Resource updated successfully

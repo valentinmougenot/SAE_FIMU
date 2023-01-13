@@ -2,21 +2,12 @@ SET SEARCH_PATH = nextseason;
 
 DROP TABLE IF EXISTS nationalites;
 DROP TABLE IF EXISTS propose;
-DROP TABLE IF EXISTS associe;
 DROP TABLE IF EXISTS fait;
 DROP TABLE IF EXISTS possede;
 DROP TABLE IF EXISTS concerts;
 DROP TABLE IF EXISTS stands;
 DROP TABLE IF EXISTS scenes;
 DROP TABLE IF EXISTS artistes;
-DROP TABLE IF EXISTS partenaires;
-
-CREATE TABLE IF NOT EXISTS partenaires(
-   id SERIAL,
-   nom VARCHAR(255),
-   logo VARCHAR(255),
-   PRIMARY KEY(id)
-);
 
 CREATE TABLE IF NOT EXISTS artistes(
    id SERIAL,
@@ -66,15 +57,6 @@ CREATE TABLE IF NOT EXISTS concerts(
    FOREIGN KEY(annee) REFERENCES common.saisons(annee) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS possede(
-   id_artiste INTEGER,
-   id_reseaux_sociaux INTEGER,
-   lien VARCHAR(255),
-   PRIMARY KEY(id_artiste, id_reseaux_sociaux),
-   FOREIGN KEY(id_artiste) REFERENCES artistes(id) ON DELETE CASCADE,
-   FOREIGN KEY(id_reseaux_sociaux) REFERENCES common.reseauxsociaux(id) ON DELETE CASCADE
-);
-
 CREATE TABLE IF NOT EXISTS fait(
    id_artiste INTEGER,
    id_genre INTEGER,
@@ -83,12 +65,13 @@ CREATE TABLE IF NOT EXISTS fait(
    FOREIGN KEY(id_genre) REFERENCES common.genres(id) ON DELETE CASCADE
 );
 
-CREATE TABLE IF NOT EXISTS associe(
-   annee INTEGER,
-   id_partenaire INTEGER,
-   PRIMARY KEY(annee, id_partenaire),
-   FOREIGN KEY(annee) REFERENCES common.saisons(annee) ON DELETE CASCADE,
-   FOREIGN KEY(id_partenaire) REFERENCES partenaires(id) ON DELETE CASCADE
+CREATE TABLE IF NOT EXISTS possede(
+   id_artiste INTEGER,
+   id_reseaux_sociaux INTEGER,
+   lien VARCHAR(255),
+   PRIMARY KEY(id_artiste, id_reseaux_sociaux),
+   FOREIGN KEY(id_artiste) REFERENCES artistes(id) ON DELETE CASCADE,
+   FOREIGN KEY(id_reseaux_sociaux) REFERENCES common.reseauxsociaux(id) ON DELETE CASCADE
 );
 
 CREATE TABLE IF NOT EXISTS propose(
@@ -138,15 +121,15 @@ INSERT INTO fait (id_artiste, id_genre) VALUES
 (4, 4);
 
 INSERT INTO concerts (id_scene, id_artiste, heure_debut, date_debut, duree, nb_personnes, annee) VALUES
-(1, 1, '12:45', '2022-12-10', 75, 958, 2023),
-(4, 2, '15:30', '2022-12-10', 120, 0, 2023),
-(3, 3, '17:00', '2022-12-11', 90, 0, 2023),
-(4, 4, '20:00', '2022-12-12', 45, 0, 2023);
+(1, 1, '12:45', '2023-12-10', 75, 958, 2023),
+(4, 2, '15:30', '2023-12-10', 120, 0, 2023),
+(3, 3, '17:00', '2023-12-11', 90, 0, 2023),
+(4, 4, '20:00', '2023-12-12', 45, 0, 2023);
 
 INSERT INTO possede VALUES
-(1, 1, 'lien-1'),
-(1, 2, 'lien-2'),
-(2, 2, 'lien-3');
+(1, 1, 'lien-1.com'),
+(1, 2, 'lien-2.com'),
+(2, 2, 'lien-3.com');
 
 INSERT INTO stands (libelle, latitude, longitude, id_typestand) VALUES
 ('Stand 1 next', 1.3948449, 2.141592653, 1),

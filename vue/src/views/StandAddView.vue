@@ -84,10 +84,10 @@ export default {
     addStand() {
       this.stand.latitude = parseFloat(this.stand.latitude);
       this.stand.longitude = parseFloat(this.stand.longitude);
-      Vue.axios.post('http://localhost:3000/stand', this.stand)
+      Vue.axios.post(`http://localhost:3000${this.$store.state.sselected}/stand`, this.stand)
           .then(response => {
             this.id_services.forEach(id_service => {
-              Vue.axios.post('http://localhost:3000/propose', {
+              Vue.axios.post(`http://localhost:3000${this.$store.state.sselected}/propose`, {
                 id_stand: response.data.id,
                 id_service: id_service
               })

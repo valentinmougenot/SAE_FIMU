@@ -63,14 +63,15 @@ export default {
         date_debut: null,
         duree: null,
         nb_personnes: 0,
-        annee: 2022
+        annee: 0
       }
     };
   },
   methods: {
     addConcert() {
+      this.concert.annee = parseInt(this.concert.date_debut.slice(0, 4));
       Vue.axios
-        .post("http://localhost:3000/concert", this.concert)
+        .post(`http://localhost:3000${this.$store.state.sselected}/concert`, this.concert)
         .then(() => {
           this.$store.dispatch("getConcerts");
           this.$router.push("/concert");

@@ -67,13 +67,13 @@ export default {
         date_debut: null,
         duree: null,
         nb_personnes: 0,
-        annee: 2022
+        annee: 0
       }
     }
   },
   methods: {
     getConcert() {
-      Vue.axios.get('http://localhost:3000/concert/' + this.$route.params.id)
+      Vue.axios.get(`http://localhost:3000${this.$store.state.sselected}/concert/` + this.$route.params.id)
         .then(response => {
           this.concert = response.data;
         })
@@ -82,8 +82,9 @@ export default {
         });
     },
     editConcert() {
+      this.concert.annee = parseInt(this.concert.date_debut.slice(0, 4));
       Vue.axios
-        .put("http://localhost:3000/concert/" + this.$route.params.id, this.concert)
+        .put(`http://localhost:3000${this.$store.state.sselected}/concert/` + this.$route.params.id, this.concert)
         .then(() => {
           this.$router.push("/concert");
         })

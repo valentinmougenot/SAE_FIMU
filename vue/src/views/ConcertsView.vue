@@ -15,7 +15,7 @@
       <v-btn
           class="ma-6 addDeleteBtn"
           :height="56"
-          :href="'/concert/add'"
+          :to="'/concert/add'"
           color="success">Ajouter concert&emsp;<v-icon>mdi-plus-box-outline</v-icon>
       </v-btn>
     </v-row>
@@ -66,7 +66,7 @@ export default {
       }
     },
     async getScenes() {
-      return await Vue.axios.get("http://localhost:3000/scene")
+      return await Vue.axios.get(`http://localhost:3000${this.$store.state.sselected}/scene`)
           .then(response => {
             this.scenes = response.data;
             this.scenes.forEach(scene => {
@@ -79,7 +79,7 @@ export default {
           });
     },
     async getConcerts(date) {
-      return await Vue.axios.get("http://localhost:3000/concert/date/" + date)
+      return await Vue.axios.get(`http://localhost:3000${this.$store.state.sselected}/concert/date/` + date)
           .then(response => {
             this.concerts = response.data.map(concert => {
               return {
@@ -99,7 +99,7 @@ export default {
           });
     },
     async getDates() {
-      return await Vue.axios.get("http://localhost:3000/concert/date")
+      return await Vue.axios.get(`http://localhost:3000${this.$store.state.sselected}/concert/date`)
           .then(response => {
             response.data.forEach(date => {
               this.dates.push(date.date_debut);
@@ -132,6 +132,7 @@ export default {
         a.style.height = "130px";
         a.style.color = "white";
         a.style.textDecoration = "none";
+        a.style.overflow = "hidden";
         td.setAttribute("colspan", concert.duree.toString());
         const artiste = document.createElement("p");
         artiste.innerHTML = concert.artiste;
@@ -151,7 +152,7 @@ export default {
       await this.affectConcerts();
     }
   },
-  mounted() {
+  created() {
     this.init();
     this.getScenes();
     this.getDates();

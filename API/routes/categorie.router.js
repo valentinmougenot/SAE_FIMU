@@ -41,12 +41,6 @@ router.get('/', findAll);
  *      description: affichage de toutes les catégorie + filtre avec nom
  *      tags:
  *          - catégorie
- *      parameters:
- *          - in: query
- *            name: nom
- *            description: nom de la catégorie
- *            required: false
- *            type: string
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -91,6 +85,19 @@ router.put('/:id', update);
  *            description: id de la catégorie
  *            required: true
  *            type: integer
+ *          - in: body
+ *            name: categorie
+ *            description: La catégorie à modifier
+ *            schema:
+ *              type: object
+ *              required:
+ *                - libelle
+ *              properties:
+ *                libelle:
+ *                  type: string
+ *                  minLength: 1
+ *                  maxLength: 255
+ *                  example: "Musiques du monde"
  *      responses:
  *          '200':
  *              description: Resource updated successfully

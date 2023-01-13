@@ -92,6 +92,19 @@ router.put('/:id', update);
  *            description: ID de l'utilisateur
  *            required: false
  *            type: string
+ *          - in: body
+ *            name: utilisateur
+ *            description: L'utilisateur à modifier
+ *            schema:
+ *                type: object
+ *                required:
+ *                  - mot_de_passe
+ *                properties:
+ *                  mot_de_passe:
+ *                     type: string
+ *                     minLength: 1
+ *                     maxLength: 255
+ *                     example: "PasSw0rD_4321"
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -141,7 +154,7 @@ router.delete('/', deleteAll);
 router.post('/logout', logout);
 /**
  * @swagger
- * /utilisateur:
+ * /utilisateur/logout:
  *   post:
  *      description: Déconnexion de l'utilisateur
  *      tags:

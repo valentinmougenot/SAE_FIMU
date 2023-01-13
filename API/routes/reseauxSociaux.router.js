@@ -6,7 +6,7 @@ import { create, findAll, findOne, update, deleteOne, deleteAll } from '../contr
 router.post('/', create);
 /**
  * @swagger
- * /reseauxSociaux:
+ * /reseauxsociaux:
  *   post:
  *      description: Ajout d'un réseau social
  *      tags:
@@ -43,17 +43,11 @@ router.post('/', create);
 router.get('/', findAll);
 /**
  * @swagger
- * /reseauxSociaux:
+ * /reseauxsociaux:
  *   get:
  *      description: afficher tous les réseaux sociaux 
  *      tags:
- *          - reseauxSociaux
- *      parameters:
- *          - in: query
- *            name: libelle
- *            description: libelle d'un réseau social pour filtrer
- *            required: false
- *            type: string         
+ *          - reseauxSociaux       
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -66,7 +60,7 @@ router.get('/', findAll);
 router.get('/:id', findOne);
 /**
  * @swagger
- * /reseauxSociaux/{id}:
+ * /reseauxsociaux/{id}:
  *   get:
  *      description: afficher un réseau social en fonction de l'id
  *      tags:
@@ -89,7 +83,7 @@ router.get('/:id', findOne);
 router.put('/:id', update);
 /**
  * @swagger
- * /reseauxSociaux/{id}:
+ * /reseauxsociaux/{id}:
  *   put:
  *      description: modifier un réseau social
  *      tags:
@@ -99,7 +93,26 @@ router.put('/:id', update);
  *            name: id
  *            description: id du réseau social à modifier
  *            required: true
- *            type: integer         
+ *            type: integer  
+ *          - in: body
+ *            name: reseauxSociaux
+ *            description: Le réseau social à modifier
+ *            schema:
+ *                type: object
+ *                required:
+ *                  - libelle
+ *                  - logo
+ *                properties:
+ *                  libelle:
+ *                     type: string
+ *                     minLength: 1
+ *                     maxLength: 255
+ *                     example: "Twitter"
+ *                  logo:
+ *                     type: string
+ *                     minLength: 1
+ *                     maxLength: 255
+ *                     example: "MDI-Twitter"       
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -111,7 +124,7 @@ router.put('/:id', update);
 router.delete('/:id', deleteOne);
 /**
  * @swagger
- * /reseauxSociaux/{id}:
+ * /reseauxsociaux/{id}:
  *   delete:
  *      description: supprimer un réseau social
  *      tags:
@@ -133,7 +146,7 @@ router.delete('/:id', deleteOne);
 router.delete('/', deleteAll);
 /**
  * @swagger
- * /reseauxSociaux:
+ * /reseauxsociaux:
  *   delete:
  *      description: supprimer tous les réseaux sociaux
  *      tags:

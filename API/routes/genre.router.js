@@ -42,12 +42,6 @@ router.get("/", findAll);
  *      description: Trouver les genres pour le nom donné
  *      tags:
  *          - genre
- *      parameters:
- *          - in: query
- *            name: nom
- *            description: Nom du genre
- *            required: false
- *            type: string
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -92,6 +86,19 @@ router.put("/:id", update);
  *            description: ID du genre
  *            required: false
  *            type: string
+ *          - in: body
+ *            name: genre
+ *            description: Le genre à modifier
+ *            schema:
+ *              type: object
+ *              required:
+ *                - libelle
+ *              properties:
+ *                libelle:
+ *                  type: string
+ *                  minLength: 1
+ *                  maxLength: 255
+ *                  example: "Rock"
  *      responses:
  *          '200':
  *              description: Resource updated successfully

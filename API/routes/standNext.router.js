@@ -53,12 +53,6 @@ router.get('/', findAll);
  *      description: afficher tous les stands 
  *      tags:
  *          - standNext
- *      parameters:
- *          - in: query
- *            name: libelle
- *            description: libelle d'un stand pour filtrer
- *            required: false
- *            type: string         
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -102,7 +96,32 @@ router.put('/:id', update);
  *            name: id
  *            description: id du stand à modifier
  *            required: true
- *            type: integer         
+ *            type: integer  
+ *          - in: body
+ *            name: stand
+ *            description: Le stand à modifier
+ *            schema:
+ *                type: object
+ *                required:
+ *                  - libelle
+ *                  - latitude
+ *                  - longitude
+ *                  - id_typestand
+ *                properties:
+ *                  libelle:
+ *                     type: string
+ *                     minLength: 1
+ *                     maxLength: 255
+ *                     example: "Kebab du coin"
+ *                  latitude:
+ *                     type: float
+ *                     example: 48.856614
+ *                  longitude:
+ *                     type: float
+ *                     example: 2.3522219
+ *                  id_typestand:
+ *                     type: integer
+ *                     example: 1       
  *      responses:
  *          '200':
  *              description: Resource updated successfully

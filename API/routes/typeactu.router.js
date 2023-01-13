@@ -40,13 +40,7 @@ router.get('/', findAll)
  *   get:
  *      description: afficher tous les types d'actualités 
  *      tags:
- *          - Type Actu
- *      parameters:
- *          - in: query
- *            name: nom
- *            description: nom d'une actualité pour filtrer
- *            required: false
- *            type: string         
+ *          - Type Actu   
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -91,6 +85,19 @@ router.put('/:id', update)
  *            description: ID du type d'actualité
  *            required: true
  *            type: string
+ *          - in: body
+ *            name: typeactu
+ *            description: Le type d'actualité à modifier
+ *            schema:
+ *              type: object
+ *              required:
+ *                - libelle
+ *              properties:
+ *                libelle:
+ *                  type: string
+ *                  minLength: 1
+ *                  maxLength: 255
+ *                  example: Intérieur
  *      responses:
  *          '200':
  *              description: Resource updated successfully

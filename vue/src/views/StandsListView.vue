@@ -125,7 +125,7 @@ export default {
       }
     },
     deleteStand(id) {
-      Vue.axios.delete('http://localhost:3000/stand/' + id)
+      Vue.axios.delete(`http://localhost:3000${this.$store.state.sselected}/stand/` + id)
           .then(() => {
             this.$store.dispatch('getStands');
           })
@@ -135,7 +135,7 @@ export default {
     },
     deleteAll() {
       if (confirm("Voulez-vous vraiment supprimer tous les stands ?")) {
-        Vue.axios.delete('http://localhost:3000/stand')
+        Vue.axios.delete(`http://localhost:3000${this.$store.state.sselected}/stand`)
             .then(() => {
               this.$store.dispatch('getStands');
             })

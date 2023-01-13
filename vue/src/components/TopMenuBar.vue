@@ -1,9 +1,11 @@
 <template>
   <nav>
     <div class="topbar">
+      <div class="d-inline-flex">
       <v-menu
           down
           :offset-y="true"
+          class="ma-1"
       >
         <template v-slot:activator="{ on, attrs }">
           <v-btn
@@ -26,6 +28,26 @@
           </v-list-item>
         </v-list>
       </v-menu>
+      <v-btn
+          color="red"
+          dark
+          style="display: inline-block"
+          class="ma-1"
+          @click="$emit('switch-saison')"
+      >{{btnChange}}</v-btn>
+      <v-select
+          v-model="defaultSelect"
+          :items="saisonSelect"
+          label="Saison"
+          outlined
+          dense
+          hide-details
+          background-color="green"
+          class="select ma-1"
+          style="width: 15%"
+          @change="$emit('change-saison', defaultSelect)"
+          ></v-select>
+      </div>
     </div>
   </nav>
 </template>
@@ -33,10 +55,23 @@
 <script>
 export default {
   name: "TopMenuBar",
+  data: () => ({
+    defaultSelect: null
+  }),
   props: {
     user: Object,
-    items: Array
+    items: Array,
+    btnChange: String,
+    saisonSelect: Array,
   },
+  methods: {
+    test() {
+      console.log("salut");
+    }
+  },
+  created() {
+    this.defaultSelect = this.saisonSelect[0];
+  }
 }
 </script>
 

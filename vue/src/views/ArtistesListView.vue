@@ -77,7 +77,7 @@
       <v-btn
           class="ma-6 addDeleteBtn"
           :height="56"
-          :href="'/artiste/add'"
+          :to="'/artiste/add'"
           color="success">Ajouter artiste&emsp;<v-icon>mdi-plus-box-outline</v-icon>
       </v-btn>
       <v-btn
@@ -178,7 +178,7 @@ export default {
     },
 
     deleteArtiste(id) {
-      Vue.axios.delete("http://localhost:3000/artiste/" + id)
+      Vue.axios.delete(`http://localhost:3000${this.$store.state.sselected}/artiste/` + id)
           .then(() => {
             this.$store.dispatch("getArtistes");
           })
@@ -188,7 +188,7 @@ export default {
     },
     deleteAll() {
       if (confirm("Voulez-vous vraiment supprimer tous les artistes ?")) {
-        Vue.axios.delete("http://localhost:3000/artiste")
+        Vue.axios.delete(`http://localhost:3000${this.$store.state.sselected}/artiste`)
             .then(() => {
               this.$store.dispatch("getArtistes");
             })
@@ -247,7 +247,7 @@ export default {
       })
     },
   },
-  mounted() {
+  created() {
     if (this.artistes.length === 0) {
       this.$store.dispatch("getArtistes");
     }

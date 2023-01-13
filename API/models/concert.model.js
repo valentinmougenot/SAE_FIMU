@@ -2,7 +2,7 @@ export const concert = (sequelize, Sequelize) => {
     const Concert = sequelize.define("concerts", {
         id: {
             type: Sequelize.INTEGER,
-            allowNull: false
+            autoIncrement: true,
         },
         id_scene: {
             type: Sequelize.INTEGER,
@@ -28,9 +28,6 @@ export const concert = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             primaryKey: true,
             allowNull: false,
-            validate: {
-                isTime: true
-            }
         },
         date_debut: {
             type: Sequelize.STRING,

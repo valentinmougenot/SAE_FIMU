@@ -50,7 +50,7 @@ export default {
   }),
   methods: {
     async getArtiste() {
-      return await Vue.axios.get("http://localhost:3000/artiste/" + this.$route.params.id)
+      return await Vue.axios.get(`http://localhost:3000${this.$store.state.sselected}/artiste/` + this.$route.params.id)
           .then(response => {
             this.artiste = response.data
           })
