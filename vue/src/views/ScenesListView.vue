@@ -93,6 +93,7 @@ export default {
     deleteScene(id) {
       Vue.axios.delete(`http://localhost:3000${this.$store.state.sselected}/scene/` + id)
           .then(response => {
+            this.$store.dispatch('getScenes');
             return response.data
           })
           .catch(error => {
@@ -103,7 +104,7 @@ export default {
       if (confirm("Voulez-vous vraiment supprimer toutes les scènes ?")) {
         Vue.axios.delete(`http://localhost:3000${this.$store.state.sselected}/scene`)
             .then(response => {
-              this.getScenes()
+              this.$store.dispatch('getScenes');
               return response.data
             })
             .catch(error => {

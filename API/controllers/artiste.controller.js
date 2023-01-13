@@ -116,13 +116,14 @@ export const update = (req, res) => {
 };
 
 export const deleteOne = (req, res) => {
+    console.log(req.session)
     if (!req.session.identifiant) {
         res.status(401).send({
             message: "Vous devez être connecté pour supprimer un artiste"
         });
         return;
     }
-    if (req.session.role != 'Administateur') {
+    if (req.session.role != 'Administrateur') {
         res.status(401).send({
             message: "Vous devez être administrateur pour supprimer un artiste"
         });
@@ -159,7 +160,7 @@ export const deleteAll = (req, res) => {
         });
         return;
     }
-    if (req.session.role != 'Administateur') {
+    if (req.session.role != 'Administrateur') {
         res.status(401).send({
             message: "Vous devez être administrateur pour supprimer les artistes"
         });
