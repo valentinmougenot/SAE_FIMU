@@ -26,7 +26,7 @@
       </v-col>
       <v-col cols="12" sm="12" md="12" v-else>
         <v-main>
-          <router-view ref="myComponent"/>
+          <router-view/>
         </v-main>
       </v-col>
     </v-row>
@@ -34,7 +34,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import {post} from "@/services/axios.service.js";
 import {mapActions, mapState} from "vuex";
 export default {
   name: 'App',
@@ -44,12 +44,11 @@ export default {
   },
   data: () => ({
     menuData: [],
-    tab: [],
   }),
   methods: {
     ...mapActions(['getArtistes', 'getScenes', "getTypescenes", "getCategories", "getGenres", "getPays", "getConcerts"]),
     logout() {
-      Vue.axios.post('http://localhost:3000/utilisateur/logout')
+      post('utilisateur/logout')
           .then(() => {
             this.$router.push('/login');
           })
@@ -58,25 +57,27 @@ export default {
           });
       },
     selectItem(index) {
-      if (index === 0 && this.$route.path !== '/artiste') {
+      if (index === 0) {
         this.$router.push('/artiste');
-      } else if (index === 1 && this.$route.path !== '/scene') {
+      } else if (index === 1) {
         this.$router.push('/scene');
-      } else if (index === 2 && this.$route.path !== '/concert') {
+      } else if (index === 2) {
         this.$router.push('/concert');
-      } else if (index === 3 && this.$route.path !== '/categorie') {
+      } else if (index === 3) {
+        this.$router.push('/planning');
+      } else if (index === 4) {
         this.$router.push('/categorie');
-      } else if (index === 4 && this.$route.path !== '/genre') {
+      } else if (index === 5) {
         this.$router.push('/genre');
-      } else if (index === 5 && this.$route.path !== '/actualite') {
+      } else if (index === 6) {
         this.$router.push('/actualite');
-      } else if (index === 6 && this.$route.path !== '/notification') {
+      } else if (index === 7) {
         this.$router.push('/notification');
-      } else if (index === 7 && this.$route.path !== '/stand') {
+      } else if (index === 8) {
         this.$router.push('/stand');
-      } else if (index === 8 && this.$route.path !== '/service') {
+      } else if (index === 9) {
         this.$router.push('/service');
-      } else if (index === 9 && this.$route.path !== '/utilisateur') {
+      } else if (index === 10) {
         this.$router.push('/utilisateur');
       }
     },
@@ -86,6 +87,7 @@ export default {
           {text: 'Artistes', selected : false},
           {text: 'Scènes', selected: false},
           {text: 'Concerts', selected: false},
+          {text: 'Planning', selected: false},
           {text: 'Catégories', selected: false},
           {text: 'Genres', selected: false},
           {text: 'Actualités', selected: false},
@@ -100,6 +102,7 @@ export default {
           {text: 'Artistes', selected : false},
           {text: 'Scènes', selected: false},
           {text: 'Concerts', selected: false},
+          {text: 'Planning', selected: false},
           {text: 'Catégories', selected: false},
           {text: 'Genres', selected: false},
           {text: 'Actualités', selected: false},
@@ -107,22 +110,6 @@ export default {
           {text: 'Stands', selected: false},
           {text: 'Services', selected: false},
         ];
-      }
-    },
-    initTab() {
-      this.tab.push({
-        text: "Saison " + this.saison[1].annee.toString() + " (actuelle)",
-        value: 0
-      })
-      this.tab.push({
-        text: "Saison " + this.saison[0].annee + " (suivante)",
-        value: 1
-      })
-      for(let i = 2; i < this.saison.length; i++) {
-        this.tab.push({
-          text: "Saison " + this.saison[i].annee,
-          value: i
-        })
       }
     },
     userBtnClick(index) {
@@ -133,9 +120,9 @@ export default {
     },
     switchSaison() {
       if (confirm("Voulez-vous vraiment changer de saison ?")) {
-        Vue.axios.post('http://localhost:3000/saison/migrate-data-previous')
+        post('saison/migrate-data-previous')
             .then(() => {
-              Vue.axios.post('http://localhost:3000/saison/migrate-data-current')
+              post('saison/migrate-data-current')
                   .then(() => {
                     window.location.reload();
                   })
@@ -170,13 +157,33 @@ export default {
       await this.$store.commit('updateScenes', []);
       await this.$store.commit('updateStands', []);
       await this.$store.commit('updateConcerts', []);
-      this.$router.push('/artiste', {force: true});
+      this.$router.push('/artiste');
     }
    },
   computed: {
     ...mapState(['saison']),
     showNavbars() {
       return !this.$route.path.includes('/login');
+    },
+    tab() {
+      if (this.saison.length === 0)
+        return [];
+      let tab = [];
+      tab.push({
+        text: "Saison " + this.saison[1].annee + " (actuelle)",
+        value: 0
+      })
+      tab.push({
+        text: "Saison " + this.saison[0].annee + " (suivante)",
+        value: 1
+      })
+      for(let i = 2; i < this.saison.length; i++) {
+        tab.push({
+          text: "Saison " + this.saison[i].annee,
+          value: i
+        })
+      }
+      return tab;
     },
   },
   watch:{
@@ -190,20 +197,22 @@ export default {
         this.menuData[1].selected = true;
       } else if (this.$route.path.includes('/concert')) {
         this.menuData[2].selected = true;
-      } else if (this.$route.path.includes('/categorie')) {
+      }  else if (this.$route.path.includes('/planning')) {
         this.menuData[3].selected = true;
-      } else if (this.$route.path.includes('/genre')) {
+      } else if (this.$route.path.includes('/categorie')) {
         this.menuData[4].selected = true;
-      } else if (this.$route.path.includes('/actualite')) {
+      } else if (this.$route.path.includes('/genre')) {
         this.menuData[5].selected = true;
-      } else if (this.$route.path.includes('/notification')) {
+      } else if (this.$route.path.includes('/actualite')) {
         this.menuData[6].selected = true;
-      } else if (this.$route.path.includes('/stand')) {
+      } else if (this.$route.path.includes('/notification')) {
         this.menuData[7].selected = true;
-      } else if (this.$route.path.includes('/service')) {
+      } else if (this.$route.path.includes('/stand')) {
         this.menuData[8].selected = true;
-      } else if (this.$route.path.includes('/utilisateur')) {
+      } else if (this.$route.path.includes('/service')) {
         this.menuData[9].selected = true;
+      } else if (this.$route.path.includes('/utilisateur')) {
+        this.menuData[10].selected = true;
       }
     },
 
@@ -213,8 +222,6 @@ export default {
       await this.$store.dispatch('getSaison');
     }
     this.initMenuData();
-    this.initTab();
-
   },
 };
 </script>

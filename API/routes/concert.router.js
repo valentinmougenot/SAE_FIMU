@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router()
 
-import {create, findAll, findOne, findByDate, update, deleteOne, deleteAll, getDates} from '../controllers/concert.controller.js'
+import {create, findAll, findOne, update, deleteOne, deleteAll, getDates, heureMin, heureMax} from '../controllers/concert.controller.js'
 
 router.post('/', create)
 /**
@@ -10,7 +10,7 @@ router.post('/', create)
  *   post:
  *      description: Create a new concert
  *      tags:
- *          - Concerts
+ *          - concert
  *      parameters:
  *          - in: body
  *            name: concert
@@ -62,7 +62,14 @@ router.get('/', findAll)
  *   get:
  *      description: Trouver les concerts pour le nom donné
  *      tags:
- *          - Concerts
+ *          - concert
+ *      parameters:
+ *          - in: query
+ *            date: date
+ *            description: Date du concert
+ *            required: false
+ *            type: string
+ *            example: "2022-12-10"
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -79,7 +86,7 @@ router.get('/date', getDates);
  *   get:
  *      description: Trouver toutes les dates des concerts
  *      tags:
- *          - Concerts
+ *          - concert
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -89,6 +96,54 @@ router.get('/date', getDates);
  *              description: Bad request
 */
 
+router.get('/heuremin', heureMin);
+/**
+ * @swagger
+ * /concert/heuremin:
+ *   get:
+ *      description: Trouver l'heure de début du concert le plus tôt
+ *      tags:
+ *          - concert
+ *      parameters:
+ *          - in: query
+ *            date: date
+ *            description: Date du concert
+ *            required: false
+ *            type: string
+ *            example: "2022-12-10"
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
+
+router.get('/heuremax', heureMax);
+/**
+ * @swagger
+ * /concert/heuremin:
+ *   get:
+ *      description: Trouver l'heure de début du concert le plus tôt
+ *      tags:
+ *          - concert
+ *      parameters:
+ *          - in: query
+ *            date: date
+ *            description: Date du concert
+ *            required: false
+ *            type: string
+ *            example: "2022-12-10"
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
+
 router.get('/:id', findOne)
 /**
  * @swagger
@@ -96,7 +151,7 @@ router.get('/:id', findOne)
  *   get:
  *      description: Trouver le concert pour l'id donné
  *      tags:
- *          - Concerts
+ *          - concert
  *      parameters:
  *          - in: path
  *            name: id
@@ -112,28 +167,6 @@ router.get('/:id', findOne)
  *              description: Bad request
 */
 
-router.get('/date/:date', findByDate)
-/**
- * @swagger
- * /concert/date/{date}:
- *   get:
- *      description: Trouver le concert pour la date donnée
- *      tags:
- *          - Concerts
- *      parameters:
- *          - in: path
- *            name: date
- *            description: date du concert
- *            required: true
- *            type: string
- *      responses:
- *          '200':
- *              description: Resource updated successfully
- *          '500':
- *              description: Internal server error
- *          '400':
- *              description: Bad request
-*/
 router.put('/:id', update)
 /**
  * @swagger
@@ -141,7 +174,7 @@ router.put('/:id', update)
  *   put:
  *      description: Updater le concert pour l'id donné
  *      tags:
- *          - Concerts
+ *          - concert
  *      parameters:
  *          - in: path
  *            name: id
@@ -198,7 +231,7 @@ router.delete('/:id', deleteOne)
  *   delete:
  *      description: Supprimer le concert pour l'id donné
  *      tags:
- *          - Concerts
+ *          - concert
  *      parameters:
  *          - in: path
  *            name: id
@@ -220,7 +253,7 @@ router.delete('/', deleteAll)
  *   delete:
  *      description: Supprimer tous les concerts
  *      tags:
- *          - Concerts
+ *          - concert
  *      responses:
  *          '200':
  *              description: Resource updated successfully

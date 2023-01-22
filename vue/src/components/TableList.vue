@@ -30,5 +30,5 @@ export default {
 </script>
 
 <style scoped>
-@import '../../public/css/show.css';
+@import '@/../public/css/show.css';
 </style>

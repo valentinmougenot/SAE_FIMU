@@ -10,7 +10,7 @@ router.post("/", create);
  *   post:
  *      description: Crée un nouveau pays
  *      tags:
- *          - Pays
+ *          - pays
  *      parameters:
  *          - in: body
  *            name: pays
@@ -40,7 +40,7 @@ router.get('/', findAll)
  *   get:
  *      description: Trouver les pays pour le nom donné
  *      tags:
- *          - Pays
+ *          - pays
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -56,7 +56,7 @@ router.get('/:id', findOne)
  *   get:
  *      description: Trouver le pays pour l'id donné
  *      tags:
- *          - Pays
+ *          - pays
  *      parameters:
  *          - in: path
  *            name: id
@@ -78,7 +78,7 @@ router.put('/:id', update)
  *   put:
  *      description: Updater le pays pour l'id donné
  *      tags:
- *          - Pays
+ *          - pays
  *      parameters:
  *          - in: path
  *            name: id
@@ -113,7 +113,7 @@ router.delete('/:id', deleteOne)
  *   delete:
  *      description: Supprimer le pays pour l'id donné
  *      tags:
- *          - Pays
+ *          - pays
  *      parameters:
  *          - in: path
  *            name: id
@@ -135,7 +135,7 @@ router.delete('/', deleteAll)
  *   delete:
  *      description: Supprimer tous les pays
  *      tags:
- *          - Pays
+ *          - pays
  *      responses:
  *          '200':
  *              description: Resource updated successfully

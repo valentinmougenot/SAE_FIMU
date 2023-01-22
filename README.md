@@ -54,14 +54,15 @@ CREATE SCHEMA previousseasons;
 4. Fill the database with the data
 
 ```bash
+cd ../Ressources/BDD
 ./init_db.sh <login> <server>
 ```
 
 5. Edit the configuration file
 
 ```bash
-cd API
-nano config.js
+cd ../../API/db
+nano db.config.js
 ```
 
 Replace the username and password with your own.
@@ -69,6 +70,7 @@ Replace the username and password with your own.
 6. Run the API
 
 ```bash
+cd ..
 npm start
 ```
 
@@ -85,7 +87,7 @@ Open your browser and go to [http://localhost:8080/login](http://localhost:8080/
 
 ![Login Page](./images/login_page.png)
 
-The default login is `admin` and the default password is `admin`.
+The default login is `admin` and the default password is `admin`. You will be logged as an administrator. If you want to log as an editor, you can use the login `editor` and the password `editor`.
 
 And that's it ! You can now try the web interface.
 

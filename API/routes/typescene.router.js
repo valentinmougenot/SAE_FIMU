@@ -10,7 +10,7 @@ router.post('/', create)
  *   post:
  *      description: Ajout d'un type de scène
  *      tags:
- *          - Type Scene
+ *          - typeScene
  *      parameters:
  *          - in: body
  *            name: typescene
@@ -40,7 +40,7 @@ router.get('/', findAll)
  *   get:
  *      description: afficher tous les types de scènes 
  *      tags:
- *          - Type Scene      
+ *          - typeScene      
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -56,7 +56,7 @@ router.get('/:id', findOne)
  *   get:
  *      description: Trouver le type de scène par son id
  *      tags:
- *          - Type Scene
+ *          - typeScene
  *      parameters:
  *          - in: path
  *            name: id
@@ -78,7 +78,7 @@ router.put('/:id', update)
  *   put:
  *      description: Updater le type de scène par son id
  *      tags:
- *          - Type Scene
+ *          - typeScene
  *      parameters:
  *          - in: path
  *            name: id
@@ -113,7 +113,7 @@ router.delete('/:id', deleteOne)
  *   delete:
  *      description: Supprimer le type de scène par son id
  *      tags:
- *          - Type Scene
+ *          - typeScene
  *      parameters:
  *          - in: path
  *            name: id
@@ -135,7 +135,7 @@ router.delete('/', deleteAll)
  *   delete:
  *      description: Supprimer tous les types de scènes
  *      tags:
- *          - Type Scene
+ *          - typeScene
  *      responses:
  *          '200':
  *              description: Resource updated successfully

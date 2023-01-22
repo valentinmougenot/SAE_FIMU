@@ -10,7 +10,7 @@ router.post('/', create)
  *   post:
  *      description: Ajout d'un type d'actualité
  *      tags:
- *          - Type Actu
+ *          - typeActu
  *      parameters:
  *          - in: body
  *            name: typeactu
@@ -40,7 +40,7 @@ router.get('/', findAll)
  *   get:
  *      description: afficher tous les types d'actualités 
  *      tags:
- *          - Type Actu   
+ *          - typeActu   
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -56,7 +56,7 @@ router.get('/:id', findOne)
  *   get:
  *      description: Trouver le type d'actualité par son id
  *      tags:
- *          - Type Actu
+ *          - typeActu
  *      parameters:
  *          - in: path
  *            name: id
@@ -78,7 +78,7 @@ router.put('/:id', update)
  *   put:
  *      description: Updater le type d'actualité par son id
  *      tags:
- *          - Type Actu
+ *          - typeActu
  *      parameters:
  *          - in: path
  *            name: id
@@ -113,7 +113,7 @@ router.delete('/:id', deleteOne)
  *   delete:
  *      description: Supprimer le type d'actualité par son id
  *      tags:
- *          - Type Actu
+ *          - typeActu
  *      parameters:
  *          - in: path
  *            name: id
@@ -135,7 +135,7 @@ router.delete('/', deleteAll)
  *   delete:
  *      description: Supprimer tous les types d'actualités
  *      tags:
- *          - Type Actu
+ *          - typeActu
  *      responses:
  *          '200':
  *              description: Resource updated successfully

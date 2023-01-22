@@ -26,172 +26,172 @@ const routes = [
   {
     path: '/artiste',
     name: 'artiste',
-    component: () => import('../views/ArtistesListView.vue')
+    component: () => import('../views/Artiste/ArtistesListView.vue')
   },
   {
     path: '/artiste/add',
     name: 'artiste-add',
-    component: () => import('../views/ArtisteAddView.vue')
+    component: () => import('../views/Artiste/ArtisteAddView.vue')
   },
   {
     path: '/artiste/:id',
     name: 'artiste-detail',
-    component: () => import('../views/ArtisteDetailView.vue')
+    component: () => import('../views/Artiste/ArtisteDetailView.vue')
   },
   {
     path: '/artiste/:id/edit',
     name: 'artiste-edit',
-    component: () => import('../views/ArtisteEditView.vue')
+    component: () => import('../views/Artiste/ArtisteEditView.vue')
   },
   {
     path: '/scene',
     name: 'scene',
-    component: () => import('../views/ScenesListView.vue')
+    component: () => import('../views/Scene/ScenesListView.vue')
   },
   {
     path: '/scene/add',
     name: 'scene-add',
-    component: () => import('../views/SceneAddView.vue')
+    component: () => import('../views/Scene/SceneAddView.vue')
   },
   {
     path: '/scene/:id',
     name: 'scene-detail',
-    component: () => import('../views/SceneDetailView.vue')
+    component: () => import('../views/Scene/SceneDetailView.vue')
   },
   {
     path: '/scene/:id/edit',
     name: 'scene-edit',
-    component: () => import('../views/SceneEditView.vue')
+    component: () => import('../views/Scene/SceneEditView.vue')
   },
   {
     path: '/categorie',
     name: 'categorie',
-    component: () => import('../views/CategoriesListView.vue')
+    component: () => import('../views/Categorie/CategoriesListView.vue')
   },
   {
     path: '/categorie/add',
     name: 'categorie-add',
-    component: () => import('../views/CategorieAddView.vue')
+    component: () => import('../views/Categorie/CategorieAddView.vue')
   },
   {
     path: '/categorie/:id/edit',
     name: 'categorie-edit',
-    component: () => import('../views/CategorieEditView.vue')
+    component: () => import('../views/Categorie/CategorieEditView.vue')
   },
   {
     path: '/genre',
     name: 'genre',
-    component: () => import('../views/GenresListView.vue')
+    component: () => import('../views/Genre/GenresListView.vue')
   },
   {
     path: '/genre/add',
     name: 'genre-add',
-    component: () => import('../views/GenreAddView.vue')
+    component: () => import('../views/Genre/GenreAddView.vue')
   },
   {
     path: '/genre/:id/edit',
     name: 'genre-edit',
-    component: () => import('../views/GenreEditView.vue')
+    component: () => import('../views/Genre/GenreEditView.vue')
   },
   {
     path: '/utilisateur',
     name: 'utilisateur',
-    component: () => import('../views/UtilisateursListView.vue')
+    component: () => import('../views/Utilisateur/UtilisateursListView.vue')
   },
   {
     path: '/utilisateur/add',
     name: 'utilisateur-add',
-    component: () => import('../views/UtilisateurAddView.vue')
+    component: () => import('../views/Utilisateur/UtilisateurAddView.vue')
   },
   {
     path: '/utilisateur/:id/edit',
     name: 'utilisateur-edit',
-    component: () => import('../views/UtilisateurEditView.vue')
+    component: () => import('../views/Utilisateur/UtilisateurEditView.vue')
   },
   {
     path: '/password/:id/edit',
     name: 'password-edit',
-    component: () => import('../views/PasswordEditView.vue')
+    component: () => import('../views/Utilisateur/PasswordEditView.vue')
   },
   {
     path: '/concert',
     name: 'concert',
-    component: () => import('../views/ConcertsView.vue')
+    component: () => import('../views/Concert/ConcertsListView.vue')
   },
   {
     path: '/concert/add',
     name: 'concert-add',
-    component: () => import('../views/ConcertAddView.vue')
-  },
-  {
-  path: '/concert/:id',
-  name: 'concert-detail',
-  component: () => import('../views/ConcertDetailView.vue')
+    component: () => import('../views/Concert/ConcertAddView.vue')
   },
   {
     path: '/concert/:id/edit',
     name: 'concert-edit',
-    component: () => import('../views/ConcertEditView.vue')
+    component: () => import('../views/Concert/ConcertEditView.vue')
+  },
+  {
+    path: '/planning',
+    name: 'planning',
+    component: () => import('../views/Concert/PlanningView.vue')
   },
   {
     path: '/actualite',
     name: 'actualite',
-    component: () => import('../views/./ActualitesView')
+    component: () => import('../views/Actualite/ActualitesView.vue')
   },
   {
     path: '/actualite/add',
     name: 'actualite-add',
-    component: () => import('../views/ActualiteAddView.vue')
+    component: () => import('../views/Actualite/ActualiteAddView.vue')
   },
   {
     path: '/actualite/:id/edit',
     name: 'actualite-edit',
-    component: () => import('../views/ActualiteEditView.vue')
+    component: () => import('../views/Actualite/ActualiteEditView.vue')
   },
   {
     path: '/notification',
     name: 'notification',
-    component: () => import('../views/./NotificationsView')
+    component: () => import('../views/Notification/NotificationsView.vue')
   },
   {
     path: '/notification/add',
     name: 'notification-add',
-    component: () => import('../views/NotificationAddView.vue')
+    component: () => import('../views/Notification/NotificationAddView.vue')
   },
   {
     path: '/notification/:id/edit',
     name: 'notification-edit',
-    component: () => import('../views/NotificationEditView.vue')
+    component: () => import('../views/Notification/NotificationEditView.vue')
   },
   {
     path: '/stand',
     name: 'stand',
-    component: () => import('../views/./StandsListView')
+    component: () => import('../views/Stand/StandsListView.vue')
   },
   {
     path: '/stand/add',
     name: 'stand-add',
-    component: () => import('../views/StandAddView.vue')
+    component: () => import('../views/Stand/StandAddView.vue')
   },
   {
     path: '/stand/:id/edit',
     name: 'stand-edit',
-    component: () => import('../views/StandEditView.vue')
+    component: () => import('../views/Stand/StandEditView.vue')
   },
   {
     path: '/service',
     name: 'service',
-    component: () => import('../views/./ServicesListView')
+    component: () => import('../views/Service/ServicesListView.vue')
   },
   {
     path: '/service/add',
     name: 'service-add',
-    component: () => import('../views/ServiceAddView.vue')
+    component: () => import('../views/Service/ServiceAddView.vue')
   },
   {
     path: '/service/:id/edit',
     name: 'service-edit',
-    component: () => import('../views/ServiceEditView.vue')
+    component: () => import('../views/Service/ServiceEditView.vue')
   }
 ]
 

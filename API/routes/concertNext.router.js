@@ -1,7 +1,7 @@
 import express from 'express';
 const router = express.Router()
 
-import {create, findAll, findOne, findByDate, update, deleteOne, deleteAll, getDates} from '../controllers/concertNext.controller.js'
+import {create, findAll, findOne, update, deleteOne, deleteAll, getDates, heureMin, heureMax} from '../controllers/concertNext.controller.js'
 
 router.post('/', create);
 /**
@@ -65,10 +65,11 @@ router.get('/', findAll);
  *          - concertNext
  *      parameters:
  *          - in: query
- *            name: nom
- *            description: Nom du prochain concert
+ *            date: date
+ *            description: Date du concert
  *            required: false
  *            type: string
+ *            example: "2022-12-10"
  *      responses:
  *          '200':
  *              description: Resource updated successfully
@@ -93,6 +94,55 @@ router.get('/date', getDates);
  *          '400':
  *              description: Bad request
 */
+
+router.get('/heuremin', heureMin);
+/**
+ * @swagger
+ * /next/concert/heuremin:
+ *   get:
+ *      description: Trouver l'heure de début du concert le plus tôt
+ *      tags:
+ *          - concertNext
+ *      parameters:
+ *          - in: query
+ *            date: date
+ *            description: Date du concert
+ *            required: false
+ *            type: string
+ *            example: "2023-12-10"
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
+
+router.get('/heuremax', heureMax);
+/**
+ * @swagger
+ * /next/concert/heuremin:
+ *   get:
+ *      description: Trouver l'heure de fin du concert le plus tard
+ *      tags:
+ *          - concertNext
+ *      parameters:
+ *          - in: query
+ *            date: date
+ *            description: Date du concert
+ *            required: false
+ *            type: string
+ *            example: "2023-12-10"
+ *      responses:
+ *          '200':
+ *              description: Resource updated successfully
+ *          '500':
+ *              description: Internal server error
+ *          '400':
+ *              description: Bad request
+ */
+
 router.get('/:id', findOne);
 /**
  * @swagger
@@ -115,28 +165,7 @@ router.get('/:id', findOne);
  *          '400':
  *              description: Bad request
 */
-router.get('/date/:date', findByDate)
-/**
- * @swagger
- * /next/concert/date/{date}:
- *   get:
- *      description: Trouver le concert pour la date donnée
- *      tags:
- *          - concertNext
- *      parameters:
- *          - in: path
- *            name: date
- *            description: date du concert
- *            required: true
- *            type: string
- *      responses:
- *          '200':
- *              description: Resource updated successfully
- *          '500':
- *              description: Internal server error
- *          '400':
- *              description: Bad request
-*/
+
 router.put('/:id', update)
 /**
  * @swagger

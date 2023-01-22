@@ -38,7 +38,7 @@
 </template>
 
 <script>
-import Vue from 'vue';
+import {post} from "@/services/axios.service";
 export default {
   name: "LoginView",
   data: () => ({
@@ -62,7 +62,7 @@ export default {
   }),
   methods: {
     login() {
-      Vue.axios.post("http://localhost:3000/utilisateur/login", {
+      post("/utilisateur/login", {
         identifiant: this.identifiant,
         mot_de_passe: this.password,
       }).then((response) => {

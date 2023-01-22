@@ -196,6 +196,7 @@ export const deleteAll = (req, res) => {
 export const login = (req, res) => {
     const identifiant = req.body.identifiant;
     const mot_de_passe = req.body.mot_de_passe;
+    
     Utilisateur.findOne({
         where: {
             identifiant: identifiant,

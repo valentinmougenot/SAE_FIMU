@@ -33,10 +33,18 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
+    const date = req.query.date;
+    const condition = date ? {date_debut: date} : null;
     Concert.findAll(
-        {include: [{model:db.artisteNext, include: [{model: db.categorie}, {model: db.genre}]},
-            {model:db.sceneNext},
-            {model:db.saison}]})
+        { include: [{model:db.artiste, include: [{model: db.categorie}, {model: db.genre}]},
+            {model:db.scene},
+            {model:db.saison}],
+            where: condition,
+            order: [
+                ['date_debut', 'ASC'],
+                ['id_scene', 'ASC'],
+                ['heure_debut', 'ASC']
+            ]})
         .then(data => {
             res.send(data);
         })
@@ -60,22 +68,6 @@ export const findOne = (req, res) => {
         .catch(err => {
             res.status(500).send({
                 message: "Error retrieving Concert with id=" + id
-            });
-        });
-}
-
-export const findByDate = (req, res) => {
-    const date = req.params.date;
-
-    Concert.findAll({where: {date_debut: date}, include: [{model:db.artisteNext, include: [{model: db.categorie}, {model: db.genre}]},
-        {model:db.sceneNext},
-        {model:db.saison}]})
-        .then(data => {
-            res.send(data);
-        })
-        .catch(err => {
-            res.status(500).send({
-                message: "Error retrieving Concert with date=" + date
             });
         });
 }
@@ -180,6 +172,72 @@ export const getDates = (req, res) => {
     Concert.findAll({attributes: ['date_debut'], group: ['date_debut'], order: [['date_debut', 'ASC']]})
         .then(data => {
             res.send(data);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Concert."
+            });
+        });
+}
+
+export const heureMin = (req, res) => {
+    const date = req.query.date;
+    const condition = date ? {date_debut: date} : null;
+    Concert.findAll({
+        attributes: ['heure_debut'],
+        where: condition,
+        group: ['heure_debut'],
+        order: [['heure_debut', 'ASC']],
+        limit: 1
+    })
+        .then(data => {
+            res.send(data[0]);
+        })
+        .catch(err => {
+            res.status(500).send({
+                message:
+                    err.message || "Some error occurred while retrieving Concert."
+            });
+        });
+}
+
+export const heureMax = (req, res) => {
+    const date = req.query.date;
+    const condition = date ? {date_debut: date} : null;
+
+    Concert.findAll({
+        attributes: ['heure_debut', 'duree'],
+        where: condition,
+        group: ['heure_debut', 'duree'],
+        order: [['heure_debut', 'DESC']],
+    })
+        .then(data => {
+            let l = [];
+            for (let i = 0; i < data.length; i++) {
+                const h = parseInt(data[i].duree / 60)
+                const m = data[i].duree % 60
+                let hFin = parseInt(data[i].heure_debut.split(':')[0]) + h
+                let mFin = parseInt(data[i].heure_debut.split(':')[1]) + m
+                if (mFin >= 60) {
+                    hFin += 1
+                    mFin -= 60
+                }
+                if (mFin < 10) {
+                    mFin = '0' + mFin
+                }
+                if (hFin < 10) {
+                    hFin = '0' + hFin
+                }
+                l.push(hFin + ':' + mFin)
+            }
+            let max = l[0];
+            for(const heure of l) {
+                if (heure > max) {
+                    max = heure
+                }
+            }
+            res.send({heure_fin: max})
         })
         .catch(err => {
             res.status(500).send({

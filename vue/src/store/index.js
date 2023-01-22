@@ -1,5 +1,6 @@
 import Vue from 'vue'
 import Vuex from 'vuex'
+import {get} from '@/services/axios.service'
 
 Vue.use(Vuex)
 
@@ -11,7 +12,6 @@ export default new Vuex.Store({
     categories: [],
     genres: [],
     pays: [],
-    concerts: [],
     actualites: [],
     typeactu: [],
     notifications: [],
@@ -20,6 +20,7 @@ export default new Vuex.Store({
     services: [],
     reseauxsociaux: [],
     saison: [],
+    roles: [],
     saisonSelected: "",
     yearSelected: "",
     sselected: "" // "next" si next, "" si autre
@@ -80,11 +81,14 @@ export default new Vuex.Store({
     },
     updateSselected(state, sselected) {
         state.sselected = sselected
+    },
+    updateRoles(state, roles) {
+        state.roles = roles
     }
   },
   actions: {
       async getArtistes({commit}) {
-          await Vue.axios.get(`http://localhost:3000${this.state.saisonSelected}/artiste${this.state.yearSelected}`)
+          await get(`${this.state.saisonSelected}/artiste${this.state.yearSelected}`)
               .then(response => {
                   response.data.forEach(artiste => {
                       artiste.cl = artiste.category.libelle
@@ -98,7 +102,7 @@ export default new Vuex.Store({
               });
       },
       async getScenes({commit}) {
-          await Vue.axios.get(`http://localhost:3000${this.state.sselected}/scene`)
+          await get(`${this.state.sselected}/scene`)
               .then(response => {
                   response.data.forEach(scene => {
                       scene.tsl = scene.typescene.libelle
@@ -110,7 +114,7 @@ export default new Vuex.Store({
               });
       },
       async getTypescenes({commit}) {
-          await Vue.axios.get("http://localhost:3000/typescene")
+          await get("/typescene")
               .then(response => {
                   commit('updateTypescenes', response.data)
               })
@@ -119,7 +123,7 @@ export default new Vuex.Store({
               });
       },
       async getCategories({commit}) {
-          await Vue.axios.get("http://localhost:3000/categorie")
+          await get("/categorie")
               .then(response => {
                   commit('updateCategories', response.data)
               })
@@ -128,7 +132,7 @@ export default new Vuex.Store({
               });
       },
       async getGenres({commit}) {
-          await Vue.axios.get("http://localhost:3000/genre")
+          await get("/genre")
               .then(response => {
                   commit('updateGenres', response.data)
               })
@@ -137,7 +141,7 @@ export default new Vuex.Store({
               });
       },
       async getPays({commit}) {
-          await Vue.axios.get("http://localhost:3000/pays")
+          await get("/pays")
               .then(response => {
                   commit('updatePays', response.data)
               })
@@ -145,30 +149,8 @@ export default new Vuex.Store({
                   console.log(error)
               });
       },
-      async getConcerts({commit}) {
-          console.log(`http://localhost:3000${this.state.sselected}/concert`)
-          await Vue.axios.get(`http://localhost:3000${this.state.sselected}/concert`)
-              .then(response => {
-                  response.data.map(concert => {
-                      return {
-                          id: concert.id,
-                          id_scene: concert.id_scene,
-                          artiste: concert.artiste.nom,
-                          heureDebut: parseInt(concert.date_debut.slice(0, 2)),
-                          minuteDebut: parseInt(concert.date_debut.slice(3, 5)),
-                          duree: concert.duree / 15,
-                          couleur: concert.artiste.category.couleur,
-                          genres: concert.artiste.genres.map(genre => genre.libelle)
-                      }
-                  })
-                  commit('updateConcerts', response.data)
-              })
-              .catch(error => {
-                  console.log(error)
-              });
-      },
       async getActualites({commit}) {
-          await Vue.axios.get("http://localhost:3000/actualite")
+          await get("/actualite")
               .then(response => {
                   commit('updateActualites', response.data)
               })
@@ -177,7 +159,7 @@ export default new Vuex.Store({
               });
       },
       async getTypeactu({commit}) {
-          await Vue.axios.get("http://localhost:3000/typeactu")
+          await get("/typeactu")
               .then(response => {
                   commit('updateTypeactu', response.data)
               })
@@ -186,7 +168,7 @@ export default new Vuex.Store({
               });
       },
       async getNotifications({commit}) {
-          await Vue.axios.get("http://localhost:3000/notification")
+          await get("/notification")
               .then(response => {
                   commit('updateNotifications', response.data)
               })
@@ -195,7 +177,7 @@ export default new Vuex.Store({
               });
       },
       async getStands({commit}) {
-          await Vue.axios.get(`http://localhost:3000${this.state.sselected}/stand`)
+          await get(`${this.state.sselected}/stand`)
               .then(response => {
                   response.data.forEach(stand => {
                       stand.tsl = stand.typestand.libelle
@@ -208,7 +190,7 @@ export default new Vuex.Store({
               });
       },
       async getTypestands({commit}) {
-          await Vue.axios.get("http://localhost:3000/typestand")
+          await get("/typestand")
               .then(response => {
                   commit('updateTypestands', response.data)
               })
@@ -218,7 +200,7 @@ export default new Vuex.Store({
               );
       },
       async getServices({commit}) {
-          await Vue.axios.get("http://localhost:3000/service")
+          await get("/service")
               .then(response => {
                   commit('updateServices', response.data)
               })
@@ -227,7 +209,7 @@ export default new Vuex.Store({
               });
       },
       async getReseauxsociaux({commit}) {
-          await Vue.axios.get("http://localhost:3000/reseauxsociaux")
+          await get("/reseauxsociaux")
               .then(response => {
                   commit('updateReseauxsociaux', response.data)
               })
@@ -236,7 +218,7 @@ export default new Vuex.Store({
               });
       },
         async getSaison({commit}) {
-            await Vue.axios.get("http://localhost:3000/saison")
+            await get("/saison")
                 .then(response => {
                     commit('updateSaison', response.data)
                 })
@@ -244,8 +226,16 @@ export default new Vuex.Store({
                     console.log(error)
                 });
         },
+        async getRoles({commit}) {
+            await get("/role")
+                .then(response => {
+                    commit('updateRoles', response.data)
+                })
+                .catch(error => {
+                    console.log(error)
+                });
+        },
       selectSaison({commit}, data) {
-          console.log(data)
         commit('updateSaisonSelected', data.saison);
         commit('updateYearSelected', data.year);
         commit('updateSselected', data.sselected);

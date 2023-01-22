@@ -76,5 +76,5 @@ export default {
 </script>
 
 <style scoped>
-@import '../../public/css/navbar.css';
+@import '@/../public/css/navbar.css';
 </style>
