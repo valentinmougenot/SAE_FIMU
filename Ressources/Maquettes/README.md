@@ -9,4 +9,4 @@ If you follow this link, you will see this page:
 
 ![Figma](/images/figma.png)
 
-If you want tou switch between the models, you can use the blue circled button on the top left of the page. If you want to run the preview, you can use the red circled button on the top right of the page.
+If you want to switch between the models, you can use the blue circled button on the top left of the page. If you want to run the preview, you can use the red circled button on the top right of the page.
