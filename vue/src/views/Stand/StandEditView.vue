@@ -92,11 +92,11 @@ export default {
     },
     async editStand() {
        await remove("propose/stand/" + this.$route.params.id)
-        .then(() => {
-          put("stand/" + this.$route.params.id, this.stand)
+        .then(async () => {
+          await put("stand/" + this.$route.params.id, this.stand)
             .then(() => {
-              this.id_services.forEach((id_service) => {
-                post("propose", {
+              this.id_services.forEach(async (id_service) => {
+                await post("propose", {
                   id_stand: this.$route.params.id,
                   id_service: id_service,
                 })
@@ -104,10 +104,6 @@ export default {
                       alert(error.response.data.message);
                     });
             })})
-              .then(() => {
-                this.$store.dispatch("getStands");
-                this.$router.push("/stand");
-              })
               .catch(error => {
                 alert(error.response.data.message);
               });
@@ -115,6 +111,8 @@ export default {
           .catch(error => {
             alert(error.response.data.message);
           });
+      this.$store.dispatch("getStands");
+      this.$router.push("/stand");
     }
   },
   computed: {

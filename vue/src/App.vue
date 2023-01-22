@@ -35,7 +35,7 @@
 
 <script>
 import {post} from "@/services/axios.service.js";
-import {mapActions, mapState} from "vuex";
+import {mapState} from "vuex";
 export default {
   name: 'App',
   components: {
@@ -46,7 +46,6 @@ export default {
     menuData: [],
   }),
   methods: {
-    ...mapActions(['getArtistes', 'getScenes', "getTypescenes", "getCategories", "getGenres", "getPays", "getConcerts"]),
     logout() {
       post('utilisateur/logout')
           .then(() => {

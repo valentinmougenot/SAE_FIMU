@@ -51,7 +51,7 @@
 </template>
 
 <script>
-import { post } from "axios";
+import { post } from "@/services/axios.service.js"
 export default {
   name: "ConcertAddView",
   data: () => {
@@ -72,7 +72,6 @@ export default {
       this.concert.annee = parseInt(this.concert.date_debut.slice(0, 4));
       post(`${this.$store.state.sselected}/concert`, this.concert)
         .then(() => {
-          this.$store.dispatch("getConcerts");
           this.$router.push("/concert");
         })
           .catch(error => {

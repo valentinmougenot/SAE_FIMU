@@ -78,7 +78,6 @@ export default {
       put("scene/" + this.$route.params.id, this.scene)
         .then(() => {
           this.$store.dispatch("getScenes");
-          this.$store.dispatch("getConcerts");
           this.$router.push("/scene");
         })
           .catch(error => {

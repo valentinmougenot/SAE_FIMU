@@ -70,7 +70,6 @@ export default {
       post(`${this.$store.state.sselected}/scene`, this.scene)
           .then(() => {
             this.$store.dispatch("getScenes");
-            this.$store.dispatch("getConcerts");
             this.$router.push("/scene")
           })
           .catch(error => {

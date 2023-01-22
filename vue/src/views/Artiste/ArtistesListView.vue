@@ -20,7 +20,7 @@
           outlined>
           <template v-slot:selection="{ item, index }">
             <v-chip v-if="index <= 0">
-              <span>{{ item }}</span>
+              <span>{{ item.text }}</span>
             </v-chip>
             <span
                 v-if="index === 1"
@@ -41,7 +41,7 @@
             outlined>
           <template v-slot:selection="{ item, index }">
             <v-chip v-if="index <= 1">
-              <span>{{ item }}</span>
+              <span>{{ item.text }}</span>
             </v-chip>
             <span
                 v-if="index === 2"
@@ -62,7 +62,7 @@
             outlined>
           <template v-slot:selection="{ item, index }">
             <v-chip v-if="index <= 1">
-              <span>{{ item }}</span>
+              <span>{{ item.text }}</span>
             </v-chip>
             <span
                 v-if="index === 2"

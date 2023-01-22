@@ -1,5 +1,5 @@
 import Sequelize from 'sequelize';
-import {dbConfig} from '../db.config.js';
+import {dbConfig} from '../db/db.config.js';
 import {artiste} from './artiste.model.js';
 import {scene} from './scene.model.js';
 import {categorie} from './categorie.model.js';

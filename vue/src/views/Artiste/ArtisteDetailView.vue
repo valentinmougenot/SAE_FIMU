@@ -59,8 +59,8 @@ export default {
           });
     },
   },
-  mounted() {
-    this.getArtiste();
+  async created() {
+    await this.getArtiste();
   },
   beforeCreate() {
     if (!this.$session.exists()) {
