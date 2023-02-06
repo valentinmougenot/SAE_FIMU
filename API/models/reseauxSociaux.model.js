@@ -16,7 +16,6 @@ export const reseauxSociaux = (sequelize, Sequelize) => {
             type: Sequelize.STRING,
             allowNull: false,
             validate: {
-                isUrl: true,
                 len: [1, 255]
             }
         },

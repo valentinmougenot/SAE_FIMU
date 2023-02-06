@@ -28,9 +28,7 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
-    Fait.findAll(
-        { include: [{model:db.artisteNext},
-                    {model:db.genre}]})
+    Fait.findAll()
         .then(data => {
             res.send(data);
         }

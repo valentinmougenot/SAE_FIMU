@@ -122,7 +122,7 @@ router.get('/heuremin', heureMin);
 router.get('/heuremax', heureMax);
 /**
  * @swagger
- * /next/concert/heuremin:
+ * /next/concert/heuremax:
  *   get:
  *      description: Trouver l'heure de fin du concert le plus tard
  *      tags:

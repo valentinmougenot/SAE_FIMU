@@ -28,9 +28,7 @@ export const create = (req, res) => {
 }
 
 export const findAll = (req, res) => {
-    Nationalite.findAll(
-        { include: [{model:db.artisteNext},
-                    {model:db.pays}]})
+    Nationalite.findAll()
         .then(data => {
             res.send(data);
         }

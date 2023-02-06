@@ -123,7 +123,7 @@ router.get('/heuremin', heureMin);
 router.get('/heuremax', heureMax);
 /**
  * @swagger
- * /concert/heuremin:
+ * /concert/heuremax:
  *   get:
  *      description: Trouver l'heure de début du concert le plus tôt
  *      tags:

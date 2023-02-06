@@ -66,7 +66,7 @@ export const update = (req, res) => {
     const id = req.params.id;
 
     Saison.update(req.body, {
-        where: { id: id }
+        where: { annee: id }
     })
         .then(num => {
             if (num == 1) {
@@ -102,7 +102,7 @@ export const deleteOne = (req, res) => {
     const id = req.params.id;
 
     Saison.destroy({
-        where: { id: id }
+        where: { annee: id }
     })
         .then(num => {
             if (num == 1) {
