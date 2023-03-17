@@ -9,13 +9,13 @@
           <v-card-text>
             <v-form ref="form" lazy-validation>
               <v-select
-                  v-model="concert.id_artiste"
+                  v-model="concert.artisteId"
                   :items="artistesSelect"
                   label="Artiste"
                   required
               ></v-select>
               <v-select
-                  v-model="concert.id_scene"
+                  v-model="concert.sceneId"
                   :items="scenesSelect"
                   label="Scène"
                   required
@@ -57,8 +57,8 @@ export default {
   data: () => {
     return {
       concert: {
-        id_artiste: null,
-        id_scene: null,
+        artisteId: null,
+        sceneId: null,
         heure_debut: null,
         date_debut: null,
         duree: null,
@@ -105,11 +105,7 @@ export default {
       this.$store.dispatch("getArtistes");
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

@@ -39,7 +39,7 @@
           {icon: 'mdi-pencil', color: 'primary'},
           {icon: 'mdi-delete', color: 'error'}
         ]"
-        :pk="'identifiant'"
+        :pk="'id'"
         @button-click="buttonClick"
         ></TableList>
     </v-row>
@@ -64,7 +64,7 @@ export default {
       //pas dans le store car réservé aux admins
       await get("utilisateur")
           .then(response => {
-            this.utilisateurs = response.data
+            this.utilisateurs = response.data.data
             this.utilisateurs.forEach(user => {
               user.rl = user.role.libelle
             })
@@ -95,16 +95,16 @@ export default {
             alert(error.response.data.message);
           });
     },
-    buttonClick(identifiant, buttonIndex) {
+    buttonClick(id, buttonIndex) {
       switch (buttonIndex) {
         case 0:
-          this.$router.push('/password/' + identifiant + '/edit');
+          this.$router.push('/password/' + id + '/edit');
           break;
         case 1:
-          this.$router.push('/utilisateur/' + identifiant + '/edit');
+          this.$router.push('/utilisateur/' + id + '/edit');
           break;
         case 2:
-          this.deleteUtilisateur(identifiant);
+          this.deleteUtilisateur(id);
           break;
       }
     }
@@ -131,11 +131,7 @@ export default {
       })
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

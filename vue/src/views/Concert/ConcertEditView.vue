@@ -9,13 +9,13 @@
           <v-card-text>
             <v-form ref="form" lazy-validation>
               <v-select
-                  v-model="concert.id_artiste"
+                  v-model="concert.artisteId"
                   :items="artistesSelect"
                   label="Artiste"
                   required
               ></v-select>
               <v-select
-                  v-model="concert.id_scene"
+                  v-model="concert.sceneId"
                   :items="scenesSelect"
                   label="Scène"
                   required
@@ -61,8 +61,8 @@ export default {
   data: () => {
     return {
       concert: {
-        id_artiste: null,
-        id_scene: null,
+        artisteId: null,
+        sceneId: null,
         heure_debut: null,
         date_debut: null,
         duree: null,
@@ -73,17 +73,17 @@ export default {
   },
   methods: {
     async getConcert() {
-      await get(`${this.$store.state.sselected}/concert/` + this.$route.params.id)
+      await get(`/concert/${this.$route.params.id}`, {headers: {'saison': this.$store.state.saison}})
         .then(response => {
-          this.concert = response.data;
+          this.concert = response.data.data;
+          console.log(this.concert)
         })
         .catch(error => {
           console.log(error);
         });
     },
     async editConcert() {
-      this.concert.annee = parseInt(this.concert.date_debut.slice(0, 4));
-      put(`${this.$store.state.sselected}/concert/` + this.$route.params.id, this.concert)
+      put(`/concert/${this.$route.params.id}`, this.concert, {headers: {'saison': this.$store.state.saison}})
         .then(() => {
           this.$router.push("/concert");
         })
@@ -119,11 +119,7 @@ export default {
       this.$store.dispatch("getArtistes");
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

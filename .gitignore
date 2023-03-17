@@ -1,2 +1,5 @@
 API/node_modules
 API/package-lock.json
+API/dist
+.DS_STORE
+.gitignore

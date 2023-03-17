@@ -1,0 +1,62 @@
+{
+  "current": [
+    {
+      "libelle": "L'Arsenal",
+      "jauge": null,
+      "latitude": 47.63685325292823,
+      "longitude": 6.863017391534138,
+      "typesceneId": 1
+    },
+    {
+      "libelle": "Jazz",
+      "jauge": 100,
+      "latitude": 47.64326769984944,
+      "longitude": 6.83896598237312,
+      "typesceneId": 2
+    },
+    {
+      "libelle": "Hôtel du département",
+      "jauge": null,
+      "latitude": 47.2380945197141,
+      "longitude": 6.81431011527731,
+      "typesceneId": 1
+    },
+    {
+      "libelle": "Cathédrale St-Christophe",
+      "jauge": null,
+      "latitude": 47.2380945197142,
+      "longitude": 6.81431011527733,
+      "typesceneId": 1
+    },
+    {
+      "libelle": "Kiosque",
+      "jauge": null,
+      "latitude": 47.64326769984944,
+      "longitude": 6.83896598237312,
+      "typesceneId": 1
+    }
+  ],
+  "next": [
+    {
+      "libelle": "Scène 4 (next)",
+      "jauge": 200,
+      "latitude": 51.856614,
+      "longitude": 5.3522219,
+      "typesceneId": 2
+    },
+    {
+      "libelle": "Scène 5 (next)",
+      "jauge": null,
+      "latitude": 52.856614,
+      "longitude": 6.3522219,
+      "typesceneId": 1
+    },
+    {
+      "libelle": "Scène 6 (next)",
+      "jauge": 300,
+      "latitude": 53.856614,
+      "longitude": 7.3522219,
+      "typesceneId": 2
+    }
+  ]
+}

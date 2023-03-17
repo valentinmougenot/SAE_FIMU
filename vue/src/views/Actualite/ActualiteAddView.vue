@@ -76,11 +76,7 @@ export default {
       this.$store.dispatch("getTypeactu");
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

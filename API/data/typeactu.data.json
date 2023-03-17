@@ -1,0 +1,14 @@
+[
+  {
+    "libelle": "Information",
+    "couleur": "#3399ff"
+  },
+  {
+    "libelle": "Avertissement",
+    "couleur": "#ffff00"
+  },
+  {
+    "libelle": "Urgent",
+    "couleur": "#ff3300"
+  }
+]

@@ -1,0 +1,48 @@
+{
+  "current": [
+    {
+      "libelle": "Le bon resto'",
+      "latitude": 47.63685325292823,
+      "longitude": 6.863017391534138,
+      "typestandId": 1
+    },
+    {
+      "libelle": "Chez Fifi",
+      "latitude": 47.64326769984944,
+      "longitude": 6.83896598237312,
+      "typestandId": 1
+    },
+    {
+      "libelle": "Goodies | FIMU",
+      "latitude": 47.63685325292823,
+      "longitude": 6.863017391534138,
+      "typestandId": 5
+    }
+  ],
+  "next": [
+    {
+      "libelle": "Stand 1 (next)",
+      "latitude": 53.856614,
+      "longitude": 19.3522219,
+      "typestandId": 1
+    },
+    {
+      "libelle": "Stand 2 (next)",
+      "latitude": 54.856614,
+      "longitude": 19.3522219,
+      "typestandId": 2
+    },
+    {
+      "libelle": "Stand 3 (next)",
+      "latitude": 55.856614,
+      "longitude": 19.3522219,
+      "typestandId": 3
+    },
+    {
+      "libelle": "Stand 4 (next)",
+      "latitude": 56.856614,
+      "longitude": 19.3522219,
+      "typestandId": 4
+    }
+  ]
+}

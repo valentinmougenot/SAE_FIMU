@@ -94,11 +94,7 @@ export default {
       this.$store.dispatch("getNotifications");
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

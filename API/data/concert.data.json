@@ -1,0 +1,141 @@
+{
+  "current": [
+    {
+      "heure_debut": "15:00",
+      "heure_fin": "15:45",
+      "date_debut": "2023-03-02",
+      "duree": 45,
+      "nbPersonnes": 100,
+      "artisteId": 1,
+      "sceneId": 1
+    },
+    {
+      "heure_debut": "16:00",
+      "heure_fin": "17:00",
+      "date_debut": "2023-03-02",
+      "duree": 60,
+      "nbPersonnes": 200,
+      "artisteId": 2,
+      "sceneId": 2
+    },
+    {
+      "heure_debut": "17:00",
+      "heure_fin": "18:15",
+      "date_debut": "2023-03-02",
+      "duree": 75,
+      "nbPersonnes": 300,
+      "artisteId": 3,
+      "sceneId": 3
+    },
+    {
+      "heure_debut": "18:00",
+      "heure_fin": "19:30",
+      "date_debut": "2023-03-02",
+      "duree": 90,
+      "nbPersonnes": 400,
+      "artisteId": 4,
+      "sceneId": 4
+    },
+    {
+      "heure_debut": "19:00",
+      "heure_fin": "20:45",
+      "date_debut": "2023-03-02",
+      "duree": 105,
+      "nbPersonnes": 500,
+      "artisteId": 5,
+      "sceneId": 5
+    },
+    {
+      "heure_debut": "20:00",
+      "heure_fin": "22:00",
+      "date_debut": "2023-03-02",
+      "duree": 120,
+      "nbPersonnes": 600,
+      "artisteId": 6,
+      "sceneId": 1
+    },
+    {
+      "heure_debut": "15:00",
+      "heure_fin": "15:45",
+      "date_debut": "2023-03-02",
+      "duree": 45,
+      "nbPersonnes": 100,
+      "artisteId": 7,
+      "sceneId": 2
+    },
+    {
+      "heure_debut": "16:00",
+      "heure_fin": "17:00",
+      "date_debut": "2023-03-02",
+      "duree": 60,
+      "nbPersonnes": 200,
+      "artisteId": 8,
+      "sceneId": 3
+    },
+    {
+      "heure_debut": "17:00",
+      "heure_fin": "18:15",
+      "date_debut": "2023-03-03",
+      "duree": 75,
+      "nbPersonnes": 300,
+      "artisteId": 9,
+      "sceneId": 4
+    },
+    {
+      "heure_debut": "18:00",
+      "heure_fin": "19:30",
+      "date_debut": "2023-03-03",
+      "duree": 90,
+      "nbPersonnes": 400,
+      "artisteId": 1,
+      "sceneId": 5
+    },
+    {
+      "heure_debut": "19:00",
+      "heure_fin": "20:45",
+      "date_debut": "2023-03-03",
+      "duree": 105,
+      "nbPersonnes": 500,
+      "artisteId": 2,
+      "sceneId": 1
+    },
+    {
+      "heure_debut": "20:00",
+      "heure_fin": "22:00",
+      "date_debut": "2023-03-04",
+      "duree": 120,
+      "nbPersonnes": 600,
+      "artisteId": 3,
+      "sceneId": 2
+    }
+  ],
+  "next": [
+    {
+      "heure_debut": "18:00",
+      "heure_fin": "19:30",
+      "date_debut": "2024-03-05",
+      "duree": 90,
+      "nbPersonnes": 400,
+      "artisteId": 1,
+      "sceneId": 1
+    },
+    {
+      "heure_debut": "19:00",
+      "heure_fin": "20:45",
+      "date_debut": "2024-03-06",
+      "duree": 105,
+      "nbPersonnes": 500,
+      "artisteId": 2,
+      "sceneId": 2
+    },
+    {
+      "heure_debut": "20:00",
+      "heure_fin": "22:00",
+      "date_debut": "2024-03-07",
+      "duree": 120,
+      "nbPersonnes": 600,
+      "artisteId": 3,
+      "sceneId": 3
+    }
+  ]
+}

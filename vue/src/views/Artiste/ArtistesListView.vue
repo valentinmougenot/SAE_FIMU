@@ -139,7 +139,7 @@ export default {
         return this.artistes;
       }
       return this.artistes.filter(artiste => {
-        return this.categorie.includes(artiste.category.id);
+        return this.categorie.includes(artiste.categorie.id);
       })
     },
     genresFiltres() {
@@ -178,7 +178,7 @@ export default {
     },
 
     async deleteArtiste(id) {
-       await remove(`${this.$store.state.sselected}/artiste/` + id)
+       await remove(`${this.$store.state.sselected}/artiste/` + id, {headers: {'saison': this.$store.state.saisonSelected}})
           .then(() => {
             this.$store.dispatch("getArtistes");
           })
@@ -188,7 +188,7 @@ export default {
     },
     async deleteAll() {
       if (confirm("Voulez-vous vraiment supprimer tous les artistes ?")) {
-         await remove(`${this.$store.state.sselected}/artiste`)
+         await remove(`${this.$store.state.sselected}/artiste`, {headers: {'saison': this.$store.state.saisonSelected}})
             .then(() => {
               this.$store.dispatch("getArtistes");
             })
@@ -261,11 +261,6 @@ export default {
       this.$store.dispatch("getPays");
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
 }
 </script>
 

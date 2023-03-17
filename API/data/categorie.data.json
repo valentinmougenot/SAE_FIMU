@@ -1,0 +1,18 @@
+[
+    {
+        "libelle": "Musique du monde",
+        "couleur": "#dc331e"
+    },
+    {
+        "libelle": "Musique actuelle",
+        "couleur": "#39b7ab"
+    },
+    {
+        "libelle": "Musique classique",
+        "couleur": "#f5a8ae"
+    },
+    {
+        "libelle": "Musique improvisée",
+        "couleur": "#f6d914"
+    }
+]

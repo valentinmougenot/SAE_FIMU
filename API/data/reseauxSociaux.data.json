@@ -1,0 +1,26 @@
+[
+    {
+        "libelle": "Facebook",
+        "logo": "mdi-facebook"
+    },
+    {
+        "libelle": "Twitter",
+        "logo": "mdi-twitter"
+    },
+    {
+        "libelle": "Instagram",
+        "logo": "mdi-instagram"
+    },
+    {
+        "libelle": "Pinterest",
+        "logo": "mdi-pinterest"
+    },
+    {
+        "libelle": "Snapchat",
+        "logo": "mdi-snapchat"
+    },
+    {
+        "libelle": "Tiktok",
+        "logo": "mdi-tiktok"
+    }
+]

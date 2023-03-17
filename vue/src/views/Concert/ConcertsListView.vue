@@ -115,9 +115,9 @@ export default {
   methods: {
     async getDates() {
       this.dates = [];
-      await get(`${this.$store.state.sselected}/concert/date`)
+      await get(`/concert/date`, {headers: {'saison': this.$store.state.saisonSelected}})
           .then(response => {
-            response.data.forEach(date => {
+            response.data.data.forEach(date => {
               this.dates.push(date.date_debut)
             })
           })
@@ -126,17 +126,18 @@ export default {
           });
     },
     async getConcerts(date) {
-      await get(`${this.$store.state.sselected}/concert?date=` + date)
+      await get(`/concert?date=${date}`, {headers: {'saison': this.$store.state.saisonSelected}})
           .then(response => {
-            this.concerts = response.data.map(concert => {
+            console.log(response.data.data)
+            this.concerts = response.data.data.map(concert => {
               return {
                 id: concert.id,
-                id_scene: concert.id_scene,
+                id_scene: concert.sceneId,
                 na: concert.artiste.nom,
                 ns: concert.scene.libelle,
                 hd: concert.heure_debut,
                 d: concert.duree,
-                np: concert.nb_personnes,
+                np: concert.nbPersonnes,
               }
             })
           })
@@ -155,7 +156,7 @@ export default {
       }
     },
     async deleteConcert(id) {
-       await remove(`${this.$store.state.sselected}/concert/:id`, id)
+       await remove(`/concert/${id}`, {headers: {'saison': this.$store.state.saisonSelected}})
           .then(async () => {
             const dateSel = Math.min(this.dateSelected, this.dates.length - 2);
             await this.getDates();
@@ -237,14 +238,10 @@ export default {
     await this.getDates();
     await this.getConcerts(this.dates[0]);
     if (this.scenes.length === 0) {
-      this.$store.dispatch("getScenes");
+      await this.$store.dispatch("getScenes");
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

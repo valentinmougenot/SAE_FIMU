@@ -97,11 +97,7 @@ export default {
       this.$store.dispatch("getCategories");
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

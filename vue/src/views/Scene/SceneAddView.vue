@@ -67,7 +67,7 @@ export default {
       this.scene.jauge = parseInt(this.scene.jauge);
       this.scene.latitude = parseFloat(this.scene.latitude);
       this.scene.longitude = parseFloat(this.scene.longitude);
-      post(`${this.$store.state.sselected}/scene`, this.scene)
+      post(`/scene`, this.scene, {headers: {'saison': this.$store.state.saisonSelected}})
           .then(() => {
             this.$store.dispatch("getScenes");
             this.$router.push("/scene")
@@ -93,11 +93,7 @@ export default {
       this.$store.dispatch("getTypescenes");
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

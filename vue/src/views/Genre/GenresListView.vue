@@ -101,11 +101,7 @@ export default {
       this.$store.dispatch("getGenres");
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

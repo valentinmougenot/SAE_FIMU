@@ -64,11 +64,6 @@ export default {
     btnChange: String,
     saisonSelect: Array,
   },
-  methods: {
-    test() {
-      console.log("salut");
-    }
-  },
   created() {
     this.defaultSelect = this.saisonSelect[0];
   }

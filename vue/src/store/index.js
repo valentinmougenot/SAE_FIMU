@@ -88,157 +88,155 @@ export default new Vuex.Store({
   },
   actions: {
       async getArtistes({commit}) {
-          await get(`${this.state.saisonSelected}/artiste${this.state.yearSelected}`)
-              .then(response => {
-                  response.data.forEach(artiste => {
-                      artiste.cl = artiste.category.libelle
-                      artiste.gl = artiste.genres.map(genre => genre.libelle).join(', ')
-                      artiste.pl = artiste.pays.map(pays => pays.libelle).join(', ')
-                  })
-                  commit('updateArtistes', response.data)
+          try {
+              const response = await get(`/artiste?incConcert=false${this.state.yearSelected}`, {headers: {'saison': this.state.saisonSelected}})
+              response.data.data.forEach(artiste => {
+                  artiste.cl = artiste.categorie.libelle
+                  artiste.gl = artiste.genres.map(genre => genre.libelle).join(', ')
+                  artiste.pl = artiste.pays.map(pays => pays.libelle).join(', ')
               })
-              .catch(error => {
-                  console.log(error)
-              });
+              commit('updateArtistes', response.data.data)
+          }
+          catch (error) {
+              console.log(error)
+          }
       },
       async getScenes({commit}) {
-          await get(`${this.state.sselected}/scene`)
-              .then(response => {
-                  response.data.forEach(scene => {
-                      scene.tsl = scene.typescene.libelle
-                  })
-                  commit('updateScenes', response.data)
-              })
-              .catch(error => {
-                  console.log(error)
-              });
+          try {
+                const response = await get(`/scene${this.state.yearSelected}`, {headers: {'saison': this.state.saisonSelected}})
+                response.data.data.forEach(scene => {
+                    scene.tsl = scene.typescene.libelle
+                })
+                commit('updateScenes', response.data.data)
+          }
+            catch (error) {
+                console.log(error)
+            }
       },
       async getTypescenes({commit}) {
-          await get("/typescene")
-              .then(response => {
-                  commit('updateTypescenes', response.data)
-              })
-              .catch(error => {
-                  console.log(error)
-              });
+          try {
+            const response = await get("/typescene")
+            commit('updateTypescenes', response.data.data)
+          }
+            catch (error) {
+                console.log(error)
+            }
       },
       async getCategories({commit}) {
-          await get("/categorie")
-              .then(response => {
-                  commit('updateCategories', response.data)
-              })
-              .catch(error => {
-                  console.log(error)
-              });
+          try {
+            const response = await get("/categorie")
+            commit('updateCategories', response.data.data)
+          }
+            catch (error) {
+              console.log(error)
+            }
       },
       async getGenres({commit}) {
-          await get("/genre")
-              .then(response => {
-                  commit('updateGenres', response.data)
-              })
-              .catch(error => {
-                  console.log(error)
-              });
+          try {
+            const response = await get("/genre")
+            commit('updateGenres', response.data.data)
+          }
+            catch (error) {
+                console.log(error)
+            }
       },
       async getPays({commit}) {
-          await get("/pays")
-              .then(response => {
-                  commit('updatePays', response.data)
-              })
-              .catch(error => {
-                  console.log(error)
-              });
+          try {
+            const response = await get("/pays")
+            commit('updatePays', response.data.data)
+          }
+            catch (error) {
+                console.log(error)
+            }
       },
       async getActualites({commit}) {
-          await get("/actualite")
-              .then(response => {
-                  commit('updateActualites', response.data)
-              })
-              .catch(error => {
-                  console.log(error)
-              });
+          try {
+            const response = await get("/actualite")
+            commit('updateActualites', response.data.data)
+          }
+            catch (error) {
+                console.log(error)
+            }
       },
       async getTypeactu({commit}) {
-          await get("/typeactu")
-              .then(response => {
-                  commit('updateTypeactu', response.data)
-              })
-              .catch(error => {
-                  console.log(error)
-              });
+          try {
+            const response = await get("/typeactu")
+            commit('updateTypeactu', response.data.data)
+          }
+            catch (error) {
+                console.log(error)
+            }
       },
       async getNotifications({commit}) {
-          await get("/notification")
-              .then(response => {
-                  commit('updateNotifications', response.data)
-              })
-              .catch(error => {
-                  console.log(error)
-              });
+          try {
+            const response = await get("/notification")
+            commit('updateNotifications', response.data.data)
+          }
+            catch (error) {
+                console.log(error)
+            }
       },
       async getStands({commit}) {
-          await get(`${this.state.sselected}/stand`)
-              .then(response => {
-                  response.data.forEach(stand => {
-                      stand.tsl = stand.typestand.libelle
-                      stand.tsr = stand.services.map(service => service.libelle).join(', ')
-                  });
-                  commit('updateStands', response.data)
-              })
-              .catch(error => {
-                  console.log(error)
-              });
+          try {
+            const response = await get("/stand", {headers: {'saison': this.state.saisonSelected}})
+            response.data.data.forEach(stand => {
+                stand.tsl = stand.typestand.libelle
+                stand.tsr = stand.services.map(service => service.libelle).join(', ')
+            });
+            commit('updateStands', response.data.data)
+          }
+            catch (error) {
+                console.log(error)
+            }
       },
       async getTypestands({commit}) {
-          await get("/typestand")
-              .then(response => {
-                  commit('updateTypestands', response.data)
-              })
-              .catch(error => {
-                      console.log(error)
-                  }
-              );
+          try {
+            const response = await get("/typestand")
+            commit('updateTypestands', response.data.data)
+          }
+            catch (error) {
+                console.log(error)
+            }
       },
       async getServices({commit}) {
-          await get("/service")
-              .then(response => {
-                  commit('updateServices', response.data)
-              })
-              .catch(error => {
-                  console.log(error)
-              });
+          try {
+            const response = await get("/service")
+            commit('updateServices', response.data.data)
+          }
+            catch (error) {
+                console.log(error)
+            }
       },
       async getReseauxsociaux({commit}) {
-          await get("/reseauxsociaux")
-              .then(response => {
-                  commit('updateReseauxsociaux', response.data)
-              })
-              .catch(error => {
-                  console.log(error)
-              });
+          try {
+            const response = await get("/reseauxsociaux")
+            commit('updateReseauxsociaux', response.data.data)
+          }
+            catch (error) {
+                console.log(error)
+            }
       },
         async getSaison({commit}) {
-            await get("/saison")
-                .then(response => {
-                    commit('updateSaison', response.data)
-                })
-                .catch(error => {
-                    console.log(error)
-                });
+          try {
+            const response = await get("/saison");
+            commit('updateSaison', response.data.data)
+          }
+          catch (error) {
+            console.log(error)
+          }
         },
         async getRoles({commit}) {
-            await get("/role")
-                .then(response => {
-                    commit('updateRoles', response.data)
-                })
-                .catch(error => {
-                    console.log(error)
-                });
+          try {
+            const response = await get("/role");
+            commit('updateRoles', response.data.data)
+          }
+          catch (error) {
+            console.log(error)
+          }
         },
       selectSaison({commit}, data) {
         commit('updateSaisonSelected', data.saison);
         commit('updateYearSelected', data.year);
-        commit('updateSselected', data.sselected);
       }
   },
   modules: {

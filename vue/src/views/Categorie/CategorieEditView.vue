@@ -44,7 +44,7 @@ export default {
     async getCategorie() {
       await get("categorie/" + this.$route.params.id)
           .then(response => {
-            this.categorie = response.data;
+            this.categorie = response.data.data;
           })
           .catch(error => {
             console.log(error);
@@ -65,11 +65,7 @@ export default {
   created() {
     this.getCategorie();
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

@@ -15,7 +15,7 @@
                     required
                 ></v-text-field>
                 <v-select
-                    v-model="stand.id_typestand"
+                    v-model="stand.typestandId"
                     :items="typestandSelect"
                     label="Type de stand"
                     required
@@ -72,7 +72,7 @@ export default {
     return {
       stand: {
         libelle: "",
-        id_typestand: "",
+        typestandId: "",
         latitude: "",
         longitude: "",
       },
@@ -81,38 +81,27 @@ export default {
   },
   methods: {
     async getStand() {
-      await get("stand/" + this.$route.params.id)
+      await get("stand/" + this.$route.params.id, {headers: {'saison': this.$store.state.saisonSelected}})
         .then((response) => {
-          this.stand = response.data;
-          this.id_services = response.data.services.map((service) => service.id);
+          this.stand = response.data.data;
+          this.id_services = response.data.data.services.map((service) => service.id);
         })
         .catch((error) => {
           console.log(error);
         });
     },
     async editStand() {
-       await remove("propose/stand/" + this.$route.params.id)
-        .then(async () => {
-          await put("stand/" + this.$route.params.id, this.stand)
-            .then(() => {
-              this.id_services.forEach(async (id_service) => {
-                await post("propose", {
-                  id_stand: this.$route.params.id,
-                  id_service: id_service,
-                })
-                    .catch(error => {
-                      alert(error.response.data.message);
-                    });
-            })})
-              .catch(error => {
-                alert(error.response.data.message);
-              });
-        })
+      this.stand.latitude = parseFloat(this.stand.latitude);
+      this.stand.longitude = parseFloat(this.stand.longitude);
+      this.stand.services = this.id_services;
+      await put(`/stand`, this.stand, {headers: {'saison': this.$store.state.saisonSelected}})
+          .then(async () => {
+            await this.$store.dispatch('getStands');
+            await this.$router.push('/stand');
+          })
           .catch(error => {
             alert(error.response.data.message);
           });
-      this.$store.dispatch("getStands");
-      this.$router.push("/stand");
     }
   },
   computed: {
@@ -134,20 +123,16 @@ export default {
       })
     }
   },
-  mounted() {
+  async created() {
     if (this.typestands.length === 0) {
-      this.$store.dispatch('getTypestands');
+      await this.$store.dispatch('getTypestands');
     }
     if (this.services.length === 0) {
-      this.$store.dispatch('getServices');
+      await this.$store.dispatch('getServices');
     }
     this.getStand();
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

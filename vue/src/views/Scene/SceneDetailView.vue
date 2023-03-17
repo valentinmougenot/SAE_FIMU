@@ -27,9 +27,9 @@ export default {
   }),
   methods: {
     async getScene() {
-      await get(`${this.$store.state.sselected}/scene/` + this.$route.params.id)
+      await get(`/scene/${this.$route.params.id}`, {headers: {'saison': this.$store.state.saisonSelected}})
           .then(response => {
-            this.scene = response.data
+            this.scene = response.data.data;
           })
           .catch(error => {
             console.log(error)
@@ -39,11 +39,7 @@ export default {
   created() {
     this.getScene()
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

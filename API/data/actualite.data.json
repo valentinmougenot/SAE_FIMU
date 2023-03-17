@@ -1,0 +1,26 @@
+[
+  {
+    "titre": "Concert pour enfants en approche",
+    "contenu": "Dans 30 minutes commence le concert pour les enfants à la Scène des Enfants à la Préfecture !\nLes petits festivaliers pourront profiter de la présence des musiciens durant 2 heures.",
+    "lienImage": "https://www.adobe.com/content/dam/cc/us/en/creativecloud/photography/discover/concert-photography/thumbnail.jpeg",
+    "dateEnvoi": "2023-03-15",
+    "heureEnvoi": "17:00",
+    "typeactuId": 1
+  },
+  {
+    "titre": "Attention changement d’horaires",
+    "contenu": "Le concert prévu à 18h30 sur la Scène de l’Arsenal est décalé à 19h00 au même endroit.\nNous vous attendons à 19h00 pour profiter du concert dans une ambiance plus que festive !",
+    "lienImage": "https://www.ikea.com/fr/fr/images/products/pluttis-horloge-murale-basse-tension-noir__1013114_pe829054_s5.jpg",
+    "dateEnvoi": "2023-03-15",
+    "heureEnvoi": "17:30",
+    "typeactuId": 2
+  },
+  {
+    "titre": "Alerte orage",
+    "contenu": "Attention, un orage est prévu dans 20 minutes. Mettez-vous à l’abri le plus possible. Ne vous mettez pas sous les arbres. Nous vous tiendrons informés si des concerts sont décalés et de l’avancée de la météo.",
+    "lienImage": "https://cdn-s-www.ledauphine.com/images/8EBC1ED9-30CC-460F-A68E-A582A1C11AC9/NW_raw/au-coeur-de-l-orage-une-exposition-visible-jusqu-au-18-septembre-au-fort-l-ecluse-photo-le-dl-p-c-1659098417.jpg",
+    "dateEnvoi": "2023-03-15",
+    "heureEnvoi": "18:00",
+    "typeactuId": 3
+  }
+]

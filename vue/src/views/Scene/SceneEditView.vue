@@ -14,7 +14,7 @@
                   required
               ></v-text-field>
               <v-select
-                  v-model="scene.id_typescene"
+                  v-model="scene.typesceneId"
                   :items="typescenesSelect"
                   label="Type de scène"
                   required
@@ -57,7 +57,7 @@ export default {
       scene: {
         id: null,
         libelle: null,
-        id_typescene: null,
+        typesceneId: null,
         latitude: null,
         longitude: null,
         jauge: null
@@ -66,16 +66,16 @@ export default {
   },
   methods: {
     async getScene() {
-      await get(`${this.$store.state.sselected}/scene/` + this.$route.params.id)
+      await get(`/scene/${this.$route.params.id}`, {headers: {'saison': this.$store.state.saisonSelected}})
         .then((response) => {
-          this.scene = response.data;
+          this.scene = response.data.data;
         });
     },
     async editScene() {
       if (this.scene.id_typescene === 1) {
         this.scene.jauge = null;
       }
-      put("scene/" + this.$route.params.id, this.scene)
+      put("scene/" + this.$route.params.id, this.scene, {headers: {'saison': this.$store.state.saisonSelected}})
         .then(() => {
           this.$store.dispatch("getScenes");
           this.$router.push("/scene");
@@ -102,11 +102,7 @@ export default {
       this.$store.dispatch("getTypescenes");
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

@@ -84,20 +84,15 @@ export default {
     async addStand() {
       this.stand.latitude = parseFloat(this.stand.latitude);
       this.stand.longitude = parseFloat(this.stand.longitude);
-      await post(`${this.$store.state.sselected}/stand`, this.stand)
-          .then(async (response) => {
-            for(const id_service of this.id_services) {
-              await post(`${this.$store.state.sselected}/propose`, {
-                id_stand: response.data.id,
-                id_service: id_service
-              })
-            }
+      this.stand.services = this.id_services;
+      await post(`/stand`, this.stand, {headers: {'saison': this.$store.state.saisonSelected}})
+          .then(async () => {
+            await this.$store.dispatch('getStands');
+            await this.$router.push('/stand');
           })
           .catch(error => {
             alert(error.response.data.message);
           });
-      this.$store.dispatch('getStands');
-      this.$router.push('/stand');
     }
   },
   computed: {
@@ -127,11 +122,7 @@ export default {
       this.$store.dispatch('getServices');
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

@@ -13,7 +13,7 @@
                 required
             ></v-text-field>
             <v-select
-                v-model="actualite.id_typeactu"
+                v-model="actualite.typeactuId"
                 :items="typeactuSelect"
                 label="Type d'actualité"
                 required
@@ -45,14 +45,14 @@ export default {
     actualite: {
       titre: "",
       contenu: "",
-      id_typeactu: "",
+      typeactuId: "",
     },
   }),
   methods: {
     async getActualite() {
       await get('actualite/' + this.$route.params.id)
         .then((response) => {
-          this.actualite = response.data;
+          this.actualite = response.data.data;
         })
     },
     editActualite() {
@@ -83,11 +83,7 @@ export default {
     }
     this.getActualite();
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

@@ -57,9 +57,9 @@ export default {
     async getNotification() {
       await get("notification/" + this.$route.params.id)
         .then((response) => {
-          this.notification.message = response.data.message;
-          this.notification.date_envoi = response.data.date_envoi;
-          this.notification.heure_envoi = response.data.heure_envoi;
+          this.notification.message = response.data.data.message;
+          this.notification.date_envoi = response.data.data.date_envoi;
+          this.notification.heure_envoi = response.data.data.heure_envoi;
         })
         .catch((error) => {
           console.log(error);
@@ -83,11 +83,7 @@ export default {
   mounted() {
     this.getNotification();
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

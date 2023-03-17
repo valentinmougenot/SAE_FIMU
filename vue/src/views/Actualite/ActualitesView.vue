@@ -37,7 +37,7 @@
           @click="deleteAll()">Tout supprimer&emsp;<v-icon>mdi-delete</v-icon>
       </v-btn>
     </v-row>
-    <v-card class="ma-4" v-for="(actu, i) in filtres" :key="i" :class="{'bginfo': actu.typeactu.libelle === 'Info', 'bgwarn': actu.typeactu.libelle === 'Avertissement', 'bgdanger': actu.typeactu.libelle === 'Urgent'}">
+    <v-card class="ma-4" v-for="(actu, i) in filtres" :key="i" :class="{'bginfo': actu.typeactu.libelle === 'Information', 'bgwarn': actu.typeactu.libelle === 'Avertissement', 'bgdanger': actu.typeactu.libelle === 'Urgent'}">
       <v-card-title>
         <h2>{{ actu.titre }}</h2>
       </v-card-title>
@@ -124,11 +124,7 @@ export default {
       this.$store.dispatch("getActualites");
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

@@ -39,10 +39,9 @@ export default {
     async getGenre() {
       await get("genre/" + this.$route.params.id)
           .then(response => {
-            console.log(response.data);
             this.genre = {
-              id: response.data.id,
-              libelle: response.data.libelle,
+              id: response.data.data.id,
+              libelle: response.data.data.libelle,
             };
           })
           .catch(error => {
@@ -64,11 +63,7 @@ export default {
   created() {
     this.getGenre();
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

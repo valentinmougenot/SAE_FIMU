@@ -1,0 +1,17 @@
+[
+  {
+    "date_envoi": "2019-01-01",
+    "heure_envoi": "12:00:00",
+    "message": "Notification 1"
+  },
+  {
+    "date_envoi": "2019-01-01",
+    "heure_envoi": "12:00:00",
+    "message": "Notification 2"
+  },
+  {
+    "date_envoi": "2019-01-01",
+    "heure_envoi": "12:00:00",
+    "message": "Notification 3"
+  }
+]

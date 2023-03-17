@@ -182,11 +182,7 @@ export default {
       this.$store.dispatch("getServices");
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 
 }
 </script>

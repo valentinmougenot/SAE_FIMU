@@ -20,7 +20,7 @@
                     required
                 ></v-text-field>
                 <v-select
-                    v-model="artiste.nationalite"
+                    v-model="artiste.pays"
                     :items="paysSelect"
                     label="Origine de l'artiste"
                     multiple
@@ -35,18 +35,18 @@
                         v-if="index === 2"
                         class="grey--text text-caption"
                     >
-                (+{{ artiste.nationalite.length - 2 }} autre<span v-if="artiste.nationalite.length - 2 > 1">s</span>)
+                (+{{ artiste.pays.length - 2 }} autre<span v-if="artiste.pays.length - 2 > 1">s</span>)
                     </span>
                   </template>
                 </v-select>
                 <v-select
-                    v-model="artiste.id_categorie"
+                    v-model="artiste.categorieId"
                     :items="categoriesSelect"
                     label="Catégorie de l'artiste"
                     required
                 ></v-select>
                 <v-select
-                    v-model="artiste.fait"
+                    v-model="artiste.genres"
                     :items="genresSelect"
                     label="Genres de l'artiste"
                     multiple
@@ -61,7 +61,7 @@
                         v-if="index === 2"
                         class="grey--text text-caption"
                     >
-                (+{{ artiste.fait.length - 2 }} autre<span v-if="artiste.fait.length - 2 > 1">s</span>)
+                (+{{ artiste.genres.length - 2 }} autre<span v-if="artiste.genres.length - 2 > 1">s</span>)
               </span>
                   </template>
                 </v-select>
@@ -102,7 +102,7 @@
                 </v-select>
                 <v-text-field
                     v-for="(id, i) in id_reseauxsociaux" :key="i"
-                    v-model="artiste.possede.find(p => p.id_reseaux_sociaux === id).lien"
+                    v-model="artiste.rs.find(p => p.id === id).lien"
                     :label="reseauxsociaux.find(r => r.id === id).libelle"
                 ></v-text-field>
               <v-card-actions>
@@ -130,32 +130,32 @@ export default {
       biographie: null,
       lien_video: null,
       lien_site: null,
-      id_categorie: null,
-      fait: [],
-      nationalite: [],
-      possede: []
+      categorieId: null,
+      genres: [],
+      pays: [],
+      rs: []
     },
     id_reseauxsociaux: [],
   }),
   methods: {
     async getArtiste() {
-      await get("artiste/" + this.$route.params.id)
+      await get("artiste/" + this.$route.params.id, {headers: {'saison': this.$store.state.saisonSelected}})
           .then(response => {
-            this.artiste.nom = response.data.nom
-            this.artiste.photo = response.data.photo
-            this.artiste.biographie = response.data.biographie
-            this.artiste.lien_video = response.data.lien_video
-            this.artiste.lien_site = response.data.lien_site
-            this.artiste.id_categorie = response.data.id_categorie
-            response.data.genres.forEach(genre => {
-              this.artiste.fait.push(genre.id);
+            this.artiste.nom = response.data.data.nom
+            this.artiste.photo = response.data.data.photo
+            this.artiste.biographie = response.data.data.biographie
+            this.artiste.lien_video = response.data.data.lien_video
+            this.artiste.lien_site = response.data.data.lien_site
+            this.artiste.categorieId = response.data.data.categorieId
+            response.data.data.genres.forEach(genre => {
+              this.artiste.genres.push(genre.id);
             })
-            response.data.pays.forEach(pays => {
-              this.artiste.nationalite.push(pays.id);
+            response.data.data.pays.forEach(pays => {
+              this.artiste.pays.push(pays.id);
             })
-            response.data.reseauxsociauxes.forEach(reseau => {
+            response.data.data.reseauxSociauxes.forEach(reseau => {
               this.id_reseauxsociaux.push(reseau.id);
-              this.artiste.possede.find(p => p.id_reseaux_sociaux === reseau.id).lien = reseau.possede.lien;
+              this.artiste.rs.find(p => p.id === reseau.id).lien = reseau.possede.lien;
             })
             console.log(this.artiste);
           })
@@ -164,12 +164,12 @@ export default {
           });
     },
     async editArtiste() {
-      for (let i = this.artiste.possede.length - 1; i >= 0; i--) {
-        if (!this.id_reseauxsociaux.includes(this.artiste.possede[i].id_reseaux_sociaux)) {
-          this.artiste.possede.splice(i, 1);
+      for (let i = this.artiste.rs.length - 1; i >= 0; i--) {
+        if (!this.id_reseauxsociaux.includes(this.artiste.rs[i].id)) {
+          this.artiste.rs.splice(i, 1);
         }
       }
-      put("artiste/all/" + this.$route.params.id, this.artiste)
+      put(`artiste/${this.$route.params.id}`, this.artiste, {headers: {'saison': this.$store.state.saison}})
           .then(() => {
             this.$store.dispatch('getArtistes');
             this.$router.push('/artiste');
@@ -227,18 +227,13 @@ export default {
     if (this.reseauxsociaux.length === 0) {
       await this.$store.dispatch('getReseauxsociaux');
     }
-    this.artiste.possede = this.reseauxsociaux.map(rs => {
+    this.artiste.rs = this.reseauxsociaux.map(rs => {
       return {
-        id_reseaux_sociaux: rs.id,
+        id: rs.id,
         lien: null
       }
     })
     await this.getArtiste();
-  },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
   }
 }
 </script>

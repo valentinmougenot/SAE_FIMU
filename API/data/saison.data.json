@@ -1,0 +1,42 @@
+[
+  {
+    "annee": 2020,
+    "noMois": 1,
+    "couleur1": "#000000",
+    "couleur2": "#111111",
+    "banniere": "https://www.wikipedia.org/baniere-2020.jpg",
+    "paysId": 1
+  },
+  {
+    "annee": 2021,
+    "noMois": 1,
+    "couleur1": "#222222",
+    "couleur2": "#333333",
+    "banniere": "https://www.wikipedia.org/baniere-2021.jpg",
+    "paysId": 2
+  },
+  {
+    "annee": 2022,
+    "noMois": 1,
+    "couleur1": "#444444",
+    "couleur2": "#555555",
+    "banniere": "https://www.wikipedia.org/baniere-2022.jpg",
+    "paysId": 3
+  },
+  {
+    "annee": 2023,
+    "noMois": 1,
+    "couleur1": "#666666",
+    "couleur2": "#777777",
+    "banniere": "https://www.wikipedia.org/baniere-2023.jpg",
+    "paysId": 4
+  },
+  {
+    "annee": 2024,
+    "noMois": 1,
+    "couleur1": "#888888",
+    "couleur2": "#999999",
+    "banniere": "https://www.wikipedia.org/baniere-2024.jpg",
+    "paysId": 1
+  }
+]

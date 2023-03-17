@@ -14,7 +14,7 @@
                   required
               ></v-text-field>
               <v-select
-                  v-model="utilisateur.id_role"
+                  v-model="utilisateur.roleId"
                   :items="rolesSelect"
                   label="Rôle de l'utilisateur"
                   required>
@@ -57,8 +57,8 @@ export default {
   data: () => ({
     utilisateur: {
       identifiant: null,
-      mot_de_passe: null,
-      id_role: null
+      motDePasse: null,
+      roleId: null
     },
     confirm_password: null,
     passwordRules: [
@@ -68,8 +68,8 @@ export default {
   }),
   methods: {
     addUtilisateur() {
-      if (this.utilisateur.mot_de_passe === this.confirm_password) {
-        this.utilisateur.mot_de_passe = bcrypt.hashSync(this.utilisateur.mot_de_passe, 10);
+      if (this.utilisateur.motDePasse === this.confirm_password) {
+        this.utilisateur.motDePasse = bcrypt.hashSync(this.utilisateur.motDePasse, 10);
         post("utilisateur", this.utilisateur)
             .then(() => {
               this.$router.push("/utilisateur");
@@ -98,11 +98,7 @@ export default {
       this.$store.dispatch('getRoles');
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

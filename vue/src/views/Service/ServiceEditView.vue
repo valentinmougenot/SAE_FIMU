@@ -40,7 +40,7 @@ export default {
     async getService() {
       await get('service/' + this.$route.params.id)
         .then((response) => {
-          this.service = response.data;
+          this.service = response.data.data;
         })
         .catch((error) => {
           console.log(error);
@@ -61,11 +61,7 @@ export default {
   mounted() {
     this.getService();
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

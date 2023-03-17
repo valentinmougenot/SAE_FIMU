@@ -1,0 +1,12 @@
+[
+  {
+    "identifiant": "admin",
+    "motDePasse": "$2a$10$guQcEKLVrLObnENrzX3vAOMiep1nMk8ppJ0l5zhpAU0FEPLVstuV2",
+    "roleId": 1
+  },
+  {
+    "identifiant": "editor",
+    "motDePasse": "$2y$10$VjkDzzYgKjHALQK69oEFUuo0Ojzk6RqaE/XUSG2oqXP6g97anfH1i",
+    "roleId": 2
+  }
+]

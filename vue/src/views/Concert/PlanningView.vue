@@ -56,9 +56,9 @@ export default {
       }
     },
     async getScenes() {
-      await get(`${this.$store.state.sselected}/scene`)
+      await get(`/scene`, {headers: {'saison': this.$store.state.saisonSelected}})
           .then(response => {
-            this.scenes = response.data;
+            this.scenes = response.data.data;
             this.scenes.forEach(scene => {
               if (scene.libelle.length > 15)
                 scene.libelle = scene.libelle.substring(0, 12) + "...";
@@ -69,17 +69,17 @@ export default {
           });
     },
     async getConcerts(date) {
-      await get(`${this.$store.state.sselected}/concert?date=` + date)
+      await get(`/concert?date=` + date, {headers: {'saison': this.$store.state.saisonSelected}})
           .then(response => {
-            this.concerts = response.data.map(concert => {
+            this.concerts = response.data.data.map(concert => {
               return {
                 id: concert.id,
-                id_scene: concert.id_scene,
+                sceneId: concert.sceneId,
                 artiste: concert.artiste.nom,
                 heureDebut: parseInt(concert.heure_debut.slice(0, 2)),
                 minuteDebut: parseInt(concert.heure_debut.slice(3, 5)),
                 duree: concert.duree / 15,
-                couleur: concert.artiste.category.couleur,
+                couleur: concert.artiste.categorie.couleur,
                 genres: concert.artiste.genres.map(genre => genre.libelle)
               }
           })
@@ -89,9 +89,9 @@ export default {
           });
     },
     async getDates() {
-      await get(`${this.$store.state.sselected}/concert/date`)
+      await get(`/concert/date`, {headers: {'saison': this.$store.state.saisonSelected}})
           .then(response => {
-            response.data.forEach(date => {
+            response.data.data.forEach(date => {
               this.dates.push(date.date_debut);
             })
           })
@@ -100,19 +100,19 @@ export default {
           });
     },
     async getHeureMin(date) {
-      await get(`${this.$store.state.sselected}/concert/heuremin?date=${date}`)
+      await get(`/concert/heuremin?date=${date}`, {headers: {'saison': this.$store.state.saisonSelected}})
           .then(response => {
-            this.heureDebut = parseInt(response.data.heure_debut.slice(0, 2));
+            this.heureDebut = parseInt(response.data.data.heure_debut.slice(0, 2));
           })
           .catch(error => {
             console.log(error)
           });
     },
     async getHeureMax(date) {
-      await get(`${this.$store.state.sselected}/concert/heuremax?date=${date}`)
+      await get(`/concert/heuremax?date=${date}`, {headers: {'saison': this.$store.state.saisonSelected}})
           .then(response => {
-            this.heureFin = parseInt(response.data.heure_fin.slice(0, 2));
-            if (response.data.heure_fin.slice(3, 5) !== "00")
+            this.heureFin = parseInt(response.data.data.heure_fin.slice(0, 2));
+            if (response.data.data.heure_fin.slice(3, 5) !== "00")
               this.heureFin++;
           })
           .catch(error => {
@@ -126,12 +126,11 @@ export default {
           while (td.firstChild) {
             td.removeChild(td.firstChild);
           }
-          td.setAttribute("colspan", 1);
           td.style.display = "table-cell";
         }
       });
       this.concerts.forEach(concert => {
-        const td = document.getElementById(concert.id_scene + "-" + ((concert.heureDebut - this.heureDebut) * 4 + concert.minuteDebut / this.dureeCreneau));
+        const td = document.getElementById(concert.sceneId + "-" + ((concert.heureDebut - this.heureDebut) * 4 + concert.minuteDebut / this.dureeCreneau));
         const span = document.createElement("span");
         span.style.backgroundColor = concert.couleur;
         span.style.position = "relative";
@@ -150,7 +149,7 @@ export default {
         span.appendChild(genres);
         td.appendChild(span);
         for(var i = 1; i < concert.duree; i++) {
-          const td = document.getElementById(concert.id_scene + "-" + ((concert.heureDebut - this.heureDebut) * 4 + concert.minuteDebut / this.dureeCreneau + i));
+          const td = document.getElementById(concert.sceneId + "-" + ((concert.heureDebut - this.heureDebut) * 4 + concert.minuteDebut / this.dureeCreneau + i));
           td.style.display = "none";
         }
       })
@@ -171,12 +170,9 @@ export default {
     await this.init();
     await this.getScenes();
     await this.getConcerts(this.dates[0]);
+    // nextTick permet d'attendre que le DOM soit chargé
+    await this.$nextTick();
     await this.affectConcerts();
-  },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
   }
 }
 </script>

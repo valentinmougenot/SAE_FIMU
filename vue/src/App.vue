@@ -1,8 +1,8 @@
 <template>
   <v-app>
     <TopMenuBar
-        v-if="showNavbars"
-        :user="{identifiant: $session.get('identifiant'), role: $session.get('role')}"
+        v-if="showNavbars && user !== {}"
+        :user="{identifiant: user.identifiant, role: user.role}"
         :items="['Déconnexion']"
         btnChange="Changer de saison"
         :saisonSelect="tab"
@@ -36,6 +36,7 @@
 <script>
 import {post} from "@/services/axios.service.js";
 import {mapState} from "vuex";
+import {authUser} from "@/services/auth.service";
 export default {
   name: 'App',
   components: {
@@ -46,15 +47,6 @@ export default {
     menuData: [],
   }),
   methods: {
-    logout() {
-      post('utilisateur/logout')
-          .then(() => {
-            this.$router.push('/login');
-          })
-          .catch(error => {
-            console.log(error)
-          });
-      },
     selectItem(index) {
       if (index === 0) {
         this.$router.push('/artiste');
@@ -81,7 +73,7 @@ export default {
       }
     },
     initMenuData() {
-      if (this.$session.exists() && this.$session.get('role') === 'Administrateur') {
+      if (this.user !== {} && this.user.role === 'Administrateur') {
         this.menuData = [
           {text: 'Artistes', selected : false},
           {text: 'Scènes', selected: false},
@@ -113,8 +105,8 @@ export default {
     },
     userBtnClick(index) {
       if (index === 0) {
-        this.logout();
-        this.$session.destroy();
+        localStorage.removeItem('user');
+        this.$router.push('/login');
       }
     },
     switchSaison() {
@@ -139,17 +131,14 @@ export default {
       if (id === 0) {
         data.saison = '';
         data.year = '';
-        data.sselected = '';
       }
       else if (id === 1) {
-        data.saison = '/next';
+        data.saison = 'next';
         data.year = '';
-        data.sselected = '/next';
       }
       else {
-        data.saison = '/previous';
-        data.year = '/year/' + this.saison[id].annee.toString();
-        data.sselected = '';
+        data.saison = 'previous';
+        data.year = '&saisonId=' + this.saison[id].id.toString();
       }
       await this.$store.dispatch('selectSaison', data);
       await this.$store.dispatch('getArtistes');
@@ -169,21 +158,24 @@ export default {
         return [];
       let tab = [];
       tab.push({
-        text: "Saison " + this.saison[1].annee + " (actuelle)",
+        text: "Saison " + this.saison[1].annee + " - " + this.saison[1].noMois + " (actuelle)",
         value: 0
       })
       tab.push({
-        text: "Saison " + this.saison[0].annee + " (suivante)",
+        text: "Saison " + this.saison[0].annee + " - " + this.saison[0].noMois + " (suivante)",
         value: 1
       })
       for(let i = 2; i < this.saison.length; i++) {
         tab.push({
-          text: "Saison " + this.saison[i].annee,
+          text: "Saison " + this.saison[i].annee + " - " + this.saison[i].noMois,
           value: i
         })
       }
       return tab;
     },
+    user() {
+      return authUser();
+    }
   },
   watch:{
     $route () {

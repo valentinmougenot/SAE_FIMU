@@ -148,11 +148,7 @@ export default {
       this.$store.dispatch('getTypescenes')
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 

@@ -1,0 +1,713 @@
+[
+  {
+    "libelle": "Afghanistan"
+  },
+  {
+    "libelle": "Afrique du Sud"
+  },
+  {
+    "libelle": "Albanie"
+  },
+  {
+    "libelle": "Algérie"
+  },
+  {
+    "libelle": "Allemagne"
+  },
+  {
+    "libelle": "Andorre"
+  },
+  {
+    "libelle": "Angola"
+  },
+  {
+    "libelle": "Anguilla"
+  },
+  {
+    "libelle": "Antarctique"
+  },
+  {
+    "libelle": "Antigua-et-Barbuda"
+  },
+  {
+    "libelle": "Antilles Néerlandaises"
+  },
+  {
+    "libelle": "Arabie Saoudite"
+  },
+  {
+    "libelle": "Argentine"
+  },
+  {
+    "libelle": "Arménie"
+  },
+  {
+    "libelle": "Aruba"
+  },
+  {
+    "libelle": "Australie"
+  },
+  {
+    "libelle": "Autriche"
+  },
+  {
+    "libelle": "Azerbaïdjan"
+  },
+  {
+    "libelle": "Bahamas"
+  },
+  {
+    "libelle": "Bahreïn"
+  },
+  {
+    "libelle": "Bangladesh"
+  },
+  {
+    "libelle": "Barbade"
+  },
+  {
+    "libelle": "Bélarus"
+  },
+  {
+    "libelle": "Belgique"
+  },
+  {
+    "libelle": "Belize"
+  },
+  {
+    "libelle": "Bénin"
+  },
+  {
+    "libelle": "Bermudes"
+  },
+  {
+    "libelle": "Bhoutan"
+  },
+  {
+    "libelle": "Bolivie"
+  },
+  {
+    "libelle": "Bosnie-Herzégovine"
+  },
+  {
+    "libelle": "Botswana"
+  },
+  {
+    "libelle": "Brésil"
+  },
+  {
+    "libelle": "Brunéi Darussalam"
+  },
+  {
+    "libelle": "Bulgarie"
+  },
+  {
+    "libelle": "Burkina Faso"
+  },
+  {
+    "libelle": "Burundi"
+  },
+  {
+    "libelle": "Cambodge"
+  },
+  {
+    "libelle": "Cameroun"
+  },
+  {
+    "libelle": "Canada"
+  },
+  {
+    "libelle": "Cap-vert"
+  },
+  {
+    "libelle": "Chili"
+  },
+  {
+    "libelle": "Chine"
+  },
+  {
+    "libelle": "Chypre"
+  },
+  {
+    "libelle": "Colombie"
+  },
+  {
+    "libelle": "Comores"
+  },
+  {
+    "libelle": "Costa Rica"
+  },
+  {
+    "libelle": "Côte d'Ivoire"
+  },
+  {
+    "libelle": "Croatie"
+  },
+  {
+    "libelle": "Cuba"
+  },
+  {
+    "libelle": "Danemark"
+  },
+  {
+    "libelle": "Djibouti"
+  },
+  {
+    "libelle": "Dominique"
+  },
+  {
+    "libelle": "Égypte"
+  },
+  {
+    "libelle": "El Salvador"
+  },
+  {
+    "libelle": "Émirats Arabes Unis"
+  },
+  {
+    "libelle": "Équateur"
+  },
+  {
+    "libelle": "Érythrée"
+  },
+  {
+    "libelle": "Espagne"
+  },
+  {
+    "libelle": "Estonie"
+  },
+  {
+    "libelle": "États Fédérés de Micronésie"
+  },
+  {
+    "libelle": "États-Unis"
+  },
+  {
+    "libelle": "Éthiopie"
+  },
+  {
+    "libelle": "Ex-République Yougoslave de Macédoine"
+  },
+  {
+    "libelle": "Fédération de Russie"
+  },
+  {
+    "libelle": "Fidji"
+  },
+  {
+    "libelle": "Finlande"
+  },
+  {
+    "libelle": "France"
+  },
+  {
+    "libelle": "Gabon"
+  },
+  {
+    "libelle": "Gambie"
+  },
+  {
+    "libelle": "Géorgie"
+  },
+  {
+    "libelle": "Géorgie du Sud et les Îles Sandwich du Sud"
+  },
+  {
+    "libelle": "Ghana"
+  },
+  {
+    "libelle": "Gibraltar"
+  },
+  {
+    "libelle": "Grèce"
+  },
+  {
+    "libelle": "Grenade"
+  },
+  {
+    "libelle": "Groenland"
+  },
+  {
+    "libelle": "Guadeloupe"
+  },
+  {
+    "libelle": "Guam"
+  },
+  {
+    "libelle": "Guatemala"
+  },
+  {
+    "libelle": "Guinée"
+  },
+  {
+    "libelle": "Guinée Équatoriale"
+  },
+  {
+    "libelle": "Guinée-Bissau"
+  },
+  {
+    "libelle": "Guyana"
+  },
+  {
+    "libelle": "Guyane Française"
+  },
+  {
+    "libelle": "Haïti"
+  },
+  {
+    "libelle": "Honduras"
+  },
+  {
+    "libelle": "Hong-Kong"
+  },
+  {
+    "libelle": "Hongrie"
+  },
+  {
+    "libelle": "Île Christmas"
+  },
+  {
+    "libelle": "Île de Man"
+  },
+  {
+    "libelle": "Île Norfolk"
+  },
+  {
+    "libelle": "Îles (malvinas) Falkland"
+  },
+  {
+    "libelle": "Îles Ã…land"
+  },
+  {
+    "libelle": "Îles Caïmanes"
+  },
+  {
+    "libelle": "Îles Cocos (Keeling)"
+  },
+  {
+    "libelle": "Îles Cook"
+  },
+  {
+    "libelle": "Îles Féroé"
+  },
+  {
+    "libelle": "Îles Heard et Mcdonald"
+  },
+  {
+    "libelle": "Îles Mariannes du Nord"
+  },
+  {
+    "libelle": "Îles Marshall"
+  },
+  {
+    "libelle": "Îles Mineures Éloignées des États-Unis"
+  },
+  {
+    "libelle": "Îles Turks et Caïques"
+  },
+  {
+    "libelle": "Îles Vierges des États-Unis"
+  },
+  {
+    "libelle": "Inde"
+  },
+  {
+    "libelle": "Indonésie"
+  },
+  {
+    "libelle": "Iraq"
+  },
+  {
+    "libelle": "Irlande"
+  },
+  {
+    "libelle": "Islande"
+  },
+  {
+    "libelle": "IsraÃ«l"
+  },
+  {
+    "libelle": "Italie"
+  },
+  {
+    "libelle": "Jamahiriya Arabe Libyenne"
+  },
+  {
+    "libelle": "Jamaïque"
+  },
+  {
+    "libelle": "Japon"
+  },
+  {
+    "libelle": "Jordanie"
+  },
+  {
+    "libelle": "Kazakhstan"
+  },
+  {
+    "libelle": "Kenya"
+  },
+  {
+    "libelle": "Kirghizistan"
+  },
+  {
+    "libelle": "Kiribati"
+  },
+  {
+    "libelle": "Koweït"
+  },
+  {
+    "libelle": "Lesotho"
+  },
+  {
+    "libelle": "Lettonie"
+  },
+  {
+    "libelle": "Liban"
+  },
+  {
+    "libelle": "Libéria"
+  },
+  {
+    "libelle": "Liechtenstein"
+  },
+  {
+    "libelle": "Lituanie"
+  },
+  {
+    "libelle": "Luxembourg"
+  },
+  {
+    "libelle": "Macao"
+  },
+  {
+    "libelle": "Madagascar"
+  },
+  {
+    "libelle": "Malaisie"
+  },
+  {
+    "libelle": "Malawi"
+  },
+  {
+    "libelle": "Maldives"
+  },
+  {
+    "libelle": "Mali"
+  },
+  {
+    "libelle": "Malte"
+  },
+  {
+    "libelle": "Maroc"
+  },
+  {
+    "libelle": "Martinique"
+  },
+  {
+    "libelle": "Maurice"
+  },
+  {
+    "libelle": "Mauritanie"
+  },
+  {
+    "libelle": "Mayotte"
+  },
+  {
+    "libelle": "Mexique"
+  },
+  {
+    "libelle": "Monaco"
+  },
+  {
+    "libelle": "Mongolie"
+  },
+  {
+    "libelle": "Montserrat"
+  },
+  {
+    "libelle": "Mozambique"
+  },
+  {
+    "libelle": "Myanmar"
+  },
+  {
+    "libelle": "Namibie"
+  },
+  {
+    "libelle": "Nauru"
+  },
+  {
+    "libelle": "Népal"
+  },
+  {
+    "libelle": "Nicaragua"
+  },
+  {
+    "libelle": "Niger"
+  },
+  {
+    "libelle": "Nigéria"
+  },
+  {
+    "libelle": "Niué"
+  },
+  {
+    "libelle": "Norvège"
+  },
+  {
+    "libelle": "Nouvelle-Calédonie"
+  },
+  {
+    "libelle": "Nouvelle-Zélande"
+  },
+  {
+    "libelle": "Oman"
+  },
+  {
+    "libelle": "Ouganda"
+  },
+  {
+    "libelle": "Ouzbékistan"
+  },
+  {
+    "libelle": "Pakistan"
+  },
+  {
+    "libelle": "Palaos"
+  },
+  {
+    "libelle": "Panama"
+  },
+  {
+    "libelle": "Papouasie-Nouvelle-Guinée"
+  },
+  {
+    "libelle": "Paraguay"
+  },
+  {
+    "libelle": "Pays-Bas"
+  },
+  {
+    "libelle": "Pérou"
+  },
+  {
+    "libelle": "Philippines"
+  },
+  {
+    "libelle": "Pitcairn"
+  },
+  {
+    "libelle": "Pologne"
+  },
+  {
+    "libelle": "Polynésie Française"
+  },
+  {
+    "libelle": "Porto Rico"
+  },
+  {
+    "libelle": "Portugal"
+  },
+  {
+    "libelle": "Qatar"
+  },
+  {
+    "libelle": "République Arabe Syrienne"
+  },
+  {
+    "libelle": "République Centrafricaine"
+  },
+  {
+    "libelle": "République de Corée"
+  },
+  {
+    "libelle": "République de Moldova"
+  },
+  {
+    "libelle": "République Démocratique du Congo"
+  },
+  {
+    "libelle": "République Démocratique Populaire Lao"
+  },
+  {
+    "libelle": "République Dominicaine"
+  },
+  {
+    "libelle": "République du Congo"
+  },
+  {
+    "libelle": "République Islamique d'Iran"
+  },
+  {
+    "libelle": "République Populaire Démocratique de Corée"
+  },
+  {
+    "libelle": "République Tchèque"
+  },
+  {
+    "libelle": "République-Unie de Tanzanie"
+  },
+  {
+    "libelle": "Réunion"
+  },
+  {
+    "libelle": "Roumanie"
+  },
+  {
+    "libelle": "Royaume-Uni"
+  },
+  {
+    "libelle": "Rwanda"
+  },
+  {
+    "libelle": "Sahara Occidental"
+  },
+  {
+    "libelle": "Sainte-Hélène"
+  },
+  {
+    "libelle": "Sainte-Lucie"
+  },
+  {
+    "libelle": "Saint-Kitts-et-Nevis"
+  },
+  {
+    "libelle": "Saint-Marin"
+  },
+  {
+    "libelle": "Saint-Pierre-et-Miquelon"
+  },
+  {
+    "libelle": "Saint-Vincent-et-les Grenadines"
+  },
+  {
+    "libelle": "Samoa"
+  },
+  {
+    "libelle": "Samoa Américaines"
+  },
+  {
+    "libelle": "Sao Tomé-et-Principe"
+  },
+  {
+    "libelle": "Sénégal"
+  },
+  {
+    "libelle": "Serbie-et-Monténégro"
+  },
+  {
+    "libelle": "Seychelles"
+  },
+  {
+    "libelle": "Sierra Leone"
+  },
+  {
+    "libelle": "Singapour"
+  },
+  {
+    "libelle": "Slovaquie"
+  },
+  {
+    "libelle": "Slovénie"
+  },
+  {
+    "libelle": "Somalie"
+  },
+  {
+    "libelle": "Soudan"
+  },
+  {
+    "libelle": "Sri Lanka"
+  },
+  {
+    "libelle": "Suède"
+  },
+  {
+    "libelle": "Suisse"
+  },
+  {
+    "libelle": "Suriname"
+  },
+  {
+    "libelle": "Svalbard etÎle Jan Mayen"
+  },
+  {
+    "libelle": "Swaziland"
+  },
+  {
+    "libelle": "Tadjikistan"
+  },
+  {
+    "libelle": "Taïwan"
+  },
+  {
+    "libelle": "Tchad"
+  },
+  {
+    "libelle": "Terres Australes Françaises"
+  },
+  {
+    "libelle": "Territoire Britannique de l'Océan Indien"
+  },
+  {
+    "libelle": "Territoire Palestinien Occupé"
+  },
+  {
+    "libelle": "Thaïlande"
+  },
+  {
+    "libelle": "Timor-Leste"
+  },
+  {
+    "libelle": "Togo"
+  },
+  {
+    "libelle": "Tokelau"
+  },
+  {
+    "libelle": "Tonga"
+  },
+  {
+    "libelle": "Trinité-et-Tobago"
+  },
+  {
+    "libelle": "Tunisie"
+  },
+  {
+    "libelle": "Turkménistan"
+  },
+  {
+    "libelle": "Turquie"
+  },
+  {
+    "libelle": "Tuvalu"
+  },
+  {
+    "libelle": "Ukraine"
+  },
+  {
+    "libelle": "Uruguay"
+  },
+  {
+    "libelle": "Vanuatu"
+  },
+  {
+    "libelle": "Venezuela"
+  },
+  {
+    "libelle": "Viet Nam"
+  },
+  {
+    "libelle": "Wallis et Futuna"
+  },
+  {
+    "libelle": "Yémen"
+  },
+  {
+    "libelle": "Zambie"
+  },
+  {
+    "libelle": "Zimbabwe"
+  }
+]

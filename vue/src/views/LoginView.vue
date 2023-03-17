@@ -62,16 +62,12 @@ export default {
   }),
   methods: {
     login() {
-      post("/utilisateur/login", {
+      post("/auth/signin", {
         identifiant: this.identifiant,
-        mot_de_passe: this.password,
+        motDePasse: this.password,
       }).then((response) => {
-        if (response.data.identifiant) {
-          this.$session.start();
-          this.$session.set("identifiant", response.data.identifiant);
-          this.$session.set("role", response.data.role.libelle);
-          window.location.href = "/artiste";
-        }
+        localStorage.setItem("user", JSON.stringify(response.data))
+        window.location.href = "/artiste";
       }).catch((error) => {
         console.log(error);
         alert("Identifiant ou mot de passe incorrect");

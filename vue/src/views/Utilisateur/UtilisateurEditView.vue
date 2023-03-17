@@ -8,12 +8,12 @@
           </v-card-title>
           <v-card-text>
             <v-text-field
-                v-model="this.$route.params.id"
+                v-model="utilisateur.identifiant"
                 readonly
                 required
             ></v-text-field>
             <v-select
-                v-model="id_role"
+                v-model="utilisateur.roleId"
                 :items="rolesSelect"
                 label="Rôle de l'utilisateur"
                 required>
@@ -35,13 +35,16 @@ import {mapState} from "vuex";
 export default {
   name: "UtilisateurEditView",
   data: () => ({
-    id_role: null,
+    utilisateur: {
+      identifiant: null,
+      roleId: null,
+    }
   }),
   methods: {
     async getUtilisateur() {
       await get("utilisateur/" + this.$route.params.id)
         .then(response => {
-          this.id_role = response.data.id_role;
+          this.utilisateur = response.data.data;
         })
         .catch(error => {
           console.log(error);
@@ -49,7 +52,7 @@ export default {
     },
     editUtilisateur() {
       put("utilisateur/" + this.$route.params.id, {
-          id_role: this.id_role
+          roleId: this.roleId
         })
         .then(() => {
           this.$router.push("/utilisateur");
@@ -76,11 +79,7 @@ export default {
       this.$store.dispatch('getRoles');
     }
   },
-  beforeCreate() {
-    if (!this.$session.exists()) {
-      this.$router.push('/login')
-    }
-  }
+
 }
 </script>
 
