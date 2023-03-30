@@ -32,32 +32,23 @@ axiosService.interceptors.response.use(
 );
 
 export const get = async (url, params) => {
+    if (!params) params = {headers: authHeader()}
+    else if (!params.headers) params.headers = authHeader()
+    else params.headers = {...params.headers, ...authHeader()}
     return axiosService.get(url, params);
 }
 
 export const post = async (url, data) => {
-    if (!data) {
-        data = authHeader();
-    }
-    else
-        data['x-access-token'] = authHeader()["x-access-token"];
-    return axiosService.post(url, data);
+    const headers = {headers: authHeader()}
+    return axiosService.post(url, data, headers);
 }
 
 export const put = async (url, data) => {
-    if (!data) {
-        data = authHeader();
-    }
-    else
-        data['x-access-token'] = authHeader()["x-access-token"];
-    return axiosService.put(url, data);
+    const headers = {headers: authHeader()}
+    return axiosService.put(url, data, headers);
 }
 
 export const remove = async (url, params) => {
-    if (!params) {
-        params = authHeader();
-    }
-    else
-        params['x-access-token'] = authHeader()["x-access-token"];
-    return axiosService.delete(url, params);
+    const headers = {headers: authHeader()}
+    return axiosService.delete(url, params, headers);
 }

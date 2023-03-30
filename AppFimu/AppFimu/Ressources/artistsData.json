@@ -1,0 +1,773 @@
+[
+    {
+        "id": 1,
+        "nom": "#TRAD'",
+        "photo": "https://www.fimu.com/fileadmin/_processed_/a/d/csm_MM__TRAD__ff2b63e800.jpg",
+        "biographie": "Ayant baignés dès leur plus jeune âge dans la musique traditionnelle du Centre-France, les deux jeunes frères du groupe #TRAD' ont l’objectif de faire découvrir cette culture musicale hors du commun tout en apportant une touche de modernité à",
+        "lien_video": "https://www.youtube.com/artiste1",
+        "lien_site": "https://www.wikipedia.org/artiste1",
+        "categorieId": 1,
+        "categorie": {
+            "id": 1,
+            "libelle": "Catégorie 1",
+            "couleur": "#111111"
+        },
+        "genres": [
+            {
+                "id": 2,
+                "libelle": "Genre 2"
+            },
+            {
+                "id": 1,
+                "libelle": "Genre 1"
+            }
+        ],
+        "pays": [
+            {
+                "id": 1,
+                "libelle": "France"
+            },
+            {
+                "id": 2,
+                "libelle": "Allemagne"
+            },
+            {
+                "id": 3,
+                "libelle": "Italie"
+            }
+        ],
+        "reseauxSociauxes": [
+            {
+                "id": 1,
+                "libelle": "Facebook",
+                "logo": "mdi-facebook",
+                "possede": {
+                    "lien": "https://www.facebook.com/1"
+                }
+            },
+            {
+                "id": 2,
+                "libelle": "Twitter",
+                "logo": "mdi-twitter",
+                "possede": {
+                    "lien": "https://www.twitter.com/1"
+                }
+            },
+            {
+                "id": 3,
+                "libelle": "Instagram",
+                "logo": "mdi-instagram",
+                "possede": {
+                    "lien": "https://www.instagram.com/1"
+                }
+            }
+        ],
+        "concerts": [
+            {
+                "id": 10,
+                "heure_debut": "18:00:00",
+                "heure_fin": "19:30:00",
+                "date_debut": "2024-03-11",
+                "duree": 90,
+                "nbPersonnes": 400,
+                "artisteId": 1,
+                "sceneId": 5,
+                "scene": {
+                    "id": 5,
+                    "libelle": "Kiosque",
+                    "jauge": null,
+                    "latitude": 52.856614,
+                    "longitude": 6.3522219,
+                    "typesceneId": 1,
+                    "typescene": {
+                        "id": 1,
+                        "libelle": "Extérieur"
+                    }
+                }
+            },
+            {
+                "id": 1,
+                "heure_debut": "15:00:00",
+                "heure_fin": "15:45:00",
+                "date_debut": "2023-03-02",
+                "duree": 45,
+                "nbPersonnes": 100,
+                "artisteId": 1,
+                "sceneId": 1,
+                "scene": {
+                    "id": 1,
+                    "libelle": "L'Arsenal",
+                    "jauge": null,
+                    "latitude": 48.856614,
+                    "longitude": 2.3522219,
+                    "typesceneId": 1,
+                    "typescene": {
+                        "id": 1,
+                        "libelle": "Extérieur"
+                    }
+                }
+            }
+        ],
+        "isFavorite": false
+    },
+    {
+        "id": 2,
+        "nom": "2PanHeads",
+        "photo": "https://www.fimu.com/fileadmin/_processed_/5/7/csm_MM_2PanHeads_1400_cad6a9572a.jpg",
+        "biographie": "Biographie de l'artiste 2",
+        "lien_video": "https://www.youtube.com/artiste2",
+        "lien_site": "https://www.wikipedia.org/artiste2",
+        "categorieId": 2,
+        "categorie": {
+            "id": 2,
+            "libelle": "Catégorie 2",
+            "couleur": "#222222"
+        },
+        "genres": [
+            {
+                "id": 3,
+                "libelle": "Genre 3"
+            },
+            {
+                "id": 4,
+                "libelle": "Genre 4"
+            },
+            {
+                "id": 1,
+                "libelle": "Genre 1"
+            }
+        ],
+        "pays": [
+            {
+                "id": 4,
+                "libelle": "Espagne"
+            },
+            {
+                "id": 1,
+                "libelle": "France"
+            },
+            {
+                "id": 2,
+                "libelle": "Allemagne"
+            }
+        ],
+        "reseauxSociauxes": [
+            {
+                "id": 4,
+                "libelle": "Pinterest",
+                "logo": "mdi-pinterest",
+                "possede": {
+                    "lien": "https://www.pinterest.com/2"
+                }
+            },
+            {
+                "id": 5,
+                "libelle": "Snapchat",
+                "logo": "mdi-snapchat",
+                "possede": {
+                    "lien": "https://www.snapchat.com/2"
+                }
+            }
+        ],
+        "concerts": [
+            {
+                "id": 11,
+                "heure_debut": "19:00:00",
+                "heure_fin": "20:45:00",
+                "date_debut": "2024-03-12",
+                "duree": 105,
+                "nbPersonnes": 500,
+                "artisteId": 2,
+                "sceneId": 1,
+                "scene": {
+                    "id": 1,
+                    "libelle": "L'Arsenal",
+                    "jauge": null,
+                    "latitude": 48.856614,
+                    "longitude": 2.3522219,
+                    "typesceneId": 1,
+                    "typescene": {
+                        "id": 1,
+                        "libelle": "Extérieur"
+                    }
+                }
+            },
+            {
+                "id": 2,
+                "heure_debut": "16:00:00",
+                "heure_fin": "17:00:00",
+                "date_debut": "2023-03-03",
+                "duree": 60,
+                "nbPersonnes": 200,
+                "artisteId": 2,
+                "sceneId": 2,
+                "scene": {
+                    "id": 2,
+                    "libelle": "Jazz",
+                    "jauge": 100,
+                    "latitude": 49.856614,
+                    "longitude": 3.3522219,
+                    "typesceneId": 2,
+                    "typescene": {
+                        "id": 2,
+                        "libelle": "Intérieur"
+                    }
+                }
+            }
+        ],
+        "isFavorite": false
+    },
+    {
+        "id": 3,
+        "nom": "Aleph Quintet",
+        "photo": "https://www.fimu.com/fileadmin/_processed_/f/5/csm_J_Aleph_Quintet_ad33dc29d4.jpg",
+        "biographie": "Biographie de l'artiste 3",
+        "lien_video": "https://www.youtube.com/artiste3",
+        "lien_site": "https://www.wikipedia.org/artiste3",
+        "categorieId": 3,
+        "categorie": {
+            "id": 3,
+            "libelle": "Catégorie 3",
+            "couleur": "#333333"
+        },
+        "genres": [
+            {
+                "id": 2,
+                "libelle": "Genre 2"
+            },
+            {
+                "id": 3,
+                "libelle": "Genre 3"
+            },
+            {
+                "id": 4,
+                "libelle": "Genre 4"
+            }
+        ],
+        "pays": [
+            {
+                "id": 3,
+                "libelle": "Italie"
+            }
+        ],
+        "reseauxSociauxes": [
+            {
+                "id": 6,
+                "libelle": "Tiktok",
+                "logo": "mdi-tiktok",
+                "possede": {
+                    "lien": "https://www.tiktok.com/3"
+                }
+            }
+        ],
+        "concerts": [
+            {
+                "id": 12,
+                "heure_debut": "20:00:00",
+                "heure_fin": "22:00:00",
+                "date_debut": "2024-03-13",
+                "duree": 120,
+                "nbPersonnes": 600,
+                "artisteId": 3,
+                "sceneId": 2,
+                "scene": {
+                    "id": 2,
+                    "libelle": "Jazz",
+                    "jauge": 100,
+                    "latitude": 49.856614,
+                    "longitude": 3.3522219,
+                    "typesceneId": 2,
+                    "typescene": {
+                        "id": 2,
+                        "libelle": "Intérieur"
+                    }
+                }
+            },
+            {
+                "id": 3,
+                "heure_debut": "17:00:00",
+                "heure_fin": "18:15:00",
+                "date_debut": "2023-03-04",
+                "duree": 75,
+                "nbPersonnes": 300,
+                "artisteId": 3,
+                "sceneId": 3,
+                "scene": {
+                    "id": 3,
+                    "libelle": "Hôtel du département",
+                    "jauge": null,
+                    "latitude": 50.856614,
+                    "longitude": 4.3522219,
+                    "typesceneId": 1,
+                    "typescene": {
+                        "id": 1,
+                        "libelle": "Extérieur"
+                    }
+                }
+            }
+        ],
+        "isFavorite": false
+    },
+    {
+        "id": 4,
+        "nom": "AMA",
+        "photo": "https://www.fimu.com/fileadmin/_processed_/8/7/csm_MM_Ama_033bdbc747.jpg",
+        "biographie": "Biographie de l'artiste 4",
+        "lien_video": "https://www.youtube.com/artiste4",
+        "lien_site": "https://www.wikipedia.org/artiste4",
+        "categorieId": 4,
+        "categorie": {
+            "id": 4,
+            "libelle": "Catégorie 4",
+            "couleur": "#444444"
+        },
+        "genres": [
+            {
+                "id": 1,
+                "libelle": "Genre 1"
+            }
+        ],
+        "pays": [
+            {
+                "id": 4,
+                "libelle": "Espagne"
+            }
+        ],
+        "reseauxSociauxes": [
+            {
+                "id": 1,
+                "libelle": "Facebook",
+                "logo": "mdi-facebook",
+                "possede": {
+                    "lien": "https://www.facebook.com/4"
+                }
+            }
+        ],
+        "concerts": [
+            {
+                "id": 4,
+                "heure_debut": "18:00:00",
+                "heure_fin": "19:30:00",
+                "date_debut": "2023-03-05",
+                "duree": 90,
+                "nbPersonnes": 400,
+                "artisteId": 4,
+                "sceneId": 4,
+                "scene": {
+                    "id": 4,
+                    "libelle": "Cathédrale St-Christophe",
+                    "jauge": null,
+                    "latitude": 51.856614,
+                    "longitude": 5.3522219,
+                    "typesceneId": 1,
+                    "typescene": {
+                        "id": 1,
+                        "libelle": "Extérieur"
+                    }
+                }
+            }
+        ],
+        "isFavorite": false
+    },
+    {
+        "id": 5,
+        "nom": "AMA & Bandikoot ",
+        "photo": "https://www.fimu.com/fileadmin/_processed_/d/4/csm_MM_AMA_meets_Bandikoot_0a1e5efd4c.jpg",
+        "biographie": "Biographie de l'artiste 5",
+        "lien_video": "https://www.youtube.com/artiste5",
+        "lien_site": "https://www.wikipedia.org/artiste5",
+        "categorieId": 1,
+        "categorie": {
+            "id": 1,
+            "libelle": "Catégorie 1",
+            "couleur": "#111111"
+        },
+        "genres": [
+            {
+                "id": 2,
+                "libelle": "Genre 2"
+            },
+            {
+                "id": 3,
+                "libelle": "Genre 3"
+            }
+        ],
+        "pays": [
+            {
+                "id": 1,
+                "libelle": "France"
+            },
+            {
+                "id": 2,
+                "libelle": "Allemagne"
+            }
+        ],
+        "reseauxSociauxes": [
+            {
+                "id": 2,
+                "libelle": "Twitter",
+                "logo": "mdi-twitter",
+                "possede": {
+                    "lien": "https://www.twitter.com/5"
+                }
+            }
+        ],
+        "concerts": [
+            {
+                "id": 5,
+                "heure_debut": "19:00:00",
+                "heure_fin": "20:45:00",
+                "date_debut": "2023-03-06",
+                "duree": 105,
+                "nbPersonnes": 500,
+                "artisteId": 5,
+                "sceneId": 5,
+                "scene": {
+                    "id": 5,
+                    "libelle": "Kiosque",
+                    "jauge": null,
+                    "latitude": 52.856614,
+                    "longitude": 6.3522219,
+                    "typesceneId": 1,
+                    "typescene": {
+                        "id": 1,
+                        "libelle": "Extérieur"
+                    }
+                }
+            }
+        ],
+        "isFavorite": false
+    },
+    {
+        "id": 6,
+        "nom": "André Teixeira",
+        "photo": "https://www.fimu.com/fileadmin/_processed_/0/3/csm_MC_Andre_Teixeira_1400_ef75224d5b.jpg",
+        "biographie": "Biographie de l'artiste 6",
+        "lien_video": "https://www.youtube.com/artiste6",
+        "lien_site": "https://www.wikipedia.org/artiste6",
+        "categorieId": 2,
+        "categorie": {
+            "id": 2,
+            "libelle": "Catégorie 2",
+            "couleur": "#222222"
+        },
+        "genres": [
+            {
+                "id": 4,
+                "libelle": "Genre 4"
+            },
+            {
+                "id": 1,
+                "libelle": "Genre 1"
+            }
+        ],
+        "pays": [
+            {
+                "id": 3,
+                "libelle": "Italie"
+            },
+            {
+                "id": 4,
+                "libelle": "Espagne"
+            },
+            {
+                "id": 1,
+                "libelle": "France"
+            }
+        ],
+        "reseauxSociauxes": [
+            {
+                "id": 3,
+                "libelle": "Instagram",
+                "logo": "mdi-instagram",
+                "possede": {
+                    "lien": "https://www.instagram.com/6"
+                }
+            },
+            {
+                "id": 4,
+                "libelle": "Pinterest",
+                "logo": "mdi-pinterest",
+                "possede": {
+                    "lien": "https://www.pinterest.com/6"
+                }
+            },
+            {
+                "id": 5,
+                "libelle": "Snapchat",
+                "logo": "mdi-snapchat",
+                "possede": {
+                    "lien": "https://www.snapchat.com/6"
+                }
+            }
+        ],
+        "concerts": [
+            {
+                "id": 6,
+                "heure_debut": "20:00:00",
+                "heure_fin": "22:00:00",
+                "date_debut": "2023-03-07",
+                "duree": 120,
+                "nbPersonnes": 600,
+                "artisteId": 6,
+                "sceneId": 1,
+                "scene": {
+                    "id": 1,
+                    "libelle": "L'Arsenal",
+                    "jauge": null,
+                    "latitude": 48.856614,
+                    "longitude": 2.3522219,
+                    "typesceneId": 1,
+                    "typescene": {
+                        "id": 1,
+                        "libelle": "Extérieur"
+                    }
+                }
+            }
+        ],
+        "isFavorite": false
+    },
+    {
+        "id": 7,
+        "nom": "Bachar Mar-Khalifé",
+        "photo": "https://www.fimu.com/fileadmin/_processed_/3/5/csm_HABIB_SALEH1_60f4b45fcc.jpg",
+        "biographie": "Biographie de l'artiste 7",
+        "lien_video": "https://www.youtube.com/artiste7",
+        "lien_site": "https://www.wikipedia.org/artiste7",
+        "categorieId": 3,
+        "categorie": {
+            "id": 3,
+            "libelle": "Catégorie 3",
+            "couleur": "#333333"
+        },
+        "genres": [
+            {
+                "id": 2,
+                "libelle": "Genre 2"
+            },
+            {
+                "id": 3,
+                "libelle": "Genre 3"
+            },
+            {
+                "id": 4,
+                "libelle": "Genre 4"
+            }
+        ],
+        "pays": [
+            {
+                "id": 2,
+                "libelle": "Allemagne"
+            },
+            {
+                "id": 3,
+                "libelle": "Italie"
+            }
+        ],
+        "reseauxSociauxes": [
+            {
+                "id": 6,
+                "libelle": "Tiktok",
+                "logo": "mdi-tiktok",
+                "possede": {
+                    "lien": "https://www.tiktok.com/7"
+                }
+            },
+            {
+                "id": 2,
+                "libelle": "Twitter",
+                "logo": "mdi-twitter",
+                "possede": {
+                    "lien": "https://www.twitter.com/7"
+                }
+            },
+            {
+                "id": 1,
+                "libelle": "Facebook",
+                "logo": "mdi-facebook",
+                "possede": {
+                    "lien": "https://www.facebook.com/7"
+                }
+            }
+        ],
+        "concerts": [
+            {
+                "id": 7,
+                "heure_debut": "15:00:00",
+                "heure_fin": "15:45:00",
+                "date_debut": "2024-03-08",
+                "duree": 45,
+                "nbPersonnes": 100,
+                "artisteId": 7,
+                "sceneId": 2,
+                "scene": {
+                    "id": 2,
+                    "libelle": "Jazz",
+                    "jauge": 100,
+                    "latitude": 49.856614,
+                    "longitude": 3.3522219,
+                    "typesceneId": 2,
+                    "typescene": {
+                        "id": 2,
+                        "libelle": "Intérieur"
+                    }
+                }
+            }
+        ],
+        "isFavorite": false
+    },
+    {
+        "id": 8,
+        "nom": "Beirut Contemporary Ensemble",
+        "photo": "https://www.fimu.com/fileadmin/_processed_/0/0/csm_MC_Beirut_Contemporary_Ensemble_1400_02ec5daa53.jpg",
+        "biographie": "Biographie de l'artiste 8",
+        "lien_video": "https://www.youtube.com/artiste8",
+        "lien_site": "https://www.wikipedia.org/artiste8",
+        "categorieId": 4,
+        "categorie": {
+            "id": 4,
+            "libelle": "Catégorie 4",
+            "couleur": "#444444"
+        },
+        "genres": [
+            {
+                "id": 1,
+                "libelle": "Genre 1"
+            },
+            {
+                "id": 2,
+                "libelle": "Genre 2"
+            }
+        ],
+        "pays": [
+            {
+                "id": 4,
+                "libelle": "Espagne"
+            },
+            {
+                "id": 1,
+                "libelle": "France"
+            },
+            {
+                "id": 2,
+                "libelle": "Allemagne"
+            }
+        ],
+        "reseauxSociauxes": [
+            {
+                "id": 3,
+                "libelle": "Instagram",
+                "logo": "mdi-instagram",
+                "possede": {
+                    "lien": "https://www.instagram.com/8"
+                }
+            },
+            {
+                "id": 4,
+                "libelle": "Pinterest",
+                "logo": "mdi-pinterest",
+                "possede": {
+                    "lien": "https://www.pinterest.com/8"
+                }
+            }
+        ],
+        "concerts": [
+            {
+                "id": 8,
+                "heure_debut": "16:00:00",
+                "heure_fin": "17:00:00",
+                "date_debut": "2024-03-09",
+                "duree": 60,
+                "nbPersonnes": 200,
+                "artisteId": 8,
+                "sceneId": 3,
+                "scene": {
+                    "id": 3,
+                    "libelle": "Hôtel du département",
+                    "jauge": null,
+                    "latitude": 50.856614,
+                    "longitude": 4.3522219,
+                    "typesceneId": 1,
+                    "typescene": {
+                        "id": 1,
+                        "libelle": "Extérieur"
+                    }
+                }
+            }
+        ],
+        "isFavorite": false
+    },
+    {
+        "id": 9,
+        "nom": "Belly Moon",
+        "photo": "https://www.fimu.com/fileadmin/_processed_/1/5/csm_J_Belly_Moon_85892c07c1.jpg",
+        "biographie": "Biographie de l'article 9",
+        "lien_video": "https://www.youtube.com/artiste9",
+        "lien_site": "https://www.wikipedia.org/artiste9",
+        "categorieId": 1,
+        "categorie": {
+            "id": 1,
+            "libelle": "Catégorie 1",
+            "couleur": "#111111"
+        },
+        "genres": [
+            {
+                "id": 3,
+                "libelle": "Genre 3"
+            },
+            {
+                "id": 4,
+                "libelle": "Genre 4"
+            }
+        ],
+        "pays": [
+            {
+                "id": 3,
+                "libelle": "Italie"
+            }
+        ],
+        "reseauxSociauxes": [
+            {
+                "id": 5,
+                "libelle": "Snapchat",
+                "logo": "mdi-snapchat",
+                "possede": {
+                    "lien": "https://www.snapchat.com/9"
+                }
+            },
+            {
+                "id": 6,
+                "libelle": "Tiktok",
+                "logo": "mdi-tiktok",
+                "possede": {
+                    "lien": "https://www.tiktok.com/9"
+                }
+            }
+        ],
+        "concerts": [
+            {
+                "id": 9,
+                "heure_debut": "17:00:00",
+                "heure_fin": "18:15:00",
+                "date_debut": "2024-03-10",
+                "duree": 75,
+                "nbPersonnes": 300,
+                "artisteId": 9,
+                "sceneId": 4,
+                "scene": {
+                    "id": 4,
+                    "libelle": "Cathédrale St-Christophe",
+                    "jauge": null,
+                    "latitude": 51.856614,
+                    "longitude": 5.3522219,
+                    "typesceneId": 1,
+                    "typescene": {
+                        "id": 1,
+                        "libelle": "Extérieur"
+                    }
+                }
+            }
+        ],
+        "isFavorite": false
+    }
+]

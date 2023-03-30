@@ -128,7 +128,6 @@ export default {
     async getConcerts(date) {
       await get(`/concert?date=${date}`, {headers: {'saison': this.$store.state.saisonSelected}})
           .then(response => {
-            console.log(response.data.data)
             this.concerts = response.data.data.map(concert => {
               return {
                 id: concert.id,

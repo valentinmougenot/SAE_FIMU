@@ -1,0 +1,49 @@
+[
+    {
+        "id": 1,
+        "titre": "The 10 Best Places to Eat in the World",
+        "contenu": "Here are the 10 best places to eat in the world. 1. The Fat Duck, Bray, England 2. El Celler de Can Roca, Girona, Spain 3. Mugaritz, San Sebastian, Spain 4. Noma, Copenhagen, Denmark 5. Osteria Francescana, Modena, Italy 6. Eleven Madison Park, New York, USA 7. Dinner by Heston Blumenthal, London, England 8. Steirereck, Vienna, Austria 9. Arzak, San Sebastian, Spain 10. Maaemo, Oslo, Norway",
+        "lienImage": "https://img.cuisineaz.com/660x660/2018/02/28/i136025-pizza-legere.jpeg",
+        "dateEnvoi": "2018-02-28",
+        "typeactuId": 1,
+        
+        "typeactu": {
+            "id": 1,
+            "libelle": "Information",
+            "couleur": "#3399ff"
+        }
+        
+    },
+    
+    {
+        "id": 2,
+        "titre": "The 10 Best Movies of 2017",
+        "contenu": "Here are the 10 best movies of 2017. 1. Get Out 2. Lady Bird 3. The Shape of Water 4. Three Billboards Outside Ebbing, Missouri 5. Call Me by Your Name 6. The Florida Project 7. Phantom Thread 8. The Big Sick 9. The Disaster Artist 10. Blade Runner 2049",
+        "lienImage": "https://lumiere-a.akamaihd.net/v1/images/image_83011738.jpeg?region=0,0,540,810",
+        "dateEnvoi": "2018-03-01",
+        "typeactuId": 2,
+        
+        "typeactu": {
+            "id": 2,
+            "libelle": "Avertissement",
+            "couleur": "#ffff00"
+        }
+        
+    },
+    
+    {
+        "id": 3,
+        "titre": "The 10 Best TV Shows of 2017",
+        "contenu": "Here are the 10 best TV shows of 2017. 1. The Handmaid's Tale 2. Stranger Things 3. The Crown 4. This Is Us 5. The Good Place 6. The Deuce 7. The Leftovers 8. The Americans 9. Atlanta 10. The Marvelous Mrs. Maisel",
+        "lienImage": "https://file1.telestar.fr/var/telestar/storage/images/2015/articles/pourquoi-le-juste-prix-n-est-il-plus-a-l-antenne-tf1-repond-90083/793407-3-fre-FR/Pourquoi-Le-Juste-Prix-n-est-il-plus-a-l-antenne-TF1-repond.jpg?alias=original",
+        "dateEnvoi": "2018-03-02",
+        "typeactuId": 3,
+        
+        "typeactu": {
+            "id": 3,
+            "libelle": "Urgent",
+            "couleur": "#ff3300"
+        }
+        
+    }
+]

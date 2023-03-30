@@ -27,7 +27,8 @@ const getArtistes = async (req: Request, res: Result) => {
 
         const options = {
             where: conditions,
-            include: []
+            include: [],
+            order: [['id', 'ASC']]
         }
         if (incCategorie) {
             options.include.push({
@@ -76,11 +77,7 @@ const getArtistes = async (req: Request, res: Result) => {
         if (incConcert && saison !== 'previous') {
             let include = {
                 model: db.concerts,
-                include: [],
-                order: [
-                    ['date_debut', 'ASC'],
-                    ['heure_debut', 'ASC']
-                ]
+                include: []
             }
             if (incScene) {
                 include.include.push({
@@ -91,6 +88,8 @@ const getArtistes = async (req: Request, res: Result) => {
                 });
             }
             options.include.push(include);
+            options.order.push([db.sequelize.col('"concerts"."date_debut"'), 'ASC']);
+            options.order.push([db.sequelize.col('"concerts"."heure_debut"'), 'ASC']);
         }
 
         const artistes = await db.artistes.findAll(options);

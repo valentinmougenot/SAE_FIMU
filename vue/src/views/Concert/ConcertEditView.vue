@@ -66,7 +66,7 @@ export default {
         heure_debut: null,
         date_debut: null,
         duree: null,
-        nb_personnes: 0,
+        nbPersonnes: 0,
         annee: 0
       }
     }
@@ -76,7 +76,6 @@ export default {
       await get(`/concert/${this.$route.params.id}`, {headers: {'saison': this.$store.state.saison}})
         .then(response => {
           this.concert = response.data.data;
-          console.log(this.concert)
         })
         .catch(error => {
           console.log(error);

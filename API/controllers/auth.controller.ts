@@ -18,7 +18,6 @@ const signup = async (req: Request, res: Response) => {
 }
 
 const signin = (req, res) => {
-    console.log(req.body)
     const utilisateur = dbCommon.utilisateurs.findOne({
         where: {
             identifiant: req.body.identifiant

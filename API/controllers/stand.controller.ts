@@ -131,19 +131,20 @@ const createStand = async (req: Request, res: Result) => {
 
 const editStand = async (req: Request, res: Result) => {
     try {
+        console.log(req.body)
         const saison = req.headers.saison ? req.headers.saison.toLowerCase() : "";
         const db = getDbSaions(saison);
 
         const id = req.params.id;
 
-        const stand = await db.stands.update(req.body, {
+        const stand = await db.stands.findOne({
             where: {
                 id: id
             }
         });
+        await stand.update(req.body);
 
         await stand.setServices(req.body.services);
-
         const result = {
             error: 0,
             data: stand
@@ -152,6 +153,7 @@ const editStand = async (req: Request, res: Result) => {
         res.status(200).json(result);
     }
     catch (e) {
+        console.log(e)
         const result = {
             error: 1,
             message: "Une erreur est survenue lors de la modification du stand."

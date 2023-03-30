@@ -43,26 +43,15 @@ npm install
 ```sql
 psql -U login
 CREATE DATABASE fimu;
-\c fimu
-CREATE SCHEMA common;
-CREATE SCHEMA currentseason;
-CREATE SCHEMA nextseason;
-CREATE SCHEMA previousseasons;
-\q
 ```
 
-4. Fill the database with the data
-
-```bash
-cd ../Ressources/BDD
-./init_db.sh <login> <server>
-```
+4. Uncomment the line 387 in the file `API/models/index.ts`
 
 5. Edit the configuration file
 
 ```bash
 cd ../../API/db
-nano db.config.js
+nano db.config.ts
 ```
 
 Replace the username and password with your own.
@@ -71,8 +60,15 @@ Replace the username and password with your own.
 
 ```bash
 cd ..
+npm run build
+```
+
+Comment the line 387 in the file `API/models/index.ts`
+
+```bash
 npm start
 ```
+
 
 7. Run the web interface
 

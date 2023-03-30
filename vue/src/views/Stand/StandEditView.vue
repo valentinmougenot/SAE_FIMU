@@ -65,7 +65,7 @@
 
 <script>
 import {mapState} from "vuex";
-import {get, post, put, remove} from "@/services/axios.service.js";
+import {get, put} from "@/services/axios.service.js";
 export default {
   name: "StandEditView",
   data() {
@@ -94,7 +94,7 @@ export default {
       this.stand.latitude = parseFloat(this.stand.latitude);
       this.stand.longitude = parseFloat(this.stand.longitude);
       this.stand.services = this.id_services;
-      await put(`/stand`, this.stand, {headers: {'saison': this.$store.state.saisonSelected}})
+      await put(`/stand/${this.$route.params.id}`, this.stand, {headers: {'saison': this.$store.state.saisonSelected}})
           .then(async () => {
             await this.$store.dispatch('getStands');
             await this.$router.push('/stand');

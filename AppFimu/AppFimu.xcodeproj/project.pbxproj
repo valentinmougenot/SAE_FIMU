@@ -1,0 +1,602 @@
+// !$*UTF8*$!
+{
+	archiveVersion = 1;
+	classes = {
+	};
+	objectVersion = 56;
+	objects = {
+
+/* Begin PBXBuildFile section */
+		3EF2D8D529B5CEE30080814E /* Genre.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF2D8D429B5CEE30080814E /* Genre.swift */; };
+		3EF2D8D929B5DACA0080814E /* TypeStand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF2D8D829B5DACA0080814E /* TypeStand.swift */; };
+		3EF2D8DB29B5DC700080814E /* NewViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF2D8DA29B5DC700080814E /* NewViewModel.swift */; };
+		3EF2D8DD29B5E09A0080814E /* TypeActu.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EF2D8DC29B5E09A0080814E /* TypeActu.swift */; };
+		3EFA506929B79D6600D0B933 /* TypeScene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 3EFA506829B79D6600D0B933 /* TypeScene.swift */; };
+		7850179B29CDD86B005A8244 /* CountryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7850179A29CDD86B005A8244 /* CountryViewModel.swift */; };
+		7850179D29CDDB12005A8244 /* GenreViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7850179C29CDDB12005A8244 /* GenreViewModel.swift */; };
+		7850179F29CDDB23005A8244 /* CategoryViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7850179E29CDDB23005A8244 /* CategoryViewModel.swift */; };
+		785B209129D2FB3C00D96C1A /* Scene.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785B209029D2FB3C00D96C1A /* Scene.swift */; };
+		785B209329D2FB5600D96C1A /* SceneViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 785B209229D2FB5600D96C1A /* SceneViewModel.swift */; };
+		7863838429CCD8E800E854C2 /* ArtistDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7863838129CCD8E800E854C2 /* ArtistDetail.swift */; };
+		7863838529CCD8E800E854C2 /* ArtistRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7863838229CCD8E800E854C2 /* ArtistRow.swift */; };
+		7863838629CCD8E800E854C2 /* ArtistList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7863838329CCD8E800E854C2 /* ArtistList.swift */; };
+		7863838F29CCE4CE00E854C2 /* ArtistConcert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7863838E29CCE4CE00E854C2 /* ArtistConcert.swift */; };
+		78649C9F29D18B7000DF9236 /* FullPlanView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78649C9C29D18B7000DF9236 /* FullPlanView.swift */; };
+		78649CA029D18B7000DF9236 /* ConcertRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78649C9D29D18B7000DF9236 /* ConcertRow.swift */; };
+		78649CA129D18B7000DF9236 /* PlanningView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78649C9E29D18B7000DF9236 /* PlanningView.swift */; };
+		7871158C29793B800001E536 /* AppFimuApp.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7871158B29793B800001E536 /* AppFimuApp.swift */; };
+		7871158E29793B800001E536 /* ContentView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 7871158D29793B800001E536 /* ContentView.swift */; };
+		7871159029793B820001E536 /* Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7871158F29793B820001E536 /* Assets.xcassets */; };
+		7871159329793B820001E536 /* Preview Assets.xcassets in Resources */ = {isa = PBXBuildFile; fileRef = 7871159229793B820001E536 /* Preview Assets.xcassets */; };
+		787115A12979B16B0001E536 /* ModelData.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787115A02979B16B0001E536 /* ModelData.swift */; };
+		787115A32979B22F0001E536 /* artistsData.json in Resources */ = {isa = PBXBuildFile; fileRef = 787115A22979B22F0001E536 /* artistsData.json */; };
+		787115AB2979D6730001E536 /* FavoriteButton.swift in Sources */ = {isa = PBXBuildFile; fileRef = 787115AA2979D6730001E536 /* FavoriteButton.swift */; };
+		78789A7429B8E04C00DE5E30 /* Concert.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78789A7329B8E04C00DE5E30 /* Concert.swift */; };
+		78A7BC4B29CC5E9B00ED9E8D /* ConcertArtist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78A7BC4A29CC5E9B00ED9E8D /* ConcertArtist.swift */; };
+		78B1B3CC29D4A9AE00858C28 /* Stand.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B1B3CB29D4A9AE00858C28 /* Stand.swift */; };
+		78B1B3CE29D4A9FF00858C28 /* StandViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B1B3CD29D4A9FF00858C28 /* StandViewModel.swift */; };
+		78B1B3D029D4AB2100858C28 /* Tricks.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B1B3CF29D4AB2100858C28 /* Tricks.swift */; };
+		78B1B3D329D4AB6B00858C28 /* MapView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B1B3D229D4AB6B00858C28 /* MapView.swift */; };
+		78B1B3D529D4AB9300858C28 /* StandDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78B1B3D429D4AB9300858C28 /* StandDetailView.swift */; };
+		78C840BD298BDB99009D4443 /* Color.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C840BC298BDB99009D4443 /* Color.swift */; };
+		78C840BF298BDDBF009D4443 /* News.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C840BE298BDDBF009D4443 /* News.swift */; };
+		78C840C1298BDDD3009D4443 /* NewsDetail.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C840C0298BDDD3009D4443 /* NewsDetail.swift */; };
+		78C840C3298BDDDB009D4443 /* NewsRow.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C840C2298BDDDB009D4443 /* NewsRow.swift */; };
+		78C840C5298BDE15009D4443 /* newsData.json in Resources */ = {isa = PBXBuildFile; fileRef = 78C840C4298BDE15009D4443 /* newsData.json */; };
+		78C840C7298BEBCB009D4443 /* NewsList.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78C840C6298BEBCB009D4443 /* NewsList.swift */; };
+		78E3E59129D5BAB20076C081 /* SceneDetailView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3E59029D5BAB20076C081 /* SceneDetailView.swift */; };
+		78E3E59329D5CB410076C081 /* TimeLineView.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78E3E59229D5CB410076C081 /* TimeLineView.swift */; };
+		78EA9B1929B0DD2D002F0E12 /* BaseAPI.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EA9B1829B0DD2D002F0E12 /* BaseAPI.swift */; };
+		78EA9B2129B0EA29002F0E12 /* Category.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EA9B2029B0EA29002F0E12 /* Category.swift */; };
+		78EA9B2329B0EAC1002F0E12 /* Country.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EA9B2229B0EAC1002F0E12 /* Country.swift */; };
+		78EA9B2529B0EC50002F0E12 /* SocialNetwork.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78EA9B2429B0EC50002F0E12 /* SocialNetwork.swift */; };
+		78FDA09A29C31110009A381D /* Artist.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FDA09929C31110009A381D /* Artist.swift */; };
+		78FDA09C29C31119009A381D /* ArtistViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 78FDA09B29C31119009A381D /* ArtistViewModel.swift */; };
+		987C6AE829C30A810050D100 /* Service.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987C6AE729C30A810050D100 /* Service.swift */; };
+		987C6AEE29C30BFF0050D100 /* Planning.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987C6AED29C30BFE0050D100 /* Planning.swift */; };
+		987C6AF029C30C0A0050D100 /* Date.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987C6AEF29C30C0A0050D100 /* Date.swift */; };
+		987C6AF229C30C1F0050D100 /* ConcertViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987C6AF129C30C1F0050D100 /* ConcertViewModel.swift */; };
+		987C6AF429C30C240050D100 /* DateViewModel.swift in Sources */ = {isa = PBXBuildFile; fileRef = 987C6AF329C30C240050D100 /* DateViewModel.swift */; };
+/* End PBXBuildFile section */
+
+/* Begin PBXFileReference section */
+		3EF2D8D429B5CEE30080814E /* Genre.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Genre.swift; sourceTree = "<group>"; };
+		3EF2D8D829B5DACA0080814E /* TypeStand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeStand.swift; sourceTree = "<group>"; };
+		3EF2D8DA29B5DC700080814E /* NewViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewViewModel.swift; sourceTree = "<group>"; };
+		3EF2D8DC29B5E09A0080814E /* TypeActu.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeActu.swift; sourceTree = "<group>"; };
+		3EFA506829B79D6600D0B933 /* TypeScene.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TypeScene.swift; sourceTree = "<group>"; };
+		7850179A29CDD86B005A8244 /* CountryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CountryViewModel.swift; sourceTree = "<group>"; };
+		7850179C29CDDB12005A8244 /* GenreViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = GenreViewModel.swift; sourceTree = "<group>"; };
+		7850179E29CDDB23005A8244 /* CategoryViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = CategoryViewModel.swift; sourceTree = "<group>"; };
+		785B209029D2FB3C00D96C1A /* Scene.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Scene.swift; sourceTree = "<group>"; };
+		785B209229D2FB5600D96C1A /* SceneViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = SceneViewModel.swift; sourceTree = "<group>"; };
+		7863838129CCD8E800E854C2 /* ArtistDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistDetail.swift; sourceTree = "<group>"; };
+		7863838229CCD8E800E854C2 /* ArtistRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistRow.swift; sourceTree = "<group>"; };
+		7863838329CCD8E800E854C2 /* ArtistList.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistList.swift; sourceTree = "<group>"; };
+		7863838E29CCE4CE00E854C2 /* ArtistConcert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ArtistConcert.swift; sourceTree = "<group>"; };
+		78649C9C29D18B7000DF9236 /* FullPlanView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = FullPlanView.swift; sourceTree = "<group>"; };
+		78649C9D29D18B7000DF9236 /* ConcertRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcertRow.swift; sourceTree = "<group>"; };
+		78649C9E29D18B7000DF9236 /* PlanningView.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = PlanningView.swift; sourceTree = "<group>"; };
+		7871158829793B800001E536 /* AppFimu.app */ = {isa = PBXFileReference; explicitFileType = wrapper.application; includeInIndex = 0; path = AppFimu.app; sourceTree = BUILT_PRODUCTS_DIR; };
+		7871158B29793B800001E536 /* AppFimuApp.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = AppFimuApp.swift; sourceTree = "<group>"; };
+		7871158D29793B800001E536 /* ContentView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ContentView.swift; sourceTree = "<group>"; };
+		7871158F29793B820001E536 /* Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = Assets.xcassets; sourceTree = "<group>"; };
+		7871159229793B820001E536 /* Preview Assets.xcassets */ = {isa = PBXFileReference; lastKnownFileType = folder.assetcatalog; path = "Preview Assets.xcassets"; sourceTree = "<group>"; };
+		787115A02979B16B0001E536 /* ModelData.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ModelData.swift; sourceTree = "<group>"; };
+		787115A22979B22F0001E536 /* artistsData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = artistsData.json; sourceTree = "<group>"; };
+		787115AA2979D6730001E536 /* FavoriteButton.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = FavoriteButton.swift; sourceTree = "<group>"; };
+		78789A7329B8E04C00DE5E30 /* Concert.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Concert.swift; sourceTree = "<group>"; };
+		78A7BC4A29CC5E9B00ED9E8D /* ConcertArtist.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = ConcertArtist.swift; sourceTree = "<group>"; };
+		78B1B3CB29D4A9AE00858C28 /* Stand.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Stand.swift; sourceTree = "<group>"; };
+		78B1B3CD29D4A9FF00858C28 /* StandViewModel.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandViewModel.swift; sourceTree = "<group>"; };
+		78B1B3CF29D4AB2100858C28 /* Tricks.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Tricks.swift; sourceTree = "<group>"; };
+		78B1B3D229D4AB6B00858C28 /* MapView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = MapView.swift; sourceTree = "<group>"; };
+		78B1B3D429D4AB9300858C28 /* StandDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = StandDetailView.swift; sourceTree = "<group>"; };
+		78C840BC298BDB99009D4443 /* Color.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Color.swift; sourceTree = "<group>"; };
+		78C840BE298BDDBF009D4443 /* News.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = News.swift; sourceTree = "<group>"; };
+		78C840C0298BDDD3009D4443 /* NewsDetail.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsDetail.swift; sourceTree = "<group>"; };
+		78C840C2298BDDDB009D4443 /* NewsRow.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = NewsRow.swift; sourceTree = "<group>"; };
+		78C840C4298BDE15009D4443 /* newsData.json */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = text.json; path = newsData.json; sourceTree = "<group>"; };
+		78C840C6298BEBCB009D4443 /* NewsList.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = NewsList.swift; sourceTree = "<group>"; };
+		78E3E59029D5BAB20076C081 /* SceneDetailView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SceneDetailView.swift; sourceTree = "<group>"; };
+		78E3E59229D5CB410076C081 /* TimeLineView.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = TimeLineView.swift; sourceTree = "<group>"; };
+		78EA9B1829B0DD2D002F0E12 /* BaseAPI.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = BaseAPI.swift; sourceTree = "<group>"; };
+		78EA9B2029B0EA29002F0E12 /* Category.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Category.swift; sourceTree = "<group>"; };
+		78EA9B2229B0EAC1002F0E12 /* Country.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = Country.swift; sourceTree = "<group>"; };
+		78EA9B2429B0EC50002F0E12 /* SocialNetwork.swift */ = {isa = PBXFileReference; lastKnownFileType = sourcecode.swift; path = SocialNetwork.swift; sourceTree = "<group>"; };
+		78FDA09929C31110009A381D /* Artist.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Artist.swift; sourceTree = "<group>"; };
+		78FDA09B29C31119009A381D /* ArtistViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ArtistViewModel.swift; sourceTree = "<group>"; };
+		987C6AE729C30A810050D100 /* Service.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Service.swift; sourceTree = "<group>"; };
+		987C6AED29C30BFE0050D100 /* Planning.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Planning.swift; sourceTree = "<group>"; };
+		987C6AEF29C30C0A0050D100 /* Date.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = Date.swift; sourceTree = "<group>"; };
+		987C6AF129C30C1F0050D100 /* ConcertViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = ConcertViewModel.swift; sourceTree = "<group>"; };
+		987C6AF329C30C240050D100 /* DateViewModel.swift */ = {isa = PBXFileReference; fileEncoding = 4; lastKnownFileType = sourcecode.swift; path = DateViewModel.swift; sourceTree = "<group>"; };
+/* End PBXFileReference section */
+
+/* Begin PBXFrameworksBuildPhase section */
+		7871158529793B800001E536 /* Frameworks */ = {
+			isa = PBXFrameworksBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXFrameworksBuildPhase section */
+
+/* Begin PBXGroup section */
+		7863838029CCD8D800E854C2 /* Artist */ = {
+			isa = PBXGroup;
+			children = (
+				7863838129CCD8E800E854C2 /* ArtistDetail.swift */,
+				7863838329CCD8E800E854C2 /* ArtistList.swift */,
+				7863838229CCD8E800E854C2 /* ArtistRow.swift */,
+			);
+			path = Artist;
+			sourceTree = "<group>";
+		};
+		78649C9B29D18B7000DF9236 /* Planning */ = {
+			isa = PBXGroup;
+			children = (
+				78649C9C29D18B7000DF9236 /* FullPlanView.swift */,
+				78649C9D29D18B7000DF9236 /* ConcertRow.swift */,
+				78649C9E29D18B7000DF9236 /* PlanningView.swift */,
+				78E3E59229D5CB410076C081 /* TimeLineView.swift */,
+			);
+			path = Planning;
+			sourceTree = "<group>";
+		};
+		7871157F29793B800001E536 = {
+			isa = PBXGroup;
+			children = (
+				7871158A29793B800001E536 /* AppFimu */,
+				7871158929793B800001E536 /* Products */,
+			);
+			sourceTree = "<group>";
+		};
+		7871158929793B800001E536 /* Products */ = {
+			isa = PBXGroup;
+			children = (
+				7871158829793B800001E536 /* AppFimu.app */,
+			);
+			name = Products;
+			sourceTree = "<group>";
+		};
+		7871158A29793B800001E536 /* AppFimu */ = {
+			isa = PBXGroup;
+			children = (
+				78EA9B2B29B11624002F0E12 /* ViewModel */,
+				78EA9B1A29B0E0C7002F0E12 /* API */,
+				7871158B29793B800001E536 /* AppFimuApp.swift */,
+				7871159E2979AF370001E536 /* Model */,
+				7871159D2979AF2E0001E536 /* View */,
+				7871159F2979AF4A0001E536 /* Ressources */,
+				7871158F29793B820001E536 /* Assets.xcassets */,
+				7871159129793B820001E536 /* Preview Content */,
+			);
+			path = AppFimu;
+			sourceTree = "<group>";
+		};
+		7871159129793B820001E536 /* Preview Content */ = {
+			isa = PBXGroup;
+			children = (
+				7871159229793B820001E536 /* Preview Assets.xcassets */,
+			);
+			path = "Preview Content";
+			sourceTree = "<group>";
+		};
+		7871159D2979AF2E0001E536 /* View */ = {
+			isa = PBXGroup;
+			children = (
+				78649C9B29D18B7000DF9236 /* Planning */,
+				7863838029CCD8D800E854C2 /* Artist */,
+				7871158D29793B800001E536 /* ContentView.swift */,
+				78C840CA298BF8D6009D4443 /* News */,
+				787115AA2979D6730001E536 /* FavoriteButton.swift */,
+				78B1B3D129D4AB4A00858C28 /* Map */,
+			);
+			path = View;
+			sourceTree = "<group>";
+		};
+		7871159E2979AF370001E536 /* Model */ = {
+			isa = PBXGroup;
+			children = (
+				78FDA09929C31110009A381D /* Artist.swift */,
+				987C6AEF29C30C0A0050D100 /* Date.swift */,
+				987C6AED29C30BFE0050D100 /* Planning.swift */,
+				987C6AE729C30A810050D100 /* Service.swift */,
+				78C840BE298BDDBF009D4443 /* News.swift */,
+				78EA9B2429B0EC50002F0E12 /* SocialNetwork.swift */,
+				78C840BC298BDB99009D4443 /* Color.swift */,
+				78EA9B2029B0EA29002F0E12 /* Category.swift */,
+				785B209029D2FB3C00D96C1A /* Scene.swift */,
+				78EA9B2229B0EAC1002F0E12 /* Country.swift */,
+				3EF2D8D429B5CEE30080814E /* Genre.swift */,
+				3EF2D8D829B5DACA0080814E /* TypeStand.swift */,
+				3EF2D8DC29B5E09A0080814E /* TypeActu.swift */,
+				3EFA506829B79D6600D0B933 /* TypeScene.swift */,
+				78789A7329B8E04C00DE5E30 /* Concert.swift */,
+				78A7BC4A29CC5E9B00ED9E8D /* ConcertArtist.swift */,
+				7863838E29CCE4CE00E854C2 /* ArtistConcert.swift */,
+				78B1B3CB29D4A9AE00858C28 /* Stand.swift */,
+			);
+			path = Model;
+			sourceTree = "<group>";
+		};
+		7871159F2979AF4A0001E536 /* Ressources */ = {
+			isa = PBXGroup;
+			children = (
+				78C840C4298BDE15009D4443 /* newsData.json */,
+				787115A22979B22F0001E536 /* artistsData.json */,
+				787115A02979B16B0001E536 /* ModelData.swift */,
+			);
+			path = Ressources;
+			sourceTree = "<group>";
+		};
+		78B1B3D129D4AB4A00858C28 /* Map */ = {
+			isa = PBXGroup;
+			children = (
+				78B1B3CF29D4AB2100858C28 /* Tricks.swift */,
+				78B1B3D229D4AB6B00858C28 /* MapView.swift */,
+				78B1B3D429D4AB9300858C28 /* StandDetailView.swift */,
+				78E3E59029D5BAB20076C081 /* SceneDetailView.swift */,
+			);
+			path = Map;
+			sourceTree = "<group>";
+		};
+		78C840CA298BF8D6009D4443 /* News */ = {
+			isa = PBXGroup;
+			children = (
+				78C840C0298BDDD3009D4443 /* NewsDetail.swift */,
+				78C840C2298BDDDB009D4443 /* NewsRow.swift */,
+				78C840C6298BEBCB009D4443 /* NewsList.swift */,
+			);
+			path = News;
+			sourceTree = "<group>";
+		};
+		78EA9B1A29B0E0C7002F0E12 /* API */ = {
+			isa = PBXGroup;
+			children = (
+				78EA9B1829B0DD2D002F0E12 /* BaseAPI.swift */,
+			);
+			path = API;
+			sourceTree = "<group>";
+		};
+		78EA9B2B29B11624002F0E12 /* ViewModel */ = {
+			isa = PBXGroup;
+			children = (
+				78FDA09B29C31119009A381D /* ArtistViewModel.swift */,
+				3EF2D8DA29B5DC700080814E /* NewViewModel.swift */,
+				987C6AF129C30C1F0050D100 /* ConcertViewModel.swift */,
+				987C6AF329C30C240050D100 /* DateViewModel.swift */,
+				785B209229D2FB5600D96C1A /* SceneViewModel.swift */,
+				7850179A29CDD86B005A8244 /* CountryViewModel.swift */,
+				7850179C29CDDB12005A8244 /* GenreViewModel.swift */,
+				7850179E29CDDB23005A8244 /* CategoryViewModel.swift */,
+				78B1B3CD29D4A9FF00858C28 /* StandViewModel.swift */,
+			);
+			path = ViewModel;
+			sourceTree = "<group>";
+		};
+/* End PBXGroup section */
+
+/* Begin PBXNativeTarget section */
+		7871158729793B800001E536 /* AppFimu */ = {
+			isa = PBXNativeTarget;
+			buildConfigurationList = 7871159629793B820001E536 /* Build configuration list for PBXNativeTarget "AppFimu" */;
+			buildPhases = (
+				7871158429793B800001E536 /* Sources */,
+				7871158529793B800001E536 /* Frameworks */,
+				7871158629793B800001E536 /* Resources */,
+			);
+			buildRules = (
+			);
+			dependencies = (
+			);
+			name = AppFimu;
+			productName = AppFimu;
+			productReference = 7871158829793B800001E536 /* AppFimu.app */;
+			productType = "com.apple.product-type.application";
+		};
+/* End PBXNativeTarget section */
+
+/* Begin PBXProject section */
+		7871158029793B800001E536 /* Project object */ = {
+			isa = PBXProject;
+			attributes = {
+				BuildIndependentTargetsInParallel = 1;
+				LastSwiftUpdateCheck = 1420;
+				LastUpgradeCheck = 1420;
+				TargetAttributes = {
+					7871158729793B800001E536 = {
+						CreatedOnToolsVersion = 14.2;
+					};
+				};
+			};
+			buildConfigurationList = 7871158329793B800001E536 /* Build configuration list for PBXProject "AppFimu" */;
+			compatibilityVersion = "Xcode 14.0";
+			developmentRegion = en;
+			hasScannedForEncodings = 0;
+			knownRegions = (
+				en,
+				Base,
+			);
+			mainGroup = 7871157F29793B800001E536;
+			productRefGroup = 7871158929793B800001E536 /* Products */;
+			projectDirPath = "";
+			projectRoot = "";
+			targets = (
+				7871158729793B800001E536 /* AppFimu */,
+			);
+		};
+/* End PBXProject section */
+
+/* Begin PBXResourcesBuildPhase section */
+		7871158629793B800001E536 /* Resources */ = {
+			isa = PBXResourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				787115A32979B22F0001E536 /* artistsData.json in Resources */,
+				7871159329793B820001E536 /* Preview Assets.xcassets in Resources */,
+				78C840C5298BDE15009D4443 /* newsData.json in Resources */,
+				7871159029793B820001E536 /* Assets.xcassets in Resources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXResourcesBuildPhase section */
+
+/* Begin PBXSourcesBuildPhase section */
+		7871158429793B800001E536 /* Sources */ = {
+			isa = PBXSourcesBuildPhase;
+			buildActionMask = 2147483647;
+			files = (
+				987C6AEE29C30BFF0050D100 /* Planning.swift in Sources */,
+				78E3E59329D5CB410076C081 /* TimeLineView.swift in Sources */,
+				78EA9B2529B0EC50002F0E12 /* SocialNetwork.swift in Sources */,
+				3EF2D8D529B5CEE30080814E /* Genre.swift in Sources */,
+				78A7BC4B29CC5E9B00ED9E8D /* ConcertArtist.swift in Sources */,
+				78B1B3D529D4AB9300858C28 /* StandDetailView.swift in Sources */,
+				7850179B29CDD86B005A8244 /* CountryViewModel.swift in Sources */,
+				78789A7429B8E04C00DE5E30 /* Concert.swift in Sources */,
+				78C840BD298BDB99009D4443 /* Color.swift in Sources */,
+				78B1B3D029D4AB2100858C28 /* Tricks.swift in Sources */,
+				78649CA129D18B7000DF9236 /* PlanningView.swift in Sources */,
+				78C840C7298BEBCB009D4443 /* NewsList.swift in Sources */,
+				987C6AF229C30C1F0050D100 /* ConcertViewModel.swift in Sources */,
+				78649CA029D18B7000DF9236 /* ConcertRow.swift in Sources */,
+				78C840C1298BDDD3009D4443 /* NewsDetail.swift in Sources */,
+				78B1B3CE29D4A9FF00858C28 /* StandViewModel.swift in Sources */,
+				7863838F29CCE4CE00E854C2 /* ArtistConcert.swift in Sources */,
+				7850179F29CDDB23005A8244 /* CategoryViewModel.swift in Sources */,
+				78FDA09A29C31110009A381D /* Artist.swift in Sources */,
+				78EA9B2129B0EA29002F0E12 /* Category.swift in Sources */,
+				78EA9B2329B0EAC1002F0E12 /* Country.swift in Sources */,
+				78C840C3298BDDDB009D4443 /* NewsRow.swift in Sources */,
+				787115AB2979D6730001E536 /* FavoriteButton.swift in Sources */,
+				7863838629CCD8E800E854C2 /* ArtistList.swift in Sources */,
+				78649C9F29D18B7000DF9236 /* FullPlanView.swift in Sources */,
+				785B209329D2FB5600D96C1A /* SceneViewModel.swift in Sources */,
+				7863838529CCD8E800E854C2 /* ArtistRow.swift in Sources */,
+				78B1B3D329D4AB6B00858C28 /* MapView.swift in Sources */,
+				785B209129D2FB3C00D96C1A /* Scene.swift in Sources */,
+				78C840BF298BDDBF009D4443 /* News.swift in Sources */,
+				987C6AF029C30C0A0050D100 /* Date.swift in Sources */,
+				987C6AE829C30A810050D100 /* Service.swift in Sources */,
+				7871158E29793B800001E536 /* ContentView.swift in Sources */,
+				3EF2D8DB29B5DC700080814E /* NewViewModel.swift in Sources */,
+				78FDA09C29C31119009A381D /* ArtistViewModel.swift in Sources */,
+				787115A12979B16B0001E536 /* ModelData.swift in Sources */,
+				3EF2D8DD29B5E09A0080814E /* TypeActu.swift in Sources */,
+				78B1B3CC29D4A9AE00858C28 /* Stand.swift in Sources */,
+				78EA9B1929B0DD2D002F0E12 /* BaseAPI.swift in Sources */,
+				3EFA506929B79D6600D0B933 /* TypeScene.swift in Sources */,
+				7863838429CCD8E800E854C2 /* ArtistDetail.swift in Sources */,
+				987C6AF429C30C240050D100 /* DateViewModel.swift in Sources */,
+				3EF2D8D929B5DACA0080814E /* TypeStand.swift in Sources */,
+				7850179D29CDDB12005A8244 /* GenreViewModel.swift in Sources */,
+				78E3E59129D5BAB20076C081 /* SceneDetailView.swift in Sources */,
+				7871158C29793B800001E536 /* AppFimuApp.swift in Sources */,
+			);
+			runOnlyForDeploymentPostprocessing = 0;
+		};
+/* End PBXSourcesBuildPhase section */
+
+/* Begin XCBuildConfiguration section */
+		7871159429793B820001E536 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = dwarf;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				ENABLE_TESTABILITY = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_DYNAMIC_NO_PIC = NO;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_OPTIMIZATION_LEVEL = 0;
+				GCC_PREPROCESSOR_DEFINITIONS = (
+					"DEBUG=1",
+					"$(inherited)",
+				);
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = INCLUDE_SOURCE;
+				MTL_FAST_MATH = YES;
+				ONLY_ACTIVE_ARCH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_ACTIVE_COMPILATION_CONDITIONS = DEBUG;
+				SWIFT_OPTIMIZATION_LEVEL = "-Onone";
+			};
+			name = Debug;
+		};
+		7871159529793B820001E536 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ALWAYS_SEARCH_USER_PATHS = NO;
+				CLANG_ANALYZER_NONNULL = YES;
+				CLANG_ANALYZER_NUMBER_OBJECT_CONVERSION = YES_AGGRESSIVE;
+				CLANG_CXX_LANGUAGE_STANDARD = "gnu++20";
+				CLANG_ENABLE_MODULES = YES;
+				CLANG_ENABLE_OBJC_ARC = YES;
+				CLANG_ENABLE_OBJC_WEAK = YES;
+				CLANG_WARN_BLOCK_CAPTURE_AUTORELEASING = YES;
+				CLANG_WARN_BOOL_CONVERSION = YES;
+				CLANG_WARN_COMMA = YES;
+				CLANG_WARN_CONSTANT_CONVERSION = YES;
+				CLANG_WARN_DEPRECATED_OBJC_IMPLEMENTATIONS = YES;
+				CLANG_WARN_DIRECT_OBJC_ISA_USAGE = YES_ERROR;
+				CLANG_WARN_DOCUMENTATION_COMMENTS = YES;
+				CLANG_WARN_EMPTY_BODY = YES;
+				CLANG_WARN_ENUM_CONVERSION = YES;
+				CLANG_WARN_INFINITE_RECURSION = YES;
+				CLANG_WARN_INT_CONVERSION = YES;
+				CLANG_WARN_NON_LITERAL_NULL_CONVERSION = YES;
+				CLANG_WARN_OBJC_IMPLICIT_RETAIN_SELF = YES;
+				CLANG_WARN_OBJC_LITERAL_CONVERSION = YES;
+				CLANG_WARN_OBJC_ROOT_CLASS = YES_ERROR;
+				CLANG_WARN_QUOTED_INCLUDE_IN_FRAMEWORK_HEADER = YES;
+				CLANG_WARN_RANGE_LOOP_ANALYSIS = YES;
+				CLANG_WARN_STRICT_PROTOTYPES = YES;
+				CLANG_WARN_SUSPICIOUS_MOVE = YES;
+				CLANG_WARN_UNGUARDED_AVAILABILITY = YES_AGGRESSIVE;
+				CLANG_WARN_UNREACHABLE_CODE = YES;
+				CLANG_WARN__DUPLICATE_METHOD_MATCH = YES;
+				COPY_PHASE_STRIP = NO;
+				DEBUG_INFORMATION_FORMAT = "dwarf-with-dsym";
+				ENABLE_NS_ASSERTIONS = NO;
+				ENABLE_STRICT_OBJC_MSGSEND = YES;
+				GCC_C_LANGUAGE_STANDARD = gnu11;
+				GCC_NO_COMMON_BLOCKS = YES;
+				GCC_WARN_64_TO_32_BIT_CONVERSION = YES;
+				GCC_WARN_ABOUT_RETURN_TYPE = YES_ERROR;
+				GCC_WARN_UNDECLARED_SELECTOR = YES;
+				GCC_WARN_UNINITIALIZED_AUTOS = YES_AGGRESSIVE;
+				GCC_WARN_UNUSED_FUNCTION = YES;
+				GCC_WARN_UNUSED_VARIABLE = YES;
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				MTL_ENABLE_DEBUG_INFO = NO;
+				MTL_FAST_MATH = YES;
+				SDKROOT = iphoneos;
+				SWIFT_COMPILATION_MODE = wholemodule;
+				SWIFT_OPTIMIZATION_LEVEL = "-O";
+				VALIDATE_PRODUCT = YES;
+			};
+			name = Release;
+		};
+		7871159729793B820001E536 /* Debug */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"AppFimu/Preview Content\"";
+				DEVELOPMENT_TEAM = DYTQKTQ8BL;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codabee.AppFimu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Debug;
+		};
+		7871159829793B820001E536 /* Release */ = {
+			isa = XCBuildConfiguration;
+			buildSettings = {
+				ASSETCATALOG_COMPILER_APPICON_NAME = AppIcon;
+				ASSETCATALOG_COMPILER_GLOBAL_ACCENT_COLOR_NAME = AccentColor;
+				CODE_SIGN_STYLE = Automatic;
+				CURRENT_PROJECT_VERSION = 1;
+				DEVELOPMENT_ASSET_PATHS = "\"AppFimu/Preview Content\"";
+				DEVELOPMENT_TEAM = DYTQKTQ8BL;
+				ENABLE_PREVIEWS = YES;
+				GENERATE_INFOPLIST_FILE = YES;
+				INFOPLIST_KEY_UIApplicationSceneManifest_Generation = YES;
+				INFOPLIST_KEY_UIApplicationSupportsIndirectInputEvents = YES;
+				INFOPLIST_KEY_UILaunchScreen_Generation = YES;
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPad = "UIInterfaceOrientationPortrait UIInterfaceOrientationPortraitUpsideDown UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				INFOPLIST_KEY_UISupportedInterfaceOrientations_iPhone = "UIInterfaceOrientationPortrait UIInterfaceOrientationLandscapeLeft UIInterfaceOrientationLandscapeRight";
+				IPHONEOS_DEPLOYMENT_TARGET = 16.2;
+				LD_RUNPATH_SEARCH_PATHS = (
+					"$(inherited)",
+					"@executable_path/Frameworks",
+				);
+				MARKETING_VERSION = 1.0;
+				PRODUCT_BUNDLE_IDENTIFIER = com.codabee.AppFimu;
+				PRODUCT_NAME = "$(TARGET_NAME)";
+				SWIFT_EMIT_LOC_STRINGS = YES;
+				SWIFT_VERSION = 5.0;
+				TARGETED_DEVICE_FAMILY = "1,2";
+			};
+			name = Release;
+		};
+/* End XCBuildConfiguration section */
+
+/* Begin XCConfigurationList section */
+		7871158329793B800001E536 /* Build configuration list for PBXProject "AppFimu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7871159429793B820001E536 /* Debug */,
+				7871159529793B820001E536 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+		7871159629793B820001E536 /* Build configuration list for PBXNativeTarget "AppFimu" */ = {
+			isa = XCConfigurationList;
+			buildConfigurations = (
+				7871159729793B820001E536 /* Debug */,
+				7871159829793B820001E536 /* Release */,
+			);
+			defaultConfigurationIsVisible = 0;
+			defaultConfigurationName = Release;
+		};
+/* End XCConfigurationList section */
+	};
+	rootObject = 7871158029793B800001E536 /* Project object */;
+}

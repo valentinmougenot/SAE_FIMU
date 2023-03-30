@@ -5,12 +5,14 @@
   "main": "server.js",
   "scripts": {
     "test": "echo \"Error: no test specified\" && exit 1",
-    "build": "tsc && node dist/server.js"
+    "build": "tsc",
+    "start": "nodemon dist/server.js"
   },
   "author": "",
   "license": "ISC",
   "devDependencies": {
     "@types/node": "^18.14.1",
+    "nodemon": "^2.0.22",
     "typescript": "^4.9.5"
   },
   "dependencies": {
@@ -22,6 +24,8 @@
     "jsonwebtoken": "^9.0.0",
     "pg": "^8.9.0",
     "pg-hstore": "^2.3.4",
-    "sequelize": "^6.28.2"
+    "sequelize": "^6.28.2",
+    "swagger-jsdoc": "^6.2.8",
+    "swagger-ui-express": "^4.6.2"
   }
 }

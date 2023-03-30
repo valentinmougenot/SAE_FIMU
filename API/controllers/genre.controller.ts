@@ -1,6 +1,5 @@
 import {Request, Response} from "express";
 import {dbCommon} from "../models";
-import {Op} from "sequelize";
 
 const getGenres = async (req: Request, res: Response) => {
     try {

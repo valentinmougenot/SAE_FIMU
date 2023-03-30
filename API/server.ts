@@ -38,6 +38,30 @@ import bodyParser from "body-parser";
 app.use(bodyParser.json());
 app.use(bodyParser.urlencoded({extended: true}));
 
+import swaggerUi from "swagger-ui-express";
+import swaggerJsdoc from "swagger-jsdoc";
+
+const swaggerOptions = {
+    definition: {
+        openapi: '3.0.0',
+        info: {
+            title: 'Mon API REST Express',
+            version: '1.0.0',
+            description: 'Documentation Swagger pour mon API REST Express'
+        },
+        servers: [
+            {
+                url: 'http://localhost:3000',
+                description: 'Serveur local'
+            }
+        ]
+    },
+    apis: ['./routes/*.ts']
+};
+
+const swaggerSpec = swaggerJsdoc(swaggerOptions);
+app.use('/api-docs', swaggerUi.serve, swaggerUi.setup(swaggerSpec));
+
 app.use('/actualite', actualiteRouter);
 app.use('/artiste', artisteRouter);
 app.use('/auth', authRouter);

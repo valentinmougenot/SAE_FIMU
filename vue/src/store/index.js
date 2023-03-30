@@ -23,7 +23,6 @@ export default new Vuex.Store({
     roles: [],
     saisonSelected: "",
     yearSelected: "",
-    sselected: "" // "next" si next, "" si autre
   },
   getters: {
   },

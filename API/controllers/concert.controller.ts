@@ -1,10 +1,13 @@
 import {Request, Response} from "express";
 import {dbCommon, dbCurrent} from "../models";
 import {getDbSaions} from "../services/saison.service";
+import {Op} from "sequelize";
 
 const getConcerts = async (req: Request, res: Response) => {
     try {
-        const saison = req.headers.saison ? req.headers.saison.toLowerCase() : "";
+        let saison = req.headers.saison ? req.headers.saison.toLowerCase() : "";
+        if (saison !== "current" && saison !== "next")
+            saison = "";
         const incArtiste = req.query.incArtiste !== 'false';
         const incScene = req.query.incScene !== 'false';
         const incCat = req.query.incCat !== 'false';
@@ -92,7 +95,9 @@ const getConcerts = async (req: Request, res: Response) => {
 
 const getConcertById = async (req: Request, res: Response) => {
     try {
-        const saison = req.headers.saison ? req.headers.saison.toLowerCase() : "";
+        let saison = req.headers.saison ? req.headers.saison.toLowerCase() : "";
+        if (saison !== "current" && saison !== "next")
+            saison = "";
         const id = req.params.id;
         const incArtiste = req.query.incArtiste !== 'false';
         const incScene = req.query.incScene !== 'false';
@@ -178,28 +183,23 @@ const createConcert = async (req: Request, res: Response) => {
         const saison = req.headers.saison ? req.headers.saison.toLowerCase() : "";
         const db = getDbSaions(saison);
 
-        let heure_fin = '';
-        let h = parseInt(req.body.heure_debut.split(':')[0]);
-        let m = parseInt(req.body.heure_debut.split(':')[1]);
-        let duree = req.body.duree;
+        req.body.heure_fin = calculateHeureFin(req.body.heure_debut, req.body.duree);
 
-        m += duree;
-        while (m >= 60) {
-            m -= 60;
-            h++;
+        if (!await isSceneFree(db, req.body.sceneId, req.body.date_debut, req.body.heure_debut, req.body.heure_fin)) {
+            res.status(500).json({
+                error: 1,
+                message: "La scène n'est pas disponible à cette heure."
+            });
+            return;
         }
-        while (h >= 24) {
-            h -= 24;
+
+        if (!await isArtistFree(db, req.body.artisteId, req.body.date_debut, req.body.heure_debut, req.body.heure_fin)) {
+            res.status(500).json({
+                error: 1,
+                message: "L'artiste n'est pas disponible à cette heure."
+            });
+            return;
         }
-        if (h < 10) {
-            heure_fin += '0';
-        }
-        heure_fin += h.toString() + ':';
-        if (m < 10) {
-            heure_fin += '0';
-        }
-        heure_fin += m.toString();
-        req.body.heure_fin = heure_fin;
 
         const concert = await db.concerts.create(req.body);
 
@@ -225,28 +225,24 @@ const editConcert = async (req: Request, res: Response) => {
         const id = req.params.id;
         const db = getDbSaions(saison);
 
-        let heure_fin = '';
-        let h = parseInt(req.body.heure_debut.split(':')[0]);
-        let m = parseInt(req.body.heure_debut.split(':')[1]);
-        let duree = req.body.duree;
+        req.body.heure_fin = calculateHeureFin(req.body.heure_debut, req.body.duree);
+        console.log(calculateHeureFin(req.body.heure_debut, req.body.duree))
 
-        m += duree;
-        while (m >= 60) {
-            m -= 60;
-            h++;
+        if (!await isSceneFree(db, req.body.sceneId, req.body.date_debut, req.body.heure_debut, req.body.heure_fin)) {
+            res.status(500).json({
+                error: 1,
+                message: "La scène n'est pas disponible à cette heure."
+            });
+            return;
         }
-        while (h >= 24) {
-            h -= 24;
+
+        if (!await isArtistFree(db, req.body.artisteId, req.body.date_debut, req.body.heure_debut, req.body.heure_fin)) {
+            res.status(500).json({
+                error: 1,
+                message: "L'artiste n'est pas disponible à cette heure."
+            });
+            return;
         }
-        if (h < 10) {
-            heure_fin += '0';
-        }
-        heure_fin += h.toString() + ':';
-        if (m < 10) {
-            heure_fin += '0';
-        }
-        heure_fin += m.toString();
-        req.body.heure_fin = heure_fin;
 
         const concert = await db.concerts.update(req.body, {
             where: {
@@ -428,6 +424,78 @@ const getHeureMax = async (req: Request, res: Response) => {
         });
     }
 }
+
+const calculateHeureFin = (heure_debut: string, duree: number) => {
+    console.log(heure_debut, duree)
+    let heure_fin = '';
+    let h = parseInt(heure_debut.split(':')[0]);
+    let m = parseInt(heure_debut.split(':')[1]);
+
+    m += duree;
+    while (m >= 60) {
+        m -= 60;
+        h++;
+    }
+    while (h >= 24) {
+        h -= 24;
+    }
+    if (h < 10) {
+        heure_fin += '0';
+    }
+    heure_fin += h.toString() + ':';
+    if (m < 10) {
+        heure_fin += '0';
+    }
+    heure_fin += m.toString();
+
+    return heure_fin;
+}
+
+const isSceneFree = async (db, sceneId, date_debut, heure_debut, heure_fin) => {
+    const sceneOccupee = await db.concerts.findOne({
+        where: {
+            sceneId: sceneId,
+            date_debut: date_debut,
+            [Op.or]: [
+                {
+                    heure_debut: {
+                        [Op.between]: [heure_debut, heure_fin],
+                    },
+                },
+                {
+                    heure_fin: {
+                        [Op.between]: [heure_debut, heure_fin],
+                    },
+                },
+            ],
+        },
+    });
+
+    return !sceneOccupee;
+};
+
+const isArtistFree = async (db, artisteId, date_debut, heure_debut, heure_fin) => {
+    const artisteOccupe = await db.concerts.findOne({
+        where: {
+            artisteId: artisteId,
+            date_debut: date_debut,
+            [Op.or]: [
+                {
+                    heure_debut: {
+                        [Op.between]: [heure_debut, heure_fin],
+                    },
+                },
+                {
+                    heure_fin: {
+                        [Op.between]: [heure_debut, heure_fin],
+                    },
+                },
+            ],
+        },
+    });
+
+    return !artisteOccupe;
+};
 
 export default {
     getConcerts,

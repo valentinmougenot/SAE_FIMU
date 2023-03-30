@@ -42,7 +42,7 @@
         <h2>{{ actu.titre }}</h2>
       </v-card-title>
       <v-card-subtitle>
-        <h4>{{actu.typeactu.libelle}} - {{actu.date_envoi}}</h4>
+        <h4>{{actu.typeactu.libelle}} - {{actu.dateEnvoi}}</h4>
       </v-card-subtitle>
       <v-card-text>
         <p>{{ actu.contenu }}</p>

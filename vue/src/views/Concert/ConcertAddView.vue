@@ -62,14 +62,12 @@ export default {
         heure_debut: null,
         date_debut: null,
         duree: null,
-        nb_personnes: 0,
-        annee: 0
+        nbPersonnes: 0,
       }
     };
   },
   methods: {
     addConcert() {
-      this.concert.annee = parseInt(this.concert.date_debut.slice(0, 4));
       post(`${this.$store.state.sselected}/concert`, this.concert)
         .then(() => {
           this.$router.push("/concert");

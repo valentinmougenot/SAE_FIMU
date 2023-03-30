@@ -1,5 +1,50 @@
 <template>
   <v-app>
+    <v-dialog v-model="dialog">
+      <v-card>
+        <v-card-title class="headline">Changer de saison</v-card-title>
+        <v-card-text>
+          <v-text-field
+              v-model="newSaison.annee"
+              label="Année"
+              required
+              type="number"
+          ></v-text-field>
+          <v-text-field
+              v-model="newSaison.noMois"
+              label="N° du mois"
+              required
+              type="number">
+          </v-text-field>
+          <v-color-picker
+              v-model="newSaison.couleur1"
+              label="Couleur 1"
+              required>
+          </v-color-picker>
+          <v-color-picker
+              v-model="newSaison.couleur2"
+              label="Couleur 2"
+              required>
+          </v-color-picker>
+          <v-text-field
+              v-model="newSaison.banniere"
+              label="Bannière"
+              required>
+          </v-text-field>
+          <v-select
+              v-model="newSaison.paysId"
+              :items="paysSelect"
+              label="Pays"
+              required>
+          </v-select>
+        </v-card-text>
+        <v-card-actions>
+          <v-spacer></v-spacer>
+          <v-btn color="blue darken-1" text @click="dialog = false">Annuler</v-btn>
+          <v-btn color="blue darken-1" text @click="switchSaison">Changer</v-btn>
+        </v-card-actions>
+      </v-card>
+    </v-dialog>
     <TopMenuBar
         v-if="showNavbars && user !== {}"
         :user="{identifiant: user.identifiant, role: user.role}"
@@ -7,7 +52,7 @@
         btnChange="Changer de saison"
         :saisonSelect="tab"
         @user-btn-click="userBtnClick"
-        @switch-saison="switchSaison"
+        @switch-saison="dialog = true"
         @change-saison="changeSaison"
         ></TopMenuBar>
     <v-row>
@@ -45,6 +90,15 @@ export default {
   },
   data: () => ({
     menuData: [],
+    dialog: false,
+    newSaison: {
+      annee: null,
+      noMois: null,
+      couleur1: '',
+      couleur2: '',
+      banniere: '',
+      paysId: null
+    }
   }),
   methods: {
     selectItem(index) {
@@ -109,21 +163,13 @@ export default {
         this.$router.push('/login');
       }
     },
-    switchSaison() {
-      if (confirm("Voulez-vous vraiment changer de saison ?")) {
-        post('saison/migrate-data-previous')
-            .then(() => {
-              post('saison/migrate-data-current')
-                  .then(() => {
-                    window.location.reload();
-                  })
-                  .catch(error => {
-                    alert(error.response.data.message);
-                  });
-            })
-            .catch(error => {
-              alert(error.response.data.message);
-            });
+    async switchSaison() {
+      try {
+        await post('saison/migrate-data', this.newSaison);
+        window.location.reload();
+      }
+      catch (error) {
+          alert(error.response.data.message);
       }
     },
     async changeSaison(id) {
@@ -145,11 +191,11 @@ export default {
       await this.$store.commit('updateScenes', []);
       await this.$store.commit('updateStands', []);
       await this.$store.commit('updateConcerts', []);
-      this.$router.push('/artiste');
+      await this.$router.push('/artiste');
     }
    },
   computed: {
-    ...mapState(['saison']),
+    ...mapState(['saison', 'pays']),
     showNavbars() {
       return !this.$route.path.includes('/login');
     },
@@ -175,6 +221,11 @@ export default {
     },
     user() {
       return authUser();
+    },
+    paysSelect() {
+      return this.pays.map(p => {
+        return {text: p.nom, value: p.id}
+      })
     }
   },
   watch:{
@@ -212,6 +263,10 @@ export default {
     if (this.saison.length === 0) {
       await this.$store.dispatch('getSaison');
     }
+    if (this.pays.length === 0) {
+      await this.$store.dispatch('getPays');
+    }
+
     this.initMenuData();
   },
 };
