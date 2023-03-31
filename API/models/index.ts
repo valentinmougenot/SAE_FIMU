@@ -1,5 +1,5 @@
 import dbConfig from "../config/db.config";
-import {DataTypes, Dialect, Sequelize} from "sequelize";
+import { DataTypes, Dialect, Sequelize } from "sequelize";
 
 import Actualite from "./actualite.model";
 import Artiste from "./artiste.model";
@@ -85,18 +85,18 @@ async function createCommonSchema() {
         .catch((err) => {
             console.error('Erreur lors de l\'initialisation des modèles :', err);
         });
-    
-    dbCommon.saisons.belongsTo(dbCommon.pays, {foreignKey: "paysId"});
-    dbCommon.pays.hasMany(dbCommon.saisons, {foreignKey: "paysId"});
 
-    dbCommon.actualites.belongsTo(dbCommon.typeActus, {foreignKey: "typeactuId"});
-    dbCommon.typeActus.hasMany(dbCommon.actualites, {foreignKey: "typeactuId"});
+    dbCommon.saisons.belongsTo(dbCommon.pays, { foreignKey: "paysId" });
+    dbCommon.pays.hasMany(dbCommon.saisons, { foreignKey: "paysId" });
 
-    dbCommon.utilisateurs.belongsTo(dbCommon.roles, {foreignKey: "roleId"});
-    dbCommon.roles.hasMany(dbCommon.utilisateurs, {foreignKey: "roleId"});
+    dbCommon.actualites.belongsTo(dbCommon.typeActus, { foreignKey: "typeactuId" });
+    dbCommon.typeActus.hasMany(dbCommon.actualites, { foreignKey: "typeactuId" });
 
-    dbCommon.refreshTokens.belongsTo(dbCommon.utilisateurs, {foreignKey: "utilisateurId"});
-    dbCommon.utilisateurs.hasMany(dbCommon.refreshTokens, {foreignKey: "utilisateurId"});
+    dbCommon.utilisateurs.belongsTo(dbCommon.roles, { foreignKey: "roleId" });
+    dbCommon.roles.hasMany(dbCommon.utilisateurs, { foreignKey: "roleId" });
+
+    dbCommon.refreshTokens.belongsTo(dbCommon.utilisateurs, { foreignKey: "utilisateurId" });
+    dbCommon.utilisateurs.hasMany(dbCommon.refreshTokens, { foreignKey: "utilisateurId" });
 
     return dbCommon;
 }
@@ -132,24 +132,24 @@ async function createPreviousSchema() {
             console.error('Erreur lors de l\'initialisation des modèles :', err);
         });
 
-    const possede = sequelizePrevious.define("possede", {lien: DataTypes.STRING}, {schema: "previous", timestamps: false, freezeTableName: true});
-    dbPrevious.artistes.belongsToMany(dbCommon.reseauxSociaux, {through: possede, foreignKey: "artisteId"});
-    dbCommon.reseauxSociaux.belongsToMany(dbPrevious.artistes, {through: possede, foreignKey: "reseauxSociauxId"});
+    const possede = sequelizePrevious.define("possede", { lien: DataTypes.STRING }, { schema: "previous", timestamps: false, freezeTableName: true });
+    dbPrevious.artistes.belongsToMany(dbCommon.reseauxSociaux, { through: possede, foreignKey: "artisteId" });
+    dbCommon.reseauxSociaux.belongsToMany(dbPrevious.artistes, { through: possede, foreignKey: "reseauxSociauxId" });
 
-    const nationalite = sequelizePrevious.define("nationalite", {}, {schema: "previous", timestamps: false});
-    dbPrevious.artistes.belongsToMany(dbCommon.pays, {through: nationalite, foreignKey: "artisteId"});
-    dbCommon.pays.belongsToMany(dbPrevious.artistes, {through: nationalite, foreignKey: "paysId"});
+    const nationalite = sequelizePrevious.define("nationalite", {}, { schema: "previous", timestamps: false });
+    dbPrevious.artistes.belongsToMany(dbCommon.pays, { through: nationalite, foreignKey: "artisteId" });
+    dbCommon.pays.belongsToMany(dbPrevious.artistes, { through: nationalite, foreignKey: "paysId" });
 
-    const fait = sequelizePrevious.define("fait", {}, {schema: "previous", timestamps: false});
-    dbPrevious.artistes.belongsToMany(dbCommon.genres, {through: fait, foreignKey: "artisteId"});
-    dbCommon.genres.belongsToMany(dbPrevious.artistes, {through: fait, foreignKey: "genreId"});
+    const fait = sequelizePrevious.define("fait", {}, { schema: "previous", timestamps: false });
+    dbPrevious.artistes.belongsToMany(dbCommon.genres, { through: fait, foreignKey: "artisteId" });
+    dbCommon.genres.belongsToMany(dbPrevious.artistes, { through: fait, foreignKey: "genreId" });
 
-    dbPrevious.artistes.belongsTo(dbCommon.categories, {foreignKey: "categorieId"});
-    dbCommon.categories.hasMany(dbPrevious.artistes, {foreignKey: "categorieId"});
+    dbPrevious.artistes.belongsTo(dbCommon.categories, { foreignKey: "categorieId" });
+    dbCommon.categories.hasMany(dbPrevious.artistes, { foreignKey: "categorieId" });
 
-    const joue = sequelizePrevious.define("joue", {}, {schema: "previous", timestamps: false});
-    dbPrevious.artistes.belongsToMany(dbCommon.saisons, {through: joue, foreignKey: "artisteId"});
-    dbCommon.saisons.belongsToMany(dbPrevious.artistes, {through: joue, foreignKey: "concertId"});
+    const joue = sequelizePrevious.define("joue", {}, { schema: "previous", timestamps: false });
+    dbPrevious.artistes.belongsToMany(dbCommon.saisons, { through: joue, foreignKey: "artisteId" });
+    dbCommon.saisons.belongsToMany(dbPrevious.artistes, { through: joue, foreignKey: "concertId" });
 
     return dbPrevious;
 }
@@ -191,36 +191,36 @@ async function syncModelsSchema(schema: string) {
 }
 
 async function addConstraintsToSchema(db: any, schema: string) {
-    const possede = db.sequelize.define("possede", {lien: DataTypes.STRING}, {schema: schema, timestamps: false, freezeTableName: true});
-    db.artistes.belongsToMany(dbCommon.reseauxSociaux, {through: possede, foreignKey: "artisteId"});
-    dbCommon.reseauxSociaux.belongsToMany(db.artistes, {through: possede, foreignKey: "reseauxSociauxId"});
+    const possede = db.sequelize.define("possede", { lien: DataTypes.STRING }, { schema: schema, timestamps: false, freezeTableName: true });
+    db.artistes.belongsToMany(dbCommon.reseauxSociaux, { through: possede, foreignKey: "artisteId" });
+    dbCommon.reseauxSociaux.belongsToMany(db.artistes, { through: possede, foreignKey: "reseauxSociauxId" });
 
-    const nationalite = db.sequelize.define("nationalite", {}, {schema: schema, timestamps: false, freezeTableName: true});
-    db.artistes.belongsToMany(dbCommon.pays, {through: nationalite, foreignKey: "artisteId"});
-    dbCommon.pays.belongsToMany(db.artistes, {through: nationalite, foreignKey: "paysId"});
+    const nationalite = db.sequelize.define("nationalite", {}, { schema: schema, timestamps: false, freezeTableName: true });
+    db.artistes.belongsToMany(dbCommon.pays, { through: nationalite, foreignKey: "artisteId" });
+    dbCommon.pays.belongsToMany(db.artistes, { through: nationalite, foreignKey: "paysId" });
 
-    const fait = db.sequelize.define("fait", {}, {schema: schema, timestamps: false, freezeTableName: true});
-    db.artistes.belongsToMany(dbCommon.genres, {through: fait, foreignKey: "artisteId"});
-    dbCommon.genres.belongsToMany(db.artistes, {through: fait, foreignKey: "genreId"});
+    const fait = db.sequelize.define("fait", {}, { schema: schema, timestamps: false, freezeTableName: true });
+    db.artistes.belongsToMany(dbCommon.genres, { through: fait, foreignKey: "artisteId" });
+    dbCommon.genres.belongsToMany(db.artistes, { through: fait, foreignKey: "genreId" });
 
-    db.artistes.belongsTo(dbCommon.categories, {foreignKey: "categorieId"});
-    dbCommon.categories.hasMany(db.artistes, {foreignKey: "categorieId"});
+    db.artistes.belongsTo(dbCommon.categories, { foreignKey: "categorieId" });
+    dbCommon.categories.hasMany(db.artistes, { foreignKey: "categorieId" });
 
-    db.concerts.belongsTo(db.artistes, {foreignKey: "artisteId"});
-    db.artistes.hasMany(db.concerts, {foreignKey: "artisteId"});
+    db.concerts.belongsTo(db.artistes, { foreignKey: "artisteId" });
+    db.artistes.hasMany(db.concerts, { foreignKey: "artisteId" });
 
-    db.concerts.belongsTo(db.scenes, {foreignKey: "sceneId"});
-    db.scenes.hasMany(db.concerts, {foreignKey: "sceneId"});
+    db.concerts.belongsTo(db.scenes, { foreignKey: "sceneId" });
+    db.scenes.hasMany(db.concerts, { foreignKey: "sceneId" });
 
-    db.scenes.belongsTo(dbCommon.typeScenes, {foreignKey: "typesceneId"});
-    dbCommon.typeScenes.hasMany(db.scenes, {foreignKey: "typesceneId"});
+    db.scenes.belongsTo(dbCommon.typeScenes, { foreignKey: "typesceneId" });
+    dbCommon.typeScenes.hasMany(db.scenes, { foreignKey: "typesceneId" });
 
-    db.stands.belongsTo(dbCommon.typeStands, {foreignKey: "typestandId"});
-    dbCommon.typeStands.hasMany(db.stands, {foreignKey: "typestandId"});
+    db.stands.belongsTo(dbCommon.typeStands, { foreignKey: "typestandId" });
+    dbCommon.typeStands.hasMany(db.stands, { foreignKey: "typestandId" });
 
-    const propose = db.sequelize.define("propose", {}, {schema: schema, timestamps: false, freezeTableName: true});
-    db.stands.belongsToMany(dbCommon.services, {through: propose, foreignKey: "standId"});
-    dbCommon.services.belongsToMany(db.stands, {through: propose, foreignKey: "serviceId"});
+    const propose = db.sequelize.define("propose", {}, { schema: schema, timestamps: false, freezeTableName: true });
+    db.stands.belongsToMany(dbCommon.services, { through: propose, foreignKey: "standId" });
+    dbCommon.services.belongsToMany(db.stands, { through: propose, foreignKey: "serviceId" });
 
     return db;
 }
@@ -277,7 +277,7 @@ async function insertData() {
             }
         }
         for (let i = 0; i < Math.floor(Math.random() * 3) + 1; i++) {
-            artiste.addReseauxSociaux(reseauxSociaux[rsIdx], {through: {lien: "https://www." + reseauxSociaux[rsIdx].libelle.toLowerCase() + ".com/" + artiste.id}});
+            artiste.addReseauxSociaux(reseauxSociaux[rsIdx], { through: { lien: "https://www." + reseauxSociaux[rsIdx].libelle.toLowerCase() + ".com/" + artiste.id } });
             rsIdx++;
             if (rsIdx >= reseauxSociaux.length) {
                 rsIdx = 0;
@@ -302,7 +302,7 @@ async function insertData() {
             }
         }
         for (let i = 0; i < Math.floor(Math.random() * 3) + 1; i++) {
-            artiste.addReseauxSociaux(reseauxSociaux[rsIdx], {through: {lien: "https://www." + reseauxSociaux[rsIdx].libelle + ".com/" + artiste.id}});
+            artiste.addReseauxSociaux(reseauxSociaux[rsIdx], { through: { lien: "https://www." + reseauxSociaux[rsIdx].libelle + ".com/" + artiste.id } });
             rsIdx++;
             if (rsIdx >= reseauxSociaux.length) {
                 rsIdx = 0;
@@ -327,7 +327,7 @@ async function insertData() {
             }
         }
         for (let i = 0; i < Math.floor(Math.random() * 3) + 1; i++) {
-            artiste.addReseauxSociaux(reseauxSociaux[rsIdx], {through: {lien: "https://www." + reseauxSociaux[rsIdx].libelle + ".com/" + artiste.id}});
+            artiste.addReseauxSociaux(reseauxSociaux[rsIdx], { through: { lien: "https://www." + reseauxSociaux[rsIdx].libelle + ".com/" + artiste.id } });
             rsIdx++;
             if (rsIdx >= reseauxSociaux.length) {
                 rsIdx = 0;
@@ -343,7 +343,7 @@ async function insertData() {
     }
 
     const standsCurrent = await dbCurrent.stands.findAll();
-    for(const stand of standsCurrent) {
+    for (const stand of standsCurrent) {
         for (let i = 0; i < Math.floor(Math.random() * 5) + 1; i++) {
             stand.addService(services[serviceIdx]);
             serviceIdx++;
@@ -354,7 +354,7 @@ async function insertData() {
     }
 
     const standsNext = await dbNext.stands.findAll();
-    for(const stand of standsNext) {
+    for (const stand of standsNext) {
         for (let i = 0; i < Math.floor(Math.random() * 5) + 1; i++) {
             stand.addService(services[serviceIdx]);
             serviceIdx++;
@@ -374,17 +374,17 @@ createCommonSchema()
         dbNext = await syncModelsSchema("next");
         dbPrevious = await createPreviousSchema();
 
-        await dbCommon.sequelize.sync({logging: false});
-        await dbPrevious.sequelize.sync({logging: false});
+        await dbCommon.sequelize.sync({ logging: false });
+        await dbPrevious.sequelize.sync({ logging: false });
 
         dbCurrent = await addConstraintsToSchema(dbCurrent, "current");
         dbNext = await addConstraintsToSchema(dbNext, "next");
-        await dbCurrent.sequelize.sync({logging: false});
-        await dbNext.sequelize.sync({logging: false});
+        await dbCurrent.sequelize.sync({ logging: false });
+        await dbNext.sequelize.sync({ logging: false });
         console.log("Done !");
     })
     .then(async () => {
         //await insertData();
     });
 
-export {dbCommon, dbCurrent, dbNext, dbPrevious};
+export { dbCommon, dbCurrent, dbNext, dbPrevious };

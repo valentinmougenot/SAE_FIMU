@@ -13,7 +13,7 @@
                 required
             ></v-text-field>
             <v-select
-                v-model="scene.id_typescene"
+                v-model="scene.typesceneId"
                 :items="typescenesSelect"
                 label="Type de scène"
                 required
@@ -55,7 +55,7 @@ export default {
       libelle: null,
       latitude: null,
       longitude: null,
-      id_typescene: null,
+      typesceneId: null,
       jauge: null
     }
   }),

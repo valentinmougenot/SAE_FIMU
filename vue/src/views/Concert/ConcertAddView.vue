@@ -68,7 +68,7 @@ export default {
   },
   methods: {
     addConcert() {
-      post(`${this.$store.state.sselected}/concert`, this.concert)
+      post(`/concert`, this.concert)
         .then(() => {
           this.$router.push("/concert");
         })
