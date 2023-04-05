@@ -66,6 +66,7 @@ npm run build
 Comment the line 387 in the file `API/models/index.ts`
 
 ```bash
+npm run build
 npm start
 ```
 
