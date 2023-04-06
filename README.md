@@ -50,7 +50,7 @@ CREATE DATABASE fimu;
 5. Edit the configuration file
 
 ```bash
-cd ../../API/db
+cd ../../API/config
 nano db.config.ts
 ```
 
@@ -61,6 +61,7 @@ Replace the username and password with your own.
 ```bash
 cd ..
 npm run build
+npm start
 ```
 
 Comment the line 387 in the file `API/models/index.ts`
